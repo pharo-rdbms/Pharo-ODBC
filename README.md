@@ -6,7 +6,7 @@ Thanks to [InfOil](http://www.infoil.com.ar) for supporting this project.
 ```Smalltalk
 Metacello new
 	repository: 'github://rko281/Pharo-ODBC';
-	baseline: 'Pharo-ODBC';
+	baseline: 'ODBC';
 	load
 ```
 
