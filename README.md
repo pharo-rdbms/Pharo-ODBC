@@ -11,8 +11,8 @@ Metacello new
 ```
 
 On non-Windows platforms you will also need to install an appropriate ODBC Driver Manager:
-- [iODBC](http://www.iodbc.org/)
-- [unixODBC](http://www.unixodbc.org/)
+- MacOS: [iODBC](http://www.iodbc.org/)
+- Linux: [unixODBC](http://www.unixodbc.org/)
 
 ### Getting Started
  - See the [Database Connection section](http://www.object-arts.com/downloads/docs/index.html?databaseconnectivity.htm) in the Dolphin Smalltalk Education Center
