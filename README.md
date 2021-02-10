@@ -23,5 +23,6 @@ On non-Windows platforms you will also need to install an appropriate ODBC Drive
 The folder test-resources contains compressed files required by the unit tests - northwind.mdb (Access) and northwind.sql (SQL Server). Unpack these to the root image directory to run the tests (see test classes for further info).
 
 ### Licence
-[MIT Licence](https://github.com/rko281/Pharo-ODBC/blob/main/LICENSE) as per [Dolphin Smalltalk](https://github.com/dolphinsmalltalk/Dolphin/blob/master/LICENSE).<BR>
-Dolphin Smalltalk Copyright (c) 2015 Object Arts<BR>
+[MIT Licence](https://github.com/rko281/Pharo-ODBC/blob/main/LICENSE).<BR>
+[Dolphin Smalltalk](https://github.com/dolphinsmalltalk/Dolphin/blob/master/LICENSE) Copyright (c) 2015 Object Arts<BR>
+Dolphin Smalltalk ODBC Database Connection Package Copyright (c) Object Arts Ltd, 1997-2003. Portions copyright CGI Group (Europe) Ltd, 1997.
