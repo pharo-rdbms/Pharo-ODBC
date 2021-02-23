@@ -1369,11 +1369,12 @@ Class {
 		'TRACE_VS_EVENT_ON',
 		'TypeOffset'
 	],
-	#category : #'ODBC-FFI'
+	#category : #'ODBC-FFI-Base'
 }
 
-{ #category : #'pool initialization' }
+{ #category : #'class initialization' }
 ODBCConstants class >> initialize [
+
 	self
 		initializeSQLLEN;
 		initialize5;
@@ -1485,12 +1486,12 @@ ODBCConstants class >> initialize [
 		initialize_TRACE_ON;
 		initialize_TRACE_VERSION;
 		initialize_TRACE_VS_EVENT_ON;
-		initialize_TypeOffset;
-		yourself
+		initialize_TypeOffset
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization' }
 ODBCConstants class >> initialize1 [
+
 	self
 		initialize_ODBCVER;
 		initialize_ODBC_VS_FLAG_RETCODE;
@@ -1742,12 +1743,12 @@ ODBCConstants class >> initialize1 [
 		initialize_SQL_BS_SELECT_EXPLICIT;
 		initialize_SQL_BS_SELECT_PROC;
 		initialize_SQL_CA1_ABSOLUTE;
-		initialize_SQL_CA1_BOOKMARK;
-		yourself
+		initialize_SQL_CA1_BOOKMARK
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization' }
 ODBCConstants class >> initialize2 [
+
 	self
 		initialize1;
 		initialize_SQL_CA1_BULK_ADD;
@@ -2000,12 +2001,12 @@ ODBCConstants class >> initialize2 [
 		initialize_SQL_C_INTERVAL_DAY_TO_HOUR;
 		initialize_SQL_C_INTERVAL_DAY_TO_MINUTE;
 		initialize_SQL_C_INTERVAL_DAY_TO_SECOND;
-		initialize_SQL_C_INTERVAL_HOUR;
-		yourself
+		initialize_SQL_C_INTERVAL_HOUR
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization' }
 ODBCConstants class >> initialize3 [
+
 	self
 		initialize2;
 		initialize_SQL_C_INTERVAL_HOUR_TO_MINUTE;
@@ -2258,12 +2259,12 @@ ODBCConstants class >> initialize3 [
 		initialize_SQL_FN_NUM_MOD;
 		initialize_SQL_FN_NUM_PI;
 		initialize_SQL_FN_NUM_POWER;
-		initialize_SQL_FN_NUM_RADIANS;
-		yourself
+		initialize_SQL_FN_NUM_RADIANS
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization' }
 ODBCConstants class >> initialize4 [
+
 	self
 		initialize3;
 		initialize_SQL_FN_NUM_RAND;
@@ -2516,12 +2517,12 @@ ODBCConstants class >> initialize4 [
 		initialize_SQL_NUMERIC_FUNCTIONS;
 		initialize_SQL_NUM_TYPES;
 		initialize_SQL_OAC_LEVEL1;
-		initialize_SQL_OAC_LEVEL2;
-		yourself
+		initialize_SQL_OAC_LEVEL2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization' }
 ODBCConstants class >> initialize5 [
+
 	self
 		initialize4;
 		initialize_SQL_OAC_NONE;
@@ -2774,6838 +2775,8201 @@ ODBCConstants class >> initialize5 [
 		initialize_SQL_SRJO_EXCEPT_JOIN;
 		initialize_SQL_SRJO_FULL_OUTER_JOIN;
 		initialize_SQL_SRJO_INNER_JOIN;
-		initialize_SQL_SRJO_INTERSECT_JOIN;
-		yourself
+		initialize_SQL_SRJO_INTERSECT_JOIN
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization' }
 ODBCConstants class >> initializeSQLLEN [
 
 	ExternalAddress wordSize = 4
-		ifTrue: 
-			[ 	SQLLEN := SQLINTEGER.
-				SQLULEN := SQLUINTEGER ]
-		ifFalse: 
-			[ 	SQLLEN := SQLLEN64.
-				SQLULEN := SQLULEN64  ]
+		ifTrue: [ 
+			SQLLEN := SQLINTEGER.
+			SQLULEN := SQLUINTEGER ]
+		ifFalse: [ 
+			SQLLEN := SQLLEN64.
+			SQLULEN := SQLULEN64 ]
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_ODBCVER [
+
 	ODBCVER := 896
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_ODBC_VS_FLAG_RETCODE [
+
 	ODBC_VS_FLAG_RETCODE := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_ODBC_VS_FLAG_STOP [
+
 	ODBC_VS_FLAG_STOP := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_ODBC_VS_FLAG_UNICODE_ARG [
+
 	ODBC_VS_FLAG_UNICODE_ARG := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_ODBC_VS_FLAG_UNICODE_COR [
+
 	ODBC_VS_FLAG_UNICODE_COR := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AA_FALSE [
+
 	SQL_AA_FALSE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AA_TRUE [
+
 	SQL_AA_TRUE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ACCESSIBLE_PROCEDURES [
+
 	SQL_ACCESSIBLE_PROCEDURES := 20
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ACCESSIBLE_TABLES [
+
 	SQL_ACCESSIBLE_TABLES := 19
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ACCESS_MODE [
+
 	SQL_ACCESS_MODE := 101
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ACTIVE_CONNECTIONS [
+
 	SQL_ACTIVE_CONNECTIONS := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ACTIVE_ENVIRONMENTS [
+
 	SQL_ACTIVE_ENVIRONMENTS := 116
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ACTIVE_STATEMENTS [
+
 	SQL_ACTIVE_STATEMENTS := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ADD [
+
 	SQL_ADD := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AD_ADD_CONSTRAINT_DEFERRABLE [
+
 	SQL_AD_ADD_CONSTRAINT_DEFERRABLE := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AD_ADD_CONSTRAINT_INITIALLY_DEFERRED [
+
 	SQL_AD_ADD_CONSTRAINT_INITIALLY_DEFERRED := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AD_ADD_CONSTRAINT_INITIALLY_IMMEDIATE [
+
 	SQL_AD_ADD_CONSTRAINT_INITIALLY_IMMEDIATE := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AD_ADD_CONSTRAINT_NON_DEFERRABLE [
+
 	SQL_AD_ADD_CONSTRAINT_NON_DEFERRABLE := 256
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AD_ADD_DOMAIN_CONSTRAINT [
+
 	SQL_AD_ADD_DOMAIN_CONSTRAINT := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AD_ADD_DOMAIN_DEFAULT [
+
 	SQL_AD_ADD_DOMAIN_DEFAULT := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AD_CONSTRAINT_NAME_DEFINITION [
+
 	SQL_AD_CONSTRAINT_NAME_DEFINITION := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AD_DROP_DOMAIN_CONSTRAINT [
+
 	SQL_AD_DROP_DOMAIN_CONSTRAINT := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AD_DROP_DOMAIN_DEFAULT [
+
 	SQL_AD_DROP_DOMAIN_DEFAULT := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AF_ALL [
+
 	SQL_AF_ALL := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AF_AVG [
+
 	SQL_AF_AVG := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AF_COUNT [
+
 	SQL_AF_COUNT := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AF_DISTINCT [
+
 	SQL_AF_DISTINCT := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AF_MAX [
+
 	SQL_AF_MAX := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AF_MIN [
+
 	SQL_AF_MIN := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AF_SUM [
+
 	SQL_AF_SUM := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AGGREGATE_FUNCTIONS [
+
 	SQL_AGGREGATE_FUNCTIONS := 169
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ALL_CATALOGS [
+
 	SQL_ALL_CATALOGS := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ALL_EXCEPT_LIKE [
+
 	SQL_ALL_EXCEPT_LIKE := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ALL_SCHEMAS [
+
 	SQL_ALL_SCHEMAS := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ALL_TABLE_TYPES [
+
 	SQL_ALL_TABLE_TYPES := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ALL_TYPES [
+
 	SQL_ALL_TYPES := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ALTER_DOMAIN [
+
 	SQL_ALTER_DOMAIN := 117
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ALTER_TABLE [
+
 	SQL_ALTER_TABLE := 86
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AM_CONNECTION [
+
 	SQL_AM_CONNECTION := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AM_NONE [
+
 	SQL_AM_NONE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AM_STATEMENT [
+
 	SQL_AM_STATEMENT := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_APD_TYPE [
+
 	SQL_APD_TYPE := -100
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_ALL_FUNCTIONS [
+
 	SQL_API_ALL_FUNCTIONS := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_LOADBYORDINAL [
+
 	SQL_API_LOADBYORDINAL := 199
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_ODBC3_ALL_FUNCTIONS [
+
 	SQL_API_ODBC3_ALL_FUNCTIONS := 999
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_ODBC3_ALL_FUNCTIONS_SIZE [
+
 	SQL_API_ODBC3_ALL_FUNCTIONS_SIZE := 250
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLALLOCCONNECT [
+
 	SQL_API_SQLALLOCCONNECT := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLALLOCENV [
+
 	SQL_API_SQLALLOCENV := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLALLOCHANDLE [
+
 	SQL_API_SQLALLOCHANDLE := 1001
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLALLOCHANDLESTD [
+
 	SQL_API_SQLALLOCHANDLESTD := 73
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLALLOCSTMT [
+
 	SQL_API_SQLALLOCSTMT := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLBINDCOL [
+
 	SQL_API_SQLBINDCOL := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLBINDPARAM [
+
 	SQL_API_SQLBINDPARAM := 1002
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLBINDPARAMETER [
+
 	SQL_API_SQLBINDPARAMETER := 72
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLBROWSECONNECT [
+
 	SQL_API_SQLBROWSECONNECT := 55
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLBULKOPERATIONS [
+
 	SQL_API_SQLBULKOPERATIONS := 24
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLCANCEL [
+
 	SQL_API_SQLCANCEL := 5
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLCANCELHANDLE [
+
 	SQL_API_SQLCANCELHANDLE := 1550
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLCLOSECURSOR [
+
 	SQL_API_SQLCLOSECURSOR := 1003
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLCOLATTRIBUTE [
+
 	SQL_API_SQLCOLATTRIBUTE := 6
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLCOLATTRIBUTES [
+
 	SQL_API_SQLCOLATTRIBUTES := 6
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLCOLUMNPRIVILEGES [
+
 	SQL_API_SQLCOLUMNPRIVILEGES := 56
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLCOLUMNS [
+
 	SQL_API_SQLCOLUMNS := 40
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLCOMPLETEASYNC [
+
 	SQL_API_SQLCOMPLETEASYNC := 1551
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLCONNECT [
+
 	SQL_API_SQLCONNECT := 7
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLCOPYDESC [
+
 	SQL_API_SQLCOPYDESC := 1004
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLDATASOURCES [
+
 	SQL_API_SQLDATASOURCES := 57
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLDESCRIBECOL [
+
 	SQL_API_SQLDESCRIBECOL := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLDESCRIBEPARAM [
+
 	SQL_API_SQLDESCRIBEPARAM := 58
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLDISCONNECT [
+
 	SQL_API_SQLDISCONNECT := 9
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLDRIVERCONNECT [
+
 	SQL_API_SQLDRIVERCONNECT := 41
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLDRIVERS [
+
 	SQL_API_SQLDRIVERS := 71
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLENDTRAN [
+
 	SQL_API_SQLENDTRAN := 1005
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLERROR [
+
 	SQL_API_SQLERROR := 10
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLEXECDIRECT [
+
 	SQL_API_SQLEXECDIRECT := 11
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLEXECUTE [
+
 	SQL_API_SQLEXECUTE := 12
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLEXTENDEDFETCH [
+
 	SQL_API_SQLEXTENDEDFETCH := 59
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLFETCH [
+
 	SQL_API_SQLFETCH := 13
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLFETCHSCROLL [
+
 	SQL_API_SQLFETCHSCROLL := 1021
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLFOREIGNKEYS [
+
 	SQL_API_SQLFOREIGNKEYS := 60
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLFREECONNECT [
+
 	SQL_API_SQLFREECONNECT := 14
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLFREEENV [
+
 	SQL_API_SQLFREEENV := 15
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLFREEHANDLE [
+
 	SQL_API_SQLFREEHANDLE := 1006
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLFREESTMT [
+
 	SQL_API_SQLFREESTMT := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLGETCONNECTATTR [
+
 	SQL_API_SQLGETCONNECTATTR := 1007
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLGETCONNECTOPTION [
+
 	SQL_API_SQLGETCONNECTOPTION := 42
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLGETCURSORNAME [
+
 	SQL_API_SQLGETCURSORNAME := 17
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLGETDATA [
+
 	SQL_API_SQLGETDATA := 43
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLGETDESCFIELD [
+
 	SQL_API_SQLGETDESCFIELD := 1008
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLGETDESCREC [
+
 	SQL_API_SQLGETDESCREC := 1009
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLGETDIAGFIELD [
+
 	SQL_API_SQLGETDIAGFIELD := 1010
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLGETDIAGREC [
+
 	SQL_API_SQLGETDIAGREC := 1011
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLGETENVATTR [
+
 	SQL_API_SQLGETENVATTR := 1012
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLGETFUNCTIONS [
+
 	SQL_API_SQLGETFUNCTIONS := 44
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLGETINFO [
+
 	SQL_API_SQLGETINFO := 45
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLGETSTMTATTR [
+
 	SQL_API_SQLGETSTMTATTR := 1014
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLGETSTMTOPTION [
+
 	SQL_API_SQLGETSTMTOPTION := 46
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLGETTYPEINFO [
+
 	SQL_API_SQLGETTYPEINFO := 47
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLMORERESULTS [
+
 	SQL_API_SQLMORERESULTS := 61
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLNATIVESQL [
+
 	SQL_API_SQLNATIVESQL := 62
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLNUMPARAMS [
+
 	SQL_API_SQLNUMPARAMS := 63
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLNUMRESULTCOLS [
+
 	SQL_API_SQLNUMRESULTCOLS := 18
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLPARAMDATA [
+
 	SQL_API_SQLPARAMDATA := 48
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLPARAMOPTIONS [
+
 	SQL_API_SQLPARAMOPTIONS := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLPREPARE [
+
 	SQL_API_SQLPREPARE := 19
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLPRIMARYKEYS [
+
 	SQL_API_SQLPRIMARYKEYS := 65
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLPROCEDURECOLUMNS [
+
 	SQL_API_SQLPROCEDURECOLUMNS := 66
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLPROCEDURES [
+
 	SQL_API_SQLPROCEDURES := 67
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLPUTDATA [
+
 	SQL_API_SQLPUTDATA := 49
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLROWCOUNT [
+
 	SQL_API_SQLROWCOUNT := 20
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLSETCONNECTATTR [
+
 	SQL_API_SQLSETCONNECTATTR := 1016
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLSETCONNECTOPTION [
+
 	SQL_API_SQLSETCONNECTOPTION := 50
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLSETCURSORNAME [
+
 	SQL_API_SQLSETCURSORNAME := 21
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLSETDESCFIELD [
+
 	SQL_API_SQLSETDESCFIELD := 1017
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLSETDESCREC [
+
 	SQL_API_SQLSETDESCREC := 1018
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLSETENVATTR [
+
 	SQL_API_SQLSETENVATTR := 1019
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLSETPARAM [
+
 	SQL_API_SQLSETPARAM := 22
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLSETPOS [
+
 	SQL_API_SQLSETPOS := 68
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLSETSCROLLOPTIONS [
+
 	SQL_API_SQLSETSCROLLOPTIONS := 69
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLSETSTMTATTR [
+
 	SQL_API_SQLSETSTMTATTR := 1020
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLSETSTMTOPTION [
+
 	SQL_API_SQLSETSTMTOPTION := 51
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLSPECIALCOLUMNS [
+
 	SQL_API_SQLSPECIALCOLUMNS := 52
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLSTATISTICS [
+
 	SQL_API_SQLSTATISTICS := 53
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLTABLEPRIVILEGES [
+
 	SQL_API_SQLTABLEPRIVILEGES := 70
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLTABLES [
+
 	SQL_API_SQLTABLES := 54
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_API_SQLTRANSACT [
+
 	SQL_API_SQLTRANSACT := 23
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ARD_TYPE [
+
 	SQL_ARD_TYPE := -99
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ASYNC_DBC_CAPABLE [
+
 	SQL_ASYNC_DBC_CAPABLE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ASYNC_DBC_ENABLE_DEFAULT [
+
 	SQL_ASYNC_DBC_ENABLE_DEFAULT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ASYNC_DBC_ENABLE_OFF [
+
 	SQL_ASYNC_DBC_ENABLE_OFF := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ASYNC_DBC_ENABLE_ON [
+
 	SQL_ASYNC_DBC_ENABLE_ON := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ASYNC_DBC_FUNCTIONS [
+
 	SQL_ASYNC_DBC_FUNCTIONS := 10023
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ASYNC_DBC_NOT_CAPABLE [
+
 	SQL_ASYNC_DBC_NOT_CAPABLE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ASYNC_ENABLE [
+
 	SQL_ASYNC_ENABLE := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ASYNC_ENABLE_DEFAULT [
+
 	SQL_ASYNC_ENABLE_DEFAULT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ASYNC_ENABLE_OFF [
+
 	SQL_ASYNC_ENABLE_OFF := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ASYNC_ENABLE_ON [
+
 	SQL_ASYNC_ENABLE_ON := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ASYNC_MODE [
+
 	SQL_ASYNC_MODE := 10021
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ASYNC_NOTIFICATION [
+
 	SQL_ASYNC_NOTIFICATION := 10025
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ASYNC_NOTIFICATION_CAPABLE [
+
 	SQL_ASYNC_NOTIFICATION_CAPABLE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ASYNC_NOTIFICATION_NOT_CAPABLE [
+
 	SQL_ASYNC_NOTIFICATION_NOT_CAPABLE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_ACCESS_MODE [
+
 	SQL_ATTR_ACCESS_MODE := 101
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_ANSI_APP [
+
 	SQL_ATTR_ANSI_APP := 115
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_APPLICATION_KEY [
+
 	SQL_ATTR_APPLICATION_KEY := 203
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_APP_PARAM_DESC [
+
 	SQL_ATTR_APP_PARAM_DESC := 10011
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_APP_ROW_DESC [
+
 	SQL_ATTR_APP_ROW_DESC := 10010
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_ASYNC_DBC_EVENT [
+
 	SQL_ATTR_ASYNC_DBC_EVENT := 119
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_ASYNC_DBC_FUNCTIONS_ENABLE [
+
 	SQL_ATTR_ASYNC_DBC_FUNCTIONS_ENABLE := 117
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_ASYNC_ENABLE [
+
 	SQL_ATTR_ASYNC_ENABLE := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_ASYNC_STMT_EVENT [
+
 	SQL_ATTR_ASYNC_STMT_EVENT := 29
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_AUTOCOMMIT [
+
 	SQL_ATTR_AUTOCOMMIT := 102
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_AUTO_IPD [
+
 	SQL_ATTR_AUTO_IPD := 10001
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_CONCURRENCY [
+
 	SQL_ATTR_CONCURRENCY := 7
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_CONNECTION_DEAD [
+
 	SQL_ATTR_CONNECTION_DEAD := 1209
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_CONNECTION_POOLING [
+
 	SQL_ATTR_CONNECTION_POOLING := 201
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_CONNECTION_TIMEOUT [
+
 	SQL_ATTR_CONNECTION_TIMEOUT := 113
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_CP_MATCH [
+
 	SQL_ATTR_CP_MATCH := 202
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_CURRENT_CATALOG [
+
 	SQL_ATTR_CURRENT_CATALOG := 109
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_CURSOR_SCROLLABLE [
+
 	SQL_ATTR_CURSOR_SCROLLABLE := -1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_CURSOR_SENSITIVITY [
+
 	SQL_ATTR_CURSOR_SENSITIVITY := -2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_CURSOR_TYPE [
+
 	SQL_ATTR_CURSOR_TYPE := 6
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_DISCONNECT_BEHAVIOR [
+
 	SQL_ATTR_DISCONNECT_BEHAVIOR := 114
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_ENABLE_AUTO_IPD [
+
 	SQL_ATTR_ENABLE_AUTO_IPD := 15
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_ENLIST_IN_DTC [
+
 	SQL_ATTR_ENLIST_IN_DTC := 1207
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_ENLIST_IN_XA [
+
 	SQL_ATTR_ENLIST_IN_XA := 1208
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_FETCH_BOOKMARK_PTR [
+
 	SQL_ATTR_FETCH_BOOKMARK_PTR := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_IMP_PARAM_DESC [
+
 	SQL_ATTR_IMP_PARAM_DESC := 10013
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_IMP_ROW_DESC [
+
 	SQL_ATTR_IMP_ROW_DESC := 10012
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_KEYSET_SIZE [
+
 	SQL_ATTR_KEYSET_SIZE := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_LOGIN_TIMEOUT [
+
 	SQL_ATTR_LOGIN_TIMEOUT := 103
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_MAX_LENGTH [
+
 	SQL_ATTR_MAX_LENGTH := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_MAX_ROWS [
+
 	SQL_ATTR_MAX_ROWS := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_METADATA_ID [
+
 	SQL_ATTR_METADATA_ID := 10014
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_NOSCAN [
+
 	SQL_ATTR_NOSCAN := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_ODBC_CURSORS [
+
 	SQL_ATTR_ODBC_CURSORS := 110
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_ODBC_VERSION [
+
 	SQL_ATTR_ODBC_VERSION := 200
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_OUTPUT_NTS [
+
 	SQL_ATTR_OUTPUT_NTS := 10001
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_PACKET_SIZE [
+
 	SQL_ATTR_PACKET_SIZE := 112
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_PARAMSET_SIZE [
+
 	SQL_ATTR_PARAMSET_SIZE := 22
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_PARAMS_PROCESSED_PTR [
+
 	SQL_ATTR_PARAMS_PROCESSED_PTR := 21
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_PARAM_BIND_OFFSET_PTR [
+
 	SQL_ATTR_PARAM_BIND_OFFSET_PTR := 17
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_PARAM_BIND_TYPE [
+
 	SQL_ATTR_PARAM_BIND_TYPE := 18
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_PARAM_OPERATION_PTR [
+
 	SQL_ATTR_PARAM_OPERATION_PTR := 19
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_PARAM_STATUS_PTR [
+
 	SQL_ATTR_PARAM_STATUS_PTR := 20
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_QUERY_TIMEOUT [
+
 	SQL_ATTR_QUERY_TIMEOUT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_QUIET_MODE [
+
 	SQL_ATTR_QUIET_MODE := 111
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_READONLY [
+
 	SQL_ATTR_READONLY := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_READWRITE_UNKNOWN [
+
 	SQL_ATTR_READWRITE_UNKNOWN := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_RESET_CONNECTION [
+
 	SQL_ATTR_RESET_CONNECTION := 116
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_RETRIEVE_DATA [
+
 	SQL_ATTR_RETRIEVE_DATA := 11
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_ROWS_FETCHED_PTR [
+
 	SQL_ATTR_ROWS_FETCHED_PTR := 26
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_ROW_ARRAY_SIZE [
+
 	SQL_ATTR_ROW_ARRAY_SIZE := 27
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_ROW_BIND_OFFSET_PTR [
+
 	SQL_ATTR_ROW_BIND_OFFSET_PTR := 23
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_ROW_BIND_TYPE [
+
 	SQL_ATTR_ROW_BIND_TYPE := 5
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_ROW_NUMBER [
+
 	SQL_ATTR_ROW_NUMBER := 14
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_ROW_OPERATION_PTR [
+
 	SQL_ATTR_ROW_OPERATION_PTR := 24
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_ROW_STATUS_PTR [
+
 	SQL_ATTR_ROW_STATUS_PTR := 25
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_SIMULATE_CURSOR [
+
 	SQL_ATTR_SIMULATE_CURSOR := 10
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_TRACE [
+
 	SQL_ATTR_TRACE := 104
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_TRACEFILE [
+
 	SQL_ATTR_TRACEFILE := 105
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_TRANSLATE_LIB [
+
 	SQL_ATTR_TRANSLATE_LIB := 106
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_TRANSLATE_OPTION [
+
 	SQL_ATTR_TRANSLATE_OPTION := 107
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_TXN_ISOLATION [
+
 	SQL_ATTR_TXN_ISOLATION := 108
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_USE_BOOKMARKS [
+
 	SQL_ATTR_USE_BOOKMARKS := 12
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ATTR_WRITE [
+
 	SQL_ATTR_WRITE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AT_ADD_COLUMN [
+
 	SQL_AT_ADD_COLUMN := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AT_ADD_COLUMN_COLLATION [
+
 	SQL_AT_ADD_COLUMN_COLLATION := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AT_ADD_COLUMN_DEFAULT [
+
 	SQL_AT_ADD_COLUMN_DEFAULT := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AT_ADD_COLUMN_SINGLE [
+
 	SQL_AT_ADD_COLUMN_SINGLE := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AT_ADD_CONSTRAINT [
+
 	SQL_AT_ADD_CONSTRAINT := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AT_ADD_TABLE_CONSTRAINT [
+
 	SQL_AT_ADD_TABLE_CONSTRAINT := 4096
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AT_COLUMN_SINGLE [
+
 	SQL_AT_COLUMN_SINGLE := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AT_CONSTRAINT_DEFERRABLE [
+
 	SQL_AT_CONSTRAINT_DEFERRABLE := 262144
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AT_CONSTRAINT_INITIALLY_DEFERRED [
+
 	SQL_AT_CONSTRAINT_INITIALLY_DEFERRED := 65536
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AT_CONSTRAINT_INITIALLY_IMMEDIATE [
+
 	SQL_AT_CONSTRAINT_INITIALLY_IMMEDIATE := 131072
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AT_CONSTRAINT_NAME_DEFINITION [
+
 	SQL_AT_CONSTRAINT_NAME_DEFINITION := 32768
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AT_CONSTRAINT_NON_DEFERRABLE [
+
 	SQL_AT_CONSTRAINT_NON_DEFERRABLE := 524288
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AT_DROP_COLUMN [
+
 	SQL_AT_DROP_COLUMN := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AT_DROP_COLUMN_CASCADE [
+
 	SQL_AT_DROP_COLUMN_CASCADE := 1024
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AT_DROP_COLUMN_DEFAULT [
+
 	SQL_AT_DROP_COLUMN_DEFAULT := 512
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AT_DROP_COLUMN_RESTRICT [
+
 	SQL_AT_DROP_COLUMN_RESTRICT := 2048
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AT_DROP_TABLE_CONSTRAINT_CASCADE [
+
 	SQL_AT_DROP_TABLE_CONSTRAINT_CASCADE := 8192
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AT_DROP_TABLE_CONSTRAINT_RESTRICT [
+
 	SQL_AT_DROP_TABLE_CONSTRAINT_RESTRICT := 16384
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AT_SET_COLUMN_DEFAULT [
+
 	SQL_AT_SET_COLUMN_DEFAULT := 256
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AUTOCOMMIT [
+
 	SQL_AUTOCOMMIT := 102
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AUTOCOMMIT_DEFAULT [
+
 	SQL_AUTOCOMMIT_DEFAULT := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AUTOCOMMIT_OFF [
+
 	SQL_AUTOCOMMIT_OFF := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_AUTOCOMMIT_ON [
+
 	SQL_AUTOCOMMIT_ON := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_BATCH_ROW_COUNT [
+
 	SQL_BATCH_ROW_COUNT := 120
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_BATCH_SUPPORT [
+
 	SQL_BATCH_SUPPORT := 121
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_BEST_ROWID [
+
 	SQL_BEST_ROWID := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_BIND_BY_COLUMN [
+
 	SQL_BIND_BY_COLUMN := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_BIND_TYPE [
+
 	SQL_BIND_TYPE := 5
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_BIND_TYPE_DEFAULT [
+
 	SQL_BIND_TYPE_DEFAULT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_BOOKMARK_PERSISTENCE [
+
 	SQL_BOOKMARK_PERSISTENCE := 82
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_BP_CLOSE [
+
 	SQL_BP_CLOSE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_BP_DELETE [
+
 	SQL_BP_DELETE := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_BP_DROP [
+
 	SQL_BP_DROP := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_BP_OTHER_HSTMT [
+
 	SQL_BP_OTHER_HSTMT := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_BP_SCROLL [
+
 	SQL_BP_SCROLL := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_BP_TRANSACTION [
+
 	SQL_BP_TRANSACTION := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_BP_UPDATE [
+
 	SQL_BP_UPDATE := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_BRC_EXPLICIT [
+
 	SQL_BRC_EXPLICIT := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_BRC_PROCEDURES [
+
 	SQL_BRC_PROCEDURES := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_BRC_ROLLED_UP [
+
 	SQL_BRC_ROLLED_UP := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_BS_ROW_COUNT_EXPLICIT [
+
 	SQL_BS_ROW_COUNT_EXPLICIT := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_BS_ROW_COUNT_PROC [
+
 	SQL_BS_ROW_COUNT_PROC := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_BS_SELECT_EXPLICIT [
+
 	SQL_BS_SELECT_EXPLICIT := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_BS_SELECT_PROC [
+
 	SQL_BS_SELECT_PROC := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA1_ABSOLUTE [
+
 	SQL_CA1_ABSOLUTE := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA1_BOOKMARK [
+
 	SQL_CA1_BOOKMARK := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA1_BULK_ADD [
+
 	SQL_CA1_BULK_ADD := 65536
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA1_BULK_DELETE_BY_BOOKMARK [
+
 	SQL_CA1_BULK_DELETE_BY_BOOKMARK := 262144
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA1_BULK_FETCH_BY_BOOKMARK [
+
 	SQL_CA1_BULK_FETCH_BY_BOOKMARK := 524288
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA1_BULK_UPDATE_BY_BOOKMARK [
+
 	SQL_CA1_BULK_UPDATE_BY_BOOKMARK := 131072
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA1_LOCK_EXCLUSIVE [
+
 	SQL_CA1_LOCK_EXCLUSIVE := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA1_LOCK_NO_CHANGE [
+
 	SQL_CA1_LOCK_NO_CHANGE := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA1_LOCK_UNLOCK [
+
 	SQL_CA1_LOCK_UNLOCK := 256
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA1_NEXT [
+
 	SQL_CA1_NEXT := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA1_POSITIONED_DELETE [
+
 	SQL_CA1_POSITIONED_DELETE := 16384
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA1_POSITIONED_UPDATE [
+
 	SQL_CA1_POSITIONED_UPDATE := 8192
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA1_POS_DELETE [
+
 	SQL_CA1_POS_DELETE := 2048
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA1_POS_POSITION [
+
 	SQL_CA1_POS_POSITION := 512
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA1_POS_REFRESH [
+
 	SQL_CA1_POS_REFRESH := 4096
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA1_POS_UPDATE [
+
 	SQL_CA1_POS_UPDATE := 1024
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA1_RELATIVE [
+
 	SQL_CA1_RELATIVE := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA1_SELECT_FOR_UPDATE [
+
 	SQL_CA1_SELECT_FOR_UPDATE := 32768
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA2_CRC_APPROXIMATE [
+
 	SQL_CA2_CRC_APPROXIMATE := 8192
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA2_CRC_EXACT [
+
 	SQL_CA2_CRC_EXACT := 4096
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA2_LOCK_CONCURRENCY [
+
 	SQL_CA2_LOCK_CONCURRENCY := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA2_MAX_ROWS_AFFECTS_ALL [
+
 	SQL_CA2_MAX_ROWS_AFFECTS_ALL := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA2_MAX_ROWS_CATALOG [
+
 	SQL_CA2_MAX_ROWS_CATALOG := 2048
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA2_MAX_ROWS_DELETE [
+
 	SQL_CA2_MAX_ROWS_DELETE := 512
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA2_MAX_ROWS_INSERT [
+
 	SQL_CA2_MAX_ROWS_INSERT := 256
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA2_MAX_ROWS_SELECT [
+
 	SQL_CA2_MAX_ROWS_SELECT := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA2_MAX_ROWS_UPDATE [
+
 	SQL_CA2_MAX_ROWS_UPDATE := 1024
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA2_OPT_ROWVER_CONCURRENCY [
+
 	SQL_CA2_OPT_ROWVER_CONCURRENCY := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA2_OPT_VALUES_CONCURRENCY [
+
 	SQL_CA2_OPT_VALUES_CONCURRENCY := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA2_READ_ONLY_CONCURRENCY [
+
 	SQL_CA2_READ_ONLY_CONCURRENCY := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA2_SENSITIVITY_ADDITIONS [
+
 	SQL_CA2_SENSITIVITY_ADDITIONS := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA2_SENSITIVITY_DELETIONS [
+
 	SQL_CA2_SENSITIVITY_DELETIONS := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA2_SENSITIVITY_UPDATES [
+
 	SQL_CA2_SENSITIVITY_UPDATES := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA2_SIMULATE_NON_UNIQUE [
+
 	SQL_CA2_SIMULATE_NON_UNIQUE := 16384
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA2_SIMULATE_TRY_UNIQUE [
+
 	SQL_CA2_SIMULATE_TRY_UNIQUE := 32768
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA2_SIMULATE_UNIQUE [
+
 	SQL_CA2_SIMULATE_UNIQUE := 65536
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CASCADE [
+
 	SQL_CASCADE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CATALOG_LOCATION [
+
 	SQL_CATALOG_LOCATION := 114
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CATALOG_NAME [
+
 	SQL_CATALOG_NAME := 10003
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CATALOG_NAME_SEPARATOR [
+
 	SQL_CATALOG_NAME_SEPARATOR := 41
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CATALOG_TERM [
+
 	SQL_CATALOG_TERM := 42
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CATALOG_USAGE [
+
 	SQL_CATALOG_USAGE := 92
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA_CONSTRAINT_DEFERRABLE [
+
 	SQL_CA_CONSTRAINT_DEFERRABLE := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA_CONSTRAINT_INITIALLY_DEFERRED [
+
 	SQL_CA_CONSTRAINT_INITIALLY_DEFERRED := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA_CONSTRAINT_INITIALLY_IMMEDIATE [
+
 	SQL_CA_CONSTRAINT_INITIALLY_IMMEDIATE := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA_CONSTRAINT_NON_DEFERRABLE [
+
 	SQL_CA_CONSTRAINT_NON_DEFERRABLE := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CA_CREATE_ASSERTION [
+
 	SQL_CA_CREATE_ASSERTION := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CB_CLOSE [
+
 	SQL_CB_CLOSE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CB_DELETE [
+
 	SQL_CB_DELETE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CB_NON_NULL [
+
 	SQL_CB_NON_NULL := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CB_NULL [
+
 	SQL_CB_NULL := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CB_PRESERVE [
+
 	SQL_CB_PRESERVE := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CCOL_CREATE_COLLATION [
+
 	SQL_CCOL_CREATE_COLLATION := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CCS_COLLATE_CLAUSE [
+
 	SQL_CCS_COLLATE_CLAUSE := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CCS_CREATE_CHARACTER_SET [
+
 	SQL_CCS_CREATE_CHARACTER_SET := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CCS_LIMITED_COLLATION [
+
 	SQL_CCS_LIMITED_COLLATION := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CC_CLOSE [
+
 	SQL_CC_CLOSE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CC_DELETE [
+
 	SQL_CC_DELETE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CC_PRESERVE [
+
 	SQL_CC_PRESERVE := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CDO_COLLATION [
+
 	SQL_CDO_COLLATION := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CDO_CONSTRAINT [
+
 	SQL_CDO_CONSTRAINT := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CDO_CONSTRAINT_DEFERRABLE [
+
 	SQL_CDO_CONSTRAINT_DEFERRABLE := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CDO_CONSTRAINT_INITIALLY_DEFERRED [
+
 	SQL_CDO_CONSTRAINT_INITIALLY_DEFERRED := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CDO_CONSTRAINT_INITIALLY_IMMEDIATE [
+
 	SQL_CDO_CONSTRAINT_INITIALLY_IMMEDIATE := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CDO_CONSTRAINT_NAME_DEFINITION [
+
 	SQL_CDO_CONSTRAINT_NAME_DEFINITION := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CDO_CONSTRAINT_NON_DEFERRABLE [
+
 	SQL_CDO_CONSTRAINT_NON_DEFERRABLE := 256
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CDO_CREATE_DOMAIN [
+
 	SQL_CDO_CREATE_DOMAIN := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CDO_DEFAULT [
+
 	SQL_CDO_DEFAULT := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CD_FALSE [
+
 	SQL_CD_FALSE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CD_TRUE [
+
 	SQL_CD_TRUE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CLOSE [
+
 	SQL_CLOSE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CL_END [
+
 	SQL_CL_END := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CL_START [
+
 	SQL_CL_START := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CN_ANY [
+
 	SQL_CN_ANY := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CN_DIFFERENT [
+
 	SQL_CN_DIFFERENT := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CN_NONE [
+
 	SQL_CN_NONE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CODE_DATE [
+
 	SQL_CODE_DATE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CODE_DAY [
+
 	SQL_CODE_DAY := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CODE_DAY_TO_HOUR [
+
 	SQL_CODE_DAY_TO_HOUR := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CODE_DAY_TO_MINUTE [
+
 	SQL_CODE_DAY_TO_MINUTE := 9
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CODE_DAY_TO_SECOND [
+
 	SQL_CODE_DAY_TO_SECOND := 10
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CODE_HOUR [
+
 	SQL_CODE_HOUR := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CODE_HOUR_TO_MINUTE [
+
 	SQL_CODE_HOUR_TO_MINUTE := 11
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CODE_HOUR_TO_SECOND [
+
 	SQL_CODE_HOUR_TO_SECOND := 12
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CODE_MINUTE [
+
 	SQL_CODE_MINUTE := 5
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CODE_MINUTE_TO_SECOND [
+
 	SQL_CODE_MINUTE_TO_SECOND := 13
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CODE_MONTH [
+
 	SQL_CODE_MONTH := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CODE_SECOND [
+
 	SQL_CODE_SECOND := 6
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CODE_TIME [
+
 	SQL_CODE_TIME := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CODE_TIMESTAMP [
+
 	SQL_CODE_TIMESTAMP := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CODE_YEAR [
+
 	SQL_CODE_YEAR := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CODE_YEAR_TO_MONTH [
+
 	SQL_CODE_YEAR_TO_MONTH := 7
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLATT_OPT_MAX [
+
 	SQL_COLATT_OPT_MAX := 18
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLATT_OPT_MIN [
+
 	SQL_COLATT_OPT_MIN := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLLATION_SEQ [
+
 	SQL_COLLATION_SEQ := 10004
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_ALIAS [
+
 	SQL_COLUMN_ALIAS := 87
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_AUTO_INCREMENT [
+
 	SQL_COLUMN_AUTO_INCREMENT := 11
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_CASE_SENSITIVE [
+
 	SQL_COLUMN_CASE_SENSITIVE := 12
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_COUNT [
+
 	SQL_COLUMN_COUNT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_DISPLAY_SIZE [
+
 	SQL_COLUMN_DISPLAY_SIZE := 6
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_IGNORE [
+
 	SQL_COLUMN_IGNORE := -6
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_LABEL [
+
 	SQL_COLUMN_LABEL := 18
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_LENGTH [
+
 	SQL_COLUMN_LENGTH := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_MONEY [
+
 	SQL_COLUMN_MONEY := 9
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_NAME [
+
 	SQL_COLUMN_NAME := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_NULLABLE [
+
 	SQL_COLUMN_NULLABLE := 7
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_NUMBER_UNKNOWN [
+
 	SQL_COLUMN_NUMBER_UNKNOWN := -2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_OWNER_NAME [
+
 	SQL_COLUMN_OWNER_NAME := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_PRECISION [
+
 	SQL_COLUMN_PRECISION := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_QUALIFIER_NAME [
+
 	SQL_COLUMN_QUALIFIER_NAME := 17
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_SCALE [
+
 	SQL_COLUMN_SCALE := 5
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_SEARCHABLE [
+
 	SQL_COLUMN_SEARCHABLE := 13
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_TABLE_NAME [
+
 	SQL_COLUMN_TABLE_NAME := 15
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_TYPE [
+
 	SQL_COLUMN_TYPE := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_TYPE_NAME [
+
 	SQL_COLUMN_TYPE_NAME := 14
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_UNSIGNED [
+
 	SQL_COLUMN_UNSIGNED := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COLUMN_UPDATABLE [
+
 	SQL_COLUMN_UPDATABLE := 10
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COL_PRED_BASIC [
+
 	SQL_COL_PRED_BASIC := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COL_PRED_CHAR [
+
 	SQL_COL_PRED_CHAR := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_COMMIT [
+
 	SQL_COMMIT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONCAT_NULL_BEHAVIOR [
+
 	SQL_CONCAT_NULL_BEHAVIOR := 22
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONCURRENCY [
+
 	SQL_CONCURRENCY := 7
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONCUR_DEFAULT [
+
 	SQL_CONCUR_DEFAULT := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONCUR_LOCK [
+
 	SQL_CONCUR_LOCK := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONCUR_READ_ONLY [
+
 	SQL_CONCUR_READ_ONLY := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONCUR_ROWVER [
+
 	SQL_CONCUR_ROWVER := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONCUR_TIMESTAMP [
+
 	SQL_CONCUR_TIMESTAMP := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONCUR_VALUES [
+
 	SQL_CONCUR_VALUES := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_BIGINT [
+
 	SQL_CONVERT_BIGINT := 53
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_BINARY [
+
 	SQL_CONVERT_BINARY := 54
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_BIT [
+
 	SQL_CONVERT_BIT := 55
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_CHAR [
+
 	SQL_CONVERT_CHAR := 56
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_DATE [
+
 	SQL_CONVERT_DATE := 57
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_DECIMAL [
+
 	SQL_CONVERT_DECIMAL := 58
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_DOUBLE [
+
 	SQL_CONVERT_DOUBLE := 59
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_FLOAT [
+
 	SQL_CONVERT_FLOAT := 60
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_FUNCTIONS [
+
 	SQL_CONVERT_FUNCTIONS := 48
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_GUID [
+
 	SQL_CONVERT_GUID := 173
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_INTEGER [
+
 	SQL_CONVERT_INTEGER := 61
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_INTERVAL_DAY_TIME [
+
 	SQL_CONVERT_INTERVAL_DAY_TIME := 123
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_INTERVAL_YEAR_MONTH [
+
 	SQL_CONVERT_INTERVAL_YEAR_MONTH := 124
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_LONGVARBINARY [
+
 	SQL_CONVERT_LONGVARBINARY := 71
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_LONGVARCHAR [
+
 	SQL_CONVERT_LONGVARCHAR := 62
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_NUMERIC [
+
 	SQL_CONVERT_NUMERIC := 63
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_REAL [
+
 	SQL_CONVERT_REAL := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_SMALLINT [
+
 	SQL_CONVERT_SMALLINT := 65
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_TIME [
+
 	SQL_CONVERT_TIME := 66
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_TIMESTAMP [
+
 	SQL_CONVERT_TIMESTAMP := 67
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_TINYINT [
+
 	SQL_CONVERT_TINYINT := 68
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_VARBINARY [
+
 	SQL_CONVERT_VARBINARY := 69
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_VARCHAR [
+
 	SQL_CONVERT_VARCHAR := 70
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_WCHAR [
+
 	SQL_CONVERT_WCHAR := 122
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_WLONGVARCHAR [
+
 	SQL_CONVERT_WLONGVARCHAR := 125
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CONVERT_WVARCHAR [
+
 	SQL_CONVERT_WVARCHAR := 126
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CORRELATION_NAME [
+
 	SQL_CORRELATION_NAME := 74
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CP_DEFAULT [
+
 	SQL_CP_DEFAULT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CP_DRIVER_AWARE [
+
 	SQL_CP_DRIVER_AWARE := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CP_MATCH_DEFAULT [
+
 	SQL_CP_MATCH_DEFAULT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CP_OFF [
+
 	SQL_CP_OFF := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CP_ONE_PER_DRIVER [
+
 	SQL_CP_ONE_PER_DRIVER := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CP_ONE_PER_HENV [
+
 	SQL_CP_ONE_PER_HENV := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CP_RELAXED_MATCH [
+
 	SQL_CP_RELAXED_MATCH := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CP_STRICT_MATCH [
+
 	SQL_CP_STRICT_MATCH := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CREATE_ASSERTION [
+
 	SQL_CREATE_ASSERTION := 127
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CREATE_CHARACTER_SET [
+
 	SQL_CREATE_CHARACTER_SET := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CREATE_COLLATION [
+
 	SQL_CREATE_COLLATION := 129
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CREATE_DOMAIN [
+
 	SQL_CREATE_DOMAIN := 130
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CREATE_SCHEMA [
+
 	SQL_CREATE_SCHEMA := 131
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CREATE_TABLE [
+
 	SQL_CREATE_TABLE := 132
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CREATE_TRANSLATION [
+
 	SQL_CREATE_TRANSLATION := 133
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CREATE_VIEW [
+
 	SQL_CREATE_VIEW := 134
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CR_CLOSE [
+
 	SQL_CR_CLOSE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CR_DELETE [
+
 	SQL_CR_DELETE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CR_PRESERVE [
+
 	SQL_CR_PRESERVE := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CS_AUTHORIZATION [
+
 	SQL_CS_AUTHORIZATION := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CS_CREATE_SCHEMA [
+
 	SQL_CS_CREATE_SCHEMA := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CS_DEFAULT_CHARACTER_SET [
+
 	SQL_CS_DEFAULT_CHARACTER_SET := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CTR_CREATE_TRANSLATION [
+
 	SQL_CTR_CREATE_TRANSLATION := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CT_COLUMN_COLLATION [
+
 	SQL_CT_COLUMN_COLLATION := 2048
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CT_COLUMN_CONSTRAINT [
+
 	SQL_CT_COLUMN_CONSTRAINT := 512
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CT_COLUMN_DEFAULT [
+
 	SQL_CT_COLUMN_DEFAULT := 1024
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CT_COMMIT_DELETE [
+
 	SQL_CT_COMMIT_DELETE := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CT_COMMIT_PRESERVE [
+
 	SQL_CT_COMMIT_PRESERVE := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CT_CONSTRAINT_DEFERRABLE [
+
 	SQL_CT_CONSTRAINT_DEFERRABLE := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CT_CONSTRAINT_INITIALLY_DEFERRED [
+
 	SQL_CT_CONSTRAINT_INITIALLY_DEFERRED := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CT_CONSTRAINT_INITIALLY_IMMEDIATE [
+
 	SQL_CT_CONSTRAINT_INITIALLY_IMMEDIATE := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CT_CONSTRAINT_NAME_DEFINITION [
+
 	SQL_CT_CONSTRAINT_NAME_DEFINITION := 8192
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CT_CONSTRAINT_NON_DEFERRABLE [
+
 	SQL_CT_CONSTRAINT_NON_DEFERRABLE := 256
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CT_CREATE_TABLE [
+
 	SQL_CT_CREATE_TABLE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CT_GLOBAL_TEMPORARY [
+
 	SQL_CT_GLOBAL_TEMPORARY := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CT_LOCAL_TEMPORARY [
+
 	SQL_CT_LOCAL_TEMPORARY := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CT_TABLE_CONSTRAINT [
+
 	SQL_CT_TABLE_CONSTRAINT := 4096
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CURRENT_QUALIFIER [
+
 	SQL_CURRENT_QUALIFIER := 109
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CURSOR_COMMIT_BEHAVIOR [
+
 	SQL_CURSOR_COMMIT_BEHAVIOR := 23
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CURSOR_DYNAMIC [
+
 	SQL_CURSOR_DYNAMIC := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CURSOR_FORWARD_ONLY [
+
 	SQL_CURSOR_FORWARD_ONLY := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CURSOR_KEYSET_DRIVEN [
+
 	SQL_CURSOR_KEYSET_DRIVEN := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CURSOR_ROLLBACK_BEHAVIOR [
+
 	SQL_CURSOR_ROLLBACK_BEHAVIOR := 24
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CURSOR_SENSITIVITY [
+
 	SQL_CURSOR_SENSITIVITY := 10001
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CURSOR_STATIC [
+
 	SQL_CURSOR_STATIC := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CURSOR_TYPE [
+
 	SQL_CURSOR_TYPE := 6
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CURSOR_TYPE_DEFAULT [
+
 	SQL_CURSOR_TYPE_DEFAULT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CUR_DEFAULT [
+
 	SQL_CUR_DEFAULT := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CUR_USE_DRIVER [
+
 	SQL_CUR_USE_DRIVER := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CUR_USE_IF_NEEDED [
+
 	SQL_CUR_USE_IF_NEEDED := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CUR_USE_ODBC [
+
 	SQL_CUR_USE_ODBC := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CU_DML_STATEMENTS [
+
 	SQL_CU_DML_STATEMENTS := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CU_INDEX_DEFINITION [
+
 	SQL_CU_INDEX_DEFINITION := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CU_PRIVILEGE_DEFINITION [
+
 	SQL_CU_PRIVILEGE_DEFINITION := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CU_PROCEDURE_INVOCATION [
+
 	SQL_CU_PROCEDURE_INVOCATION := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CU_TABLE_DEFINITION [
+
 	SQL_CU_TABLE_DEFINITION := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_BIGINT [
+
 	SQL_CVT_BIGINT := 16384
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_BINARY [
+
 	SQL_CVT_BINARY := 1024
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_BIT [
+
 	SQL_CVT_BIT := 4096
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_CHAR [
+
 	SQL_CVT_CHAR := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_DATE [
+
 	SQL_CVT_DATE := 32768
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_DECIMAL [
+
 	SQL_CVT_DECIMAL := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_DOUBLE [
+
 	SQL_CVT_DOUBLE := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_FLOAT [
+
 	SQL_CVT_FLOAT := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_GUID [
+
 	SQL_CVT_GUID := 16777216
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_INTEGER [
+
 	SQL_CVT_INTEGER := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_INTERVAL_DAY_TIME [
+
 	SQL_CVT_INTERVAL_DAY_TIME := 1048576
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_INTERVAL_YEAR_MONTH [
+
 	SQL_CVT_INTERVAL_YEAR_MONTH := 524288
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_LONGVARBINARY [
+
 	SQL_CVT_LONGVARBINARY := 262144
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_LONGVARCHAR [
+
 	SQL_CVT_LONGVARCHAR := 512
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_NUMERIC [
+
 	SQL_CVT_NUMERIC := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_REAL [
+
 	SQL_CVT_REAL := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_SMALLINT [
+
 	SQL_CVT_SMALLINT := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_TIME [
+
 	SQL_CVT_TIME := 65536
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_TIMESTAMP [
+
 	SQL_CVT_TIMESTAMP := 131072
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_TINYINT [
+
 	SQL_CVT_TINYINT := 8192
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_VARBINARY [
+
 	SQL_CVT_VARBINARY := 2048
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_VARCHAR [
+
 	SQL_CVT_VARCHAR := 256
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_WCHAR [
+
 	SQL_CVT_WCHAR := 2097152
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_WLONGVARCHAR [
+
 	SQL_CVT_WLONGVARCHAR := 4194304
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CVT_WVARCHAR [
+
 	SQL_CVT_WVARCHAR := 8388608
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CV_CASCADED [
+
 	SQL_CV_CASCADED := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CV_CHECK_OPTION [
+
 	SQL_CV_CHECK_OPTION := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CV_CREATE_VIEW [
+
 	SQL_CV_CREATE_VIEW := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_CV_LOCAL [
+
 	SQL_CV_LOCAL := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_BINARY [
+
 	SQL_C_BINARY := -2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_BIT [
+
 	SQL_C_BIT := -7
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_CHAR [
+
 	SQL_C_CHAR := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_DATE [
+
 	SQL_C_DATE := 9
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_DEFAULT [
+
 	SQL_C_DEFAULT := 99
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_DOUBLE [
+
 	SQL_C_DOUBLE := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_FLOAT [
+
 	SQL_C_FLOAT := 7
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_GUID [
+
 	SQL_C_GUID := -11
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_INTERVAL_DAY [
+
 	SQL_C_INTERVAL_DAY := 100
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_INTERVAL_DAY_TO_HOUR [
+
 	SQL_C_INTERVAL_DAY_TO_HOUR := 100
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_INTERVAL_DAY_TO_MINUTE [
+
 	SQL_C_INTERVAL_DAY_TO_MINUTE := 100
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_INTERVAL_DAY_TO_SECOND [
+
 	SQL_C_INTERVAL_DAY_TO_SECOND := 100
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_INTERVAL_HOUR [
+
 	SQL_C_INTERVAL_HOUR := 100
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_INTERVAL_HOUR_TO_MINUTE [
+
 	SQL_C_INTERVAL_HOUR_TO_MINUTE := 100
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_INTERVAL_HOUR_TO_SECOND [
+
 	SQL_C_INTERVAL_HOUR_TO_SECOND := 100
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_INTERVAL_MINUTE [
+
 	SQL_C_INTERVAL_MINUTE := 100
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_INTERVAL_MINUTE_TO_SECOND [
+
 	SQL_C_INTERVAL_MINUTE_TO_SECOND := 100
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_INTERVAL_MONTH [
+
 	SQL_C_INTERVAL_MONTH := 100
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_INTERVAL_SECOND [
+
 	SQL_C_INTERVAL_SECOND := 100
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_INTERVAL_YEAR [
+
 	SQL_C_INTERVAL_YEAR := 100
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_INTERVAL_YEAR_TO_MONTH [
+
 	SQL_C_INTERVAL_YEAR_TO_MONTH := 100
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_LONG [
+
 	SQL_C_LONG := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_NUMERIC [
+
 	SQL_C_NUMERIC := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_SHORT [
+
 	SQL_C_SHORT := 5
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_TIME [
+
 	SQL_C_TIME := 10
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_TIMESTAMP [
+
 	SQL_C_TIMESTAMP := 11
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_TINYINT [
+
 	SQL_C_TINYINT := -6
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_TYPE_DATE [
+
 	SQL_C_TYPE_DATE := 91
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_TYPE_TIME [
+
 	SQL_C_TYPE_TIME := 92
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_C_TYPE_TIMESTAMP [
+
 	SQL_C_TYPE_TIMESTAMP := 93
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DATABASE_NAME [
+
 	SQL_DATABASE_NAME := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DATA_AT_EXEC [
+
 	SQL_DATA_AT_EXEC := -2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DATA_SOURCE_NAME [
+
 	SQL_DATA_SOURCE_NAME := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DATA_SOURCE_READ_ONLY [
+
 	SQL_DATA_SOURCE_READ_ONLY := 25
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DATETIME_LITERALS [
+
 	SQL_DATETIME_LITERALS := 119
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DATE_LEN [
+
 	SQL_DATE_LEN := 10
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DAY [
+
 	SQL_DAY := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DAY_TO_HOUR [
+
 	SQL_DAY_TO_HOUR := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DAY_TO_MINUTE [
+
 	SQL_DAY_TO_MINUTE := 9
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DAY_TO_SECOND [
+
 	SQL_DAY_TO_SECOND := 10
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DA_DROP_ASSERTION [
+
 	SQL_DA_DROP_ASSERTION := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DBMS_NAME [
+
 	SQL_DBMS_NAME := 17
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DBMS_VER [
+
 	SQL_DBMS_VER := 18
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DB_DEFAULT [
+
 	SQL_DB_DEFAULT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DB_DISCONNECT [
+
 	SQL_DB_DISCONNECT := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DB_RETURN_TO_POOL [
+
 	SQL_DB_RETURN_TO_POOL := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DCS_DROP_CHARACTER_SET [
+
 	SQL_DCS_DROP_CHARACTER_SET := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DC_DROP_COLLATION [
+
 	SQL_DC_DROP_COLLATION := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DDL_INDEX [
+
 	SQL_DDL_INDEX := 170
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DD_CASCADE [
+
 	SQL_DD_CASCADE := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DD_DROP_DOMAIN [
+
 	SQL_DD_DROP_DOMAIN := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DD_RESTRICT [
+
 	SQL_DD_RESTRICT := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DEFAULT [
+
 	SQL_DEFAULT := 99
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DEFAULT_PARAM [
+
 	SQL_DEFAULT_PARAM := -5
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DEFAULT_TXN_ISOLATION [
+
 	SQL_DEFAULT_TXN_ISOLATION := 26
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DELETE [
+
 	SQL_DELETE := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DELETE_BY_BOOKMARK [
+
 	SQL_DELETE_BY_BOOKMARK := 6
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESCRIBE_PARAMETER [
+
 	SQL_DESCRIBE_PARAMETER := 10002
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_ALLOC_AUTO [
+
 	SQL_DESC_ALLOC_AUTO := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_ALLOC_TYPE [
+
 	SQL_DESC_ALLOC_TYPE := 1099
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_ALLOC_USER [
+
 	SQL_DESC_ALLOC_USER := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_ARRAY_SIZE [
+
 	SQL_DESC_ARRAY_SIZE := 20
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_ARRAY_STATUS_PTR [
+
 	SQL_DESC_ARRAY_STATUS_PTR := 21
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_AUTO_UNIQUE_VALUE [
+
 	SQL_DESC_AUTO_UNIQUE_VALUE := 11
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_BASE_COLUMN_NAME [
+
 	SQL_DESC_BASE_COLUMN_NAME := 22
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_BASE_TABLE_NAME [
+
 	SQL_DESC_BASE_TABLE_NAME := 23
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_BIND_OFFSET_PTR [
+
 	SQL_DESC_BIND_OFFSET_PTR := 24
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_BIND_TYPE [
+
 	SQL_DESC_BIND_TYPE := 25
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_CASE_SENSITIVE [
+
 	SQL_DESC_CASE_SENSITIVE := 12
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_CATALOG_NAME [
+
 	SQL_DESC_CATALOG_NAME := 17
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_CONCISE_TYPE [
+
 	SQL_DESC_CONCISE_TYPE := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_COUNT [
+
 	SQL_DESC_COUNT := 1001
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_DATA_PTR [
+
 	SQL_DESC_DATA_PTR := 1010
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_DATETIME_INTERVAL_CODE [
+
 	SQL_DESC_DATETIME_INTERVAL_CODE := 1007
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_DATETIME_INTERVAL_PRECISION [
+
 	SQL_DESC_DATETIME_INTERVAL_PRECISION := 26
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_DISPLAY_SIZE [
+
 	SQL_DESC_DISPLAY_SIZE := 6
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_FIXED_PREC_SCALE [
+
 	SQL_DESC_FIXED_PREC_SCALE := 9
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_INDICATOR_PTR [
+
 	SQL_DESC_INDICATOR_PTR := 1009
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_LABEL [
+
 	SQL_DESC_LABEL := 18
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_LENGTH [
+
 	SQL_DESC_LENGTH := 1003
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_LITERAL_PREFIX [
+
 	SQL_DESC_LITERAL_PREFIX := 27
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_LITERAL_SUFFIX [
+
 	SQL_DESC_LITERAL_SUFFIX := 28
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_LOCAL_TYPE_NAME [
+
 	SQL_DESC_LOCAL_TYPE_NAME := 29
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_MAXIMUM_SCALE [
+
 	SQL_DESC_MAXIMUM_SCALE := 30
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_MINIMUM_SCALE [
+
 	SQL_DESC_MINIMUM_SCALE := 31
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_NAME [
+
 	SQL_DESC_NAME := 1011
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_NULLABLE [
+
 	SQL_DESC_NULLABLE := 1008
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_NUM_PREC_RADIX [
+
 	SQL_DESC_NUM_PREC_RADIX := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_OCTET_LENGTH [
+
 	SQL_DESC_OCTET_LENGTH := 1013
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_OCTET_LENGTH_PTR [
+
 	SQL_DESC_OCTET_LENGTH_PTR := 1004
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_PARAMETER_TYPE [
+
 	SQL_DESC_PARAMETER_TYPE := 33
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_PRECISION [
+
 	SQL_DESC_PRECISION := 1005
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_ROWS_PROCESSED_PTR [
+
 	SQL_DESC_ROWS_PROCESSED_PTR := 34
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_ROWVER [
+
 	SQL_DESC_ROWVER := 35
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_SCALE [
+
 	SQL_DESC_SCALE := 1006
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_SCHEMA_NAME [
+
 	SQL_DESC_SCHEMA_NAME := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_SEARCHABLE [
+
 	SQL_DESC_SEARCHABLE := 13
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_TABLE_NAME [
+
 	SQL_DESC_TABLE_NAME := 15
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_TYPE [
+
 	SQL_DESC_TYPE := 1002
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_TYPE_NAME [
+
 	SQL_DESC_TYPE_NAME := 14
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_UNNAMED [
+
 	SQL_DESC_UNNAMED := 1012
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_UNSIGNED [
+
 	SQL_DESC_UNSIGNED := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DESC_UPDATABLE [
+
 	SQL_DESC_UPDATABLE := 10
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_ALTER_DOMAIN [
+
 	SQL_DIAG_ALTER_DOMAIN := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_ALTER_TABLE [
+
 	SQL_DIAG_ALTER_TABLE := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_CALL [
+
 	SQL_DIAG_CALL := 7
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_CLASS_ORIGIN [
+
 	SQL_DIAG_CLASS_ORIGIN := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_COLUMN_NUMBER [
+
 	SQL_DIAG_COLUMN_NUMBER := -1247
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_CONNECTION_NAME [
+
 	SQL_DIAG_CONNECTION_NAME := 10
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_CREATE_ASSERTION [
+
 	SQL_DIAG_CREATE_ASSERTION := 6
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_CREATE_CHARACTER_SET [
+
 	SQL_DIAG_CREATE_CHARACTER_SET := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_CREATE_COLLATION [
+
 	SQL_DIAG_CREATE_COLLATION := 10
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_CREATE_DOMAIN [
+
 	SQL_DIAG_CREATE_DOMAIN := 23
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_CREATE_INDEX [
+
 	SQL_DIAG_CREATE_INDEX := -1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_CREATE_SCHEMA [
+
 	SQL_DIAG_CREATE_SCHEMA := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_CREATE_TABLE [
+
 	SQL_DIAG_CREATE_TABLE := 77
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_CREATE_TRANSLATION [
+
 	SQL_DIAG_CREATE_TRANSLATION := 79
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_CREATE_VIEW [
+
 	SQL_DIAG_CREATE_VIEW := 84
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_CURSOR_ROW_COUNT [
+
 	SQL_DIAG_CURSOR_ROW_COUNT := -1249
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_DELETE_WHERE [
+
 	SQL_DIAG_DELETE_WHERE := 19
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_DROP_ASSERTION [
+
 	SQL_DIAG_DROP_ASSERTION := 24
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_DROP_CHARACTER_SET [
+
 	SQL_DIAG_DROP_CHARACTER_SET := 25
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_DROP_COLLATION [
+
 	SQL_DIAG_DROP_COLLATION := 26
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_DROP_DOMAIN [
+
 	SQL_DIAG_DROP_DOMAIN := 27
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_DROP_INDEX [
+
 	SQL_DIAG_DROP_INDEX := -2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_DROP_SCHEMA [
+
 	SQL_DIAG_DROP_SCHEMA := 31
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_DROP_TABLE [
+
 	SQL_DIAG_DROP_TABLE := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_DROP_TRANSLATION [
+
 	SQL_DIAG_DROP_TRANSLATION := 33
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_DROP_VIEW [
+
 	SQL_DIAG_DROP_VIEW := 36
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_DYNAMIC_DELETE_CURSOR [
+
 	SQL_DIAG_DYNAMIC_DELETE_CURSOR := 38
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_DYNAMIC_FUNCTION [
+
 	SQL_DIAG_DYNAMIC_FUNCTION := 7
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_DYNAMIC_FUNCTION_CODE [
+
 	SQL_DIAG_DYNAMIC_FUNCTION_CODE := 12
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_DYNAMIC_UPDATE_CURSOR [
+
 	SQL_DIAG_DYNAMIC_UPDATE_CURSOR := 81
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_GRANT [
+
 	SQL_DIAG_GRANT := 48
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_INSERT [
+
 	SQL_DIAG_INSERT := 50
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_MESSAGE_TEXT [
+
 	SQL_DIAG_MESSAGE_TEXT := 6
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_NATIVE [
+
 	SQL_DIAG_NATIVE := 5
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_NUMBER [
+
 	SQL_DIAG_NUMBER := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_RETURNCODE [
+
 	SQL_DIAG_RETURNCODE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_REVOKE [
+
 	SQL_DIAG_REVOKE := 59
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_ROW_COUNT [
+
 	SQL_DIAG_ROW_COUNT := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_ROW_NUMBER [
+
 	SQL_DIAG_ROW_NUMBER := -1248
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_SELECT_CURSOR [
+
 	SQL_DIAG_SELECT_CURSOR := 85
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_SERVER_NAME [
+
 	SQL_DIAG_SERVER_NAME := 11
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_SQLSTATE [
+
 	SQL_DIAG_SQLSTATE := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_SUBCLASS_ORIGIN [
+
 	SQL_DIAG_SUBCLASS_ORIGIN := 9
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_UNKNOWN_STATEMENT [
+
 	SQL_DIAG_UNKNOWN_STATEMENT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DIAG_UPDATE_WHERE [
+
 	SQL_DIAG_UPDATE_WHERE := 82
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DI_CREATE_INDEX [
+
 	SQL_DI_CREATE_INDEX := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DI_DROP_INDEX [
+
 	SQL_DI_DROP_INDEX := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DL_SQL92_DATE [
+
 	SQL_DL_SQL92_DATE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DL_SQL92_INTERVAL_DAY [
+
 	SQL_DL_SQL92_INTERVAL_DAY := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DL_SQL92_INTERVAL_DAY_TO_HOUR [
+
 	SQL_DL_SQL92_INTERVAL_DAY_TO_HOUR := 1024
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DL_SQL92_INTERVAL_DAY_TO_MINUTE [
+
 	SQL_DL_SQL92_INTERVAL_DAY_TO_MINUTE := 2048
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DL_SQL92_INTERVAL_DAY_TO_SECOND [
+
 	SQL_DL_SQL92_INTERVAL_DAY_TO_SECOND := 4096
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DL_SQL92_INTERVAL_HOUR [
+
 	SQL_DL_SQL92_INTERVAL_HOUR := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DL_SQL92_INTERVAL_HOUR_TO_MINUTE [
+
 	SQL_DL_SQL92_INTERVAL_HOUR_TO_MINUTE := 8192
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DL_SQL92_INTERVAL_HOUR_TO_SECOND [
+
 	SQL_DL_SQL92_INTERVAL_HOUR_TO_SECOND := 16384
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DL_SQL92_INTERVAL_MINUTE [
+
 	SQL_DL_SQL92_INTERVAL_MINUTE := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DL_SQL92_INTERVAL_MINUTE_TO_SECOND [
+
 	SQL_DL_SQL92_INTERVAL_MINUTE_TO_SECOND := 32768
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DL_SQL92_INTERVAL_MONTH [
+
 	SQL_DL_SQL92_INTERVAL_MONTH := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DL_SQL92_INTERVAL_SECOND [
+
 	SQL_DL_SQL92_INTERVAL_SECOND := 256
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DL_SQL92_INTERVAL_YEAR [
+
 	SQL_DL_SQL92_INTERVAL_YEAR := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DL_SQL92_INTERVAL_YEAR_TO_MONTH [
+
 	SQL_DL_SQL92_INTERVAL_YEAR_TO_MONTH := 512
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DL_SQL92_TIME [
+
 	SQL_DL_SQL92_TIME := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DL_SQL92_TIMESTAMP [
+
 	SQL_DL_SQL92_TIMESTAMP := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DM_VER [
+
 	SQL_DM_VER := 171
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_AWARE_POOLING_CAPABLE [
+
 	SQL_DRIVER_AWARE_POOLING_CAPABLE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_AWARE_POOLING_NOT_CAPABLE [
+
 	SQL_DRIVER_AWARE_POOLING_NOT_CAPABLE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_AWARE_POOLING_SUPPORTED [
+
 	SQL_DRIVER_AWARE_POOLING_SUPPORTED := 10024
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_COMPLETE [
+
 	SQL_DRIVER_COMPLETE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_COMPLETE_REQUIRED [
+
 	SQL_DRIVER_COMPLETE_REQUIRED := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_CONN_ATTR_BASE [
+
 	SQL_DRIVER_CONN_ATTR_BASE := 16384
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_C_TYPE_BASE [
+
 	SQL_DRIVER_C_TYPE_BASE := 16384
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_DESC_FIELD_BASE [
+
 	SQL_DRIVER_DESC_FIELD_BASE := 16384
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_DIAG_FIELD_BASE [
+
 	SQL_DRIVER_DIAG_FIELD_BASE := 16384
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_HDBC [
+
 	SQL_DRIVER_HDBC := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_HDESC [
+
 	SQL_DRIVER_HDESC := 135
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_HENV [
+
 	SQL_DRIVER_HENV := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_HLIB [
+
 	SQL_DRIVER_HLIB := 76
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_HSTMT [
+
 	SQL_DRIVER_HSTMT := 5
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_INFO_TYPE_BASE [
+
 	SQL_DRIVER_INFO_TYPE_BASE := 16384
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_NAME [
+
 	SQL_DRIVER_NAME := 6
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_NOPROMPT [
+
 	SQL_DRIVER_NOPROMPT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_ODBC_VER [
+
 	SQL_DRIVER_ODBC_VER := 77
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_PROMPT [
+
 	SQL_DRIVER_PROMPT := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_SQL_TYPE_BASE [
+
 	SQL_DRIVER_SQL_TYPE_BASE := 16384
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_STMT_ATTR_BASE [
+
 	SQL_DRIVER_STMT_ATTR_BASE := 16384
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DRIVER_VER [
+
 	SQL_DRIVER_VER := 7
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DROP [
+
 	SQL_DROP := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DROP_ASSERTION [
+
 	SQL_DROP_ASSERTION := 136
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DROP_CHARACTER_SET [
+
 	SQL_DROP_CHARACTER_SET := 137
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DROP_COLLATION [
+
 	SQL_DROP_COLLATION := 138
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DROP_DOMAIN [
+
 	SQL_DROP_DOMAIN := 139
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DROP_SCHEMA [
+
 	SQL_DROP_SCHEMA := 140
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DROP_TABLE [
+
 	SQL_DROP_TABLE := 141
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DROP_TRANSLATION [
+
 	SQL_DROP_TRANSLATION := 142
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DROP_VIEW [
+
 	SQL_DROP_VIEW := 143
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DS_CASCADE [
+
 	SQL_DS_CASCADE := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DS_DROP_SCHEMA [
+
 	SQL_DS_DROP_SCHEMA := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DS_RESTRICT [
+
 	SQL_DS_RESTRICT := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DTC_DONE [
+
 	SQL_DTC_DONE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DTC_ENLIST_EXPENSIVE [
+
 	SQL_DTC_ENLIST_EXPENSIVE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DTC_TRANSITION_COST [
+
 	SQL_DTC_TRANSITION_COST := 1750
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DTC_UNENLIST_EXPENSIVE [
+
 	SQL_DTC_UNENLIST_EXPENSIVE := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DTR_DROP_TRANSLATION [
+
 	SQL_DTR_DROP_TRANSLATION := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DT_CASCADE [
+
 	SQL_DT_CASCADE := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DT_DROP_TABLE [
+
 	SQL_DT_DROP_TABLE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DT_RESTRICT [
+
 	SQL_DT_RESTRICT := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DV_CASCADE [
+
 	SQL_DV_CASCADE := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DV_DROP_VIEW [
+
 	SQL_DV_DROP_VIEW := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DV_RESTRICT [
+
 	SQL_DV_RESTRICT := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DYNAMIC_CURSOR_ATTRIBUTES1 [
+
 	SQL_DYNAMIC_CURSOR_ATTRIBUTES1 := 144
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_DYNAMIC_CURSOR_ATTRIBUTES2 [
+
 	SQL_DYNAMIC_CURSOR_ATTRIBUTES2 := 145
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ENSURE [
+
 	SQL_ENSURE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ENTIRE_ROWSET [
+
 	SQL_ENTIRE_ROWSET := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_EXPRESSIONS_IN_ORDERBY [
+
 	SQL_EXPRESSIONS_IN_ORDERBY := 27
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FALSE [
+
 	SQL_FALSE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FD_FETCH_ABSOLUTE [
+
 	SQL_FD_FETCH_ABSOLUTE := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FD_FETCH_BOOKMARK [
+
 	SQL_FD_FETCH_BOOKMARK := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FD_FETCH_FIRST [
+
 	SQL_FD_FETCH_FIRST := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FD_FETCH_LAST [
+
 	SQL_FD_FETCH_LAST := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FD_FETCH_NEXT [
+
 	SQL_FD_FETCH_NEXT := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FD_FETCH_PREV [
+
 	SQL_FD_FETCH_PREV := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FD_FETCH_PRIOR [
+
 	SQL_FD_FETCH_PRIOR := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FD_FETCH_RELATIVE [
+
 	SQL_FD_FETCH_RELATIVE := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FD_FETCH_RESUME [
+
 	SQL_FD_FETCH_RESUME := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FETCH_ABSOLUTE [
+
 	SQL_FETCH_ABSOLUTE := 5
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FETCH_BOOKMARK [
+
 	SQL_FETCH_BOOKMARK := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FETCH_BY_BOOKMARK [
+
 	SQL_FETCH_BY_BOOKMARK := 7
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FETCH_DIRECTION [
+
 	SQL_FETCH_DIRECTION := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FETCH_FIRST [
+
 	SQL_FETCH_FIRST := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FETCH_FIRST_SYSTEM [
+
 	SQL_FETCH_FIRST_SYSTEM := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FETCH_FIRST_USER [
+
 	SQL_FETCH_FIRST_USER := 31
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FETCH_LAST [
+
 	SQL_FETCH_LAST := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FETCH_NEXT [
+
 	SQL_FETCH_NEXT := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FETCH_PREV [
+
 	SQL_FETCH_PREV := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FETCH_PRIOR [
+
 	SQL_FETCH_PRIOR := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FETCH_RELATIVE [
+
 	SQL_FETCH_RELATIVE := 6
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FETCH_RESUME [
+
 	SQL_FETCH_RESUME := 7
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FILE_CATALOG [
+
 	SQL_FILE_CATALOG := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FILE_NOT_SUPPORTED [
+
 	SQL_FILE_NOT_SUPPORTED := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FILE_QUALIFIER [
+
 	SQL_FILE_QUALIFIER := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FILE_TABLE [
+
 	SQL_FILE_TABLE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FILE_USAGE [
+
 	SQL_FILE_USAGE := 84
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_CVT_CAST [
+
 	SQL_FN_CVT_CAST := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_CVT_CONVERT [
+
 	SQL_FN_CVT_CONVERT := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_ABS [
+
 	SQL_FN_NUM_ABS := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_ACOS [
+
 	SQL_FN_NUM_ACOS := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_ASIN [
+
 	SQL_FN_NUM_ASIN := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_ATAN [
+
 	SQL_FN_NUM_ATAN := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_ATAN2 [
+
 	SQL_FN_NUM_ATAN2 := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_CEILING [
+
 	SQL_FN_NUM_CEILING := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_COS [
+
 	SQL_FN_NUM_COS := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_COT [
+
 	SQL_FN_NUM_COT := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_DEGREES [
+
 	SQL_FN_NUM_DEGREES := 262144
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_EXP [
+
 	SQL_FN_NUM_EXP := 256
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_FLOOR [
+
 	SQL_FN_NUM_FLOOR := 512
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_LOG [
+
 	SQL_FN_NUM_LOG := 1024
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_LOG10 [
+
 	SQL_FN_NUM_LOG10 := 524288
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_MOD [
+
 	SQL_FN_NUM_MOD := 2048
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_PI [
+
 	SQL_FN_NUM_PI := 65536
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_POWER [
+
 	SQL_FN_NUM_POWER := 1048576
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_RADIANS [
+
 	SQL_FN_NUM_RADIANS := 2097152
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_RAND [
+
 	SQL_FN_NUM_RAND := 131072
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_ROUND [
+
 	SQL_FN_NUM_ROUND := 4194304
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_SIGN [
+
 	SQL_FN_NUM_SIGN := 4096
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_SIN [
+
 	SQL_FN_NUM_SIN := 8192
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_SQRT [
+
 	SQL_FN_NUM_SQRT := 16384
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_TAN [
+
 	SQL_FN_NUM_TAN := 32768
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_NUM_TRUNCATE [
+
 	SQL_FN_NUM_TRUNCATE := 8388608
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_ASCII [
+
 	SQL_FN_STR_ASCII := 8192
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_BIT_LENGTH [
+
 	SQL_FN_STR_BIT_LENGTH := 524288
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_CHAR [
+
 	SQL_FN_STR_CHAR := 16384
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_CHARACTER_LENGTH [
+
 	SQL_FN_STR_CHARACTER_LENGTH := 2097152
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_CHAR_LENGTH [
+
 	SQL_FN_STR_CHAR_LENGTH := 1048576
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_CONCAT [
+
 	SQL_FN_STR_CONCAT := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_DIFFERENCE [
+
 	SQL_FN_STR_DIFFERENCE := 32768
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_INSERT [
+
 	SQL_FN_STR_INSERT := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_LCASE [
+
 	SQL_FN_STR_LCASE := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_LEFT [
+
 	SQL_FN_STR_LEFT := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_LENGTH [
+
 	SQL_FN_STR_LENGTH := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_LOCATE [
+
 	SQL_FN_STR_LOCATE := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_LOCATE_2 [
+
 	SQL_FN_STR_LOCATE_2 := 65536
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_LTRIM [
+
 	SQL_FN_STR_LTRIM := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_OCTET_LENGTH [
+
 	SQL_FN_STR_OCTET_LENGTH := 4194304
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_POSITION [
+
 	SQL_FN_STR_POSITION := 8388608
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_REPEAT [
+
 	SQL_FN_STR_REPEAT := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_REPLACE [
+
 	SQL_FN_STR_REPLACE := 256
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_RIGHT [
+
 	SQL_FN_STR_RIGHT := 512
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_RTRIM [
+
 	SQL_FN_STR_RTRIM := 1024
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_SOUNDEX [
+
 	SQL_FN_STR_SOUNDEX := 131072
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_SPACE [
+
 	SQL_FN_STR_SPACE := 262144
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_SUBSTRING [
+
 	SQL_FN_STR_SUBSTRING := 2048
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_STR_UCASE [
+
 	SQL_FN_STR_UCASE := 4096
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_SYS_DBNAME [
+
 	SQL_FN_SYS_DBNAME := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_SYS_IFNULL [
+
 	SQL_FN_SYS_IFNULL := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_SYS_USERNAME [
+
 	SQL_FN_SYS_USERNAME := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TD_CURDATE [
+
 	SQL_FN_TD_CURDATE := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TD_CURRENT_DATE [
+
 	SQL_FN_TD_CURRENT_DATE := 131072
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TD_CURRENT_TIME [
+
 	SQL_FN_TD_CURRENT_TIME := 262144
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TD_CURRENT_TIMESTAMP [
+
 	SQL_FN_TD_CURRENT_TIMESTAMP := 524288
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TD_CURTIME [
+
 	SQL_FN_TD_CURTIME := 512
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TD_DAYNAME [
+
 	SQL_FN_TD_DAYNAME := 32768
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TD_DAYOFMONTH [
+
 	SQL_FN_TD_DAYOFMONTH := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TD_DAYOFWEEK [
+
 	SQL_FN_TD_DAYOFWEEK := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TD_DAYOFYEAR [
+
 	SQL_FN_TD_DAYOFYEAR := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TD_EXTRACT [
+
 	SQL_FN_TD_EXTRACT := 1048576
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TD_HOUR [
+
 	SQL_FN_TD_HOUR := 1024
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TD_MINUTE [
+
 	SQL_FN_TD_MINUTE := 2048
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TD_MONTH [
+
 	SQL_FN_TD_MONTH := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TD_MONTHNAME [
+
 	SQL_FN_TD_MONTHNAME := 65536
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TD_NOW [
+
 	SQL_FN_TD_NOW := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TD_QUARTER [
+
 	SQL_FN_TD_QUARTER := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TD_SECOND [
+
 	SQL_FN_TD_SECOND := 4096
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TD_TIMESTAMPADD [
+
 	SQL_FN_TD_TIMESTAMPADD := 8192
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TD_TIMESTAMPDIFF [
+
 	SQL_FN_TD_TIMESTAMPDIFF := 16384
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TD_WEEK [
+
 	SQL_FN_TD_WEEK := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TD_YEAR [
+
 	SQL_FN_TD_YEAR := 256
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TSI_DAY [
+
 	SQL_FN_TSI_DAY := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TSI_FRAC_SECOND [
+
 	SQL_FN_TSI_FRAC_SECOND := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TSI_HOUR [
+
 	SQL_FN_TSI_HOUR := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TSI_MINUTE [
+
 	SQL_FN_TSI_MINUTE := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TSI_MONTH [
+
 	SQL_FN_TSI_MONTH := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TSI_QUARTER [
+
 	SQL_FN_TSI_QUARTER := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TSI_SECOND [
+
 	SQL_FN_TSI_SECOND := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TSI_WEEK [
+
 	SQL_FN_TSI_WEEK := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FN_TSI_YEAR [
+
 	SQL_FN_TSI_YEAR := 256
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FORWARD_ONLY_CURSOR_ATTRIBUTES1 [
+
 	SQL_FORWARD_ONLY_CURSOR_ATTRIBUTES1 := 146
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_FORWARD_ONLY_CURSOR_ATTRIBUTES2 [
+
 	SQL_FORWARD_ONLY_CURSOR_ATTRIBUTES2 := 147
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_GB_COLLATE [
+
 	SQL_GB_COLLATE := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_GB_GROUP_BY_CONTAINS_SELECT [
+
 	SQL_GB_GROUP_BY_CONTAINS_SELECT := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_GB_GROUP_BY_EQUALS_SELECT [
+
 	SQL_GB_GROUP_BY_EQUALS_SELECT := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_GB_NOT_SUPPORTED [
+
 	SQL_GB_NOT_SUPPORTED := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_GB_NO_RELATION [
+
 	SQL_GB_NO_RELATION := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_GD_ANY_COLUMN [
+
 	SQL_GD_ANY_COLUMN := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_GD_ANY_ORDER [
+
 	SQL_GD_ANY_ORDER := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_GD_BLOCK [
+
 	SQL_GD_BLOCK := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_GD_BOUND [
+
 	SQL_GD_BOUND := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_GD_OUTPUT_PARAMS [
+
 	SQL_GD_OUTPUT_PARAMS := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_GETDATA_EXTENSIONS [
+
 	SQL_GETDATA_EXTENSIONS := 81
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_GET_BOOKMARK [
+
 	SQL_GET_BOOKMARK := 13
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_GROUP_BY [
+
 	SQL_GROUP_BY := 88
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_HANDLE_DBC [
+
 	SQL_HANDLE_DBC := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_HANDLE_DESC [
+
 	SQL_HANDLE_DESC := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_HANDLE_ENV [
+
 	SQL_HANDLE_ENV := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_HANDLE_SENV [
+
 	SQL_HANDLE_SENV := 5
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_HANDLE_STMT [
+
 	SQL_HANDLE_STMT := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_HOUR [
+
 	SQL_HOUR := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_HOUR_TO_MINUTE [
+
 	SQL_HOUR_TO_MINUTE := 11
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_HOUR_TO_SECOND [
+
 	SQL_HOUR_TO_SECOND := 12
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_IC_LOWER [
+
 	SQL_IC_LOWER := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_IC_MIXED [
+
 	SQL_IC_MIXED := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_IC_SENSITIVE [
+
 	SQL_IC_SENSITIVE := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_IC_UPPER [
+
 	SQL_IC_UPPER := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_IDENTIFIER_CASE [
+
 	SQL_IDENTIFIER_CASE := 28
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_IDENTIFIER_QUOTE_CHAR [
+
 	SQL_IDENTIFIER_QUOTE_CHAR := 29
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_IGNORE [
+
 	SQL_IGNORE := -6
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_IK_ALL [
+
 	SQL_IK_ALL := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_IK_ASC [
+
 	SQL_IK_ASC := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_IK_DESC [
+
 	SQL_IK_DESC := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_IK_NONE [
+
 	SQL_IK_NONE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_INDEX_ALL [
+
 	SQL_INDEX_ALL := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_INDEX_CLUSTERED [
+
 	SQL_INDEX_CLUSTERED := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_INDEX_HASHED [
+
 	SQL_INDEX_HASHED := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_INDEX_KEYWORDS [
+
 	SQL_INDEX_KEYWORDS := 148
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_INDEX_OTHER [
+
 	SQL_INDEX_OTHER := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_INDEX_UNIQUE [
+
 	SQL_INDEX_UNIQUE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_INFO_FIRST [
+
 	SQL_INFO_FIRST := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_INFO_SCHEMA_VIEWS [
+
 	SQL_INFO_SCHEMA_VIEWS := 149
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_INITIALLY_DEFERRED [
+
 	SQL_INITIALLY_DEFERRED := 5
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_INITIALLY_IMMEDIATE [
+
 	SQL_INITIALLY_IMMEDIATE := 6
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_INSENSITIVE [
+
 	SQL_INSENSITIVE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_INSERT_STATEMENT [
+
 	SQL_INSERT_STATEMENT := 172
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_INTEGRITY [
+
 	SQL_INTEGRITY := 73
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_ASSERTIONS [
+
 	SQL_ISV_ASSERTIONS := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_CHARACTER_SETS [
+
 	SQL_ISV_CHARACTER_SETS := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_CHECK_CONSTRAINTS [
+
 	SQL_ISV_CHECK_CONSTRAINTS := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_COLLATIONS [
+
 	SQL_ISV_COLLATIONS := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_COLUMNS [
+
 	SQL_ISV_COLUMNS := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_COLUMN_DOMAIN_USAGE [
+
 	SQL_ISV_COLUMN_DOMAIN_USAGE := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_COLUMN_PRIVILEGES [
+
 	SQL_ISV_COLUMN_PRIVILEGES := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_CONSTRAINT_COLUMN_USAGE [
+
 	SQL_ISV_CONSTRAINT_COLUMN_USAGE := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_CONSTRAINT_TABLE_USAGE [
+
 	SQL_ISV_CONSTRAINT_TABLE_USAGE := 256
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_DOMAINS [
+
 	SQL_ISV_DOMAINS := 1024
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_DOMAIN_CONSTRAINTS [
+
 	SQL_ISV_DOMAIN_CONSTRAINTS := 512
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_KEY_COLUMN_USAGE [
+
 	SQL_ISV_KEY_COLUMN_USAGE := 2048
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_REFERENTIAL_CONSTRAINTS [
+
 	SQL_ISV_REFERENTIAL_CONSTRAINTS := 4096
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_SCHEMATA [
+
 	SQL_ISV_SCHEMATA := 8192
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_SQL_LANGUAGES [
+
 	SQL_ISV_SQL_LANGUAGES := 16384
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_TABLES [
+
 	SQL_ISV_TABLES := 131072
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_TABLE_CONSTRAINTS [
+
 	SQL_ISV_TABLE_CONSTRAINTS := 32768
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_TABLE_PRIVILEGES [
+
 	SQL_ISV_TABLE_PRIVILEGES := 65536
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_TRANSLATIONS [
+
 	SQL_ISV_TRANSLATIONS := 262144
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_USAGE_PRIVILEGES [
+
 	SQL_ISV_USAGE_PRIVILEGES := 524288
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_VIEWS [
+
 	SQL_ISV_VIEWS := 4194304
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_VIEW_COLUMN_USAGE [
+
 	SQL_ISV_VIEW_COLUMN_USAGE := 1048576
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ISV_VIEW_TABLE_USAGE [
+
 	SQL_ISV_VIEW_TABLE_USAGE := 2097152
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_IS_INSERT_LITERALS [
+
 	SQL_IS_INSERT_LITERALS := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_IS_INSERT_SEARCHED [
+
 	SQL_IS_INSERT_SEARCHED := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_IS_INTEGER [
+
 	SQL_IS_INTEGER := -6
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_IS_POINTER [
+
 	SQL_IS_POINTER := -4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_IS_SELECT_INTO [
+
 	SQL_IS_SELECT_INTO := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_IS_SMALLINT [
+
 	SQL_IS_SMALLINT := -8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_IS_UINTEGER [
+
 	SQL_IS_UINTEGER := -5
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_IS_USMALLINT [
+
 	SQL_IS_USMALLINT := -7
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_KEYSET_CURSOR_ATTRIBUTES1 [
+
 	SQL_KEYSET_CURSOR_ATTRIBUTES1 := 150
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_KEYSET_CURSOR_ATTRIBUTES2 [
+
 	SQL_KEYSET_CURSOR_ATTRIBUTES2 := 151
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_KEYSET_SIZE [
+
 	SQL_KEYSET_SIZE := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_KEYSET_SIZE_DEFAULT [
+
 	SQL_KEYSET_SIZE_DEFAULT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_KEYWORDS [
+
 	SQL_KEYWORDS := 89
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_LCK_EXCLUSIVE [
+
 	SQL_LCK_EXCLUSIVE := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_LCK_NO_CHANGE [
+
 	SQL_LCK_NO_CHANGE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_LCK_UNLOCK [
+
 	SQL_LCK_UNLOCK := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_LEN_BINARY_ATTR_OFFSET [
+
 	SQL_LEN_BINARY_ATTR_OFFSET := -100
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_LEN_DATA_AT_EXEC_OFFSET [
+
 	SQL_LEN_DATA_AT_EXEC_OFFSET := -100
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_LIKE_ESCAPE_CLAUSE [
+
 	SQL_LIKE_ESCAPE_CLAUSE := 113
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_LIKE_ONLY [
+
 	SQL_LIKE_ONLY := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_LOCK_EXCLUSIVE [
+
 	SQL_LOCK_EXCLUSIVE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_LOCK_NO_CHANGE [
+
 	SQL_LOCK_NO_CHANGE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_LOCK_TYPES [
+
 	SQL_LOCK_TYPES := 78
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_LOCK_UNLOCK [
+
 	SQL_LOCK_UNLOCK := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_LOGIN_TIMEOUT [
+
 	SQL_LOGIN_TIMEOUT := 103
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_LOGIN_TIMEOUT_DEFAULT [
+
 	SQL_LOGIN_TIMEOUT_DEFAULT := 15
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAXIMUM_CATALOG_NAME_LENGTH [
+
 	SQL_MAXIMUM_CATALOG_NAME_LENGTH := 34
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAXIMUM_COLUMNS_IN_GROUP_BY [
+
 	SQL_MAXIMUM_COLUMNS_IN_GROUP_BY := 97
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAXIMUM_COLUMNS_IN_INDEX [
+
 	SQL_MAXIMUM_COLUMNS_IN_INDEX := 98
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAXIMUM_COLUMNS_IN_ORDER_BY [
+
 	SQL_MAXIMUM_COLUMNS_IN_ORDER_BY := 99
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAXIMUM_COLUMNS_IN_SELECT [
+
 	SQL_MAXIMUM_COLUMNS_IN_SELECT := 100
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAXIMUM_COLUMN_NAME_LENGTH [
+
 	SQL_MAXIMUM_COLUMN_NAME_LENGTH := 30
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAXIMUM_CONCURRENT_ACTIVITIES [
+
 	SQL_MAXIMUM_CONCURRENT_ACTIVITIES := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAXIMUM_CURSOR_NAME_LENGTH [
+
 	SQL_MAXIMUM_CURSOR_NAME_LENGTH := 31
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAXIMUM_DRIVER_CONNECTIONS [
+
 	SQL_MAXIMUM_DRIVER_CONNECTIONS := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAXIMUM_IDENTIFIER_LENGTH [
+
 	SQL_MAXIMUM_IDENTIFIER_LENGTH := 10005
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAXIMUM_INDEX_SIZE [
+
 	SQL_MAXIMUM_INDEX_SIZE := 102
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAXIMUM_ROW_SIZE [
+
 	SQL_MAXIMUM_ROW_SIZE := 104
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAXIMUM_SCHEMA_NAME_LENGTH [
+
 	SQL_MAXIMUM_SCHEMA_NAME_LENGTH := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAXIMUM_STATEMENT_LENGTH [
+
 	SQL_MAXIMUM_STATEMENT_LENGTH := 105
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAXIMUM_TABLES_IN_SELECT [
+
 	SQL_MAXIMUM_TABLES_IN_SELECT := 106
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAXIMUM_USER_NAME_LENGTH [
+
 	SQL_MAXIMUM_USER_NAME_LENGTH := 107
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_ASYNC_CONCURRENT_STATEMENTS [
+
 	SQL_MAX_ASYNC_CONCURRENT_STATEMENTS := 10022
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_BINARY_LITERAL_LEN [
+
 	SQL_MAX_BINARY_LITERAL_LEN := 112
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_CATALOG_NAME_LEN [
+
 	SQL_MAX_CATALOG_NAME_LEN := 34
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_CHAR_LITERAL_LEN [
+
 	SQL_MAX_CHAR_LITERAL_LEN := 108
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_COLUMNS_IN_GROUP_BY [
+
 	SQL_MAX_COLUMNS_IN_GROUP_BY := 97
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_COLUMNS_IN_INDEX [
+
 	SQL_MAX_COLUMNS_IN_INDEX := 98
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_COLUMNS_IN_ORDER_BY [
+
 	SQL_MAX_COLUMNS_IN_ORDER_BY := 99
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_COLUMNS_IN_SELECT [
+
 	SQL_MAX_COLUMNS_IN_SELECT := 100
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_COLUMNS_IN_TABLE [
+
 	SQL_MAX_COLUMNS_IN_TABLE := 101
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_COLUMN_NAME_LEN [
+
 	SQL_MAX_COLUMN_NAME_LEN := 30
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_CONCURRENT_ACTIVITIES [
+
 	SQL_MAX_CONCURRENT_ACTIVITIES := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_CURSOR_NAME_LEN [
+
 	SQL_MAX_CURSOR_NAME_LEN := 31
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_DRIVER_CONNECTIONS [
+
 	SQL_MAX_DRIVER_CONNECTIONS := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_DSN_LENGTH [
+
 	SQL_MAX_DSN_LENGTH := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_IDENTIFIER_LEN [
+
 	SQL_MAX_IDENTIFIER_LEN := 10005
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_INDEX_SIZE [
+
 	SQL_MAX_INDEX_SIZE := 102
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_LENGTH [
+
 	SQL_MAX_LENGTH := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_LENGTH_DEFAULT [
+
 	SQL_MAX_LENGTH_DEFAULT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_MESSAGE_LENGTH [
+
 	SQL_MAX_MESSAGE_LENGTH := 512
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_OPTION_STRING_LENGTH [
+
 	SQL_MAX_OPTION_STRING_LENGTH := 256
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_OWNER_NAME_LEN [
+
 	SQL_MAX_OWNER_NAME_LEN := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_PROCEDURE_NAME_LEN [
+
 	SQL_MAX_PROCEDURE_NAME_LEN := 33
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_QUALIFIER_NAME_LEN [
+
 	SQL_MAX_QUALIFIER_NAME_LEN := 34
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_ROWS [
+
 	SQL_MAX_ROWS := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_ROWS_DEFAULT [
+
 	SQL_MAX_ROWS_DEFAULT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_ROW_SIZE [
+
 	SQL_MAX_ROW_SIZE := 104
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_ROW_SIZE_INCLUDES_LONG [
+
 	SQL_MAX_ROW_SIZE_INCLUDES_LONG := 103
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_SCHEMA_NAME_LEN [
+
 	SQL_MAX_SCHEMA_NAME_LEN := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_STATEMENT_LEN [
+
 	SQL_MAX_STATEMENT_LEN := 105
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_TABLES_IN_SELECT [
+
 	SQL_MAX_TABLES_IN_SELECT := 106
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_TABLE_NAME_LEN [
+
 	SQL_MAX_TABLE_NAME_LEN := 35
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MAX_USER_NAME_LEN [
+
 	SQL_MAX_USER_NAME_LEN := 107
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MINUTE [
+
 	SQL_MINUTE := 5
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MINUTE_TO_SECOND [
+
 	SQL_MINUTE_TO_SECOND := 13
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MODE_DEFAULT [
+
 	SQL_MODE_DEFAULT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MODE_READ_ONLY [
+
 	SQL_MODE_READ_ONLY := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MODE_READ_WRITE [
+
 	SQL_MODE_READ_WRITE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MONTH [
+
 	SQL_MONTH := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MULTIPLE_ACTIVE_TXN [
+
 	SQL_MULTIPLE_ACTIVE_TXN := 37
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_MULT_RESULT_SETS [
+
 	SQL_MULT_RESULT_SETS := 36
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NAMED [
+
 	SQL_NAMED := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NC_END [
+
 	SQL_NC_END := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NC_HIGH [
+
 	SQL_NC_HIGH := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NC_LOW [
+
 	SQL_NC_LOW := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NC_START [
+
 	SQL_NC_START := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NEED_LONG_DATA_LEN [
+
 	SQL_NEED_LONG_DATA_LEN := 111
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NNC_NON_NULL [
+
 	SQL_NNC_NON_NULL := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NNC_NULL [
+
 	SQL_NNC_NULL := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NONSCROLLABLE [
+
 	SQL_NONSCROLLABLE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NON_NULLABLE_COLUMNS [
+
 	SQL_NON_NULLABLE_COLUMNS := 75
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NOSCAN [
+
 	SQL_NOSCAN := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NOSCAN_DEFAULT [
+
 	SQL_NOSCAN_DEFAULT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NOSCAN_OFF [
+
 	SQL_NOSCAN_OFF := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NOSCAN_ON [
+
 	SQL_NOSCAN_ON := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NOT_DEFERRABLE [
+
 	SQL_NOT_DEFERRABLE := 7
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NO_ACTION [
+
 	SQL_NO_ACTION := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NO_COLUMN_NUMBER [
+
 	SQL_NO_COLUMN_NUMBER := -1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NO_NULLS [
+
 	SQL_NO_NULLS := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NO_ROW_NUMBER [
+
 	SQL_NO_ROW_NUMBER := -1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NO_TOTAL [
+
 	SQL_NO_TOTAL := -4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NTS [
+
 	SQL_NTS := -3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NTSL [
+
 	SQL_NTSL := -3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NULLABLE [
+
 	SQL_NULLABLE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NULLABLE_UNKNOWN [
+
 	SQL_NULLABLE_UNKNOWN := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NULL_COLLATION [
+
 	SQL_NULL_COLLATION := 85
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NULL_DATA [
+
 	SQL_NULL_DATA := -1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NULL_HANDLE [
+
 	SQL_NULL_HANDLE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NULL_HDBC [
+
 	SQL_NULL_HDBC := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NULL_HDESC [
+
 	SQL_NULL_HDESC := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NULL_HENV [
+
 	SQL_NULL_HENV := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NULL_HSTMT [
+
 	SQL_NULL_HSTMT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NUMERIC_FUNCTIONS [
+
 	SQL_NUMERIC_FUNCTIONS := 49
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_NUM_TYPES [
+
 	SQL_NUM_TYPES := 105
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OAC_LEVEL1 [
+
 	SQL_OAC_LEVEL1 := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OAC_LEVEL2 [
+
 	SQL_OAC_LEVEL2 := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OAC_NONE [
+
 	SQL_OAC_NONE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ODBC_API_CONFORMANCE [
+
 	SQL_ODBC_API_CONFORMANCE := 9
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ODBC_CURSORS [
+
 	SQL_ODBC_CURSORS := 110
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ODBC_INTERFACE_CONFORMANCE [
+
 	SQL_ODBC_INTERFACE_CONFORMANCE := 152
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ODBC_KEYWORDS [
+
 	SQL_ODBC_KEYWORDS := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ODBC_SAG_CLI_CONFORMANCE [
+
 	SQL_ODBC_SAG_CLI_CONFORMANCE := 12
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ODBC_SQL_CONFORMANCE [
+
 	SQL_ODBC_SQL_CONFORMANCE := 15
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ODBC_SQL_OPT_IEF [
+
 	SQL_ODBC_SQL_OPT_IEF := 73
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ODBC_VER [
+
 	SQL_ODBC_VER := 10
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OIC_CORE [
+
 	SQL_OIC_CORE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OIC_LEVEL1 [
+
 	SQL_OIC_LEVEL1 := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OIC_LEVEL2 [
+
 	SQL_OIC_LEVEL2 := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OJ_ALL_COMPARISON_OPS [
+
 	SQL_OJ_ALL_COMPARISON_OPS := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OJ_CAPABILITIES [
+
 	SQL_OJ_CAPABILITIES := 115
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OJ_FULL [
+
 	SQL_OJ_FULL := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OJ_INNER [
+
 	SQL_OJ_INNER := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OJ_LEFT [
+
 	SQL_OJ_LEFT := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OJ_NESTED [
+
 	SQL_OJ_NESTED := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OJ_NOT_ORDERED [
+
 	SQL_OJ_NOT_ORDERED := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OJ_RIGHT [
+
 	SQL_OJ_RIGHT := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OPT_TRACE [
+
 	SQL_OPT_TRACE := 104
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OPT_TRACEFILE [
+
 	SQL_OPT_TRACEFILE := 105
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OPT_TRACE_DEFAULT [
+
 	SQL_OPT_TRACE_DEFAULT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OPT_TRACE_FILE_DEFAULT [
+
 	SQL_OPT_TRACE_FILE_DEFAULT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OPT_TRACE_OFF [
+
 	SQL_OPT_TRACE_OFF := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OPT_TRACE_ON [
+
 	SQL_OPT_TRACE_ON := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ORDER_BY_COLUMNS_IN_SELECT [
+
 	SQL_ORDER_BY_COLUMNS_IN_SELECT := 90
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OSCC_COMPLIANT [
+
 	SQL_OSCC_COMPLIANT := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OSCC_NOT_COMPLIANT [
+
 	SQL_OSCC_NOT_COMPLIANT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OSC_CORE [
+
 	SQL_OSC_CORE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OSC_EXTENDED [
+
 	SQL_OSC_EXTENDED := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OSC_MINIMUM [
+
 	SQL_OSC_MINIMUM := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OUTER_JOINS [
+
 	SQL_OUTER_JOINS := 38
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OUTER_JOIN_CAPABILITIES [
+
 	SQL_OUTER_JOIN_CAPABILITIES := 115
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OU_DML_STATEMENTS [
+
 	SQL_OU_DML_STATEMENTS := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OU_INDEX_DEFINITION [
+
 	SQL_OU_INDEX_DEFINITION := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OU_PRIVILEGE_DEFINITION [
+
 	SQL_OU_PRIVILEGE_DEFINITION := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OU_PROCEDURE_INVOCATION [
+
 	SQL_OU_PROCEDURE_INVOCATION := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OU_TABLE_DEFINITION [
+
 	SQL_OU_TABLE_DEFINITION := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OV_ODBC2 [
+
 	SQL_OV_ODBC2 := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OV_ODBC3 [
+
 	SQL_OV_ODBC3 := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OV_ODBC3_80 [
+
 	SQL_OV_ODBC3_80 := 380
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OWNER_TERM [
+
 	SQL_OWNER_TERM := 39
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_OWNER_USAGE [
+
 	SQL_OWNER_USAGE := 91
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PACKET_SIZE [
+
 	SQL_PACKET_SIZE := 112
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PARAM_ARRAY_ROW_COUNTS [
+
 	SQL_PARAM_ARRAY_ROW_COUNTS := 153
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PARAM_ARRAY_SELECTS [
+
 	SQL_PARAM_ARRAY_SELECTS := 154
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PARAM_BIND_BY_COLUMN [
+
 	SQL_PARAM_BIND_BY_COLUMN := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PARAM_BIND_TYPE_DEFAULT [
+
 	SQL_PARAM_BIND_TYPE_DEFAULT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PARAM_DATA_AVAILABLE [
+
 	SQL_PARAM_DATA_AVAILABLE := 101
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PARAM_DIAG_UNAVAILABLE [
+
 	SQL_PARAM_DIAG_UNAVAILABLE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PARAM_ERROR [
+
 	SQL_PARAM_ERROR := 5
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PARAM_IGNORE [
+
 	SQL_PARAM_IGNORE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PARAM_INPUT [
+
 	SQL_PARAM_INPUT := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PARAM_INPUT_OUTPUT [
+
 	SQL_PARAM_INPUT_OUTPUT := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PARAM_INPUT_OUTPUT_STREAM [
+
 	SQL_PARAM_INPUT_OUTPUT_STREAM := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PARAM_OUTPUT [
+
 	SQL_PARAM_OUTPUT := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PARAM_OUTPUT_STREAM [
+
 	SQL_PARAM_OUTPUT_STREAM := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PARAM_PROCEED [
+
 	SQL_PARAM_PROCEED := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PARAM_SUCCESS [
+
 	SQL_PARAM_SUCCESS := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PARAM_SUCCESS_WITH_INFO [
+
 	SQL_PARAM_SUCCESS_WITH_INFO := 6
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PARAM_TYPE_DEFAULT [
+
 	SQL_PARAM_TYPE_DEFAULT := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PARAM_TYPE_UNKNOWN [
+
 	SQL_PARAM_TYPE_UNKNOWN := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PARAM_UNUSED [
+
 	SQL_PARAM_UNUSED := 7
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PARC_BATCH [
+
 	SQL_PARC_BATCH := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PARC_NO_BATCH [
+
 	SQL_PARC_NO_BATCH := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PAS_BATCH [
+
 	SQL_PAS_BATCH := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PAS_NO_BATCH [
+
 	SQL_PAS_NO_BATCH := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PAS_NO_SELECT [
+
 	SQL_PAS_NO_SELECT := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PC_NON_PSEUDO [
+
 	SQL_PC_NON_PSEUDO := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PC_NOT_PSEUDO [
+
 	SQL_PC_NOT_PSEUDO := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PC_PSEUDO [
+
 	SQL_PC_PSEUDO := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PC_UNKNOWN [
+
 	SQL_PC_UNKNOWN := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_POSITION [
+
 	SQL_POSITION := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_POSITIONED_STATEMENTS [
+
 	SQL_POSITIONED_STATEMENTS := 80
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_POS_ADD [
+
 	SQL_POS_ADD := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_POS_DELETE [
+
 	SQL_POS_DELETE := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_POS_OPERATIONS [
+
 	SQL_POS_OPERATIONS := 79
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_POS_POSITION [
+
 	SQL_POS_POSITION := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_POS_REFRESH [
+
 	SQL_POS_REFRESH := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_POS_UPDATE [
+
 	SQL_POS_UPDATE := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PRED_BASIC [
+
 	SQL_PRED_BASIC := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PRED_CHAR [
+
 	SQL_PRED_CHAR := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PRED_NONE [
+
 	SQL_PRED_NONE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PRED_SEARCHABLE [
+
 	SQL_PRED_SEARCHABLE := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PROCEDURES [
+
 	SQL_PROCEDURES := 21
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PROCEDURE_TERM [
+
 	SQL_PROCEDURE_TERM := 40
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PS_POSITIONED_DELETE [
+
 	SQL_PS_POSITIONED_DELETE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PS_POSITIONED_UPDATE [
+
 	SQL_PS_POSITIONED_UPDATE := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PS_SELECT_FOR_UPDATE [
+
 	SQL_PS_SELECT_FOR_UPDATE := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PT_FUNCTION [
+
 	SQL_PT_FUNCTION := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PT_PROCEDURE [
+
 	SQL_PT_PROCEDURE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_PT_UNKNOWN [
+
 	SQL_PT_UNKNOWN := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_QL_END [
+
 	SQL_QL_END := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_QL_START [
+
 	SQL_QL_START := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_QUALIFIER_LOCATION [
+
 	SQL_QUALIFIER_LOCATION := 114
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_QUALIFIER_NAME_SEPARATOR [
+
 	SQL_QUALIFIER_NAME_SEPARATOR := 41
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_QUALIFIER_TERM [
+
 	SQL_QUALIFIER_TERM := 42
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_QUALIFIER_USAGE [
+
 	SQL_QUALIFIER_USAGE := 92
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_QUERY_TIMEOUT [
+
 	SQL_QUERY_TIMEOUT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_QUERY_TIMEOUT_DEFAULT [
+
 	SQL_QUERY_TIMEOUT_DEFAULT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_QUICK [
+
 	SQL_QUICK := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_QUIET_MODE [
+
 	SQL_QUIET_MODE := 111
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_QUOTED_IDENTIFIER_CASE [
+
 	SQL_QUOTED_IDENTIFIER_CASE := 93
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_QU_DML_STATEMENTS [
+
 	SQL_QU_DML_STATEMENTS := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_QU_INDEX_DEFINITION [
+
 	SQL_QU_INDEX_DEFINITION := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_QU_PRIVILEGE_DEFINITION [
+
 	SQL_QU_PRIVILEGE_DEFINITION := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_QU_PROCEDURE_INVOCATION [
+
 	SQL_QU_PROCEDURE_INVOCATION := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_QU_TABLE_DEFINITION [
+
 	SQL_QU_TABLE_DEFINITION := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_RD_DEFAULT [
+
 	SQL_RD_DEFAULT := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_RD_OFF [
+
 	SQL_RD_OFF := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_RD_ON [
+
 	SQL_RD_ON := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_REFRESH [
+
 	SQL_REFRESH := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_RESET_CONNECTION_YES [
+
 	SQL_RESET_CONNECTION_YES := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_RESET_PARAMS [
+
 	SQL_RESET_PARAMS := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_RESTRICT [
+
 	SQL_RESTRICT := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_RESULT_COL [
+
 	SQL_RESULT_COL := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_RETRIEVE_DATA [
+
 	SQL_RETRIEVE_DATA := 11
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_RETURN_VALUE [
+
 	SQL_RETURN_VALUE := 5
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ROLLBACK [
+
 	SQL_ROLLBACK := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ROWSET_SIZE [
+
 	SQL_ROWSET_SIZE := 9
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ROWSET_SIZE_DEFAULT [
+
 	SQL_ROWSET_SIZE_DEFAULT := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ROWVER [
+
 	SQL_ROWVER := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ROW_ADDED [
+
 	SQL_ROW_ADDED := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ROW_DELETED [
+
 	SQL_ROW_DELETED := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ROW_ERROR [
+
 	SQL_ROW_ERROR := 5
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ROW_IDENTIFIER [
+
 	SQL_ROW_IDENTIFIER := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ROW_IGNORE [
+
 	SQL_ROW_IGNORE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ROW_NOROW [
+
 	SQL_ROW_NOROW := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ROW_NUMBER [
+
 	SQL_ROW_NUMBER := 14
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ROW_NUMBER_UNKNOWN [
+
 	SQL_ROW_NUMBER_UNKNOWN := -2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ROW_PROCEED [
+
 	SQL_ROW_PROCEED := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ROW_SUCCESS [
+
 	SQL_ROW_SUCCESS := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ROW_SUCCESS_WITH_INFO [
+
 	SQL_ROW_SUCCESS_WITH_INFO := 6
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ROW_UPDATED [
+
 	SQL_ROW_UPDATED := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_ROW_UPDATES [
+
 	SQL_ROW_UPDATES := 11
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SCCO_LOCK [
+
 	SQL_SCCO_LOCK := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SCCO_OPT_ROWVER [
+
 	SQL_SCCO_OPT_ROWVER := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SCCO_OPT_TIMESTAMP [
+
 	SQL_SCCO_OPT_TIMESTAMP := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SCCO_OPT_VALUES [
+
 	SQL_SCCO_OPT_VALUES := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SCCO_READ_ONLY [
+
 	SQL_SCCO_READ_ONLY := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SCC_ISO92_CLI [
+
 	SQL_SCC_ISO92_CLI := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SCC_XOPEN_CLI_VERSION1 [
+
 	SQL_SCC_XOPEN_CLI_VERSION1 := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SCHEMA_TERM [
+
 	SQL_SCHEMA_TERM := 39
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SCHEMA_USAGE [
+
 	SQL_SCHEMA_USAGE := 91
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SCOPE_CURROW [
+
 	SQL_SCOPE_CURROW := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SCOPE_SESSION [
+
 	SQL_SCOPE_SESSION := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SCOPE_TRANSACTION [
+
 	SQL_SCOPE_TRANSACTION := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SCROLLABLE [
+
 	SQL_SCROLLABLE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SCROLL_CONCURRENCY [
+
 	SQL_SCROLL_CONCURRENCY := 43
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SCROLL_DYNAMIC [
+
 	SQL_SCROLL_DYNAMIC := -2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SCROLL_FORWARD_ONLY [
+
 	SQL_SCROLL_FORWARD_ONLY := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SCROLL_KEYSET_DRIVEN [
+
 	SQL_SCROLL_KEYSET_DRIVEN := -1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SCROLL_OPTIONS [
+
 	SQL_SCROLL_OPTIONS := 44
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SCROLL_STATIC [
+
 	SQL_SCROLL_STATIC := -3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SC_FIPS127_2_TRANSITIONAL [
+
 	SQL_SC_FIPS127_2_TRANSITIONAL := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SC_NON_UNIQUE [
+
 	SQL_SC_NON_UNIQUE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SC_SQL92_ENTRY [
+
 	SQL_SC_SQL92_ENTRY := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SC_SQL92_FULL [
+
 	SQL_SC_SQL92_FULL := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SC_SQL92_INTERMEDIATE [
+
 	SQL_SC_SQL92_INTERMEDIATE := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SC_TRY_UNIQUE [
+
 	SQL_SC_TRY_UNIQUE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SC_UNIQUE [
+
 	SQL_SC_UNIQUE := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SDF_CURRENT_DATE [
+
 	SQL_SDF_CURRENT_DATE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SDF_CURRENT_TIME [
+
 	SQL_SDF_CURRENT_TIME := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SDF_CURRENT_TIMESTAMP [
+
 	SQL_SDF_CURRENT_TIMESTAMP := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SEARCHABLE [
+
 	SQL_SEARCHABLE := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SEARCH_PATTERN_ESCAPE [
+
 	SQL_SEARCH_PATTERN_ESCAPE := 14
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SECOND [
+
 	SQL_SECOND := 6
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SENSITIVE [
+
 	SQL_SENSITIVE := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SERVER_NAME [
+
 	SQL_SERVER_NAME := 13
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SETPARAM_VALUE_MAX [
+
 	SQL_SETPARAM_VALUE_MAX := -1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SETPOS_MAX_LOCK_VALUE [
+
 	SQL_SETPOS_MAX_LOCK_VALUE := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SETPOS_MAX_OPTION_VALUE [
+
 	SQL_SETPOS_MAX_OPTION_VALUE := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SET_DEFAULT [
+
 	SQL_SET_DEFAULT := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SET_NULL [
+
 	SQL_SET_NULL := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SFKD_CASCADE [
+
 	SQL_SFKD_CASCADE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SFKD_NO_ACTION [
+
 	SQL_SFKD_NO_ACTION := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SFKD_SET_DEFAULT [
+
 	SQL_SFKD_SET_DEFAULT := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SFKD_SET_NULL [
+
 	SQL_SFKD_SET_NULL := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SFKU_CASCADE [
+
 	SQL_SFKU_CASCADE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SFKU_NO_ACTION [
+
 	SQL_SFKU_NO_ACTION := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SFKU_SET_DEFAULT [
+
 	SQL_SFKU_SET_DEFAULT := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SFKU_SET_NULL [
+
 	SQL_SFKU_SET_NULL := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SG_DELETE_TABLE [
+
 	SQL_SG_DELETE_TABLE := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SG_INSERT_COLUMN [
+
 	SQL_SG_INSERT_COLUMN := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SG_INSERT_TABLE [
+
 	SQL_SG_INSERT_TABLE := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SG_REFERENCES_COLUMN [
+
 	SQL_SG_REFERENCES_COLUMN := 512
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SG_REFERENCES_TABLE [
+
 	SQL_SG_REFERENCES_TABLE := 256
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SG_SELECT_TABLE [
+
 	SQL_SG_SELECT_TABLE := 1024
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SG_UPDATE_COLUMN [
+
 	SQL_SG_UPDATE_COLUMN := 4096
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SG_UPDATE_TABLE [
+
 	SQL_SG_UPDATE_TABLE := 2048
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SG_USAGE_ON_CHARACTER_SET [
+
 	SQL_SG_USAGE_ON_CHARACTER_SET := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SG_USAGE_ON_COLLATION [
+
 	SQL_SG_USAGE_ON_COLLATION := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SG_USAGE_ON_DOMAIN [
+
 	SQL_SG_USAGE_ON_DOMAIN := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SG_USAGE_ON_TRANSLATION [
+
 	SQL_SG_USAGE_ON_TRANSLATION := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SG_WITH_GRANT_OPTION [
+
 	SQL_SG_WITH_GRANT_OPTION := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SIGNED_OFFSET [
+
 	SQL_SIGNED_OFFSET := -20
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SIMULATE_CURSOR [
+
 	SQL_SIMULATE_CURSOR := 10
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SNVF_BIT_LENGTH [
+
 	SQL_SNVF_BIT_LENGTH := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SNVF_CHARACTER_LENGTH [
+
 	SQL_SNVF_CHARACTER_LENGTH := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SNVF_CHAR_LENGTH [
+
 	SQL_SNVF_CHAR_LENGTH := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SNVF_EXTRACT [
+
 	SQL_SNVF_EXTRACT := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SNVF_OCTET_LENGTH [
+
 	SQL_SNVF_OCTET_LENGTH := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SNVF_POSITION [
+
 	SQL_SNVF_POSITION := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SO_DYNAMIC [
+
 	SQL_SO_DYNAMIC := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SO_FORWARD_ONLY [
+
 	SQL_SO_FORWARD_ONLY := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SO_KEYSET_DRIVEN [
+
 	SQL_SO_KEYSET_DRIVEN := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SO_MIXED [
+
 	SQL_SO_MIXED := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SO_STATIC [
+
 	SQL_SO_STATIC := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SPECIAL_CHARACTERS [
+
 	SQL_SPECIAL_CHARACTERS := 94
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SPEC_MAJOR [
+
 	SQL_SPEC_MAJOR := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SPEC_MINOR [
+
 	SQL_SPEC_MINOR := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SPEC_STRING [
+
 	SQL_SPEC_STRING := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SP_BETWEEN [
+
 	SQL_SP_BETWEEN := 2048
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SP_COMPARISON [
+
 	SQL_SP_COMPARISON := 4096
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SP_EXISTS [
+
 	SQL_SP_EXISTS := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SP_IN [
+
 	SQL_SP_IN := 1024
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SP_ISNOTNULL [
+
 	SQL_SP_ISNOTNULL := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SP_ISNULL [
+
 	SQL_SP_ISNULL := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SP_LIKE [
+
 	SQL_SP_LIKE := 512
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SP_MATCH_FULL [
+
 	SQL_SP_MATCH_FULL := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SP_MATCH_PARTIAL [
+
 	SQL_SP_MATCH_PARTIAL := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SP_MATCH_UNIQUE_FULL [
+
 	SQL_SP_MATCH_UNIQUE_FULL := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SP_MATCH_UNIQUE_PARTIAL [
+
 	SQL_SP_MATCH_UNIQUE_PARTIAL := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SP_OVERLAPS [
+
 	SQL_SP_OVERLAPS := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SP_QUANTIFIED_COMPARISON [
+
 	SQL_SP_QUANTIFIED_COMPARISON := 8192
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SP_UNIQUE [
+
 	SQL_SP_UNIQUE := 256
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SQL92_DATETIME_FUNCTIONS [
+
 	SQL_SQL92_DATETIME_FUNCTIONS := 155
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SQL92_FOREIGN_KEY_DELETE_RULE [
+
 	SQL_SQL92_FOREIGN_KEY_DELETE_RULE := 156
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SQL92_FOREIGN_KEY_UPDATE_RULE [
+
 	SQL_SQL92_FOREIGN_KEY_UPDATE_RULE := 157
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SQL92_GRANT [
+
 	SQL_SQL92_GRANT := 158
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SQL92_NUMERIC_VALUE_FUNCTIONS [
+
 	SQL_SQL92_NUMERIC_VALUE_FUNCTIONS := 159
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SQL92_PREDICATES [
+
 	SQL_SQL92_PREDICATES := 160
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SQL92_RELATIONAL_JOIN_OPERATORS [
+
 	SQL_SQL92_RELATIONAL_JOIN_OPERATORS := 161
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SQL92_REVOKE [
+
 	SQL_SQL92_REVOKE := 162
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SQL92_ROW_VALUE_CONSTRUCTOR [
+
 	SQL_SQL92_ROW_VALUE_CONSTRUCTOR := 163
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SQL92_STRING_FUNCTIONS [
+
 	SQL_SQL92_STRING_FUNCTIONS := 164
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SQL92_VALUE_EXPRESSIONS [
+
 	SQL_SQL92_VALUE_EXPRESSIONS := 165
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SQLSTATE_SIZE [
+
 	SQL_SQLSTATE_SIZE := 5
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SQL_CONFORMANCE [
+
 	SQL_SQL_CONFORMANCE := 118
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SQ_COMPARISON [
+
 	SQL_SQ_COMPARISON := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SQ_CORRELATED_SUBQUERIES [
+
 	SQL_SQ_CORRELATED_SUBQUERIES := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SQ_EXISTS [
+
 	SQL_SQ_EXISTS := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SQ_IN [
+
 	SQL_SQ_IN := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SQ_QUANTIFIED [
+
 	SQL_SQ_QUANTIFIED := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SRJO_CORRESPONDING_CLAUSE [
+
 	SQL_SRJO_CORRESPONDING_CLAUSE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SRJO_CROSS_JOIN [
+
 	SQL_SRJO_CROSS_JOIN := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SRJO_EXCEPT_JOIN [
+
 	SQL_SRJO_EXCEPT_JOIN := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SRJO_FULL_OUTER_JOIN [
+
 	SQL_SRJO_FULL_OUTER_JOIN := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SRJO_INNER_JOIN [
+
 	SQL_SRJO_INNER_JOIN := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SRJO_INTERSECT_JOIN [
+
 	SQL_SRJO_INTERSECT_JOIN := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SRJO_LEFT_OUTER_JOIN [
+
 	SQL_SRJO_LEFT_OUTER_JOIN := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SRJO_NATURAL_JOIN [
+
 	SQL_SRJO_NATURAL_JOIN := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SRJO_RIGHT_OUTER_JOIN [
+
 	SQL_SRJO_RIGHT_OUTER_JOIN := 256
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SRJO_UNION_JOIN [
+
 	SQL_SRJO_UNION_JOIN := 512
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SRVC_DEFAULT [
+
 	SQL_SRVC_DEFAULT := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SRVC_NULL [
+
 	SQL_SRVC_NULL := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SRVC_ROW_SUBQUERY [
+
 	SQL_SRVC_ROW_SUBQUERY := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SRVC_VALUE_EXPRESSION [
+
 	SQL_SRVC_VALUE_EXPRESSION := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SR_CASCADE [
+
 	SQL_SR_CASCADE := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SR_DELETE_TABLE [
+
 	SQL_SR_DELETE_TABLE := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SR_GRANT_OPTION_FOR [
+
 	SQL_SR_GRANT_OPTION_FOR := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SR_INSERT_COLUMN [
+
 	SQL_SR_INSERT_COLUMN := 512
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SR_INSERT_TABLE [
+
 	SQL_SR_INSERT_TABLE := 256
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SR_REFERENCES_COLUMN [
+
 	SQL_SR_REFERENCES_COLUMN := 2048
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SR_REFERENCES_TABLE [
+
 	SQL_SR_REFERENCES_TABLE := 1024
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SR_RESTRICT [
+
 	SQL_SR_RESTRICT := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SR_SELECT_TABLE [
+
 	SQL_SR_SELECT_TABLE := 4096
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SR_UPDATE_COLUMN [
+
 	SQL_SR_UPDATE_COLUMN := 16384
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SR_UPDATE_TABLE [
+
 	SQL_SR_UPDATE_TABLE := 8192
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SR_USAGE_ON_CHARACTER_SET [
+
 	SQL_SR_USAGE_ON_CHARACTER_SET := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SR_USAGE_ON_COLLATION [
+
 	SQL_SR_USAGE_ON_COLLATION := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SR_USAGE_ON_DOMAIN [
+
 	SQL_SR_USAGE_ON_DOMAIN := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SR_USAGE_ON_TRANSLATION [
+
 	SQL_SR_USAGE_ON_TRANSLATION := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SSF_CONVERT [
+
 	SQL_SSF_CONVERT := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SSF_LOWER [
+
 	SQL_SSF_LOWER := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SSF_SUBSTRING [
+
 	SQL_SSF_SUBSTRING := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SSF_TRANSLATE [
+
 	SQL_SSF_TRANSLATE := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SSF_TRIM_BOTH [
+
 	SQL_SSF_TRIM_BOTH := 32
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SSF_TRIM_LEADING [
+
 	SQL_SSF_TRIM_LEADING := 64
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SSF_TRIM_TRAILING [
+
 	SQL_SSF_TRIM_TRAILING := 128
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SSF_UPPER [
+
 	SQL_SSF_UPPER := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SS_ADDITIONS [
+
 	SQL_SS_ADDITIONS := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SS_DELETIONS [
+
 	SQL_SS_DELETIONS := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SS_UPDATES [
+
 	SQL_SS_UPDATES := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_STANDARD_CLI_CONFORMANCE [
+
 	SQL_STANDARD_CLI_CONFORMANCE := 166
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_STATIC_CURSOR_ATTRIBUTES1 [
+
 	SQL_STATIC_CURSOR_ATTRIBUTES1 := 167
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_STATIC_CURSOR_ATTRIBUTES2 [
+
 	SQL_STATIC_CURSOR_ATTRIBUTES2 := 168
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_STATIC_SENSITIVITY [
+
 	SQL_STATIC_SENSITIVITY := 83
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_STILL_EXECUTING [
+
 	SQL_STILL_EXECUTING := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_STRING_FUNCTIONS [
+
 	SQL_STRING_FUNCTIONS := 50
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SUBQUERIES [
+
 	SQL_SUBQUERIES := 95
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SU_DML_STATEMENTS [
+
 	SQL_SU_DML_STATEMENTS := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SU_INDEX_DEFINITION [
+
 	SQL_SU_INDEX_DEFINITION := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SU_PRIVILEGE_DEFINITION [
+
 	SQL_SU_PRIVILEGE_DEFINITION := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SU_PROCEDURE_INVOCATION [
+
 	SQL_SU_PROCEDURE_INVOCATION := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SU_TABLE_DEFINITION [
+
 	SQL_SU_TABLE_DEFINITION := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SVE_CASE [
+
 	SQL_SVE_CASE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SVE_CAST [
+
 	SQL_SVE_CAST := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SVE_COALESCE [
+
 	SQL_SVE_COALESCE := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SVE_NULLIF [
+
 	SQL_SVE_NULLIF := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_SYSTEM_FUNCTIONS [
+
 	SQL_SYSTEM_FUNCTIONS := 51
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TABLE_STAT [
+
 	SQL_TABLE_STAT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TABLE_TERM [
+
 	SQL_TABLE_TERM := 45
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TC_ALL [
+
 	SQL_TC_ALL := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TC_DDL_COMMIT [
+
 	SQL_TC_DDL_COMMIT := 3
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TC_DDL_IGNORE [
+
 	SQL_TC_DDL_IGNORE := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TC_DML [
+
 	SQL_TC_DML := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TC_NONE [
+
 	SQL_TC_NONE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TIMEDATE_ADD_INTERVALS [
+
 	SQL_TIMEDATE_ADD_INTERVALS := 109
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TIMEDATE_DIFF_INTERVALS [
+
 	SQL_TIMEDATE_DIFF_INTERVALS := 110
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TIMEDATE_FUNCTIONS [
+
 	SQL_TIMEDATE_FUNCTIONS := 52
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TIMESTAMP_LEN [
+
 	SQL_TIMESTAMP_LEN := 19
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TIME_LEN [
+
 	SQL_TIME_LEN := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TRANSACTION_CAPABLE [
+
 	SQL_TRANSACTION_CAPABLE := 46
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TRANSACTION_ISOLATION_OPTION [
+
 	SQL_TRANSACTION_ISOLATION_OPTION := 72
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TRANSACTION_READ_COMMITTED [
+
 	SQL_TRANSACTION_READ_COMMITTED := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TRANSACTION_READ_UNCOMMITTED [
+
 	SQL_TRANSACTION_READ_UNCOMMITTED := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TRANSACTION_REPEATABLE_READ [
+
 	SQL_TRANSACTION_REPEATABLE_READ := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TRANSACTION_SERIALIZABLE [
+
 	SQL_TRANSACTION_SERIALIZABLE := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TRANSLATE_DLL [
+
 	SQL_TRANSLATE_DLL := 106
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TRANSLATE_OPTION [
+
 	SQL_TRANSLATE_OPTION := 107
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TRUE [
+
 	SQL_TRUE := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TXN_CAPABLE [
+
 	SQL_TXN_CAPABLE := 46
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TXN_ISOLATION [
+
 	SQL_TXN_ISOLATION := 108
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TXN_ISOLATION_OPTION [
+
 	SQL_TXN_ISOLATION_OPTION := 72
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TXN_READ_COMMITTED [
+
 	SQL_TXN_READ_COMMITTED := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TXN_READ_UNCOMMITTED [
+
 	SQL_TXN_READ_UNCOMMITTED := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TXN_REPEATABLE_READ [
+
 	SQL_TXN_REPEATABLE_READ := 4
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TXN_SERIALIZABLE [
+
 	SQL_TXN_SERIALIZABLE := 8
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TXN_VERSIONING [
+
 	SQL_TXN_VERSIONING := 16
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TYPE_MAX [
+
 	SQL_TYPE_MAX := 93
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_TYPE_MIN [
+
 	SQL_TYPE_MIN := -11
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_UB_DEFAULT [
+
 	SQL_UB_DEFAULT := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_UB_FIXED [
+
 	SQL_UB_FIXED := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_UB_OFF [
+
 	SQL_UB_OFF := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_UB_ON [
+
 	SQL_UB_ON := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_UB_VARIABLE [
+
 	SQL_UB_VARIABLE := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_UNBIND [
+
 	SQL_UNBIND := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_UNION [
+
 	SQL_UNION := 96
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_UNION_STATEMENT [
+
 	SQL_UNION_STATEMENT := 96
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_UNNAMED [
+
 	SQL_UNNAMED := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_UNSEARCHABLE [
+
 	SQL_UNSEARCHABLE := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_UNSIGNED_OFFSET [
+
 	SQL_UNSIGNED_OFFSET := -22
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_UNSPECIFIED [
+
 	SQL_UNSPECIFIED := 0
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_UPDATE [
+
 	SQL_UPDATE := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_UPDATE_BY_BOOKMARK [
+
 	SQL_UPDATE_BY_BOOKMARK := 5
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_USER_NAME [
+
 	SQL_USER_NAME := 47
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_USE_BOOKMARKS [
+
 	SQL_USE_BOOKMARKS := 12
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_US_UNION [
+
 	SQL_US_UNION := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_US_UNION_ALL [
+
 	SQL_US_UNION_ALL := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_U_UNION [
+
 	SQL_U_UNION := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_U_UNION_ALL [
+
 	SQL_U_UNION_ALL := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_XOPEN_CLI_YEAR [
+
 	SQL_XOPEN_CLI_YEAR := 10000
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_YEAR [
+
 	SQL_YEAR := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_SQL_YEAR_TO_MONTH [
+
 	SQL_YEAR_TO_MONTH := 7
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_TRACE_ON [
+
 	TRACE_ON := 1
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_TRACE_VERSION [
+
 	TRACE_VERSION := 1000
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization - constants' }
 ODBCConstants class >> initialize_TRACE_VS_EVENT_ON [
+
 	TRACE_VS_EVENT_ON := 2
 ]
 
-{ #category : #'pool initialization' }
+{ #category : #'private - initialization' }
 ODBCConstants class >> initialize_TypeOffset [
+
 	TypeOffset := 12
 ]

@@ -12,7 +12,7 @@ Class {
 		'_OffsetOf_minute',
 		'_OffsetOf_second'
 	],
-	#category : #'ODBC-FFI'
+	#category : #'ODBC-FFI-Base'
 }
 
 { #category : #'template definition' }

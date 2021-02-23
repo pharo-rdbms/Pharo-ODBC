@@ -1,7 +1,7 @@
 Class {
 	#name : #SQLUINTEGER,
 	#superclass : #SQLIntegerType,
-	#category : #'ODBC-FFI'
+	#category : #'ODBC-FFI-SQL-Types'
 }
 
 { #category : #converting }

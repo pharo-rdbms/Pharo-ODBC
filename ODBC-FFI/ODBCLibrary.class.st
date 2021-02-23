@@ -28,19 +28,17 @@ Class {
 	#pools : [
 		'ODBCConstants'
 	],
-	#category : #'ODBC-FFI'
+	#category : #'ODBC-FFI-Library'
 }
 
 { #category : #'instance creation' }
 ODBCLibrary class >> default [
+
 	^ self uniqueInstance
 ]
 
 { #category : #'class initialization' }
 ODBCLibrary class >> initialize [ 
-	"
-	self initialize
-	"
 
 	SQLRETURN := #short.
 	

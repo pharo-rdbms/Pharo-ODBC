@@ -1,7 +1,7 @@
 Class {
 	#name : #SQLIntegerType,
 	#superclass : #ExternalStructure,
-	#category : #'ODBC-FFI'
+	#category : #'ODBC-FFI-SQL-Types'
 }
 
 { #category : #'instance creation' }

@@ -4,7 +4,7 @@ I represent the SQLULEN type on 64 bit platforms.
 Class {
 	#name : #SQLULEN64,
 	#superclass : #SQLIntegerType,
-	#category : #'ODBC-FFI'
+	#category : #'ODBC-FFI-SQL-Types'
 }
 
 { #category : #converting }

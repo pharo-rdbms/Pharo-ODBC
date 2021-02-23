@@ -1,7 +1,7 @@
 Class {
 	#name : #SQLHANDLE,
 	#superclass : #FFIConstantHandle,
-	#category : #'ODBC-FFI'
+	#category : #'ODBC-FFI-SQL-Types'
 }
 
 { #category : #converting }
@@ -44,7 +44,7 @@ SQLHANDLE >> invalidateHandle [
 	handle := 0
 ]
 
-{ #category : #initialization }
+{ #category : #testing }
 SQLHANDLE >> isNull [ 
 
 	^handle = 0
