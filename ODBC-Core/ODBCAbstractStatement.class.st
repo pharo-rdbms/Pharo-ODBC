@@ -28,7 +28,7 @@ Class {
 	#category : #'ODBC-Core-Base'
 }
 
-{ #category : #initializing }
+{ #category : #'class initialization' }
 ODBCAbstractStatement class >> initialize [
 	"
 		self initialize
@@ -40,6 +40,12 @@ ODBCAbstractStatement class >> initialize [
 		at: #forwardOnly put: SQL_CURSOR_FORWARD_ONLY;
 		at: #keysetDriven put: SQL_CURSOR_KEYSET_DRIVEN;
 		at: #dynamic put: SQL_CURSOR_DYNAMIC
+]
+
+{ #category : #testing }
+ODBCAbstractStatement class >> isAbstract [
+
+	^self == ODBCAbstractStatement
 ]
 
 { #category : #'instance creation' }
@@ -154,7 +160,8 @@ ODBCAbstractStatement >> cursorType [
 ]
 
 { #category : #accessing }
-ODBCAbstractStatement >> cursorType: aSymbol [ 
+ODBCAbstractStatement >> cursorType: aSymbol [
+
 	(CursorTypes includesKey: aSymbol) 
 		ifFalse: [self error: 'Invalid cursor type ' , aSymbol].
 	cursorType := aSymbol.
@@ -281,7 +288,7 @@ ODBCAbstractStatement >> exceptionDetails: anIntegerRetCode [
 
 	^(self parent exceptionDetails: anIntegerRetCode)
 		hStmt: handle;
-		yourself.
+		yourself
 ]
 
 { #category : #operations }
@@ -289,7 +296,7 @@ ODBCAbstractStatement >> exec [
 	"Private - Execute the tables query the receiver represents."
 
 	self dbCheckException: self executeStatement.
-	executed := true.
+	executed := true
 ]
 
 { #category : #operations }
@@ -314,7 +321,6 @@ ODBCAbstractStatement >> executedHandle [
 
 { #category : #accessing }
 ODBCAbstractStatement >> finalizationRegistry [
-
 	"Use the parent's statements WeakRegistry"
 	
 	^parent statements
@@ -354,6 +360,7 @@ ODBCAbstractStatement >> getStringAttribute: anInteger [
 
 { #category : #accessing }
 ODBCAbstractStatement >> handle [
+
 	^handle
 ]
 

@@ -34,8 +34,8 @@ Class {
 ODBCExceptionDetails >> addErrorDetails: newErrorDetails [
 	"Private - Add a new error details object to my collection."
 
-	errors isNil ifTrue: [self errors: OrderedCollection new].
-	errors addLast: newErrorDetails.
+	errors ifNil: [ self errors: OrderedCollection new ].
+	errors addLast: newErrorDetails
 ]
 
 { #category : #operations }
@@ -49,7 +49,7 @@ ODBCExceptionDetails >> buildErrorInfo [
 			[hEnv isNull ifFalse: [self buildErrorInfoFrom: hEnv type: SQL_HANDLE_ENV].
 			hDBC isNull ifFalse: [self buildErrorInfoFrom: hDBC type: SQL_HANDLE_DBC].
 			hStmt isNull ifFalse: [self buildErrorInfoFrom: hStmt type: SQL_HANDLE_STMT]].
-	errors isNil ifTrue: [self retCodeError: code].
+	errors ifNil: [self retCodeError: code]
 ]
 
 { #category : #operations }
@@ -171,10 +171,9 @@ ODBCExceptionDetails >> initialize [
 ODBCExceptionDetails >> printOn: aStream [
 	"Print an textual representation of the receiver to aStream"
 
-	self errors 
-		do: [ :e | aStream print: e messageText]
-		separatedBy: [aStream space]
-
+	self errors
+		do: [ :e | aStream print: e messageText ]
+		separatedBy: [ aStream space ]
 ]
 
 { #category : #accessing }
@@ -191,10 +190,12 @@ ODBCExceptionDetails >> retCodeError: anInteger [
 
 { #category : #accessing }
 ODBCExceptionDetails >> stringEncoder [
+
 	^ stringEncoder
 ]
 
 { #category : #accessing }
 ODBCExceptionDetails >> stringEncoder: anObject [
+
 	stringEncoder := anObject
 ]

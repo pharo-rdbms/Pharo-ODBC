@@ -10,6 +10,12 @@ Class {
 	#category : #'ODBC-Core-Base'
 }
 
+{ #category : #testing }
+ODBCStringEncoder class >> isAbstract [
+
+	^ self == ODBCStringEncoder
+]
+
 { #category : #encoding }
 ODBCStringEncoder >> byteSizeForCharacters: anInteger [
 
@@ -30,7 +36,6 @@ ODBCStringEncoder >> bytesPerCharacter [
 
 { #category : #accessing }
 ODBCStringEncoder >> characterEncoder [
-
 	"Appears to lose endian-ness (at image start?) so always reset"
 	
 	^characterEncoder beLittleEndian
@@ -82,7 +87,6 @@ ODBCStringEncoder >> initialize [
 
 { #category : #constants }
 ODBCStringEncoder >> nullTerminatorBytes [
-
 	"Should be size == self bytesPerCharacter"
 	
 	^self subclassResponsibility
@@ -90,7 +94,6 @@ ODBCStringEncoder >> nullTerminatorBytes [
 
 { #category : #encoding }
 ODBCStringEncoder >> stringBufferFor: anInteger [
-
 	"Create, allocate and return a buffer (ExternalAddress) to hold anInteger characters in the receiver's encoding"
 	
 	"For convenience always add 1 for a null terminator - allows this method to be used for all String API calls"

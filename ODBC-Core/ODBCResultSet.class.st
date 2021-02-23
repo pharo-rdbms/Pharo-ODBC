@@ -463,6 +463,7 @@ ODBCResultSet >> lastIndexOf: target [
 
 { #category : #accessing }
 ODBCResultSet >> lookup: keyInteger [
+
 	^self at: keyInteger
 ]
 
@@ -504,16 +505,16 @@ ODBCResultSet >> moveTo: anInteger [
 	row (requires extended fetch capability),
 	and answer the status."
 
-	^anInteger == 1 
-		ifTrue: [self moveFirst]
-		ifFalse: [self scrollTo: anInteger]
+	^ anInteger == 1
+		  ifTrue: [ self moveFirst ]
+		  ifFalse: [ self scrollTo: anInteger ]
 ]
 
 { #category : #accessing }
 ODBCResultSet >> next [
 	"Answer the next row of the receiver's result set, skipping any deleted rows."
 
-	^self moveNext isNil ifFalse: [buffer asObject]
+	^self moveNext ifNotNil: [buffer asObject]
 ]
 
 { #category : #accessing }
@@ -542,7 +543,7 @@ ODBCResultSet >> onStartup [
 ODBCResultSet >> previous [
 	"Answer the previous row of the receiver's result set"
 
-	^self movePrevious isNil ifFalse: [buffer asObject]
+	^self movePrevious ifNotNil: [buffer asObject]
 ]
 
 { #category : #printing }
@@ -554,7 +555,7 @@ ODBCResultSet >> printOn: aStream [
 		print: self class; space;
 		nextPut: $(;
 		print: self describeCols;
-		nextPut: $).
+		nextPut: $)
 ]
 
 { #category : #enumerating }
@@ -626,6 +627,7 @@ ODBCResultSet >> reverseDo: operation [
 
 { #category : #accessing }
 ODBCResultSet >> scrollTo: anInteger [
+
 	^self fetchScroll: SQL_FETCH_ABSOLUTE offset: anInteger
 ]
 
@@ -692,9 +694,8 @@ ODBCResultSet >> statementHandle [
 
 	| hStmt |
 	hStmt := statement executedHandle.
-	buffer isNil ifTrue: [self realize].
-	^hStmt
-
+	buffer ifNil: [ self realize ].
+	^ hStmt
 ]
 
 { #category : #enumerating }

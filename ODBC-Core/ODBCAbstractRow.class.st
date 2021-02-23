@@ -26,13 +26,19 @@ Class {
 	#category : #'ODBC-Core-Base'
 }
 
+{ #category : #testing }
+ODBCAbstractRow class >> isAbstract [
+
+	^ self == ODBCAbstractRow
+]
+
 { #category : #comparing }
 ODBCAbstractRow >> = comparand [
 	"Answer whether the receiver and the <Object>, comparand, 
 	are considered equivalent."
 
-	^comparand species == self species and: [
-		self contents = comparand contents]
+	^ comparand species == self species and: [ 
+		  self contents = comparand contents ]
 ]
 
 { #category : #converting }
@@ -54,8 +60,8 @@ ODBCAbstractRow >> at: aString ifAbsent: exceptionHandler [
 	"Answer the field named aString from the receiver.  If the field is not present,
 	answer the result of evaluating the niladic valuable, exceptionHandler."
 
-	^self 
-		atIndex: (self selectors at: aString ifAbsent: [^exceptionHandler value])
+	^ self atIndex:
+		  (self selectors at: aString ifAbsent: [ ^ exceptionHandler value ])
 ]
 
 { #category : #accessing }
@@ -64,7 +70,7 @@ ODBCAbstractRow >> at: key ifPresent: operation [
 	the argument, key, is the key of an element in the receiver, with that
 	element as its argument. If the key is not present, then answer nil."
 
-	^operation value: (self at: key ifAbsent: [^nil])
+	^ operation value: (self at: key ifAbsent: [ ^ nil ])
 ]
 
 { #category : #accessing }
@@ -154,8 +160,7 @@ ODBCAbstractRow >> isDeletedRow [
 
 { #category : #printing }
 ODBCAbstractRow >> printOn: aStream [
-	"Append the ASCII representation of the receiver
-	 to aStream."
+	"Append the ASCII representation of the receiver to aStream."
 
 	aStream
 		nextPutAll: 'a ';
@@ -170,11 +175,12 @@ ODBCAbstractRow >> selectors [
 	"Private - Answer a <LookupTable> mapping the names of fields in the receiver to
 	column indices."
 
-	selectors isNil ifTrue: [self buildSelectors].
-	^selectors
+	selectors ifNil: [ self buildSelectors ].
+	^ selectors
 ]
 
 { #category : #accessing }
 ODBCAbstractRow >> status [
-	^status
+
+	^ status
 ]

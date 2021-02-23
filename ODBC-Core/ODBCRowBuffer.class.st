@@ -13,7 +13,7 @@ Class {
 ODBCRowBuffer >> asObject [
 	"Private - Answer the receiver as an instance of ODBCRow containing the receiver's values."
 
-	^ODBCRow fromBuffer: self
+	^ ODBCRow fromBuffer: self
 ]
 
 { #category : #operations }
@@ -22,7 +22,7 @@ ODBCRowBuffer >> bind: aDBStatement [
 
 	| hStmt |
 	hStmt := aDBStatement executedHandle.
-	#todo "Will need an array of status values if to fetch a block of rows at a time".
+	self flag: #TODO. "Will need an array of status values if to fetch a block of rows at a time".
 	status := SQLUSMALLINT new.
 	aDBStatement statusArray: status.
 	^hStmt
@@ -32,9 +32,8 @@ ODBCRowBuffer >> bind: aDBStatement [
 ODBCRowBuffer >> contents [
 	"Answer the contents instance variable."
 
-	contents isNil
-		ifTrue: [contents := columns collect: [:colAttr | ODBCField newForCol: colAttr]].
-	^contents.
+	contents ifNil: [ contents := columns collect: [:colAttr | ODBCField newForCol: colAttr ]].
+	^contents
 ]
 
 { #category : #accessing }
@@ -42,17 +41,18 @@ ODBCRowBuffer >> objects [
 	"Private - Answer the receivers contents as an <Array> of <Object>s
 	representing the value of each column."
 
-	^self contents collect: [:c | c value]
+	^ self contents collect: [:c | c value ]
 ]
 
 { #category : #accessing }
 ODBCRowBuffer >> sizeInBytes [
 	"Answer the size of the receiver structure in bytes."
 
-	 ^self contents inject: 0 into: [ :size :f | size + f size ].
+	 ^self contents inject: 0 into: [:size :f | size + f size ]
 ]
 
 { #category : #accessing }
 ODBCRowBuffer >> status [
+
 	^status value
 ]

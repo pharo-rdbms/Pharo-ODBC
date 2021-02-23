@@ -105,7 +105,7 @@ ODBCConnection class >> dbCheckException: anIntegerRetCode [
 				ifFalse: [ODBCError]) signalWith: (self exceptionDetails: anIntegerRetCode)]
 ]
 
-{ #category : #initializing }
+{ #category : #'class initialization' }
 ODBCConnection class >> determineStringEncoder [
 
 	"The String encoding can vary depending on the ODBC driver manager:
@@ -258,8 +258,9 @@ ODBCConnection class >> freeAll [
 	connections will be closed, etc.!"
 
 	self connections do: [:each | each free].
-	self newConnections.
-	self freeEnvironment
+	self 
+		newConnections;
+		freeEnvironment
 ]
 
 { #category : #'realizing/unrealizing' }
@@ -274,11 +275,9 @@ ODBCConnection class >> freeEnvironment [
 			HEnv := nil]
 ]
 
-{ #category : #initializing }
+{ #category : #'class initialization' }
 ODBCConnection class >> initialize [
-	"Private - Initialize the receiver's class variable.s
-		self initialize
-	"
+	"Private - Initialize the receiver's class variables"
 
 	DriverCompleteMask := 1.
 	TxnIsolationLevels := (IdentityDictionary new)
@@ -297,7 +296,7 @@ ODBCConnection class >> initialize [
 	self newConnections
 ]
 
-{ #category : #initializing }
+{ #category : #'class initialization' }
 ODBCConnection class >> initializeStringEncoder [
 
 	self determineStringEncoder.
@@ -378,7 +377,7 @@ ODBCConnection class >> transact: aDBConnection action: anInteger [
 				sqlEndTran: SQL_HANDLE_DBC
 				handle: aDBConnection asParameter
 				completionType: anInteger.
-	ret ~= SQL_SUCCESS ifTrue: [ODBCError signalWith: (aDBConnection exceptionDetails: ret)].
+	ret ~= SQL_SUCCESS ifTrue: [ODBCError signalWith: (aDBConnection exceptionDetails: ret)]
 ]
 
 { #category : #helpers }
@@ -405,15 +404,14 @@ ODBCConnection >> asParameter [
 	"Answer the receiver in a form suitable for passing to an external function
 	primitive method (see ExternalLibrary and subclasses)."
 
-	handle isNull ifTrue: [self basicConnect].
-	^handle
+	handle isNull ifTrue: [ self basicConnect ].
+	^ handle
 ]
 
 { #category : #operations }
 ODBCConnection >> basicConnect [
 	"Private - Connect with the parameters specified earlier.
 	Assumes not already connected."
-
 	
 	[| ret |
 	ret := ODBCLibrary default 
@@ -425,7 +423,7 @@ ODBCConnection >> basicConnect [
 				authentication: (self stringEncoder encodeStringWithNullTerminator: pwd)
 				nameLength3: SQL_NTS.
 	self dbCheckException: ret] 
-			ifCurtailed: [self free]
+			ifCurtailed: [ self free ]
 ]
 
 { #category : #transactions }
@@ -444,6 +442,7 @@ ODBCConnection >> beginTxn [
 
 { #category : #helpers }
 ODBCConnection >> buildConnectString [
+
 	| stream |
 	stream := WriteStream on: (String new: 50).
 	dsn notNil 
@@ -468,7 +467,7 @@ ODBCConnection >> buildConnectString [
 ODBCConnection >> catalogNameSeparator [
 	"Answer the qualifier name separator"
 
-	^self getStringInfo: SQL_CATALOG_NAME_SEPARATOR
+	^ self getStringInfo: SQL_CATALOG_NAME_SEPARATOR
 ]
 
 { #category : #enquiries }
@@ -476,17 +475,17 @@ ODBCConnection >> catalogTerm [
 	"Answer the <readableString> name for a 'catalog' in the parlance of the DBMS to which the
 	receiver is connected, e.g. in the case of Access this is 'DATABASE'."
 
-	^self getStringInfo: SQL_CATALOG_TERM
+	^ self getStringInfo: SQL_CATALOG_TERM
 ]
 
 { #category : #helpers }
 ODBCConnection >> checkEmptyEnvironment [
 	"Private - If there are no more open connections, free the environment"
 
-	Connections isEmpty
-		ifTrue: [
-			[self class freeEnvironment] on: ODBCError do: [:se | se trace].
-			HEnv := nil].
+	Connections ifNotEmpty: [ ^self ].
+
+	[ self class freeEnvironment] on: ODBCError do: [:se | se trace].
+	HEnv := nil
 ]
 
 { #category : #operations }
@@ -494,14 +493,13 @@ ODBCConnection >> close [
 	"Close a database connection - rollback the current transaction, disconnect,
 	and free connection handle"
 
-	handle isNull
-		ifFalse: [
-			transaction notNil
-				ifTrue: [self rollbackTxn].
-			self
-				disconnect;
-				free;
-				checkEmptyEnvironment]
+	handle isNull ifTrue: [ ^self ].
+
+	transaction ifNotNil: [ self rollbackTxn ].	
+	self
+		disconnect;
+		free;
+		checkEmptyEnvironment
 ]
 
 { #category : #operations }
@@ -509,10 +507,12 @@ ODBCConnection >> closeNoFail [
 	"Quietly close connection (frees handle), and if no
 	more open connections, free the environment"
 
-	[self close] on: ODBCError do: [ :se |
-		se trace.
-		handle := SQLHANDLE null.
-		self checkEmptyEnvironment]
+	[ self close ]
+		on: ODBCError
+		do: [ :se | 
+			se trace.
+			handle := SQLHANDLE null.
+			self checkEmptyEnvironment ]
 ]
 
 { #category : #accessing }

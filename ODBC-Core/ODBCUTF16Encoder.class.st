@@ -21,7 +21,6 @@ ODBCUTF16Encoder >> characterEncoderClass [
 
 { #category : #decoding }
 ODBCUTF16Encoder >> decodeNullTerminatedStringFrom: aByteArray [
-
 	"Optimised (~25% faster) equivalent of superclass implementation"
 
 	| stream offset |
@@ -51,7 +50,6 @@ ODBCUTF16Encoder >> decodeNullTerminatedStringFrom: aByteArray [
 
 { #category : #decoding }
 ODBCUTF16Encoder >> decodeStringFrom: aByteArray byteCount: anInteger [
-
 	"Optimised (~25% faster) equivalent of superclass implementation"
 
 	| stream offset |
@@ -83,5 +81,5 @@ ODBCUTF16Encoder >> decodeStringFrom: aByteArray byteCount: anInteger [
 { #category : #constants }
 ODBCUTF16Encoder >> nullTerminatorBytes [
 
-	^#[0 0]
+	^#[ 0 0 ]
 ]

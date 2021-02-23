@@ -39,9 +39,9 @@ ODBCErrorDetails >> messageText [
 	"Answer a text representation of the error of the form:
 		STATE: MSG"
 
-	^(sqlState isNil 
-		ifTrue: ['']
-		ifFalse: [sqlState, ': ']), msg
+	^ (sqlState 
+			ifNil: [ '' ] 
+			ifNotNil: [ sqlState , ': ' ]) , msg
 ]
 
 { #category : #accessing }
@@ -69,7 +69,7 @@ ODBCErrorDetails >> nativeErr: aString [
 ODBCErrorDetails >> origin: aString [
 	"Private - Set the origin instance variable to aString."
 
-	origin := aString.
+	origin := aString
 ]
 
 { #category : #accessing }

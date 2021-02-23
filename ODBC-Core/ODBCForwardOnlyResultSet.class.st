@@ -24,7 +24,7 @@ ODBCForwardOnlyResultSet >> bind: anArrayOfColNums [
 	as they are fetched from the result set"
 
 	super bind: anArrayOfColNums.
-	position := 0.
+	position := 0
 ]
 
 { #category : #'realizing/unrealizing' }
@@ -44,7 +44,7 @@ ODBCForwardOnlyResultSet >> free [
 	position := 0
 ]
 
-{ #category : #operations }
+{ #category : #positioning }
 ODBCForwardOnlyResultSet >> moveFirst [
 	"Private - If not at the start of the result set, then re-exec the statement."
 
@@ -55,7 +55,7 @@ ODBCForwardOnlyResultSet >> moveFirst [
 			self moveNext]
 ]
 
-{ #category : #enumerating }
+{ #category : #positioning }
 ODBCForwardOnlyResultSet >> moveLast [
 	"Private - Scroll to the last row of the receiver's result set.
 	Answer the <integer> row status value."
@@ -65,7 +65,7 @@ ODBCForwardOnlyResultSet >> moveLast [
 	^lastStatus
 ]
 
-{ #category : #operations }
+{ #category : #positioning }
 ODBCForwardOnlyResultSet >> moveNext [
 	"Private - Advance to the next row in the result set."
 
@@ -75,7 +75,7 @@ ODBCForwardOnlyResultSet >> moveNext [
 	^status
 ]
 
-{ #category : #enumerating }
+{ #category : #positioning }
 ODBCForwardOnlyResultSet >> movePrevious [
 	"Private - Scroll to the previous row of the receiver's result set.
 	Answer the <integer> row status value."
@@ -83,7 +83,7 @@ ODBCForwardOnlyResultSet >> movePrevious [
 	self moveTo: position - 1
 ]
 
-{ #category : #accessing }
+{ #category : #positioning }
 ODBCForwardOnlyResultSet >> moveTo: anInteger [ 
 	| status |
 	position = anInteger 
