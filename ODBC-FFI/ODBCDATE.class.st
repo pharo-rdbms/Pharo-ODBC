@@ -12,7 +12,7 @@ Class {
 		'_OffsetOf_month',
 		'_OffsetOf_year'
 	],
-	#category : #'ODBC-FFI'
+	#category : #'ODBC-FFI-Base'
 }
 
 { #category : #'template definition' }

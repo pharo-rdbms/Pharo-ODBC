@@ -1,11 +1,12 @@
 Class {
 	#name : #SQLHANDLEType,
 	#superclass : #FFIConstantHandleType,
-	#category : #'ODBC-FFI'
+	#category : #'ODBC-FFI-SQL-Types'
 }
 
 { #category : #'emitting code' }
 SQLHANDLEType >> emitReturnArgument: builder context: aContext [
+
 	self loader 
 		emitPluggableHandleArityUnpack: builder
 		type: self
@@ -24,7 +25,6 @@ SQLHANDLEType >> externalType [
 
 { #category : #testing }
 SQLHANDLEType >> is32BitHandle [
-
 	"Always on Windows; by VM type on others"
 
 	^Smalltalk os isWindows or: [ Smalltalk vm is32bit ]

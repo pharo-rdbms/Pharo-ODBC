@@ -15,7 +15,7 @@ Class {
 		'OFFSET_SECOND',
 		'OFFSET_YEAR'
 	],
-	#category : #'ODBC-FFI'
+	#category : #'ODBC-FFI-Base'
 }
 
 { #category : #'template definition' }
