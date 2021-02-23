@@ -4,13 +4,13 @@ Class {
 	#instVars : [
 		'connection'
 	],
-	#category : #'ODBC-Tests'
+	#category : #'ODBC-Tests-Base'
 }
 
 { #category : #testing }
 ODBCTest class >> isAbstract [ 
 
-	^self = ODBCTest
+	^self == ODBCTest
 ]
 
 { #category : #helpers }
@@ -37,9 +37,9 @@ ODBCTest >> setUp [
 
 { #category : #helpers }
 ODBCTest >> skipUnless: aNiladicValuable [
-	" If the assumption in the <niladicValuable> argument evaluates to false, abandon the running test and mark it as skipped."
+	"If the assumption in the <niladicValuable> argument evaluates to false, abandon the running test and mark it as skipped."
 	
-	aNiladicValuable value ifFalse: [TestSkip signal: 'Assumption in #skipUnless: failed']
+	aNiladicValuable value ifFalse: [ self skip: 'Assumption in #skipUnless: failed' ]
 ]
 
 { #category : #running }

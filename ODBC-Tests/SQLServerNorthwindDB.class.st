@@ -1,10 +1,13 @@
+"
+Access to Northwind Test database using Microsoft SQL Server for tests as a reusable test resource
+"
 Class {
 	#name : #SQLServerNorthwindDB,
 	#superclass : #ODBCConnectionTestResource,
-	#category : #'ODBC-Tests'
+	#category : #'ODBC-Tests-Resources'
 }
 
-{ #category : #private }
+{ #category : #'private - accessing' }
 SQLServerNorthwindDB >> connectString [
 	"Private - APPVEYOR config is 'DRIVER=SQL Server;Server=(local)\SQL2017;Database=master;User ID=sa;Password=Password12!'"
 
@@ -49,17 +52,17 @@ SQLServerNorthwindDB >> newConnection [
 				yourself]
 ]
 
-{ #category : #private }
+{ #category : #'private - credentials' }
 SQLServerNorthwindDB >> pwd [
 	^'Password12!'
 ]
 
-{ #category : #private }
+{ #category : #'private - accessing' }
 SQLServerNorthwindDB >> serverName [
 	^'(local)\SQL2019'
 ]
 
-{ #category : #private }
+{ #category : #'private - credentials' }
 SQLServerNorthwindDB >> uid [
 	^'sa'
 ]

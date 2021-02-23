@@ -1,7 +1,7 @@
 Class {
 	#name : #AccessODBCTest,
 	#superclass : #ODBCConnectionTest,
-	#category : #'ODBC-Tests'
+	#category : #'ODBC-Tests-Base'
 }
 
 { #category : #public }
