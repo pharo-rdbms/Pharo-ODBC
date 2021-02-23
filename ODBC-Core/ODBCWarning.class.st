@@ -16,13 +16,6 @@ ODBCWarning class >> signalWith: anODBCExceptionDetails [
 	self signal: anODBCExceptionDetails displayString withTag: anODBCExceptionDetails
 ]
 
-{ #category : #displaying }
-ODBCWarning >> _descriptionFormat [
-	"Answer the Win32 format String to be used to format the description for the receiver."
-	
-	^'%1 %2'
-]
-
 { #category : #signalling }
 ODBCWarning >> signal [
 	"Signal this exception."

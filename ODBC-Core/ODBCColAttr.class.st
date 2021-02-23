@@ -38,7 +38,7 @@ Class {
 	#category : #'ODBC-Core-Base'
 }
 
-{ #category : #initializing }
+{ #category : #'class initialization' }
 ODBCColAttr class >> initialize [
 	"Private - Initialize the receiver's class variables.
 		self initialize
@@ -81,7 +81,7 @@ ODBCColAttr class >> initialize [
 	self initializeExtraBytes 
 ]
 
-{ #category : #initializing }
+{ #category : #'private - initialization' }
 ODBCColAttr class >> initializeExtraBytes [
 
 	| extraBytes |

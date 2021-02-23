@@ -22,5 +22,5 @@ ODBCUTF32Encoder >> characterEncoderClass [
 { #category : #constants }
 ODBCUTF32Encoder >> nullTerminatorBytes [
 
-	^#[0 0 0 0]
+	^#[ 0 0 0 0 ]
 ]

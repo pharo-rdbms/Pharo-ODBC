@@ -19,14 +19,15 @@ ODBCRow class >> fromBuffer: anODBCRow [
 ODBCRow >> asObject [
 	"Private - Answer the receiver as an instance of ODBCRow containing the receiver's values."
 
-	^self
+	^ self
 ]
 
 { #category : #'instance creation' }
 ODBCRow >> initializeFromBuffer: anODBCRow [
+
 	columns := anODBCRow columns.
 	selectors := anODBCRow selectors.
 	contents := anODBCRow objects.
 	status := anODBCRow status.
-	^self
+	^ self
 ]

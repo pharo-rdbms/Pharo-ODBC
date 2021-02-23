@@ -78,7 +78,7 @@ ODBCTxn >> connection [
 ODBCTxn >> connection: anODBCConnection [
 	"Private - Set the connection instance variable to anODBCConnection."
 
-	connection := anODBCConnection.
+	connection := anODBCConnection
 ]
 
 { #category : #development }
@@ -100,8 +100,9 @@ ODBCTxn >> printOn: aStream [
 			ifTrue: ['disabled']
 			ifFalse: ['enabled']);
 		nextPutAll: connection dsn;
-		nextPutAll: ', belonging to: ';
-		nextPutAll: creator printString;
+		nextPutAll: ', belonging to: '.
+	creator printOn: aStream.
+	aStream	
 		nextPut: $)
 ]
 
@@ -119,11 +120,10 @@ ODBCTxn >> transcriptMessage: aString [
 	"Private - Output an appropriately annotated message to the current
 	session's trace device. In a development session this is the Transcript"
 
-	creator notNil
-		ifTrue: 
-			[Transcript
-				print: self;
-				space;
-				nextPutAll: aString;
-				cr]
+	creator ifNotNil: [ 
+		Transcript
+			print: self;
+			space;
+			nextPutAll: aString;
+			cr ]
 ]

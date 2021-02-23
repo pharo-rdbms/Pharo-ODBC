@@ -21,80 +21,92 @@ Class {
 	#category : #'ODBC-Core-Base'
 }
 
-{ #category : #'pool initialization' }
+{ #category : #'private - pool initialization' }
 ODBCColFlags class >> initialize [
+
 	self
-		initialize_DeleteCascade;
-		initialize_DeleteRestrict;
-		initialize_DeleteRules;
-		initialize_DeleteSetNull;
-		initialize_ForeignKey;
-		initialize_ParameterTypeMask;
-		initialize_ParameterTypeShift;
-		initialize_PrimaryKey;
-		initialize_UpdateCascade;
-		initialize_UpdateRestrict;
-		initialize_UpdateRules;
-		initialize_UpdateSetNull;
-		yourself
+		initializeDeleteCascade;
+		initializeDeleteRestrict;
+		initializeDeleteRules;
+		initializeDeleteSetNull;
+		initializeForeignKey;
+		initializeParameterTypeMask;
+		initializeParameterTypeShift;
+		initializePrimaryKey;
+		initializeUpdateCascade;
+		initializeUpdateRestrict;
+		initializeUpdateRules;
+		initializeUpdateSetNull 
 ]
 
-{ #category : #'pool initialization' }
-ODBCColFlags class >> initialize_DeleteCascade [
+{ #category : #'private - pool initialization' }
+ODBCColFlags class >> initializeDeleteCascade [
+
 	DeleteCascade := 16
 ]
 
-{ #category : #'pool initialization' }
-ODBCColFlags class >> initialize_DeleteRestrict [
+{ #category : #'private - pool initialization' }
+ODBCColFlags class >> initializeDeleteRestrict [
+
 	DeleteRestrict := 32
 ]
 
-{ #category : #'pool initialization' }
-ODBCColFlags class >> initialize_DeleteRules [
+{ #category : #'private - pool initialization' }
+ODBCColFlags class >> initializeDeleteRules [
+
 	DeleteRules := 112
 ]
 
-{ #category : #'pool initialization' }
-ODBCColFlags class >> initialize_DeleteSetNull [
+{ #category : #'private - pool initialization' }
+ODBCColFlags class >> initializeDeleteSetNull [
+
 	DeleteSetNull := 64
 ]
 
-{ #category : #'pool initialization' }
-ODBCColFlags class >> initialize_ForeignKey [
+{ #category : #'private - pool initialization' }
+ODBCColFlags class >> initializeForeignKey [
+
 	ForeignKey := 2
 ]
 
-{ #category : #'pool initialization' }
-ODBCColFlags class >> initialize_ParameterTypeMask [
+{ #category : #'private - pool initialization' }
+ODBCColFlags class >> initializeParameterTypeMask [
+
 	ParameterTypeMask := 14336
 ]
 
-{ #category : #'pool initialization' }
-ODBCColFlags class >> initialize_ParameterTypeShift [
+{ #category : #'private - pool initialization' }
+ODBCColFlags class >> initializeParameterTypeShift [
+
 	ParameterTypeShift := 11
 ]
 
-{ #category : #'pool initialization' }
-ODBCColFlags class >> initialize_PrimaryKey [
+{ #category : #'private - pool initialization' }
+ODBCColFlags class >> initializePrimaryKey [
+
 	PrimaryKey := 1
 ]
 
-{ #category : #'pool initialization' }
-ODBCColFlags class >> initialize_UpdateCascade [
+{ #category : #'private - pool initialization' }
+ODBCColFlags class >> initializeUpdateCascade [
+
 	UpdateCascade := 256
 ]
 
-{ #category : #'pool initialization' }
-ODBCColFlags class >> initialize_UpdateRestrict [
+{ #category : #'private - pool initialization' }
+ODBCColFlags class >> initializeUpdateRestrict [
+
 	UpdateRestrict := 512
 ]
 
-{ #category : #'pool initialization' }
-ODBCColFlags class >> initialize_UpdateRules [
+{ #category : #'private - pool initialization' }
+ODBCColFlags class >> initializeUpdateRules [
+
 	UpdateRules := 1792
 ]
 
-{ #category : #'pool initialization' }
-ODBCColFlags class >> initialize_UpdateSetNull [
+{ #category : #'private - pool initialization' }
+ODBCColFlags class >> initializeUpdateSetNull [
+
 	UpdateSetNull := 1024
 ]

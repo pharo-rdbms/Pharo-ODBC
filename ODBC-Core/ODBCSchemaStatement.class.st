@@ -14,6 +14,12 @@ Class {
 	#category : #'ODBC-Core-Base'
 }
 
+{ #category : #testing }
+ODBCSchemaStatement class >> isAbstract [
+
+	^ self == ODBCSchemaStatement
+]
+
 { #category : #accessing }
 ODBCSchemaStatement >> catalogName [
 	^catalogName
@@ -31,6 +37,14 @@ ODBCSchemaStatement >> defaultCursorType [
 
 	^#forwardOnly
 
+]
+
+{ #category : #operations }
+ODBCSchemaStatement >> executeStatement [
+	"Private - Execute the database command that the receiver represents.
+	Answer the <integer> return code."
+
+	^self subclassResponsibility
 ]
 
 { #category : #accessing }

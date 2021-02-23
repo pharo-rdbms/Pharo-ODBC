@@ -36,7 +36,7 @@ Class {
 	#category : #'ODBC-Core-Base'
 }
 
-{ #category : #initializing }
+{ #category : #'class initialization' }
 ODBCField class >> initialize [
 	"Initialize the dictionaries of to/from
 	C Type/Smalltalk object converters.
@@ -143,6 +143,7 @@ ODBCField >> bufferSize [
 
 { #category : #accessing }
 ODBCField >> column [
+
 	^column
 ]
 
@@ -566,14 +567,16 @@ ODBCField >> value [
 	"Answer the contents of the receiver as a suitable
 	Smalltalk object."
 
-	^self isNull ifFalse: [self perform: (GetSelectors at: column type + TypeOffset)]
+	^ self isNull ifFalse: [ 
+		  self perform: (GetSelectors at: column type + TypeOffset) ]
 ]
 
 { #category : #accessing }
 ODBCField >> value: anObject [
 	"Set the contents of the receiver's buffer from anObject."
 
-	^anObject
-		ifNil: [self beNull]
-		ifNotNil: [self perform: (SetSelectors at: column type + TypeOffset) with: anObject]
+	^ anObject ifNil: [ self beNull ] ifNotNil: [ 
+		  self
+			  perform: (SetSelectors at: column type + TypeOffset)
+			  with: anObject ]
 ]
