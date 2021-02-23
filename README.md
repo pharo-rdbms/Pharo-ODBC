@@ -5,7 +5,7 @@ Thanks to [InfOil](http://www.infoil.com.ar) for supporting this project.
 ### Installation
 ```Smalltalk
 Metacello new
-	repository: 'github://rko281/Pharo-ODBC';
+	repository: 'github://pharo-rdbms/Pharo-ODBC';
 	baseline: 'ODBC';
 	load
 ```
