@@ -1,3 +1,6 @@
+"
+Common superclass for ODBC test resources
+"
 Class {
 	#name : #ODBCConnectionTestResource,
 	#superclass : #TestResource,
@@ -5,21 +8,30 @@ Class {
 		'connection',
 		'isAvailable'
 	],
-	#category : #'ODBC-Tests'
+	#category : #'ODBC-Tests-Resources'
 }
+
+{ #category : #testing }
+ODBCConnectionTestResource class >> isAbstract [
+
+	^ self == ODBCConnectionTestResource
+]
 
 { #category : #private }
 ODBCConnectionTestResource >> connect [
+
 	connection := self newConnection
 ]
 
 { #category : #private }
 ODBCConnectionTestResource >> connectString [
+
 	self subclassResponsibility
 ]
 
 { #category : #private }
 ODBCConnectionTestResource >> connection [
+
 	^connection
 ]
 
@@ -32,14 +44,15 @@ ODBCConnectionTestResource >> createDatabase [
 
 { #category : #private }
 ODBCConnectionTestResource >> dropDatabase [
-	connection
-		ifNotNil: 
-			[connection close.
-			connection := nil]
+
+	connection ifNotNil: [ 
+		connection close.
+		connection := nil ]
 ]
 
 { #category : #public }
 ODBCConnectionTestResource >> newConnection [
+
 	^isAvailable
 		ifTrue: 
 			[(ODBCConnection new connectString: self connectString)
@@ -47,12 +60,16 @@ ODBCConnectionTestResource >> newConnection [
 				yourself]
 ]
 
-{ #category : #public }
+{ #category : #running }
 ODBCConnectionTestResource >> setUp [
-	(isAvailable := self createDatabase) ifTrue: [self connect]
+
+	super setUp.
+	(isAvailable := self createDatabase) ifTrue: [ self connect ]
 ]
 
-{ #category : #public }
+{ #category : #running }
 ODBCConnectionTestResource >> tearDown [
-	self dropDatabase
+
+	self dropDatabase.
+	super tearDown 
 ]

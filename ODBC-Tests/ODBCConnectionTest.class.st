@@ -10,13 +10,13 @@ Class {
 		'ODBCConstants',
 		'ODBCTypes'
 	],
-	#category : #'ODBC-Tests'
+	#category : #'ODBC-Tests-Base'
 }
 
 { #category : #testing }
 ODBCConnectionTest class >> isAbstract [
 
-	^self = ODBCConnectionTest
+	^self == ODBCConnectionTest
 ]
 
 { #category : #public }

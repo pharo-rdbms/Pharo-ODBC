@@ -1,13 +1,16 @@
+"
+Provides access to Northwind Test database using Microsoft Access for tests as a reusable test resource
+"
 Class {
 	#name : #AccessNorthwindDB,
 	#superclass : #ODBCConnectionTestResource,
 	#instVars : [
 		'filename'
 	],
-	#category : #'ODBC-Tests'
+	#category : #'ODBC-Tests-Resources'
 }
 
-{ #category : #constants }
+{ #category : #'accessing - constants' }
 AccessNorthwindDB class >> accessDriverName [
 	
 	ODBCConnection enumerateDrivers do: [ :assoc | (assoc key beginsWith: 'Microsoft Access Driver (*.mdb') ifTrue: [ ^assoc key ]].
@@ -16,7 +19,7 @@ AccessNorthwindDB class >> accessDriverName [
 
 ]
 
-{ #category : #constants }
+{ #category : #'accessing - constants' }
 AccessNorthwindDB class >> connectStringPattern [
 
 	^'DRIVER={', self accessDriverName, '};DBQ=<1s>'
