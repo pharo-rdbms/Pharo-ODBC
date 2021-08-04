@@ -336,7 +336,7 @@ ODBCConnection class >> odbcVersion [
 				sqlGetEnvAttr: HEnv
 				infoType: SQL_ATTR_ODBC_VERSION
 				infoValuePtr: version asSQLPOINTER
-				bufferLength: nil
+				bufferLength: 0
 				stringLengthPtr: nil).
 	^version value
 ]
