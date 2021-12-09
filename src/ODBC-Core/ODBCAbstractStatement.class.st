@@ -249,7 +249,7 @@ ODBCAbstractStatement >> describeCols: columnNumbers [
 							columnNumber: each
 							fieldIdentifier: parent columnFieldIdentifier
 							characterAttributePtr: nil
-							bufferLength: nil
+							bufferLength: 0
 							stringLengthPtr: nil
 							numericAttributePtr: colLen.
 					self dbCheckException: ret] on: ODBCError do: 

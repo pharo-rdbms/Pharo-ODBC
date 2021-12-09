@@ -5,6 +5,16 @@ Class {
 }
 
 { #category : #'emitting code' }
+SQLHANDLEType >> basicEmitArgument: aBuilder context: aContext inCallout: aCallout [
+
+	"Pharo 9: differing semantics needed for TFFIBackend"
+
+	^(self class environment at: #FFIBackend ifPresent: [ :ffiBackend | ffiBackend current class name = #TFFIBackend] ifAbsent: [ false ])
+		ifTrue: [ self loader emitArgument: aBuilder context: aContext ]
+		ifFalse: [ super basicEmitArgument: aBuilder context: aContext inCallout: aCallout ]
+]
+
+{ #category : #'emitting code' }
 SQLHANDLEType >> emitReturnArgument: builder context: aContext [
 
 	self loader 
