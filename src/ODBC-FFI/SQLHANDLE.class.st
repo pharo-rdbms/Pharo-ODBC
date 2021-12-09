@@ -49,3 +49,9 @@ SQLHANDLE >> isNull [
 
 	^handle = 0
 ]
+
+{ #category : #accessing }
+SQLHANDLE >> tfPointerAddress [
+
+	^ self handle asSQLPOINTER
+]
