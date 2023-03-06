@@ -10,6 +10,23 @@ Metacello new
 	load
 ```
 #### Windows
+
+- hit WINDOWS-KEY + R for "Run" command panel
+- Type, in the run command, the following depending on your system: 
+-- For 32-bit operating systems: ODBCAD32. 
+-- For 64-bit operating systems: 
+
+32 bit panel
+```
+%windir%\syswow64\odbcad32.exe
+```
+64 bit panel
+```
+%windir%\system32\odbcad32.exe
+```
+- Click OK.
+
+
 On non-Windows platforms you will also need to install an appropriate ODBC Driver Manager:
 
 #### MacOS
