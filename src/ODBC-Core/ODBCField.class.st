@@ -410,16 +410,15 @@ ODBCField >> setByte: aNumber [
 ODBCField >> setByteArray: aByteArray [
 	"Private - Set the receiver's buffer from the <ByteArray> argument."
 
-	(self shouldTranslate: aByteArray class: ByteArray)
-		ifTrue: 
-			[| byteCount |
-			byteCount := aByteArray size min: bufferSize.
-			buffer
-				replaceFrom: 1
-				to: byteCount
-				with: aByteArray
-				startingAt: 1.
-			lengthBuf value: byteCount]
+	| byteCount |
+	(self shouldTranslate: aByteArray class: ByteArray) ifFalse: [ ^ self ].
+	byteCount := aByteArray size min: bufferSize.
+	buffer
+		replaceFrom: 1
+		to: byteCount
+		with: aByteArray
+		startingAt: 1.
+	lengthBuf value: byteCount
 ]
 
 { #category : #converting }
@@ -445,24 +444,22 @@ ODBCField >> setDateAndTime: aDateAndTime [
 
 { #category : #converting }
 ODBCField >> setDouble: aNumber [
-	"Private - Set the receiver's double buffer with <Float> value of the 
+	"Private - Set the receiver's double buffer with <Float> value of the
 	<Number> argument."
 
-	(self shouldTranslate: aNumber class: Number)
-		ifTrue: 
-			[buffer doubleAt: 1 put: aNumber asFloat.
-			lengthBuf value: 8]
+	(self shouldTranslate: aNumber class: Number) ifFalse: [ ^ self ].
+	buffer doubleAt: 1 put: aNumber asFloat.
+	lengthBuf value: 8
 ]
 
 { #category : #converting }
 ODBCField >> setFloat: aNumber [
-	"Private - Set the receiver's float buffer with the <Float> value of the 
+	"Private - Set the receiver's float buffer with the <Float> value of the
 	<Number> argument, aNumber."
 
-	(self shouldTranslate: aNumber class: Number)
-		ifTrue: 
-			[buffer floatAt: 1 put: aNumber asFloat.
-			lengthBuf value: 4]
+	(self shouldTranslate: aNumber class: Number) ifFalse: [ ^ self ].
+	buffer floatAt: 1 put: aNumber asFloat.
+	lengthBuf value: 4
 ]
 
 { #category : #converting }
@@ -523,17 +520,16 @@ ODBCField >> setTime: aTime [
 ODBCField >> setUtf16String: aString [
 	"Private - Set the receiver's buffer from aString."
 
-	(self shouldTranslate: aString class: String)
-		ifTrue: 
-			[| utf16 byteCount |
-			utf16 := self stringEncoder encodeString: aString.
-			byteCount := utf16 size.
-			buffer
-				replaceFrom: 1
-				to: byteCount
-				with: utf16
-				startingAt: 1.
-			lengthBuf value: byteCount]
+	| utf16 byteCount |
+	(self shouldTranslate: aString class: String) ifFalse: [ ^ self ].
+	utf16 := self stringEncoder encodeString: aString.
+	byteCount := utf16 size.
+	buffer
+		replaceFrom: 1
+		to: byteCount
+		with: utf16
+		startingAt: 1.
+	lengthBuf value: byteCount
 ]
 
 { #category : #accessing }
