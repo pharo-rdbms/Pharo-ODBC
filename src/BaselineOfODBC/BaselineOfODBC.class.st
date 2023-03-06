@@ -4,7 +4,7 @@ Baseline for [https://github.com/pharo-rdbms/Pharo-ODBC](https://github.com/phar
 Class {
 	#name : #BaselineOfODBC,
 	#superclass : #BaselineOf,
-	#category : #BaselineOfODBC
+	#category : #'BaselineOfODBC-Base'
 }
 
 { #category : #baselines }
