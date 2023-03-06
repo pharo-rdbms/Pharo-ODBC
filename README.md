@@ -13,8 +13,8 @@ Metacello new
 
 - hit WINDOWS-KEY + R for "Run" command panel
 - Type, in the run command, the following depending on your system: 
--- For 32-bit operating systems: ODBCAD32. 
--- For 64-bit operating systems: 
+- For 32-bit operating systems: ODBCAD32. 
+- For 64-bit operating systems: 
 
 32 bit panel
 ```
