@@ -119,7 +119,7 @@ ODBCConnection class >> determineStringEncoder [
 	OSPlatform current isWindows ifTrue: [ ^self ].
  	
 	drivers := self enumerateDrivers.
-	drivers size = 0 ifTrue: [ self error: 'no ODBC drivers found' ].
+	drivers isEmpty ifTrue: [ ^self "no ODBC drivers found" ].
 
 	"If UTF32 the second 'character' will be null"
 	(drivers first key at: 2) = Character null ifTrue: [ StringEncoder := ODBCUTF32Encoder new ]
