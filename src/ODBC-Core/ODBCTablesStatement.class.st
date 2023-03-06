@@ -17,7 +17,7 @@ ODBCTablesStatement >> executeStatement [
 	"Private - Execute the database command that the receiver represents.
 	Answer the <integer> return code."
 
-	^ODBCLibrary default 
+	^ODBCLibrary default
 		sqlTables: self allocatedHandle
 		szTableQualifier: (self stringEncoder encodeStringWithNullTerminator: catalogName)
 		cbTableQualifier: SQL_NTS

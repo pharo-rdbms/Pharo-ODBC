@@ -50,7 +50,7 @@ ODBCField class >> initialize [
 
 	self assert: [TypeOffset = (SQL_GUID abs + 1)].
 	self assert: [SQL_NUM_TYPES = (TypeOffset + SQL_TYPE_TIMESTAMP)].
-	GetSelectors := 
+	GetSelectors :=
 		((Array new: SQL_NUM_TYPES)
 				at: SQL_CHAR + TypeOffset put: #getAnsiString;
 				at: SQL_VARCHAR + TypeOffset put: #getAnsiString;
@@ -76,7 +76,7 @@ ODBCField class >> initialize [
 				at: SQL_TYPE_TIMESTAMP + TypeOffset put: #getDateAndTime;
 				at: SQL_GUID + TypeOffset put: #getGuid;
 				yourself).
-	SetSelectors := 
+	SetSelectors :=
 		((Array new: SQL_NUM_TYPES)
 				at: SQL_CHAR + TypeOffset put: #setAnsiString:;
 				at: SQL_VARCHAR + TypeOffset put: #setAnsiString:;
@@ -120,7 +120,7 @@ ODBCField class >> newForCol: aDBColAttr [
 
 { #category : #comparing }
 ODBCField >> = comparand [
-	"Answer whether the receiver and the <Object>, comparand, 
+	"Answer whether the receiver and the <Object>, comparand,
 	are considered equivalent."
 
 	^comparand species == self species and: [
@@ -169,7 +169,7 @@ ODBCField >> getAnsiString [
 	| length result  |
 
 	length := lengthBuf value.
-	result := ByteString new: length. 
+	result := ByteString new: length.
 	LibC memCopy: buffer to: result size: length.
 	^ result
 ]
@@ -245,7 +245,7 @@ ODBCField >> getGuid [
 	"Private - Answer a <UUID> read from the receiver's buffer."
 
 	| result  |
-	result := UUID new. 
+	result := UUID new.
 	LibC memCopy: buffer to: result size: result size.
 	^ result
 ]
@@ -335,7 +335,7 @@ ODBCField >> numberFromNumeric [
 	[stream atEnd or: [(char := stream next) == ($. codePoint)]]
 		whileFalse: [integerPart := integerPart * 10 + (char - ($0 codePoint))].
 	fractionPart := 0.
-	[stream atEnd] whileFalse: 
+	[stream atEnd] whileFalse:
 			[char := stream next.
 			fractionPart := fractionPart * 10 + (char - ($0 codePoint)).
 			scale := scale + 1].
@@ -350,12 +350,12 @@ ODBCField >> numberToNumeric: aNumber [
 	bound parameter) where a NUMERIC is expected."
 
 	#todo. "Define and use the SQL_NUMERIC_STRUCT instead of converting to a string"
-	(self shouldTranslate: aNumber class: Number) 	ifTrue: [ 
+	(self shouldTranslate: aNumber class: Number) 	ifTrue: [
 		self setAnsiString: ((aNumber asScaledDecimal: column scale) displayString allButLast: 2)]
 ]
 
 { #category : #printing }
-ODBCField >> printOn: aStream [ 
+ODBCField >> printOn: aStream [
 	"Append the ASCII representation of the receiver to aStream."
 
 	super printOn: aStream.
@@ -372,7 +372,7 @@ ODBCField >> setAnsiString: aString [
 	"Private - Set the receiver's buffer from aString."
 
 	(self shouldTranslate: aString class: String)
-		ifTrue: 
+		ifTrue:
 			[| ansi byteCount |
 			"This conversion may be lossy - any non-ANSI characters will be substituted with the replacement character."
 			ansi := aString asByteString.
@@ -390,18 +390,18 @@ ODBCField >> setBoolean: aBoolean [
 	"Private - Load the receiver's contents buffer with the <Boolean> argument."
 
 	(self shouldTranslate: aBoolean class: Boolean)
-		ifTrue: 
+		ifTrue:
 			[buffer byteAt: 1 put: aBoolean asBit.
 			lengthBuf value: 1]
 ]
 
 { #category : #converting }
 ODBCField >> setByte: aNumber [
-	"Private - Set the receiver's buffer to an unsigned byte representation of the 
+	"Private - Set the receiver's buffer to an unsigned byte representation of the
 	<Number> argument."
 
 	(self shouldTranslate: aNumber class: Number)
-		ifTrue: 
+		ifTrue:
 			[buffer byteAt: 1 put: aNumber asInteger.
 			lengthBuf value: 1]
 ]
@@ -424,11 +424,11 @@ ODBCField >> setByteArray: aByteArray [
 
 { #category : #converting }
 ODBCField >> setDate: aDate [
-	"Private - Set the receiver's buffer with an <ODBCDATE> object instantiated from 
+	"Private - Set the receiver's buffer with an <ODBCDATE> object instantiated from
 	the <Date> argument."
 
 	(self shouldTranslate: aDate class: Date)
-		ifTrue: 
+		ifTrue:
 			[(ODBCDATE fromHandle: buffer) date: aDate.
 			lengthBuf value: ODBCDATE byteSize]
 ]
@@ -438,7 +438,7 @@ ODBCField >> setDateAndTime: aDateAndTime [
 	"Private - Set the receiver's buffer with an ODBCTIMESTAMP object instantiated from aDateAndTime."
 
 	(self shouldTranslate: aDateAndTime class: DateAndTime)
-		ifTrue: 
+		ifTrue:
 			[(ODBCTIMESTAMP fromHandle: buffer) dateAndTime: aDateAndTime.
 			lengthBuf value: ODBCTIMESTAMP byteSize]
 ]
@@ -470,7 +470,7 @@ ODBCField >> setGuid: aUUID [
 	"Private - Set the receiver's buffer with an <GUID> value."
 
 	(self shouldTranslate: aUUID class: UUID)
-		ifTrue: 
+		ifTrue:
 			[buffer
 				replaceFrom: 1
 				to: 16
@@ -484,7 +484,7 @@ ODBCField >> setInt64: aNumber [
 	"Private - Set the receiver's buffer to the 64-bit signed integer value of the argument."
 
 	(self shouldTranslate: aNumber class: Number)
-		ifTrue: 
+		ifTrue:
 			[buffer signedLongLongAt: 1 put: aNumber asInteger.
 			lengthBuf value: 8]
 ]
@@ -494,7 +494,7 @@ ODBCField >> setLong: aNumber [
 	"Private - Set the receiver's buffer to a 32-bit signed integer representation of the <Integer> argument."
 
 	(self shouldTranslate: aNumber class: Number)
-		ifTrue: 
+		ifTrue:
 			[buffer signedLongAt: 1 put: aNumber asInteger.
 			lengthBuf value: 4]
 ]
@@ -504,7 +504,7 @@ ODBCField >> setShort: aNumber [
 	"Private - Set the receiver's buffer to the 16-bit signed integer value of the argument."
 
 	(self shouldTranslate: aNumber class: Number)
-		ifTrue: 
+		ifTrue:
 			[buffer signedShortAt: 1 put: aNumber asInteger.
 			lengthBuf value: 2]
 ]
@@ -514,7 +514,7 @@ ODBCField >> setTime: aTime [
 	"Private - Set the receiver's buffer with an ODBCTIME object instantiated from aTime."
 
 	(self shouldTranslate: aTime class: Time)
-		ifTrue: 
+		ifTrue:
 			[(ODBCTIME fromHandle: buffer) time: aTime.
 			lengthBuf value: ODBCTIME byteSize]
 ]
@@ -567,7 +567,7 @@ ODBCField >> value [
 	"Answer the contents of the receiver as a suitable
 	Smalltalk object."
 
-	^ self isNull ifFalse: [ 
+	^ self isNull ifFalse: [
 		  self perform: (GetSelectors at: column type + TypeOffset) ]
 ]
 
@@ -575,7 +575,7 @@ ODBCField >> value [
 ODBCField >> value: anObject [
 	"Set the contents of the receiver's buffer from anObject."
 
-	^ anObject ifNil: [ self beNull ] ifNotNil: [ 
+	^ anObject ifNil: [ self beNull ] ifNotNil: [
 		  self
 			  perform: (SetSelectors at: column type + TypeOffset)
 			  with: anObject ]

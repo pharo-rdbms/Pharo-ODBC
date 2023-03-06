@@ -45,12 +45,12 @@ ODBCColAttr class >> initialize [
 	"
 
 	"The types to convert the result data to on loading into our buffers - normally these are the default conversions
-	 because they are sensible for most things except GUIDs (where the default string conversion doesn't match 
+	 because they are sensible for most things except GUIDs (where the default string conversion doesn't match
 	 the reported column length, which makes allocating an appropriately sized buffer tricky)."
 
 	"The 'C' buffer types specified here must match up with the 'get' conversions defined for the SQL column type in the DBField class (see DBField>>#initialize)"
 
-	SQLToCTypes := 
+	SQLToCTypes :=
 		((Array new: SQL_NUM_TYPES)
 				at: SQL_CHAR + TypeOffset put: SQL_C_CHAR;
 				at: SQL_VARCHAR + TypeOffset put: SQL_C_CHAR;
@@ -77,17 +77,17 @@ ODBCColAttr class >> initialize [
 				at: SQL_GUID + TypeOffset put: SQL_C_GUID;
 				at: SQL_TYPE_NULL + TypeOffset put: SQL_C_DEFAULT;
 				yourself).
-	
-	self initializeExtraBytes 
+
+	self initializeExtraBytes
 ]
 
 { #category : #'private - initialization' }
 ODBCColAttr class >> initializeExtraBytes [
 
 	| extraBytes |
-	
+
 	extraBytes := Array new: SQL_NUM_TYPES withAll: 0.
-	SQLToCTypes keysAndValuesDo: 
+	SQLToCTypes keysAndValuesDo:
 			[:eachKey :eachValue |
 			eachValue == SQL_C_CHAR ifTrue: [extraBytes at: eachKey put: 1].
 			eachValue == SQL_C_WCHAR ifTrue: [extraBytes at: eachKey put: ODBCConnection stringEncoder bytesPerCharacter]].
@@ -258,8 +258,8 @@ ODBCColAttr >> parameterType [
 ]
 
 { #category : #accessing }
-ODBCColAttr >> parameterType: anInteger [ 
-	"Set the type of parameter the receiver represents when used in a parameterized 
+ODBCColAttr >> parameterType: anInteger [
+	"Set the type of parameter the receiver represents when used in a parameterized
 	statement to the SQL_PARAM_XXXX value specified as the integer argument.
 	This must be one of:
 		SQL_PARAM_TYPE_UNKNOWN 	- direction unspecified
@@ -271,7 +271,7 @@ ODBCColAttr >> parameterType: anInteger [
 	The parameterType should not be changed from the default (SQL_PARAM_INPUT),
 	unless describing an output or input/output parameter to a stored procedure."
 
-	special := (special bitClear: ParameterTypeMask) 
+	special := (special bitClear: ParameterTypeMask)
 				bitOr: (anInteger bitShift: ParameterTypeShift)
 ]
 
@@ -290,7 +290,7 @@ ODBCColAttr >> precision: anInteger [
 ]
 
 { #category : #printing }
-ODBCColAttr >> printOn: aStream [ 
+ODBCColAttr >> printOn: aStream [
 	"Append the ASCII representation of
 	 the receiver to aStream."
 
@@ -333,8 +333,8 @@ ODBCColAttr >> specialFlagAt: flagMask [
 ODBCColAttr >> specialFlagAt: flagMask put: aBoolean [
 	"Private - Set the special flag identified by flagMask to aBoolean"
 
-	aBoolean 
-		ifTrue: [ special bitOr: flagMask ] 
+	aBoolean
+		ifTrue: [ special bitOr: flagMask ]
 		ifFalse: [ special bitClear: flagMask ]
 ]
 
@@ -394,6 +394,6 @@ ODBCColAttr >> updateRuleMask: anInteger [
 	special := special bitAnd: UpdateRules bitInvert.
 	anInteger isNil ifFalse: [
 		self specialFlagAt:
-			(1 bitShift: (anInteger+8)) 
+			(1 bitShift: (anInteger+8))
 			put: true ]
 ]

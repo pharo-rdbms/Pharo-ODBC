@@ -64,9 +64,9 @@ ODBCExceptionDetails >> buildErrorInfoFrom: anExternalHandle type: anIntegerHand
 	fNativeError := SQLINTEGER new.
 	recNumber := 1.
 	odbc := ODBCLibrary default.
-	
+
 	[| ret |
-	
+
 	[ret := odbc
 				sqlGetDiagRec: anIntegerHandleType
 				handle: anExternalHandle
@@ -77,11 +77,11 @@ ODBCExceptionDetails >> buildErrorInfoFrom: anExternalHandle type: anIntegerHand
 				cbErrorMsgMax: szErrorMsgSize + 1
 				pcbErrorMsg: cbErrorMsg.
 	ret == SQL_SUCCESS_WITH_INFO]
-			whileTrue: 
+			whileTrue:
 				["Try again with a larger buffer"
 				szErrorMsg := ExternalAddress gcallocate: (szErrorMsgSize := self stringEncoder byteSizeForCharacters: cbErrorMsg value)].
 	ret == SQL_SUCCESS]
-			whileTrue: 
+			whileTrue:
 				[| newErr |
 				newErr := ODBCErrorDetails fromSQLError: (self stringEncoder decodeStringFrom: szErrorMsg characterCount: cbErrorMsg asInteger).
 				newErr

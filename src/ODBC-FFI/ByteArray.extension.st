@@ -12,5 +12,4 @@ ByteArray >> unpackULongLongHandleFromArity: arity [
 
 	arity > 1 ifTrue: [ ^ self error: 'Use ExternalAddress instead!' ].
 	^ self unsignedLongLongAt: 1
-
 ]

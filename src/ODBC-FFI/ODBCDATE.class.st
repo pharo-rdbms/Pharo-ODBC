@@ -29,7 +29,7 @@ ODBCDATE class >> fieldsDesc [
 	} DATE_STRUCT;"
 
 	^#(
-		short 		year 
+		short 		year
 		ushort 	month
 		ushort 	day
 		)
@@ -58,7 +58,7 @@ ODBCDATE >> asDate [
 ODBCDATE >> date: aDate [
 	"Set the receiver's fields from the <Date> argument."
 
-	^aDate dayMonthYearDo: 
+	^aDate dayMonthYearDo:
 			[:d :m :y |
 			self
 				day: d;

@@ -8,15 +8,15 @@ Class {
 }
 
 { #category : #converting }
-SQLLEN64 class >> asExternalTypeOn: generator [ 
+SQLLEN64 class >> asExternalTypeOn: generator [
 
-	^FFIInt64 asExternalTypeOn: generator 
+	^FFIInt64 asExternalTypeOn: generator
 ]
 
 { #category : #converting }
 SQLLEN64 class >> fields [
-	" 
-	SQLLEN64 defineFields 
+	"
+	SQLLEN64 defineFields
 	"
 	^ #(#(#value 'longlong') )
 ]

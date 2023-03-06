@@ -5,15 +5,15 @@ Class {
 }
 
 { #category : #converting }
-SQLINTEGER class >> asExternalTypeOn: generator [ 
+SQLINTEGER class >> asExternalTypeOn: generator [
 
-	^FFIInt32 asExternalTypeOn: generator 
+	^FFIInt32 asExternalTypeOn: generator
 ]
 
 { #category : #converting }
 SQLINTEGER class >> fields [
-	" 
-	SQLINTEGER defineFields 
+	"
+	SQLINTEGER defineFields
 	"
 	^ #(#(#value 'long') )
 ]

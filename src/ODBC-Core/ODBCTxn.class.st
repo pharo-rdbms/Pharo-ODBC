@@ -102,7 +102,7 @@ ODBCTxn >> printOn: aStream [
 		nextPutAll: connection dsn;
 		nextPutAll: ', belonging to: '.
 	creator printOn: aStream.
-	aStream	
+	aStream
 		nextPut: $)
 ]
 
@@ -120,7 +120,7 @@ ODBCTxn >> transcriptMessage: aString [
 	"Private - Output an appropriately annotated message to the current
 	session's trace device. In a development session this is the Transcript"
 
-	creator ifNotNil: [ 
+	creator ifNotNil: [
 		Transcript
 			print: self;
 			space;

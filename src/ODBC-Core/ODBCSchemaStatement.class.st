@@ -36,7 +36,6 @@ ODBCSchemaStatement >> defaultCursorType [
 	(one of #dynamic, #forwardOnly, #keysetDriven, #static)."
 
 	^#forwardOnly
-
 ]
 
 { #category : #operations }

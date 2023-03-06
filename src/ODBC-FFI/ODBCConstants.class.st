@@ -2782,10 +2782,10 @@ ODBCConstants class >> initialize5 [
 ODBCConstants class >> initializeSQLLEN [
 
 	ExternalAddress wordSize = 4
-		ifTrue: [ 
+		ifTrue: [
 			SQLLEN := SQLINTEGER.
 			SQLULEN := SQLUINTEGER ]
-		ifFalse: [ 
+		ifFalse: [
 			SQLLEN := SQLLEN64.
 			SQLULEN := SQLULEN64 ]
 ]

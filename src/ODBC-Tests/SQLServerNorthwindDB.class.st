@@ -21,7 +21,7 @@ SQLServerNorthwindDB >> connectString [
 SQLServerNorthwindDB >> createDatabase [
 	| sql cmd |
 
-	sql := 'Northwind.sql' asFileReference pathString. 
+	sql := 'Northwind.sql' asFileReference pathString.
 	cmd := 'sqlcmd -S <1s> -U <2s> -P <3s> -i "<4s>"'
 				expandMacrosWith: self serverName
 				with: self uid
@@ -34,7 +34,7 @@ SQLServerNorthwindDB >> createDatabase [
 { #category : #private }
 SQLServerNorthwindDB >> dropDatabase [
 	self connection
-		ifNotNil: 
+		ifNotNil:
 			[:cnxn |
 			cnxn
 				exec: 'USE [master]';
@@ -44,12 +44,13 @@ SQLServerNorthwindDB >> dropDatabase [
 
 { #category : #public }
 SQLServerNorthwindDB >> newConnection [
-	^super newConnection
-		ifNotNil: 
-			[:cnxn |
-			cnxn
-				exec: 'USE [Northwind]';
-				yourself]
+
+	| tmp1 tmp3 |
+	tmp3 := tmp1 := super newConnection.
+	^ tmp3 ifNotNil: [
+		  tmp1
+			  exec: 'USE [Northwind]';
+			  yourself ]
 ]
 
 { #category : #'private - credentials' }

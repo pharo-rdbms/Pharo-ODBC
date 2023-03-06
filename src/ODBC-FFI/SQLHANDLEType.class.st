@@ -17,7 +17,7 @@ SQLHANDLEType >> basicEmitArgument: aBuilder context: aContext inCallout: aCallo
 { #category : #'emitting code' }
 SQLHANDLEType >> emitReturnArgument: builder context: aContext [
 
-	self loader 
+	self loader
 		emitPluggableHandleArityUnpack: builder
 		type: self
 		context: aContext

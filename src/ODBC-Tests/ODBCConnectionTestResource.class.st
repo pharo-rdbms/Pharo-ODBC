@@ -45,7 +45,7 @@ ODBCConnectionTestResource >> createDatabase [
 { #category : #private }
 ODBCConnectionTestResource >> dropDatabase [
 
-	connection ifNotNil: [ 
+	connection ifNotNil: [
 		connection close.
 		connection := nil ]
 ]
@@ -53,11 +53,12 @@ ODBCConnectionTestResource >> dropDatabase [
 { #category : #public }
 ODBCConnectionTestResource >> newConnection [
 
-	^isAvailable
-		ifTrue: 
-			[(ODBCConnection new connectString: self connectString)
-				open;
-				yourself]
+	^ isAvailable ifTrue: [
+		  | tmp2 |
+		  tmp2 := ODBCConnection new connectString: self connectString.
+		  tmp2
+			  open;
+			  yourself ]
 ]
 
 { #category : #running }
@@ -71,5 +72,5 @@ ODBCConnectionTestResource >> setUp [
 ODBCConnectionTestResource >> tearDown [
 
 	self dropDatabase.
-	super tearDown 
+	super tearDown
 ]

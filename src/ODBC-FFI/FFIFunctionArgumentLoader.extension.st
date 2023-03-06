@@ -6,12 +6,12 @@ FFIFunctionArgumentLoader >> emitPluggableHandleArityUnpack: aBuilder type: aTyp
 	Compared to emithHandleArityUnpack:... this method queries aType for the unpack selector to use"
 
 	aType needsArityUnpacking ifFalse: [ ^ self ].
-	
+
 	"Push accessing variable (this change depending on the argument type)"
-	self 
-		emitArgumentVariableAccesingPart: aBuilder 
-		context: aContext 
-		objectClass: objectClass 
+	self
+		emitArgumentVariableAccesingPart: aBuilder
+		context: aContext
+		objectClass: objectClass
 		instVarName: aName.
 	"Unpack argument"
 	aBuilder
@@ -21,5 +21,5 @@ FFIFunctionArgumentLoader >> emitPluggableHandleArityUnpack: aBuilder type: aTyp
 	"Send assignment"
 	aBuilder send: #instVarAt:put:.
 	"... and return top"
-	aBuilder popTop.
+	aBuilder popTop
 ]

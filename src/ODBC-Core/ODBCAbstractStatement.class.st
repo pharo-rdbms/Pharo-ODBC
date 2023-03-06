@@ -65,7 +65,7 @@ ODBCAbstractStatement class >> parent: anODBCConnection [
 ]
 
 { #category : #'instance creation' }
-ODBCAbstractStatement class >> parent: anODBCConnection cursorType: aSymbol [ 
+ODBCAbstractStatement class >> parent: anODBCConnection cursorType: aSymbol [
 	"Answer an initialized instance of the receiver."
 
 	^(self parent: anODBCConnection)
@@ -75,11 +75,11 @@ ODBCAbstractStatement class >> parent: anODBCConnection cursorType: aSymbol [
 
 { #category : #accessing }
 ODBCAbstractStatement >> allocatedHandle [
-	"Private - Answer the receiver's ODBC statement handle, which is lazily 
+	"Private - Answer the receiver's ODBC statement handle, which is lazily
 	allocated if necessary."
 
-	handle isNull 
-		ifTrue: 
+	handle isNull
+		ifTrue:
 			[executed := false.
 			parent allocStmtHandle: self.
 			self setDefaultAttributes].
@@ -111,9 +111,9 @@ ODBCAbstractStatement >> basicFree [
 ODBCAbstractStatement >> cancel [
 	"Cancel any outstanding asynchronous request."
 
-	executed 
-		ifTrue: 
-			[handle isNull 
+	executed
+		ifTrue:
+			[handle isNull
 				ifTrue: [executed := false]
 				ifFalse: [self dbCheckException: (ODBCLibrary default sqlCancel: handle)]]
 ]
@@ -124,30 +124,30 @@ ODBCAbstractStatement >> close [
 	Implementation Note: Use SQLFreeStmt(,SQL_CLOSE), rather than SQLCloseCursor, since the latter
 	treats the cursor not actually being open as an error condition, and we don't care about that."
 
-	executed 
-		ifTrue: 
+	executed
+		ifTrue:
 			[executed := false.
-			handle isNull 
-				ifFalse: 
-					[self 
+			handle isNull
+				ifFalse:
+					[self
 						dbCheckException: (ODBCLibrary default sqlFreeStmt: handle option: SQL_CLOSE)]]
 ]
 
 { #category : #accessing }
-ODBCAbstractStatement >> columnLength: anInteger [ 
+ODBCAbstractStatement >> columnLength: anInteger [
 	"Answer the length (bytes) of column number anInteger in the Result Set."
 
 	| ret len |
 
 	len := SQLLEN new.
-	ret := ODBCLibrary default 
+	ret := ODBCLibrary default
 				sqlColAttribute: self executedHandle
 				columnNumber: anInteger
 				fieldIdentifier: SQL_COLUMN_LENGTH	"Note using ODBC 2.x definition of column length"
 				characterAttributePtr: nil
 				bufferLength: 0
 				stringLengthPtr: nil
-				numericAttributePtr: len.	
+				numericAttributePtr: len.
 	self dbCheckException: ret.
 	^len value
 ]
@@ -162,7 +162,7 @@ ODBCAbstractStatement >> cursorType [
 { #category : #accessing }
 ODBCAbstractStatement >> cursorType: aSymbol [
 
-	(CursorTypes includesKey: aSymbol) 
+	(CursorTypes includesKey: aSymbol)
 		ifFalse: [self error: 'Invalid cursor type ' , aSymbol].
 	cursorType := aSymbol.
 	"Attempting to change the cursorType once the statement has been executed will raise an error"
@@ -170,11 +170,11 @@ ODBCAbstractStatement >> cursorType: aSymbol [
 ]
 
 { #category : #exceptions }
-ODBCAbstractStatement >> dbCheckException: anIntegerRetCode [ 
+ODBCAbstractStatement >> dbCheckException: anIntegerRetCode [
 	"Private - Checks anIntegerRetCode to see if an ODBCError or ODBCWarning should be 	signalled"
 
-	^anIntegerRetCode = SQL_SUCCESS 
-		ifFalse: 
+	^anIntegerRetCode = SQL_SUCCESS
+		ifFalse:
 			["Signal an error or warning - decide which"
 
 			((anIntegerRetCode = SQL_SUCCESS_WITH_INFO or: [anIntegerRetCode = SQL_NO_DATA])
@@ -199,9 +199,9 @@ ODBCAbstractStatement >> describeCol: anInteger [
 ]
 
 { #category : #accessing }
-ODBCAbstractStatement >> describeCols: columnNumbers [ 
+ODBCAbstractStatement >> describeCols: columnNumbers [
 	"Answer an array of <ODBCColAttr>s describing each of the columns of the receiver's results with indices in the <sequencedReadableCollection> argument."
-	
+
 	| answer i name columnSize colNameLen dataType decimalDigits nullable nameBufSize hStmt colLen lib |
 	"Allocate a buffer sufficient to hold any column name, that we will re-use for all the columns"
 	nameBufSize := self parent maxColumnNameLength + 1.
@@ -217,10 +217,10 @@ ODBCAbstractStatement >> describeCols: columnNumbers [
 	lib := ODBCLibrary default.
 	answer := Array new: columnNumbers size.
 	i := 1.
-	columnNumbers do: 
-			[:each | 
+	columnNumbers do:
+			[:each |
 			| ret col |
-			ret := lib 
+			ret := lib
 						sqlDescribeCol: hStmt
 						columnNumber: each
 						columnName: name
@@ -241,10 +241,10 @@ ODBCAbstractStatement >> describeCols: columnNumbers [
 					yourself.
 
 			col hasVariableTransferOctetLength
-				ifTrue: 
-					["Error handling for iODBC/Mac - SQL_DESC_OCTET_LENGTH gives invalid identifier (HY091) error; 
+				ifTrue:
+					["Error handling for iODBC/Mac - SQL_DESC_OCTET_LENGTH gives invalid identifier (HY091) error;
 					retry with SQL_DESC_LENGTH which appears to be equivalent for this manager/platform"
-					[ret := lib 
+					[ret := lib
 							sqlColAttribute: hStmt
 							columnNumber: each
 							fieldIdentifier: parent columnFieldIdentifier
@@ -252,13 +252,13 @@ ODBCAbstractStatement >> describeCols: columnNumbers [
 							bufferLength: 0
 							stringLengthPtr: nil
 							numericAttributePtr: colLen.
-					self dbCheckException: ret] on: ODBCError do: 
+					self dbCheckException: ret] on: ODBCError do:
 						[ :exc |
 						(parent columnFieldIdentifier = SQL_DESC_OCTET_LENGTH and: [ exc tag errors anySatisfy: [ :err | err sqlState = 'HY091'] ])
 							ifTrue: [parent columnFieldIdentifier: SQL_DESC_LENGTH. exc retry]
 							ifFalse: [exc pass]].
-					col length: colLen value] 
-				ifFalse: 
+					col length: colLen value]
+				ifFalse:
 					[col length: col transferOctetLength].
 			answer at: i put: col.
 			i := i + 1].
@@ -283,7 +283,7 @@ ODBCAbstractStatement >> driverHStmt [
 { #category : #exceptions }
 ODBCAbstractStatement >> exceptionDetails: anIntegerRetCode [
 	"Private - Answer an ODBCExceptionDetails instance that describes the state of the
-	receiver following an exception. This will be available as the tag of a subsequent 
+	receiver following an exception. This will be available as the tag of a subsequent
 	signalled ODBCError or ODBCWarning."
 
 	^(self parent exceptionDetails: anIntegerRetCode)
@@ -311,24 +311,23 @@ ODBCAbstractStatement >> executeStatement [
 ODBCAbstractStatement >> executedHandle [
 	"Private - Answer the receiver's ODBC statement handle having lazily
 	executed the SQL statement associated with the receiver."
-	
+
 	| answer |
 	answer := self allocatedHandle.
 	executed ifFalse: [self exec].
 	^answer
-
 ]
 
 { #category : #accessing }
 ODBCAbstractStatement >> finalizationRegistry [
 	"Use the parent's statements WeakRegistry"
-	
+
 	^parent statements
 ]
 
 { #category : #finalizing }
 ODBCAbstractStatement >> finalize [
-	"Private - Free any external resources held by the receiver. 
+	"Private - Free any external resources held by the receiver.
 	Should any error occur we print it to trace but otherwise ignore it."
 
 	[self free] on: ODBCError do: [ :e | e trace]
@@ -353,7 +352,7 @@ ODBCAbstractStatement >> getStringAttribute: anInteger [
 				attribute: anInteger
 				valuePtr: buffer
 				bufferLength: bufferLen "Byte size including implicit null terminator"
-				stringLengthPtr: nil).	
+				stringLengthPtr: nil).
 	"N.B. We assume that as with SqlGetConnectAttr that the SQL server driver will not populate the stringLengthPtr argument. There do not seem to be any string options to test this against currently."
 	self stringEncoder decodeNullTerminatedStringFrom: buffer] ensure: [ buffer free ]
 ]
@@ -382,12 +381,12 @@ ODBCAbstractStatement >> initialize: anODBCConnection [
 ]
 
 { #category : #accessing }
-ODBCAbstractStatement >> moveTo: anIntegerRow [ 
+ODBCAbstractStatement >> moveTo: anIntegerRow [
 	"Private - Position the cursor at the specified
 	row so that it is read on a subsequent Fetch (requires
 	extended fetch)"
 
-	self dbCheckException: (ODBCLibrary default 
+	self dbCheckException: (ODBCLibrary default
 				sqlSetPos: self executedHandle
 				rowNumber: anIntegerRow
 				operation: SQL_POSITION
@@ -440,15 +439,15 @@ ODBCAbstractStatement >> results [
 	The result set will cause the receiver to be lazily executed when
 	any attempt is made to access its contents."
 
-	^(self cursorType == #forwardOnly 
+	^(self cursorType == #forwardOnly
 		ifTrue: [ODBCForwardOnlyResultSet]
 		ifFalse: [ODBCResultSet]) statement: self
 ]
 
 { #category : #accessing }
-ODBCAbstractStatement >> setAttribute: attributeInteger value: anIntegerOrStringOrBytes size: sizeInteger [ 
+ODBCAbstractStatement >> setAttribute: attributeInteger value: anIntegerOrStringOrBytes size: sizeInteger [
 	| ret |
-	ret := ODBCLibrary default 
+	ret := ODBCLibrary default
 				sqlSetStmtAttr: self allocatedHandle
 				attribute: attributeInteger
 				valuePtr: anIntegerOrStringOrBytes asSQLPOINTER
@@ -458,10 +457,10 @@ ODBCAbstractStatement >> setAttribute: attributeInteger value: anIntegerOrString
 
 { #category : #helpers }
 ODBCAbstractStatement >> setCursorType [
-	"Private - Set the cursor type of the statement to one of: #static, #dynamic, #keysetDriven or #forwardOnly. 
+	"Private - Set the cursor type of the statement to one of: #static, #dynamic, #keysetDriven or #forwardOnly.
 	See the ODBC documentation for details of the different cursor types."
 
-	^self 
+	^self
 		setAttribute: SQL_ATTR_CURSOR_TYPE
 		value: (CursorTypes at: self cursorType)
 		size: SQL_IS_UINTEGER
@@ -475,10 +474,10 @@ ODBCAbstractStatement >> setDefaultAttributes [
 ]
 
 { #category : #accessing }
-ODBCAbstractStatement >> statusArray: anArrayOfWORDs [ 
+ODBCAbstractStatement >> statusArray: anArrayOfWORDs [
 	"Private - Set the argument to be the receiver's status array attribute."
 
-	self 
+	self
 		setAttribute: SQL_ATTR_ROW_STATUS_PTR
 		value: anArrayOfWORDs
 		size: SQL_IS_POINTER
@@ -491,6 +490,6 @@ ODBCAbstractStatement >> stringEncoder [
 ]
 
 { #category : #accessing }
-ODBCAbstractStatement >> suppressErrorsDo: aNiladicBlock [ 
+ODBCAbstractStatement >> suppressErrorsDo: aNiladicBlock [
 	aNiladicBlock on: ODBCError do: [:e | e trace]
 ]

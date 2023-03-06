@@ -17,7 +17,7 @@ ODBCRowBuffer >> asObject [
 ]
 
 { #category : #operations }
-ODBCRowBuffer >> bind: aDBStatement [ 
+ODBCRowBuffer >> bind: aDBStatement [
 	"Private - Bind the receiver's field buffers to columns in the result table."
 
 	| hStmt |

@@ -11,7 +11,7 @@ AccessODBCTest class >> resources [
 
 { #category : #private }
 AccessODBCTest >> databaseResource [
-	^AccessNorthwindDB current 
+	^AccessNorthwindDB current
 ]
 
 { #category : #private }

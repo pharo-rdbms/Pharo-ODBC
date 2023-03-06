@@ -5,15 +5,15 @@ Class {
 }
 
 { #category : #converting }
-SQLUSMALLINT class >> asExternalTypeOn: generator [ 
+SQLUSMALLINT class >> asExternalTypeOn: generator [
 
-	^FFIUInt16 asExternalTypeOn: generator 
+	^FFIUInt16 asExternalTypeOn: generator
 ]
 
 { #category : #converting }
 SQLUSMALLINT class >> fields [
-	" 
-	SQLUSMALLINT defineFields 
+	"
+	SQLUSMALLINT defineFields
 	"
 	^ #(#(#value 'ushort') )
 ]

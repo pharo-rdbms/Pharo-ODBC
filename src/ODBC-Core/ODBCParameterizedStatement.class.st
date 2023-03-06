@@ -28,14 +28,14 @@ Class {
 
 { #category : #operations }
 ODBCParameterizedStatement >> bindParams [
-	"Private - Bind parameter columns for a prepared SQL statement so that when we 
-	subsequently fill the buffer fields the statement is ready to exec. Normally only done 
+	"Private - Bind parameter columns for a prepared SQL statement so that when we
+	subsequently fill the buffer fields the statement is ready to exec. Normally only done
 	just before first exec (from #parameters)."
 
 	| odbc hstmt |
 	odbc := ODBCLibrary default.
 	hstmt := self allocatedHandle.
-	parameters keysAndValuesDo: 
+	parameters keysAndValuesDo:
 			[:i :eachField |
 			| buf column |
 			buf := eachField fieldBuf.
@@ -65,8 +65,7 @@ ODBCParameterizedStatement >> exec [
 		ifTrue: [self setValues].
 	ret := ODBCLibrary default sqlExecute: self allocatedHandle.
 	self dbCheckException: ret.
-	executed := true.
-
+	executed := true
 ]
 
 { #category : #'realizing/unrealizing' }
@@ -96,12 +95,12 @@ ODBCParameterizedStatement >> paramCols: anArrayOfColAttrs [
 
 { #category : #accessing }
 ODBCParameterizedStatement >> parameters [
-	"Private - Answer the receivers bound parameter fields. On first receipt (usually from 
-	#exec) completes lazy evaluation by causing allocation of a statement handle, preparing 
+	"Private - Answer the receivers bound parameter fields. On first receipt (usually from
+	#exec) completes lazy evaluation by causing allocation of a statement handle, preparing
 	the statement, creating the array of parameter fields and binding them."
 
 	^parameters
-		ifNil: 
+		ifNil:
 			[parameters := paramCols collect: [:col | ODBCField newForCol: col].
 			self bindParams.
 			parameters]
@@ -109,13 +108,13 @@ ODBCParameterizedStatement >> parameters [
 
 { #category : #operations }
 ODBCParameterizedStatement >> prepare [
-	"Private - Prepare the receiver for later execution when the parameter values have 
+	"Private - Prepare the receiver for later execution when the parameter values have
 	been set. N.B. This should only be sent once unless closed in the interm."
 
 	| ret |
 	isPrepared := false.
 	parameters := nil.
-	ret := ODBCLibrary default 
+	ret := ODBCLibrary default
 				sqlPrepare: self allocatedHandle
 				statementText: (self stringEncoder encodeStringWithNullTerminator: self sqlString)
 				textLength: SQL_NTS.
@@ -125,7 +124,7 @@ ODBCParameterizedStatement >> prepare [
 
 { #category : #operations }
 ODBCParameterizedStatement >> prepare: aString [
-	"Private - Prepare the receiver for later execution when the parameter values have 
+	"Private - Prepare the receiver for later execution when the parameter values have
 	been set."
 
 	self sqlString: aString; prepare
@@ -137,7 +136,7 @@ ODBCParameterizedStatement >> reset [
 
 	super reset.
 	isPrepared := false.
-	parameters := nil.
+	parameters := nil
 ]
 
 { #category : #operations }
@@ -147,7 +146,6 @@ ODBCParameterizedStatement >> setValues [
 
 	1 to: self parameters size do: [:i |
 		(parameters at: i) value: (values at: i)]
-
 ]
 
 { #category : #accessing }

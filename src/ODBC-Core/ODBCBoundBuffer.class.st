@@ -24,7 +24,7 @@ ODBCBoundBuffer >> bind: aDBStatement [
 	| hStmt odbc |
 	hStmt := super bind: aDBStatement.
 	odbc := ODBCLibrary default.
-	self contents do: 
+	self contents do:
 			[:eachField |
 			| dataBuffer column |
 			column := eachField column.

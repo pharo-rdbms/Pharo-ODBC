@@ -34,10 +34,10 @@ ODBCAbstractRow class >> isAbstract [
 
 { #category : #comparing }
 ODBCAbstractRow >> = comparand [
-	"Answer whether the receiver and the <Object>, comparand, 
+	"Answer whether the receiver and the <Object>, comparand,
 	are considered equivalent."
 
-	^ comparand species == self species and: [ 
+	^ comparand species == self species and: [
 		  self contents = comparand contents ]
 ]
 
@@ -90,7 +90,7 @@ ODBCAbstractRow >> atIndex: anInteger [
 
 { #category : #accessing }
 ODBCAbstractRow >> atIndex: anInteger put: anObject [
-	"Set the field whose column index is anInteger to anObject.	
+	"Set the field whose column index is anInteger to anObject.
 	Answer the argument."
 
 	^self contents at: anInteger put: anObject
@@ -101,8 +101,8 @@ ODBCAbstractRow >> buildSelectors [
 	| cols |
 	cols := self columns.
 	selectors := Dictionary new: cols size.	"* 2"
-	cols keysAndValuesDo: 
-			[:i :col | 
+	cols keysAndValuesDo:
+			[:i :col |
 			| instName |
 			instName := col name.
 			selectors at: instName put: i
@@ -119,7 +119,6 @@ ODBCAbstractRow >> columns [
 { #category : #accessing }
 ODBCAbstractRow >> columns: anArrayOfODBCColAttr [
 	columns := anArrayOfODBCColAttr
-
 ]
 
 { #category : #accessing }
@@ -134,8 +133,8 @@ ODBCAbstractRow >> doesNotUnderstand: aMessage [
 
 	| selector |
 	selector := aMessage selector.
-	^selector last == $: 
-		ifTrue: 
+	^selector last == $:
+		ifTrue:
 			[self atIndex: (self selectors at: selector allButLast
 						ifAbsent: [^super doesNotUnderstand: aMessage])
 				put: aMessage arguments first]
@@ -144,15 +143,14 @@ ODBCAbstractRow >> doesNotUnderstand: aMessage [
 
 { #category : #comparing }
 ODBCAbstractRow >> hash [
-	"Answer the <integer> hash value for the receiver." 
+	"Answer the <integer> hash value for the receiver."
 
 	^self contents hash
-
 ]
 
 { #category : #testing }
 ODBCAbstractRow >> isDeletedRow [
-	"Answer whether the receiver represents a row in a result set which has been 
+	"Answer whether the receiver represents a row in a result set which has been
 	deleted in the time since the result set was originally queried."
 
 	^self status = SQL_ROW_DELETED

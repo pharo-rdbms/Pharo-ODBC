@@ -45,7 +45,7 @@ SQLHANDLE >> invalidateHandle [
 ]
 
 { #category : #testing }
-SQLHANDLE >> isNull [ 
+SQLHANDLE >> isNull [
 
 	^handle = 0
 ]

@@ -31,20 +31,20 @@ ODBCUTF16Encoder >> decodeNullTerminatedStringFrom: aByteArray [
 	[ | codePoint leadSurrogate trailSurrogate |
 	codePoint := aByteArray unsignedShortAt: offset.
 	offset := offset + 2.
-	(codePoint < 16rD800 or: [codePoint > 16rDFF]) ifFalse: 
+	(codePoint < 16rD800 or: [codePoint > 16rDFF]) ifFalse:
 		[leadSurrogate :=  codePoint.
 		trailSurrogate := aByteArray unsignedShortAt: offset.
 		offset := offset + 2.
 		codePoint := 16r10000 + ((leadSurrogate - 16rD800) * 16r400 + (trailSurrogate - 16rDC00))].
 
-	(codePoint > 255 and: [ stream originalContents isWideString not ]) ifTrue: 
+	(codePoint > 255 and: [ stream originalContents isWideString not ]) ifTrue:
 		[ | wideString position |
 		position := stream position.
 		wideString := WideString from: stream originalContents.
 		stream on: wideString; setFrom: position + 1 to: position ].
 
 	codePoint = 0 or: [ stream nextPut: (Character value: codePoint). false] ] whileFalse.
-	
+
 	^stream contents
 ]
 
@@ -57,17 +57,17 @@ ODBCUTF16Encoder >> decodeStringFrom: aByteArray byteCount: anInteger [
 	stream := WriteStream on: (String new: anInteger).
 	offset := 1.
 
-	[ offset <= anInteger ] whileTrue: 
+	[ offset <= anInteger ] whileTrue:
 		[ | codePoint leadSurrogate trailSurrogate |
 		codePoint := aByteArray unsignedShortAt: offset.
 		offset := offset + 2.
-		(codePoint < 16rD800 or: [codePoint > 16rDFF]) ifFalse: 
+		(codePoint < 16rD800 or: [codePoint > 16rDFF]) ifFalse:
 			[leadSurrogate :=  codePoint.
 			trailSurrogate := aByteArray unsignedShortAt: offset.
 			offset := offset + 2.
 			codePoint := 16r10000 + ((leadSurrogate - 16rD800) * 16r400 + (trailSurrogate - 16rDC00))].
 
-		(codePoint > 255 and: [ stream originalContents isWideString not ]) ifTrue: 
+		(codePoint > 255 and: [ stream originalContents isWideString not ]) ifTrue:
 			[ | wideString position |
 			position := stream position.
 			wideString := WideString from: stream originalContents.

@@ -8,15 +8,15 @@ Class {
 }
 
 { #category : #converting }
-SQLULEN64 class >> asExternalTypeOn: generator [ 
+SQLULEN64 class >> asExternalTypeOn: generator [
 
-	^FFIUInt64 asExternalTypeOn: generator 
+	^FFIUInt64 asExternalTypeOn: generator
 ]
 
 { #category : #converting }
 SQLULEN64 class >> fields [
-	" 
-	SQLULEN64 defineFields 
+	"
+	SQLULEN64 defineFields
 	"
 	^ #(#(#value 'ulonglong') )
 ]

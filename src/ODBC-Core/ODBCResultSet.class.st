@@ -26,7 +26,7 @@ Class {
 }
 
 { #category : #'class initialization' }
-ODBCResultSet class >> initialize [ 
+ODBCResultSet class >> initialize [
 	"
 	self initialize
 	"
@@ -61,7 +61,7 @@ ODBCResultSet class >> statement: aDBStatement [
 { #category : #copying }
 ODBCResultSet >> , operand [
 	"Answer a new <sequencedReadableCollection> containing the elements
-	of the receiver in their original order with those of the <sequencedReadableCollection>, 
+	of the receiver in their original order with those of the <sequencedReadableCollection>,
 	operand, appended in their original order.
 	Implementation Note: Override to avoid the use of slow #size."
 
@@ -98,9 +98,9 @@ ODBCResultSet >> appendToStream: puttableStream [
 ODBCResultSet >> approxSize [
 	"Private - Answer the approximate size of the receiver."
 
-	"Implementation Note: It is very important that this be a quick calculation (indeed that 
-	is the whole point of the #approxSize message). Calculating the size of a result set can 
-	be slow, indeed it can involve enumerating the entire result set in the worst case, 
+	"Implementation Note: It is very important that this be a quick calculation (indeed that
+	is the whole point of the #approxSize message). Calculating the size of a result set can
+	be slow, indeed it can involve enumerating the entire result set in the worst case,
 	and so we must override for acceptable performance."
 
 	| rowCount |
@@ -161,7 +161,7 @@ ODBCResultSet >> bind [
 ]
 
 { #category : #binding }
-ODBCResultSet >> bind: anArrayOfColNums [ 
+ODBCResultSet >> bind: anArrayOfColNums [
 	"Private - Create and bind a buffer to hold the
 	specified columns (or #() for all columns)
 	as they are fetched from the result set"
@@ -175,13 +175,13 @@ ODBCResultSet >> buffer: anODBCObjBuf [
 	pre-setup an object buffer, rather than have the
 	ODBCResultSet dynamically allocate a buffer"
 
-	buffer := anODBCObjBuf.
+	buffer := anODBCObjBuf
 ]
 
 { #category : #constants }
 ODBCResultSet >> bufferClass [
-	"Private - Answer the buffer class to use for ODBCResultSets (e.g. ODBCBoundRow for bound buffers 
-	where memory is allocated and bound using SQLBindCol, or ODBCUnboundRow for unbound buffers 
+	"Private - Answer the buffer class to use for ODBCResultSets (e.g. ODBCBoundRow for bound buffers
+	where memory is allocated and bound using SQLBindCol, or ODBCUnboundRow for unbound buffers
 	which are retrieved individually)."
 
 	^ODBCBoundBuffer
@@ -196,12 +196,12 @@ ODBCResultSet >> close [
 
 { #category : #enumerating }
 ODBCResultSet >> collect: transformer [
-	"Evaluate the <monadicValuable> argument, transformer, for each of the 
+	"Evaluate the <monadicValuable> argument, transformer, for each of the
 	receiver's elements in the order defined by the receiver's implementation of #do:.
-	Answer a new collection like the receiver containing the values returned by 
+	Answer a new collection like the receiver containing the values returned by
 	transformer on each evaluation.
-	Implementation Note: Override back to Collection implementation because 
-	superclass implementation needs exact #size, which can be slow against 
+	Implementation Note: Override back to Collection implementation because
+	superclass implementation needs exact #size, which can be slow against
 	DBResultSets requiring that we enumerate the entire result set twice in the
 	worst case."
 
@@ -222,7 +222,7 @@ ODBCResultSet >> copyEmpty: anInteger [
 
 { #category : #copying }
 ODBCResultSet >> copyFrom: start [
-	"Answer a copy of a subset of the receiver which starts with its element at Integer 
+	"Answer a copy of a subset of the receiver which starts with its element at Integer
 	index start.
 	Implementation Note: Override to avoid potentially slow #size."
 
@@ -244,7 +244,7 @@ ODBCResultSet >> copySize [
 
 { #category : #copying }
 ODBCResultSet >> copyWith: newElement [
-	"Answer a <sequencedReadableCollection> which is a copy of 
+	"Answer a <sequencedReadableCollection> which is a copy of
 	the receiver that has newElement concatenated to its end.
 	Implementation Note: Override to avoid slow #size."
 
@@ -278,16 +278,16 @@ ODBCResultSet >> describeCols [
 ]
 
 { #category : #accessing }
-ODBCResultSet >> describeCols: anArray [ 
+ODBCResultSet >> describeCols: anArray [
 	"Answer a list of column attributes for the columns in
 	the receiver's result set specified by the column numbers
 	in anArray"
 
-	columns isNil 
-		ifTrue: 
+	columns isNil
+		ifTrue:
 			[| num columnNumbers |
-			(num := anArray size) == 0 
-				ifTrue: 
+			(num := anArray size) == 0
+				ifTrue:
 					[num := self numColumns.
 					columnNumbers := Interval from: 1 to: num]
 				ifFalse: [columnNumbers := anArray].
@@ -296,25 +296,25 @@ ODBCResultSet >> describeCols: anArray [
 ]
 
 { #category : #enumerating }
-ODBCResultSet >> do: aOneArgBlock [ 
+ODBCResultSet >> do: aOneArgBlock [
 
 	| status |
 
 	status := self moveFirst.
-	[status isNil] whileFalse: 
+	[status isNil] whileFalse:
 			[aOneArgBlock value: buffer asObject.
 			status := self moveNext]
 ]
 
 { #category : #positioning }
-ODBCResultSet >> fetchScroll: orientationInteger offset: offsetInteger [ 
+ODBCResultSet >> fetchScroll: orientationInteger offset: offsetInteger [
 	"Private - Fetch the specified row from the receiver's
 	result set. Answers true if a row was successfully
 	fetched, false for end of result set, and throws an
 	ODBCError exception if an error occurs"
 
 	| ret |
-	ret := ODBCLibrary default 
+	ret := ODBCLibrary default
 				sqlFetchScroll: self statementHandle
 				fetchOrientation: orientationInteger
 				fetchOffset: offsetInteger.
@@ -328,13 +328,13 @@ ODBCResultSet >> fetchScroll: orientationInteger offset: offsetInteger [
 ]
 
 { #category : #searching }
-ODBCResultSet >> findLast: discriminator [ 
-	"Answer the <integer> index of the last element of the receiver for which the 
-	<monadicValuable> argument, discriminator, evaluates to true. If there are 
+ODBCResultSet >> findLast: discriminator [
+	"Answer the <integer> index of the last element of the receiver for which the
+	<monadicValuable> argument, discriminator, evaluates to true. If there are
 	If there are no such elements, answer 0."
 
-	^self numRows < 0 
-		ifTrue: 
+	^self numRows < 0
+		ifTrue:
 			[| last |
 			last := 0.
 			self keysAndValuesDo: [:i :row | (discriminator value: row) ifTrue: [last := i]].
@@ -367,7 +367,7 @@ ODBCResultSet >> from: start keysAndValuesDo: operation [
 	| i status |
 	status := self moveTo: start.
 	i := start.
-	[status isNil] whileFalse: 
+	[status isNil] whileFalse:
 			[operation value: i value: buffer asObject.
 			status := self moveNext.
 			i := i + 1]
@@ -383,7 +383,7 @@ ODBCResultSet >> from: start to: stop keysAndValuesDo: operation [
 	| status i |
 	status := self moveTo: start.
 	i := start.
-	[status isNil or: [i > stop]] whileFalse: 
+	[status isNil or: [i > stop]] whileFalse:
 			[operation value: i value: buffer asObject.
 			status := self moveNext.
 			i := i + 1]
@@ -399,8 +399,8 @@ ODBCResultSet >> hash [
 
 { #category : #searching }
 ODBCResultSet >> identityIndexOf: anElement [
-	"Answer the index of the first occurrence of the object which is the argument 
-	anElement, within the receiver. If the receiver does not contain anElement, 
+	"Answer the index of the first occurrence of the object which is the argument
+	anElement, within the receiver. If the receiver does not contain anElement,
 	answer 0. This method is the same as #indexOf:, but uses #== for comparison."
 
 	^self findFirst: [:e | anElement == e]
@@ -408,8 +408,8 @@ ODBCResultSet >> identityIndexOf: anElement [
 
 { #category : #searching }
 ODBCResultSet >> indexOf: target [
-	"Answer the <integer> index of the first element of the receiver which is 
-	equal to the <Object> argument, target, within the receiver. If the receiver 
+	"Answer the <integer> index of the first element of the receiver which is
+	equal to the <Object> argument, target, within the receiver. If the receiver
 	does not contain any elements equal to target, answer 0.
 	Implementation Note: Override to avoid #size."
 
@@ -420,11 +420,11 @@ ODBCResultSet >> indexOf: target [
 ODBCResultSet >> isEmpty [
 	"Answer true if the receiver collection contains no elements, else answer false."
 
-	"Implementation Note: In many cases the ODBC driver cannot report the size 
-	of a result set, depending on the database in question and the operation. For 
+	"Implementation Note: In many cases the ODBC driver cannot report the size
+	of a result set, depending on the database in question and the operation. For
 	example MS SQL Server can report the result set size for many SELECTs, but
 	Access cannot. The ODBC spec. says that where the driver/DB cannot provide
-	the size, SQLRowCount() should return -1. However we know of at least one driver 
+	the size, SQLRowCount() should return -1. However we know of at least one driver
 	(for SQL Anywhere) that returns a negative number as an 'estimate', so we test for < 0,"
 
 	| rowCount |
@@ -433,12 +433,12 @@ ODBCResultSet >> isEmpty [
 ]
 
 { #category : #enumerating }
-ODBCResultSet >> keysAndValuesDo: operation [ 
+ODBCResultSet >> keysAndValuesDo: operation [
 	"Evaluate the <dyadicValuable>, operation, for each element of the receiver
 	with the <integer> index of that element and the element itself as the arguments."
 
-	"Implementation Note: Subclasses should override #from:to:keysAndValuesDo: rather 
-	than this method, unless they have a slow implementation of #size, or one that 
+	"Implementation Note: Subclasses should override #from:to:keysAndValuesDo: rather
+	than this method, unless they have a slow implementation of #size, or one that
 	relies on #countElements (since that uses #do: to calculate the size and may
 	therefore go infinitely recursive)."
 
@@ -454,8 +454,8 @@ ODBCResultSet >> last [
 
 { #category : #searching }
 ODBCResultSet >> lastIndexOf: target [
-	"Answer the <integer> index of the last element of the receiver which is 
-	equal to the <Object> argument, target, within the receiver. If the receiver 
+	"Answer the <integer> index of the last element of the receiver which is
+	equal to the <Object> argument, target, within the receiver. If the receiver
 	does not contain any elements equal to target, answer 0."
 
 	^self findLast: [:e | target = e]
@@ -550,7 +550,7 @@ ODBCResultSet >> previous [
 ODBCResultSet >> printOn: aStream [
 	"Print a string representation of self onto aStream"
 
-	aStream 
+	aStream
 		nextPutAll: 'a ';
 		print: self class; space;
 		nextPut: $(;
@@ -559,7 +559,7 @@ ODBCResultSet >> printOn: aStream [
 ]
 
 { #category : #enumerating }
-ODBCResultSet >> rawCollect: aZeroArgBlock [ 
+ODBCResultSet >> rawCollect: aZeroArgBlock [
 	"Private - Answer an OrderedCollection containing the
 	results of evaluating aBlock with the current row
 	accessible from the buffer. This method is faster
@@ -573,7 +573,7 @@ ODBCResultSet >> rawCollect: aZeroArgBlock [
 ]
 
 { #category : #enumerating }
-ODBCResultSet >> rawDo: aZeroArgBlock [ 
+ODBCResultSet >> rawDo: aZeroArgBlock [
 	"Private - Answer the receiver.  For each row in the
 	receiver's result set evaluates aZeroArgBlock with
 	the current row accessible from the buffer.
@@ -582,7 +582,7 @@ ODBCResultSet >> rawDo: aZeroArgBlock [
 
 	| status |
 	status := self moveFirst.
-	[status isNil] whileFalse: 
+	[status isNil] whileFalse:
 			[aZeroArgBlock value.
 			status := self moveNext]
 ]
@@ -592,7 +592,6 @@ ODBCResultSet >> realize [
 	"Private - Recreate the result set."
 
 	self bind
-
 ]
 
 { #category : #mutating }
@@ -614,13 +613,13 @@ ODBCResultSet >> reverse [
 ]
 
 { #category : #enumerating }
-ODBCResultSet >> reverseDo: operation [ 
-	"Evaluate the <monadicValuable> argument, operation, against each 
+ODBCResultSet >> reverseDo: operation [
+	"Evaluate the <monadicValuable> argument, operation, against each
 	element of the receiver in reverse order, from end to start."
 
 	| object |
 	object := self last.
-	[object isNil] whileFalse: 
+	[object isNil] whileFalse:
 			[operation value: object.
 			object := self previous]
 ]
@@ -634,7 +633,7 @@ ODBCResultSet >> scrollTo: anInteger [
 { #category : #enumerating }
 ODBCResultSet >> select: discriminator [
 	"Evaluate the monadic valuable argument, discriminator, for each of the receiver's elements.
-	Answer a new Collection like the receiver containing only those elements for which 
+	Answer a new Collection like the receiver containing only those elements for which
 	the discriminator evaluates to true.
 	Implementation Note: We must override the superclass because our species is OrderedCollection
 	and the Collection implementation does not work for OrderedCollections."
@@ -649,11 +648,11 @@ ODBCResultSet >> select: discriminator [
 ODBCResultSet >> size [
 	"Answer the size of the receiver's result set."
 
-	"Implemementation Note: ODBC drivers cannot always report the number of rows for a 
-	SELECT statement in which case they return -1 (SQL Anywhere's driver has a bug and 
-	may return another negative number hence we test for < 0), so we must then enumerate 
-	the entire result set to count the elements. This behaviour makes it necessary to override 
-	a number of superclass messages to avoid the use of #size, as otherwise performance will 
+	"Implemementation Note: ODBC drivers cannot always report the number of rows for a
+	SELECT statement in which case they return -1 (SQL Anywhere's driver has a bug and
+	may return another negative number hence we test for < 0), so we must then enumerate
+	the entire result set to count the elements. This behaviour makes it necessary to override
+	a number of superclass messages to avoid the use of #size, as otherwise performance will
 	be poor."
 
 	| rowCount |
@@ -676,7 +675,6 @@ ODBCResultSet >> statement [
 	"Private - Answer the statement instance variable"
 
 	^statement
-
 ]
 
 { #category : #accessing }
@@ -699,20 +697,20 @@ ODBCResultSet >> statementHandle [
 ]
 
 { #category : #enumerating }
-ODBCResultSet >> with: otherCollection do: operation [ 
-	"Evaluate the <dyadicValuable> argument, operation, with each of 
-	the receiver's elements along with the corresponding element from the 
-	<sequencedReadableCollection> argument, otherCollection. 
+ODBCResultSet >> with: otherCollection do: operation [
+	"Evaluate the <dyadicValuable> argument, operation, with each of
+	the receiver's elements along with the corresponding element from the
+	<sequencedReadableCollection> argument, otherCollection.
 	Raise an exception if otherCollection is not the same size as the receiver."
 
-	"Implementation Note: Override because calculating the receiver's size may involve 
+	"Implementation Note: Override because calculating the receiver's size may involve
 	enumerating the entire record set. This implementation is more efficient, but does
 	mean that we won't detect any size mismatch until we have enumerated elements
 	up to the size of the smaller of the two collection."
 
 	| i |
 	i := 1.
-	self rawDo: 
+	self rawDo:
 			[operation value: buffer asObject value: (otherCollection at: i).
 			i := i + 1].
 	i > otherCollection size ifFalse: [^self error: 'collections are of different sizes']

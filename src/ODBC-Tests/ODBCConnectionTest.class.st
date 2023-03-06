@@ -37,8 +37,8 @@ ODBCConnectionTest >> queryColumns [
 ]
 
 { #category : #helpers }
-ODBCConnectionTest >> shouldRaiseNotSupported: block [ 
-	self 
+ODBCConnectionTest >> shouldRaiseNotSupported: block [
+	self
 		should: block
 		raise: ODBCError
 		withExceptionDo: [:e | e tag errors anySatisfy: [:x | x sqlState = 'IM001']]
@@ -55,7 +55,7 @@ ODBCConnectionTest >> testAsArray [
 	results with: array do: [:row1 :row2 | self assert: row1 equals: row2].
 	"Force with:do: to raise an error"
 	self should: [results with: (array copyWith: array first) do: [:a :b | ]] raise: Error.
-	self should: 
+	self should:
 			[results with: ((array asOrderedCollection)
 						removeLast;
 						yourself)
@@ -105,7 +105,7 @@ ODBCConnectionTest >> testColumnsQuery [
 	columns := connection columns: 'Orders'.
 	columns
 		with: self queryColumns
-		do: 
+		do:
 			[:eachCol :eachArray |
 			| type |
 			self assert: eachCol name equals: eachArray first.
@@ -118,26 +118,26 @@ ODBCConnectionTest >> testColumnsQuery [
 ODBCConnectionTest >> testConnectStringDo [
 	| pairs block |
 	pairs := OrderedCollection new.
-	block := 
-			[:paramName :paramValue | 
+	block :=
+			[:paramName :paramValue |
 			pairs
 				add: paramName;
 				add: paramValue].
-	ODBCConnection 
+	ODBCConnection
 		connectString: 'DRIVER={Microsoft Access Driver (*.mdb)};DBQ=c:\program files\microsoft office\office\samples\Northwind.mdb'
 		do: block.
-	self assert: pairs asArray 
+	self assert: pairs asArray
 				equals: #('DRIVER' 'Microsoft Access Driver (*.mdb)' 'DBQ' 'c:\program files\microsoft office\office\samples\Northwind.mdb').
 	pairs := OrderedCollection new.
 	ODBCConnection connectString: ';;DRIVER={Microsoft Text Driver (*.txt; *.csv)};;DefaultDir=.;Dummy=;'
 		do: block.
-	self assert: pairs asArray 
+	self assert: pairs asArray
 				equals: #('DRIVER' 'Microsoft Text Driver (*.txt; *.csv)' 'DefaultDir' '.' 'Dummy' '').
 	pairs := OrderedCollection new.
-	ODBCConnection 
+	ODBCConnection
 		connectString: ';DSN=PostgreSQL30;DATABASE=money;SERVER=192.168.168.2;PORT=5432;UID=akira;PWD=;A6=;A7=100;A8=4096;B0=254;B1=8190;BI=0;C2=dd_;;CX=1a503ab;EMPTY='
 		do: block.
-	self assert: pairs asArray 
+	self assert: pairs asArray
 				equals: #('DSN' 'PostgreSQL30' 'DATABASE' 'money' 'SERVER' '192.168.168.2' 'PORT' '5432' 'UID' 'akira' 'PWD' '' 'A6' '' 'A7' '100' 'A8' '4096' 'B0' '254' 'B1' '8190' 'BI' '0' 'C2' 'dd_' 'CX' '1a503ab' 'EMPTY' '')
 ]
 
@@ -156,10 +156,10 @@ ODBCConnectionTest >> testConnectionAttributes [
 	connection isReadOnly: false.
 	self assert: connection isReadOnly not.
 	self assert: connection transactionIsolation equals: #readCommitted.
-	self 
+	self
 		should: [connection transactionIsolation: #hash]
 		raise: Error
-		withExceptionDo: [:ex | ex messageText = 'value not found: #hash'].
+		withExceptionDo: [:ex | ex messageText = 'value not found: #hash']
 ]
 
 { #category : #'unit tests' }
@@ -167,12 +167,12 @@ ODBCConnectionTest >> testConnectionEnquiries [
 	self assert: (connection databaseName asLowercase indexOfSubCollection: 'northwind') ~~ 0.
 	self assert: (connection dataSourceName = connection dsn
 				or: [connection dataSourceName isEmpty and: [connection dsn isNil]]).
-	self dbmsFeaturesMap keysAndValuesDo: 
+	self dbmsFeaturesMap keysAndValuesDo:
 			[:eachKey :eachValue |
 			| value |
 			value := connection perform: eachKey.
 			(#(#sameAs: #= #==) identityIncludes: eachValue first)
-				ifTrue: 
+				ifTrue:
 					[self
 						assert: (value = eachValue second)
 						description: 'Test ' , eachKey displayString]
@@ -198,7 +198,7 @@ ODBCConnectionTest >> testConnectionString [
 
 	| db |
 	db := ODBCConnection new.
-	db 
+	db
 		connectString: ';DSN=PostgreSQL30;DATABASE=money;SERVER=192.168.168.2;PORT=5432;UID=akira;PWD=;A6=;A7=100;A8=4096;B0=254;B1=8190;BI=0;C2=dd_;;CX=1a503ab;EMPTY='.
 	self assert: db dsn equals: 'PostgreSQL30'.
 	self assert: db pwd isEmpty.
@@ -248,8 +248,7 @@ ODBCConnectionTest >> testPreparedQuery [
 ODBCConnectionTest >> testSpecialColumnsQuery [
 	| rowIds |
 	rowIds := connection rowIdColumns: 'Orders'.
-	self assert: rowIds asArray equals: #('OrderID').
-
+	self assert: rowIds asArray equals: #('OrderID')
 ]
 
 { #category : #'unit tests' }
@@ -260,8 +259,8 @@ ODBCConnectionTest >> testStatisticsQuery [
 	pk := stats detect: [:each | (each at: 'COLUMN_NAME') = 'OrderID'].
 	stats := connection indicesOf: 'Orders'.
 	self assert: (stats allSatisfy: [:each | (each at: 'TABLE_NAME') = 'Orders']).
-	self assertCollection: (stats collect: [:e | e at: 'INDEX_NAME']) 
-				hasSameElements: (#(nil 'CustomerID' 'CustomersOrders' 'EmployeeID' 'EmployeesOrders' 'OrderDate' 'ShippedDate' 'ShippersOrders' 'ShipPostalCode') 
+	self assertCollection: (stats collect: [:e | e at: 'INDEX_NAME'])
+				hasSameElements: (#(nil 'CustomerID' 'CustomersOrders' 'EmployeeID' 'EmployeesOrders' 'OrderDate' 'ShippedDate' 'ShippersOrders' 'ShipPostalCode')
 						copyWith: (pk at: 'INDEX_NAME'))
 ]
 
@@ -276,5 +275,4 @@ ODBCConnectionTest >> testTracing [
 	connection isTracing: false.
 	self assert: connection isTracing not.
 	traceFile delete
-
 ]

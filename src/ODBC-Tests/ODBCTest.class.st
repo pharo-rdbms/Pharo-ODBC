@@ -8,14 +8,14 @@ Class {
 }
 
 { #category : #testing }
-ODBCTest class >> isAbstract [ 
+ODBCTest class >> isAbstract [
 
 	^self == ODBCTest
 ]
 
 { #category : #helpers }
 ODBCTest >> databaseResource [
-	^AccessNorthwindDB current 
+	^AccessNorthwindDB current
 ]
 
 { #category : #helpers }
@@ -24,7 +24,7 @@ ODBCTest >> employeeNames [
 ]
 
 { #category : #helpers }
-ODBCTest >> field: aString fromRow: anODBCRow [ 
+ODBCTest >> field: aString fromRow: anODBCRow [
 	^anODBCRow at: aString
 ]
 
@@ -38,7 +38,7 @@ ODBCTest >> setUp [
 { #category : #helpers }
 ODBCTest >> skipUnless: aNiladicValuable [
 	"If the assumption in the <niladicValuable> argument evaluates to false, abandon the running test and mark it as skipped."
-	
+
 	aNiladicValuable value ifFalse: [ self skip: 'Assumption in #skipUnless: failed' ]
 ]
 
@@ -52,11 +52,11 @@ ODBCTest >> tearDown [
 ODBCTest >> testCollect [
 	| names rs |
 	rs := connection query: 'select LastName from employees'.
-	2 timesRepeat: 
+	2 timesRepeat:
 			[names := rs collect: [:each | self field: 'LastName' fromRow: each].
 			self assertCollection: names hasSameElements: self employeeNames].
 	rs := connection query: 'select LastName from employees where LastName = ''Bower'''.
-	2 timesRepeat: 
+	2 timesRepeat:
 			[names := rs collect: [:each | (each at: 1) value].
 			self assert: names isEmpty]
 ]
@@ -66,7 +66,7 @@ ODBCTest >> testIsEmpty [
 	| results |
 	results := connection query: 'select count(*) from categories'.
 	self deny: results isEmpty.
-	results := connection 
+	results := connection
 				query: 'select CategoryID, CategoryName from categories where CategoryID is Null'.
 	self assert: results isEmpty.
 	results := connection query: 'select CategoryID, CategoryName from categories where CategoryID = 1'.

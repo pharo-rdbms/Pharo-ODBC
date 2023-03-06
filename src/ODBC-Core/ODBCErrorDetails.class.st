@@ -23,7 +23,7 @@ Class {
 
 { #category : #'instance creation' }
 ODBCErrorDetails class >> fromSQLError: errorString [
-	"Answer a new instance of the receiver built from the information in the 
+	"Answer a new instance of the receiver built from the information in the
 	<readableString>, errorString."
 
 	| lastBrkt |
@@ -39,8 +39,8 @@ ODBCErrorDetails >> messageText [
 	"Answer a text representation of the error of the form:
 		STATE: MSG"
 
-	^ (sqlState 
-			ifNil: [ '' ] 
+	^ (sqlState
+			ifNil: [ '' ]
 			ifNotNil: [ sqlState , ': ' ]) , msg
 ]
 

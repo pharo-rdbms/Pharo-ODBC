@@ -36,7 +36,7 @@ ODBCColFlags class >> initialize [
 		initializeUpdateCascade;
 		initializeUpdateRestrict;
 		initializeUpdateRules;
-		initializeUpdateSetNull 
+		initializeUpdateSetNull
 ]
 
 { #category : #'private - pool initialization' }

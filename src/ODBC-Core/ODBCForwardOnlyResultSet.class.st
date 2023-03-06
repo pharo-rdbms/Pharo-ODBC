@@ -84,11 +84,11 @@ ODBCForwardOnlyResultSet >> movePrevious [
 ]
 
 { #category : #positioning }
-ODBCForwardOnlyResultSet >> moveTo: anInteger [ 
+ODBCForwardOnlyResultSet >> moveTo: anInteger [
 	| status |
-	position = anInteger 
+	position = anInteger
 		ifTrue: [status := 0]
-		ifFalse: 
+		ifFalse:
 			[anInteger < 1 ifTrue: [^self errorSubscriptBounds: anInteger].
 			position > anInteger ifTrue: [self requery].
 			[position < anInteger and: [(status := self moveNext) notNil]] whileTrue].
@@ -101,7 +101,7 @@ ODBCForwardOnlyResultSet >> onStartup [
 	resources so that they are lazily reallocated on demand,etc."
 
 	super onStartup.
-	position := 0.
+	position := 0
 ]
 
 { #category : #operations }
@@ -112,8 +112,8 @@ ODBCForwardOnlyResultSet >> requery [
 ]
 
 { #category : #enumerating }
-ODBCForwardOnlyResultSet >> reverseDo: operation [ 
-	"Evaluate the <monadicValuable> argument, operation, against each 
+ODBCForwardOnlyResultSet >> reverseDo: operation [
+	"Evaluate the <monadicValuable> argument, operation, against each
 	element of the receiver in reverse order, from end to start.
 	Implementation Note: Override because the superclass definition would
 	be very slow for a forward-only cursor. This implementation trades

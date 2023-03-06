@@ -30,7 +30,7 @@ ODBCTIME class >> fieldsDesc [
 
 	^#(
 		ushort 	hour
-		ushort 	minute 
+		ushort 	minute
 		ushort 	second
 		)
 ]

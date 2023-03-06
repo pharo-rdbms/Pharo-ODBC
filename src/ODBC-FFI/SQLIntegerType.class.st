@@ -30,7 +30,7 @@ SQLIntegerType >> asSQLPOINTER [
 ]
 
 { #category : #'accessing structure variables' }
-SQLIntegerType >> pointer [ 
+SQLIntegerType >> pointer [
 
 	^self getHandle
 ]

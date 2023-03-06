@@ -69,7 +69,7 @@ SQLServerODBCTest >> testForeignKeysQuery [
 	self assert: keys size equals: 3.
 	map := Dictionary new.
 	keys do: [:each | map at: (each at: 'PKTABLE_NAME') put: each].
-	#(#('Customers' 'CustomerID') #('Employees' 'EmployeeID') #('Shippers' 'ShipperID' 'ShipVia')) do: 
+	#(#('Customers' 'CustomerID') #('Employees' 'EmployeeID') #('Shippers' 'ShipperID' 'ShipVia')) do:
 			[:each |
 			| key |
 			key := map at: each first.

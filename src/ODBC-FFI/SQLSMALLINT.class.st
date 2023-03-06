@@ -5,15 +5,15 @@ Class {
 }
 
 { #category : #converting }
-SQLSMALLINT class >> asExternalTypeOn: generator [ 
+SQLSMALLINT class >> asExternalTypeOn: generator [
 
-	^FFIInt16 asExternalTypeOn: generator 
+	^FFIInt16 asExternalTypeOn: generator
 ]
 
 { #category : #converting }
 SQLSMALLINT class >> fields [
-	" 
-	SQLSMALLINT defineFields 
+	"
+	SQLSMALLINT defineFields
 	"
 	^ #(#(#value 'short') )
 ]

@@ -28,7 +28,7 @@ ODBCStatisticsStatement >> executeStatement [
 	"Private - Execute the database command that the receiver represents.
 	Answer the <integer> return code."
 
-	^ODBCLibrary default 
+	^ODBCLibrary default
 		sqlStatistics: self allocatedHandle
 		catalogName: (self stringEncoder encodeStringWithNullTerminator: self catalogName)
 		nameLength1: SQL_NTS
@@ -41,7 +41,7 @@ ODBCStatisticsStatement >> executeStatement [
 ]
 
 { #category : #initializing }
-ODBCStatisticsStatement >> initialize: anODBCConnection [ 
+ODBCStatisticsStatement >> initialize: anODBCConnection [
 	"Private - Initialize the receiver as a new statement of the
 	<ODBCConnection>, anODBCConnection."
 
@@ -61,6 +61,6 @@ ODBCStatisticsStatement >> type: statisticsTypeInteger [
 ]
 
 { #category : #accessing }
-ODBCStatisticsStatement >> unique: aBoolean [ 
+ODBCStatisticsStatement >> unique: aBoolean [
 	self type: (aBoolean ifTrue: [SQL_INDEX_UNIQUE] ifFalse: [SQL_INDEX_ALL])
 ]

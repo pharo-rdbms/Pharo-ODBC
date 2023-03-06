@@ -5,15 +5,15 @@ Class {
 }
 
 { #category : #converting }
-SQLUINTEGER class >> asExternalTypeOn: generator [ 
+SQLUINTEGER class >> asExternalTypeOn: generator [
 
-	^FFIUInt32 asExternalTypeOn: generator 
+	^FFIUInt32 asExternalTypeOn: generator
 ]
 
 { #category : #converting }
 SQLUINTEGER class >> fields [
-	" 
-	SQLUINTEGER defineFields 
+	"
+	SQLUINTEGER defineFields
 	"
 	^ #(#(#value 'ulong') )
 ]

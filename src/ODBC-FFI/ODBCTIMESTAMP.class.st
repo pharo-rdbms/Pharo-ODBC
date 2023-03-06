@@ -36,11 +36,11 @@ ODBCTIMESTAMP class >> fieldsDesc [
 	} TIMESTAMP_STRUCT;"
 
 	^#(
-		short 		year 
+		short 		year
 		ushort 	month
 		ushort 	day
 		ushort 	hour
-		ushort 	minute 
+		ushort 	minute
 		ushort 	second
 		uint32 	fraction
 		)
@@ -66,7 +66,7 @@ ODBCTIMESTAMP >> asDateAndTime [
 ODBCTIMESTAMP >> dateAndTime: aDateAndTime [
 	"Set the receiver's field values from the <DateAndTime> argument."
 
-	^aDateAndTime dayMonthYearDo: 
+	^aDateAndTime dayMonthYearDo:
 			[:d :m :y |
 			self
 				day: d;

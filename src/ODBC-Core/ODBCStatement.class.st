@@ -21,11 +21,10 @@ Class {
 ODBCStatement >> defaultCursorType [
 	"Answer the <Symbol>ic name of the default cursor type to be used for statements
 	(one of #dynamic, #forwardOnly, #keysetDriven, #static).
-	Implementation Note: For backwards compatibility use a #keysetDriven cursor 
+	Implementation Note: For backwards compatibility use a #keysetDriven cursor
 	by default."
 
 	^#keysetDriven
-
 ]
 
 { #category : #operations }
@@ -37,7 +36,7 @@ ODBCStatement >> exec: aString [
 
 { #category : #operations }
 ODBCStatement >> executeStatement [
-	^ODBCLibrary default 
+	^ODBCLibrary default
 		sqlExecDirect: self allocatedHandle
 		statementText: (self stringEncoder encodeStringWithNullTerminator: self sqlString)
 		textLength: SQL_NTS
@@ -47,12 +46,12 @@ ODBCStatement >> executeStatement [
 ODBCStatement >> printOn: aStream [
 	"Print a string representation of self onto aStream"
 
-	aStream 
+	aStream
 		nextPutAll: 'a ';
 		print: self class; space;
 		nextPut: $(;
 		print: self sqlString;
-		nextPut: $).
+		nextPut: $)
 ]
 
 { #category : #accessing }
