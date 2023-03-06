@@ -1,3 +1,6 @@
+"
+I represent the SQL SMALLINT type
+"
 Class {
 	#name : #SQLSMALLINT,
 	#superclass : #SQLIntegerType,
@@ -7,14 +10,13 @@ Class {
 { #category : #converting }
 SQLSMALLINT class >> asExternalTypeOn: generator [
 
-	^FFIInt16 asExternalTypeOn: generator
+	^ FFIInt16 asExternalTypeOn: generator
 ]
 
-{ #category : #converting }
+{ #category : #'field definition' }
 SQLSMALLINT class >> fields [
-	"
-	SQLSMALLINT defineFields
-	"
+	<script: 'SQLSMALLINT defineFields'>
+
 	^ #(#(#value 'short') )
 ]
 

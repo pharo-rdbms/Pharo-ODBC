@@ -89,32 +89,30 @@ ODBCConnection class >> connectString: aString do: aTwoArgBlock [
 ODBCConnection class >> connections [
 	"Answer the <collection> of active connections."
 
-	^Connections
+	^ Connections
 ]
 
 { #category : #exceptions }
 ODBCConnection class >> dbCheckException: anIntegerRetCode [
 	"Private - Checks anIntegerRetCode to see if a ODBCError or ODBCWarning should be signalled"
 
-	^anIntegerRetCode = SQL_SUCCESS
+	^ anIntegerRetCode = SQL_SUCCESS
 		ifFalse:
 			["Signal an error or warning - decide which"
 
-			((anIntegerRetCode = SQL_SUCCESS_WITH_INFO or: [anIntegerRetCode = SQL_NO_DATA])
-				ifTrue: [ODBCWarning]
-				ifFalse: [ODBCError]) signalWith: (self exceptionDetails: anIntegerRetCode)]
+			((anIntegerRetCode = SQL_SUCCESS_WITH_INFO or: [ anIntegerRetCode = SQL_NO_DATA ])
+				ifTrue: [ ODBCWarning ]
+				ifFalse: [ ODBCError ]) signalWith: (self exceptionDetails: anIntegerRetCode)]
 ]
 
 { #category : #'class initialization' }
 ODBCConnection class >> determineStringEncoder [
-
 	"The String encoding can vary depending on the ODBC driver manager:
 	Windows - always UTF16
 	Mac/Linux - can be UTF16 (default for unixodbc manager) or UTF32 (default for iodbc)
 	There is no readily apparent way to determine the manager or encoding, so we try UTF16 and examine the Strings resulting from an API call"
 
 	| drivers |
-
 	StringEncoder := ODBCUTF16Encoder new.
 	OSPlatform current isWindows ifTrue: [ ^self ].
 
@@ -168,7 +166,7 @@ ODBCConnection class >> enumerateDataSources [
 			ret == SQL_SUCCESS_WITH_INFO]
 					whileTrue: [description := ExternalAddress gcallocate: (descriptionBufferLength := self stringEncoder byteSizeForCharacters: descriptionLength value + 1)]].
 	ret ~= SQL_NO_DATA ifTrue: [self dbCheckException: ret].
-	^sources contents
+	^ sources contents
 ]
 
 { #category : #accessing }
@@ -213,7 +211,7 @@ ODBCConnection class >> enumerateDrivers [
 			ret == SQL_SUCCESS_WITH_INFO]
 					whileTrue: [attributes := ExternalAddress gcallocate: (attributesBufferLength := self stringEncoder byteSizeForCharacters: attributesLength value)]].
 	ret ~= SQL_NO_DATA ifTrue: [self dbCheckException: ret].
-	^drivers contents
+	^ drivers contents
 ]
 
 { #category : #accessing }
@@ -234,7 +232,7 @@ ODBCConnection class >> environmentHandle [
 					[HEnv := nil.
 					^self dbCheckException: ret].
 			self setDefaultEnvAttrs].
-	^HEnv
+	^ HEnv
 ]
 
 { #category : #exceptions }
@@ -243,11 +241,11 @@ ODBCConnection class >> exceptionDetails: retCode [
 	receiver following an exception with the specified <integer> return code. This will
 	be available as the tag of a subsequent signalled DBError or DBWarning."
 
-	^(ODBCExceptionDetails new)
-		code: retCode;
-		hEnv: HEnv;
-		stringEncoder: self stringEncoder;
-		yourself
+	^ (ODBCExceptionDetails new)
+			code: retCode;
+			hEnv: HEnv;
+			stringEncoder: self stringEncoder;
+			yourself
 ]
 
 { #category : #'realizing/unrealizing' }
@@ -265,14 +263,12 @@ ODBCConnection class >> freeAll [
 
 { #category : #'realizing/unrealizing' }
 ODBCConnection class >> freeEnvironment [
-	"Private - Free the environment"
 
-	HEnv isNull
-		ifFalse:
-			[| ret |
-			ret := ODBCLibrary default sqlFreeHandle: SQL_HANDLE_ENV handle: HEnv.
-			self dbCheckException: ret.
-			HEnv := nil]
+	| ret |
+	HEnv isNull ifTrue: [ ^ self ].
+	ret := ODBCLibrary default sqlFreeHandle: SQL_HANDLE_ENV handle: HEnv.
+	self dbCheckException: ret.
+	HEnv := nil
 ]
 
 { #category : #'class initialization' }
@@ -322,23 +318,23 @@ ODBCConnection class >> invalidateHandle: anExternalHandle [
 { #category : #accessing }
 ODBCConnection class >> newConnections [
 	"Use a WeakRegistry so this can take care of finalization for us"
+
 	Connections := WeakRegistry new
 ]
 
 { #category : #accessing }
 ODBCConnection class >> odbcVersion [
-
-	"self odbcVersion"
-
+	<script: 'self odbcVersion inspect'>
+	
 	| version |
 	version := SQLSMALLINT new.
 	self dbCheckException: (ODBCLibrary default
-				sqlGetEnvAttr: HEnv
-				infoType: SQL_ATTR_ODBC_VERSION
-				infoValuePtr: version asSQLPOINTER
-				bufferLength: 0
-				stringLengthPtr: nil).
-	^version value
+			 sqlGetEnvAttr: HEnv
+			 infoType: SQL_ATTR_ODBC_VERSION
+			 infoValuePtr: version asSQLPOINTER
+			 bufferLength: 0
+			 stringLengthPtr: nil).
+	^ version value
 ]
 
 { #category : #accessing }
@@ -363,7 +359,7 @@ ODBCConnection class >> setDefaultEnvAttrs [
 { #category : #accessing }
 ODBCConnection class >> stringEncoder [
 
-	^StringEncoder ifNil: [ self initializeStringEncoder. StringEncoder ]
+	^ StringEncoder ifNil: [ self initializeStringEncoder. StringEncoder ]
 ]
 
 { #category : #operations }
@@ -990,7 +986,7 @@ ODBCConnection >> indicesOf: aString [
 		accurate: true
 ]
 
-{ #category : #initializing }
+{ #category : #initialization }
 ODBCConnection >> initialize [
 	"Private - Initialize the receiver."
 
@@ -1000,7 +996,7 @@ ODBCConnection >> initialize [
 	self initializeStatements
 ]
 
-{ #category : #initializing }
+{ #category : #'private - initialization' }
 ODBCConnection >> initializeStatements [
 	"Use WeakRegistry so this can take care of finalization for us"
 	statements := WeakRegistry new
@@ -1154,7 +1150,7 @@ ODBCConnection >> newStatement: aSymbol [
 	"Private - Answer an ODBCStatement connected to the receiver and with the specified
 	cursor type."
 
-	^ODBCStatement parent: self cursorType: aSymbol
+	^ ODBCStatement parent: self cursorType: aSymbol
 ]
 
 { #category : #enquiries }

@@ -10,17 +10,17 @@ Class {
 { #category : #constants }
 ODBCUTF32Encoder >> bytesPerCharacter [
 
-	^4
+	^ 4
 ]
 
 { #category : #constants }
 ODBCUTF32Encoder >> characterEncoderClass [
 
-	^ZnUTF32Encoder
+	^ ZnUTF32Encoder
 ]
 
 { #category : #constants }
 ODBCUTF32Encoder >> nullTerminatorBytes [
 
-	^#[ 0 0 0 0 ]
+	^ #[ 0 0 0 0 ]
 ]

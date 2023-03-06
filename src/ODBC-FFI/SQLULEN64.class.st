@@ -1,5 +1,5 @@
 "
-I represent the SQLULEN type on 64 bit platforms.
+I represent the SQL ULEN64 type
 "
 Class {
 	#name : #SQLULEN64,
@@ -10,14 +10,13 @@ Class {
 { #category : #converting }
 SQLULEN64 class >> asExternalTypeOn: generator [
 
-	^FFIUInt64 asExternalTypeOn: generator
+	^ FFIUInt64 asExternalTypeOn: generator
 ]
 
-{ #category : #converting }
+{ #category : #'field definition' }
 SQLULEN64 class >> fields [
-	"
-	SQLULEN64 defineFields
-	"
+	<script: 'SQLULEN64 defineFields'>
+
 	^ #(#(#value 'ulonglong') )
 ]
 

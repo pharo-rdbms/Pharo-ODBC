@@ -27,9 +27,7 @@ Class {
 
 { #category : #'class initialization' }
 ODBCResultSet class >> initialize [
-	"
-	self initialize
-	"
+
 	Smalltalk addToStartUpList: self
 ]
 
@@ -42,7 +40,7 @@ ODBCResultSet class >> onStartup [
 	self allSubInstancesDo: [:i | i onStartup]
 ]
 
-{ #category : #'event handling' }
+{ #category : #'system startup' }
 ODBCResultSet class >> startUp: isImageStarting [
 	"Private - Ensure that old external resources are cleared so that they will be re-created."
 
@@ -53,9 +51,9 @@ ODBCResultSet class >> startUp: isImageStarting [
 ODBCResultSet class >> statement: aDBStatement [
 	"Answer a new instance of DBResultSet for aDBStatement."
 
-	^self new
-		statement: aDBStatement;
-		yourself
+	^ self new
+			statement: aDBStatement;
+			yourself
 ]
 
 { #category : #copying }
@@ -521,14 +519,14 @@ ODBCResultSet >> next [
 ODBCResultSet >> numColumns [
 	"Answer the number of columns in the result set associated with the receiver's statement."
 
-	^statement numColumns
+	^ statement numColumns
 ]
 
 { #category : #accessing }
 ODBCResultSet >> numRows [
 	"Answer the number of rows in the result set associated with the receiver's statement."
 
-	^statement numRows
+	^ statement numRows
 ]
 
 { #category : #'event handling' }
@@ -543,7 +541,7 @@ ODBCResultSet >> onStartup [
 ODBCResultSet >> previous [
 	"Answer the previous row of the receiver's result set"
 
-	^self movePrevious ifNotNil: [buffer asObject]
+	^ self movePrevious ifNotNil: [buffer asObject]
 ]
 
 { #category : #printing }
@@ -569,7 +567,7 @@ ODBCResultSet >> rawCollect: aZeroArgBlock [
 	| answer |
 	answer := OrderedCollection new.
 	self rawDo: [answer add: aZeroArgBlock value].
-	^answer
+	^ answer
 ]
 
 { #category : #enumerating }
@@ -598,7 +596,7 @@ ODBCResultSet >> realize [
 ODBCResultSet >> resize: anInteger [
 	"ODBCResultSets are not extensible."
 
-	^self shouldNotImplement
+	^ self shouldNotImplement
 ]
 
 { #category : #copying }
@@ -609,7 +607,7 @@ ODBCResultSet >> reverse [
 	| answer |
 	answer := self copyEmpty.
 	self reverseDo: [:row | answer addLast: row].
-	^answer
+	^ answer
 ]
 
 { #category : #enumerating }
@@ -619,15 +617,15 @@ ODBCResultSet >> reverseDo: operation [
 
 	| object |
 	object := self last.
-	[object isNil] whileFalse:
-			[operation value: object.
-			object := self previous]
+	[ object isNil ] whileFalse:
+			[ operation value: object.
+			  object := self previous ]
 ]
 
 { #category : #accessing }
 ODBCResultSet >> scrollTo: anInteger [
 
-	^self fetchScroll: SQL_FETCH_ABSOLUTE offset: anInteger
+	^ self fetchScroll: SQL_FETCH_ABSOLUTE offset: anInteger
 ]
 
 { #category : #enumerating }
@@ -641,7 +639,7 @@ ODBCResultSet >> select: discriminator [
 	| newCollection |
 	newCollection := self copyEmpty.
 	self do: [:each | (discriminator value: each) ifTrue: [newCollection add: each]].
-	^newCollection
+	^ newCollection
 ]
 
 { #category : #accessing }
@@ -657,24 +655,24 @@ ODBCResultSet >> size [
 
 	| rowCount |
 	rowCount := self numRows.
-	^rowCount < 0 ifTrue: [self countElements] ifFalse: [rowCount]
+	^ rowCount < 0 ifTrue: [self countElements] ifFalse: [rowCount]
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 ODBCResultSet >> species [
 	"Answer the species of ODBCResultSets.
 	Although the receiver is not extensible, when copying it helps to create an
 	extensible collection to avoid the necessity of pre-calculating the size,
 	and therefore we choose OrderedCollection."
 
-	^OrderedCollection
+	^ OrderedCollection
 ]
 
 { #category : #accessing }
 ODBCResultSet >> statement [
 	"Private - Answer the statement instance variable"
 
-	^statement
+	^ statement
 ]
 
 { #category : #accessing }

@@ -17,7 +17,7 @@ ODBCForeignKeysStatement >> executeStatement [
 	"Private - Execute the database command that the receiver represents.
 	Answer the <integer> return code."
 
-	^ODBCLibrary default
+	^ ODBCLibrary default
 		sqlForeignKeys: self allocatedHandle
 		pkCatalogName: (self stringEncoder encodeStringWithNullTerminator: self catalogName)
 		nameLength1: SQL_NTS
@@ -35,30 +35,36 @@ ODBCForeignKeysStatement >> executeStatement [
 
 { #category : #accessing }
 ODBCForeignKeysStatement >> foreignCatalogName [
-	^foreignCatalogName
+
+	^ foreignCatalogName
 ]
 
 { #category : #accessing }
 ODBCForeignKeysStatement >> foreignCatalogName: patternString [
+
 	foreignCatalogName := patternString
 ]
 
 { #category : #accessing }
 ODBCForeignKeysStatement >> foreignSchemaName [
-	^foreignSchemaName
+
+	^ foreignSchemaName
 ]
 
 { #category : #accessing }
 ODBCForeignKeysStatement >> foreignSchemaName: patternString [
+
 	foreignSchemaName := patternString
 ]
 
 { #category : #accessing }
 ODBCForeignKeysStatement >> foreignTableName [
-	^foreignTableName
+
+	^ foreignTableName
 ]
 
 { #category : #accessing }
 ODBCForeignKeysStatement >> foreignTableName: aString [
+
 	foreignTableName := aString
 ]

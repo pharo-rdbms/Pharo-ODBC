@@ -1,3 +1,6 @@
+"
+I represent the SQL USMALLINT type
+"
 Class {
 	#name : #SQLUSMALLINT,
 	#superclass : #SQLIntegerType,
@@ -7,14 +10,13 @@ Class {
 { #category : #converting }
 SQLUSMALLINT class >> asExternalTypeOn: generator [
 
-	^FFIUInt16 asExternalTypeOn: generator
+	^ FFIUInt16 asExternalTypeOn: generator
 ]
 
-{ #category : #converting }
+{ #category : #'field definition' }
 SQLUSMALLINT class >> fields [
-	"
-	SQLUSMALLINT defineFields
-	"
+	<script: 'SQLUSMALLINT defineFields'>
+
 	^ #(#(#value 'ushort') )
 ]
 

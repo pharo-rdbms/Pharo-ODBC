@@ -1,3 +1,6 @@
+"
+I represent the SQL INTEGER type
+"
 Class {
 	#name : #SQLINTEGER,
 	#superclass : #SQLIntegerType,
@@ -7,14 +10,13 @@ Class {
 { #category : #converting }
 SQLINTEGER class >> asExternalTypeOn: generator [
 
-	^FFIInt32 asExternalTypeOn: generator
+	^ FFIInt32 asExternalTypeOn: generator
 ]
 
-{ #category : #converting }
+{ #category : #'field definition' }
 SQLINTEGER class >> fields [
-	"
-	SQLINTEGER defineFields
-	"
+	<script: 'SQLINTEGER defineFields'>
+
 	^ #(#(#value 'long') )
 ]
 

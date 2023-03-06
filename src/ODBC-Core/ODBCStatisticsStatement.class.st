@@ -15,11 +15,13 @@ Class {
 
 { #category : #accessing }
 ODBCStatisticsStatement >> accurate [
-	^accurate
+
+	^ accurate
 ]
 
 { #category : #accessing }
 ODBCStatisticsStatement >> accurate: aBoolean [
+
 	accurate := aBoolean
 ]
 
@@ -28,7 +30,7 @@ ODBCStatisticsStatement >> executeStatement [
 	"Private - Execute the database command that the receiver represents.
 	Answer the <integer> return code."
 
-	^ODBCLibrary default
+	^ ODBCLibrary default
 		sqlStatistics: self allocatedHandle
 		catalogName: (self stringEncoder encodeStringWithNullTerminator: self catalogName)
 		nameLength1: SQL_NTS
@@ -40,7 +42,7 @@ ODBCStatisticsStatement >> executeStatement [
 		reserved: (accurate ifTrue: [SQL_ENSURE] ifFalse: [SQL_QUICK])
 ]
 
-{ #category : #initializing }
+{ #category : #initialization }
 ODBCStatisticsStatement >> initialize: anODBCConnection [
 	"Private - Initialize the receiver as a new statement of the
 	<ODBCConnection>, anODBCConnection."
@@ -52,15 +54,18 @@ ODBCStatisticsStatement >> initialize: anODBCConnection [
 
 { #category : #accessing }
 ODBCStatisticsStatement >> type [
-	^type
+
+	^ type
 ]
 
 { #category : #accessing }
 ODBCStatisticsStatement >> type: statisticsTypeInteger [
+
 	type := statisticsTypeInteger
 ]
 
 { #category : #accessing }
 ODBCStatisticsStatement >> unique: aBoolean [
+
 	self type: (aBoolean ifTrue: [SQL_INDEX_UNIQUE] ifFalse: [SQL_INDEX_ALL])
 ]

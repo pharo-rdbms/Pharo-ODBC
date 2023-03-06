@@ -28,10 +28,10 @@ Class {
 ODBCTxn class >> newOn: anODBCConnection [
 	"Answer an instance of the receiver with commits disabled."
 
-	^self new
-		connection: anODBCConnection;
-		beReadOnly;
-		yourself
+	^ self new
+			connection: anODBCConnection;
+			beReadOnly;
+			yourself
 ]
 
 { #category : #'instance creation' }
@@ -39,9 +39,9 @@ ODBCTxn class >> newRWOn: anODBCConnection [
 	"Answer an instance of the receiver with commits enabled."
 
 	^self new
-		connection: anODBCConnection;
-		beReadWrite;
-		yourself
+			connection: anODBCConnection;
+			beReadWrite;
+			yourself
 ]
 
 { #category : #accessing }
@@ -71,7 +71,7 @@ ODBCTxn >> commit [
 ODBCTxn >> connection [
 	"Answer the connection instance variable."
 
-	^connection
+	^ connection
 ]
 
 { #category : #initializing }

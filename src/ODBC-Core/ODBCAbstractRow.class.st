@@ -45,14 +45,14 @@ ODBCAbstractRow >> = comparand [
 ODBCAbstractRow >> asObject [
 	"Private - Answer the receiver as an instance of DBRow containing the receiver's values."
 
-	^self subclassResponsibility
+	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
 ODBCAbstractRow >> at: aString [
 	"Answer the field named aSymbol from the receiver."
 
-	^self atIndex: (self selectors at: aString)
+	^ self atIndex: (self selectors at: aString)
 ]
 
 { #category : #accessing }
@@ -78,14 +78,14 @@ ODBCAbstractRow >> at: aString put: anObject [
 	"Set the field named aSymbol to anObject.
 	Answer the argument."
 
-	^self atIndex: (self selectors at: aString) put: anObject
+	^ self atIndex: (self selectors at: aString) put: anObject
 ]
 
 { #category : #accessing }
 ODBCAbstractRow >> atIndex: anInteger [
 	"Answer the field whose column index is anInteger."
 
-	^self contents at: anInteger
+	^ self contents at: anInteger
 ]
 
 { #category : #accessing }
@@ -93,11 +93,12 @@ ODBCAbstractRow >> atIndex: anInteger put: anObject [
 	"Set the field whose column index is anInteger to anObject.
 	Answer the argument."
 
-	^self contents at: anInteger put: anObject
+	^ self contents at: anInteger put: anObject
 ]
 
 { #category : #accessing }
 ODBCAbstractRow >> buildSelectors [
+
 	| cols |
 	cols := self columns.
 	selectors := Dictionary new: cols size.	"* 2"
@@ -113,17 +114,19 @@ ODBCAbstractRow >> buildSelectors [
 ODBCAbstractRow >> columns [
 	"Answer an <Array> of <ODBCColAttr>s describing the columns in this row."
 
-	^columns
+	^ columns
 ]
 
 { #category : #accessing }
 ODBCAbstractRow >> columns: anArrayOfODBCColAttr [
+
 	columns := anArrayOfODBCColAttr
 ]
 
 { #category : #accessing }
 ODBCAbstractRow >> contents [
-	^contents
+
+	^ contents
 ]
 
 { #category : #exceptions }
@@ -145,7 +148,7 @@ ODBCAbstractRow >> doesNotUnderstand: aMessage [
 ODBCAbstractRow >> hash [
 	"Answer the <integer> hash value for the receiver."
 
-	^self contents hash
+	^ self contents hash
 ]
 
 { #category : #testing }
@@ -153,7 +156,7 @@ ODBCAbstractRow >> isDeletedRow [
 	"Answer whether the receiver represents a row in a result set which has been
 	deleted in the time since the result set was originally queried."
 
-	^self status = SQL_ROW_DELETED
+	^ self status = SQL_ROW_DELETED
 ]
 
 { #category : #printing }

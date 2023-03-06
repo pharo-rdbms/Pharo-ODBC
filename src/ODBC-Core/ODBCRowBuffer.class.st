@@ -25,7 +25,7 @@ ODBCRowBuffer >> bind: aDBStatement [
 	self flag: #TODO. "Will need an array of status values if to fetch a block of rows at a time".
 	status := SQLUSMALLINT new.
 	aDBStatement statusArray: status.
-	^hStmt
+	^ hStmt
 ]
 
 { #category : #accessing }
@@ -33,7 +33,7 @@ ODBCRowBuffer >> contents [
 	"Answer the contents instance variable."
 
 	contents ifNil: [ contents := columns collect: [:colAttr | ODBCField newForCol: colAttr ]].
-	^contents
+	^ contents
 ]
 
 { #category : #accessing }
@@ -48,11 +48,11 @@ ODBCRowBuffer >> objects [
 ODBCRowBuffer >> sizeInBytes [
 	"Answer the size of the receiver structure in bytes."
 
-	 ^self contents inject: 0 into: [:size :f | size + f size ]
+	 ^ self contents inject: 0 into: [:size :f | size + f size ]
 ]
 
 { #category : #accessing }
 ODBCRowBuffer >> status [
 
-	^status value
+	^ status value
 ]

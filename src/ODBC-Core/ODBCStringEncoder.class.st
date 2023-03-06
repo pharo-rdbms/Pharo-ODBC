@@ -25,20 +25,20 @@ ODBCStringEncoder >> byteSizeForCharacters: anInteger [
 { #category : #encoding }
 ODBCStringEncoder >> byteSizeForString: aString [
 
-	^self byteSizeForCharacters: aString size
+	^ self byteSizeForCharacters: aString size
 ]
 
 { #category : #constants }
 ODBCStringEncoder >> bytesPerCharacter [
 
-	^self subclassResponsibility
+	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
 ODBCStringEncoder >> characterEncoder [
 	"Appears to lose endian-ness (at image start?) so always reset"
 
-	^characterEncoder beLittleEndian
+	^ characterEncoder beLittleEndian
 ]
 
 { #category : #constants }
@@ -52,31 +52,31 @@ ODBCStringEncoder >> characterEncoderClass [
 { #category : #decoding }
 ODBCStringEncoder >> decodeNullTerminatedStringFrom: aByteArray [
 
-	^(self characterEncoder decodeBytes: aByteArray) readStream upTo: Character null
+	^ (self characterEncoder decodeBytes: aByteArray) readStream upTo: Character null
 ]
 
 { #category : #decoding }
 ODBCStringEncoder >> decodeStringFrom: aByteArray byteCount: anInteger [
 
-	^self characterEncoder decodeBytes: (aByteArray first: anInteger)
+	^ self characterEncoder decodeBytes: (aByteArray first: anInteger)
 ]
 
 { #category : #decoding }
 ODBCStringEncoder >> decodeStringFrom: aByteArray characterCount: anInteger [
 
-	^self decodeStringFrom: aByteArray byteCount: (self byteSizeForCharacters: anInteger)
+	^ self decodeStringFrom: aByteArray byteCount: (self byteSizeForCharacters: anInteger)
 ]
 
 { #category : #encoding }
 ODBCStringEncoder >> encodeString: aString [
 
-	^aString ifNotNil: [self characterEncoder encodeString: aString]
+	^ aString ifNotNil: [self characterEncoder encodeString: aString]
 ]
 
 { #category : #encoding }
 ODBCStringEncoder >> encodeStringWithNullTerminator: aString [
 
-	^aString ifNotNil: [(self encodeString: aString), self nullTerminatorBytes]
+	^ aString ifNotNil: [(self encodeString: aString), self nullTerminatorBytes]
 ]
 
 { #category : #initialization }
@@ -89,7 +89,7 @@ ODBCStringEncoder >> initialize [
 ODBCStringEncoder >> nullTerminatorBytes [
 	"Should be size == self bytesPerCharacter"
 
-	^self subclassResponsibility
+	^ self subclassResponsibility
 ]
 
 { #category : #encoding }
@@ -97,5 +97,5 @@ ODBCStringEncoder >> stringBufferFor: anInteger [
 	"Create, allocate and return a buffer (ExternalAddress) to hold anInteger characters in the receiver's encoding"
 
 	"For convenience always add 1 for a null terminator - allows this method to be used for all String API calls"
-	^ExternalAddress gcallocate: (self byteSizeForCharacters: (anInteger + 1))
+	^ ExternalAddress gcallocate: (self byteSizeForCharacters: (anInteger + 1))
 ]

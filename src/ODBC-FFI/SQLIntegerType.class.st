@@ -1,3 +1,6 @@
+"
+Abstract superclass for different SQL integer types
+"
 Class {
 	#name : #SQLIntegerType,
 	#superclass : #ExternalStructure,
@@ -8,13 +11,19 @@ Class {
 SQLIntegerType class >> fromInteger: anInteger [
 	"Answer a new instance of the receiver with contents copied from anInteger"
 
-	^self new value: anInteger
+	^ self new value: anInteger
+]
+
+{ #category : #testing }
+SQLIntegerType class >> isAbstract [
+
+	^ self == SQLIntegerType
 ]
 
 { #category : #'instance creation' }
 SQLIntegerType class >> new [
 
-	^self externalNew
+	^ self externalNew
 ]
 
 { #category : #converting }

@@ -108,14 +108,15 @@ ODBCField class >> initialize [
 ODBCField class >> new [
 	"Use #newForCol:"
 
-	^self shouldNotImplement
+	^ self shouldNotImplement
 ]
 
 { #category : #'instance creation' }
 ODBCField class >> newForCol: aDBColAttr [
 	"Answer a new instance of the receiver for the column described by aColAttr."
 
-	^super new initializeForColumn: aDBColAttr
+	^ super new
+		initializeForColumn: aDBColAttr
 ]
 
 { #category : #comparing }
@@ -123,7 +124,7 @@ ODBCField >> = comparand [
 	"Answer whether the receiver and the <Object>, comparand,
 	are considered equivalent."
 
-	^comparand species == self species and: [
+	^ comparand species == self species and: [
 		column = comparand column and: [self value = comparand value]]
 ]
 
@@ -138,20 +139,20 @@ ODBCField >> beNull [
 ODBCField >> bufferSize [
 	"Private - Answer the size of the receiver's buffer."
 
-	^bufferSize
+	^ bufferSize
 ]
 
 { #category : #accessing }
 ODBCField >> column [
 
-	^column
+	^ column
 ]
 
 { #category : #accessing }
 ODBCField >> fieldBuf [
 	"Private - Answer the address of the buffer for passing to the ODBC DLL."
 
-	^buffer
+	^ buffer
 ]
 
 { #category : #accessing }
@@ -159,7 +160,7 @@ ODBCField >> fieldSize [
 	"Private - Answer the 'C' length of the receiver's associated column (the C length includes space for the null
 	terminator if the column is a string)"
 
-	^column lengthC
+	^ column lengthC
 ]
 
 { #category : #converting }
@@ -178,21 +179,21 @@ ODBCField >> getAnsiString [
 ODBCField >> getBoolean [
 	"Private - Answer a <Boolean> read from the receiver's buffer."
 
-	^self getByte allMask: 1
+	^ self getByte allMask: 1
 ]
 
 { #category : #converting }
 ODBCField >> getByte [
 	"Private - Answer the receiver's buffer as an unsigned byte."
 
-	^buffer unsignedByteAt: 1
+	^ buffer unsignedByteAt: 1
 ]
 
 { #category : #converting }
 ODBCField >> getByteArray [
 	"Private - Answer a <ByteArray> copied from the receiver's buffer."
 
-	^buffer copyFrom: 1 to: lengthBuf value
+	^ buffer copyFrom: 1 to: lengthBuf value
 ]
 
 { #category : #accessing }
@@ -216,28 +217,28 @@ ODBCField >> getDate [
 	"Private - Answer an instance of <Date> representing the contents of the receiver.
 	Use the services of the ODBCDATE structure to split the buffer."
 
-	^(ODBCDATE fromHandle: buffer) asDate
+	^ (ODBCDATE fromHandle: buffer) asDate
 ]
 
 { #category : #converting }
 ODBCField >> getDateAndTime [
 	"Private - Answer an instance of <DateAndTime> representing the same DateAndTime as that stored in the buffer as an ODBCDATE and ODBCTIME."
 
-	^(ODBCTIMESTAMP fromHandle: buffer) asDateAndTime
+	^ (ODBCTIMESTAMP fromHandle: buffer) asDateAndTime
 ]
 
 { #category : #converting }
 ODBCField >> getDouble [
 	"Private - Answer a <Float> read from the IEEE 64-bit double precision floating point number in the receiver's buffer."
 
-	^buffer doubleAt: 1
+	^ buffer doubleAt: 1
 ]
 
 { #category : #converting }
 ODBCField >> getFloat [
 	"Private - Answer a <Float> representing the 32-bit IEEE single precision floating point number in the receiver's buffer."
 
-	^buffer floatAt: 1
+	^ buffer floatAt: 1
 ]
 
 { #category : #converting }
@@ -254,21 +255,21 @@ ODBCField >> getGuid [
 ODBCField >> getInt64 [
 	"Private - Answer an <integer> read from the 64-bit signed integer in the receiver's buffer."
 
-	^buffer signedLongLongAt: 1
+	^ buffer signedLongLongAt: 1
 ]
 
 { #category : #converting }
 ODBCField >> getLong [
 	"Private - Answer an <integer> read from the 32-bit signed integer in the receiver's buffer."
 
-	^buffer signedLongAt: 1
+	^ buffer signedLongAt: 1
 ]
 
 { #category : #converting }
 ODBCField >> getShort [
 	"Private - Answer an <integer> read from the signed 16-bit value in the receiver's buffer."
 
-	^buffer signedShortAt: 1
+	^ buffer signedShortAt: 1
 ]
 
 { #category : #converting }
@@ -276,21 +277,21 @@ ODBCField >> getTime [
 	"Private - Answer an instance of <Time> representing the buffer of the receiver.
 	Use the services of the <ODBCTIME> structure to split the buffer."
 
-	^(ODBCTIME fromHandle: buffer) asTime
+	^ (ODBCTIME fromHandle: buffer) asTime
 ]
 
 { #category : #converting }
 ODBCField >> getUtf16String [
 	"Private - Answer the receiver's buffer as an appropriate String (ByteString, WideString), i.e. to read from a SQL_C_WCHAR, SQL_C_WVARCHAR, or SQL_C_WLONGVARCHAR buffer."
 
-	^self stringEncoder decodeStringFrom: buffer byteCount: lengthBuf value
+	^ self stringEncoder decodeStringFrom: buffer byteCount: lengthBuf value
 ]
 
 { #category : #comparing }
 ODBCField >> hash [
 	"Answer the <integer> hash value for the receiver. Must be the same for any two DBField's that compare equal."
 
-	^column hash bitXor: self value hash
+	^ column hash bitXor: self value hash
 ]
 
 { #category : #accessing }
@@ -310,14 +311,14 @@ ODBCField >> initializeForColumn: aDBColAttr [
 ODBCField >> isNull [
 	"Answer whether the receiver represents a null field."
 
-	^lengthBuf value == SQL_NULL_DATA
+	^ lengthBuf value == SQL_NULL_DATA
 ]
 
 { #category : #accessing }
 ODBCField >> lengthBuf [
 	"Private - Answer the address of the length buffer for passing to ODBC"
 
-	^lengthBuf
+	^ lengthBuf
 ]
 
 { #category : #converting }
@@ -341,7 +342,7 @@ ODBCField >> numberFromNumeric [
 			scale := scale + 1].
 	number := fractionPart / (10 raisedToInteger: scale) + integerPart.
 	isNegative ifTrue: [number := number negated].
-	^ScaledDecimal newFromNumber: number scale: scale
+	^ ScaledDecimal newFromNumber: number scale: scale
 ]
 
 { #category : #converting }
@@ -371,39 +372,35 @@ ODBCField >> printOn: aStream [
 ODBCField >> setAnsiString: aString [
 	"Private - Set the receiver's buffer from aString."
 
-	(self shouldTranslate: aString class: String)
-		ifTrue:
-			[| ansi byteCount |
-			"This conversion may be lossy - any non-ANSI characters will be substituted with the replacement character."
-			ansi := aString asByteString.
-			byteCount := ansi size.
-			buffer
-				replaceFrom: 1
-				to: byteCount
-				with: ansi
-				startingAt: 1.
-			lengthBuf value: byteCount]
+	| ansi byteCount |
+	(self shouldTranslate: aString class: String) ifFalse: [ ^ self ].
+	ansi := aString asByteString.
+	byteCount := ansi size.
+	buffer
+		replaceFrom: 1
+		to: byteCount
+		with: ansi
+		startingAt: 1.
+	lengthBuf value: byteCount
 ]
 
 { #category : #converting }
 ODBCField >> setBoolean: aBoolean [
 	"Private - Load the receiver's contents buffer with the <Boolean> argument."
-
-	(self shouldTranslate: aBoolean class: Boolean)
-		ifTrue:
-			[buffer byteAt: 1 put: aBoolean asBit.
-			lengthBuf value: 1]
+	
+	(self shouldTranslate: aBoolean class: Boolean) ifFalse: [ ^ self ].
+	buffer byteAt: 1 put: aBoolean asBit.
+	lengthBuf value: 1
 ]
 
 { #category : #converting }
 ODBCField >> setByte: aNumber [
 	"Private - Set the receiver's buffer to an unsigned byte representation of the
 	<Number> argument."
-
-	(self shouldTranslate: aNumber class: Number)
-		ifTrue:
-			[buffer byteAt: 1 put: aNumber asInteger.
-			lengthBuf value: 1]
+	
+	(self shouldTranslate: aNumber class: Number) ifFalse: [ ^ self ].
+	buffer byteAt: 1 put: aNumber asInteger.
+	lengthBuf value: 1
 ]
 
 { #category : #converting }
@@ -426,20 +423,19 @@ ODBCField >> setDate: aDate [
 	"Private - Set the receiver's buffer with an <ODBCDATE> object instantiated from
 	the <Date> argument."
 
-	(self shouldTranslate: aDate class: Date)
-		ifTrue:
-			[(ODBCDATE fromHandle: buffer) date: aDate.
-			lengthBuf value: ODBCDATE byteSize]
+	(self shouldTranslate: aDate class: Date) ifFalse: [ ^ self ].
+	(ODBCDATE fromHandle: buffer) date: aDate.
+	lengthBuf value: ODBCDATE byteSize
 ]
 
 { #category : #converting }
 ODBCField >> setDateAndTime: aDateAndTime [
 	"Private - Set the receiver's buffer with an ODBCTIMESTAMP object instantiated from aDateAndTime."
 
-	(self shouldTranslate: aDateAndTime class: DateAndTime)
-		ifTrue:
-			[(ODBCTIMESTAMP fromHandle: buffer) dateAndTime: aDateAndTime.
-			lengthBuf value: ODBCTIMESTAMP byteSize]
+	(self shouldTranslate: aDateAndTime class: DateAndTime) ifFalse: [
+		^ self ].
+	(ODBCTIMESTAMP fromHandle: buffer) dateAndTime: aDateAndTime.
+	lengthBuf value: ODBCTIMESTAMP byteSize
 ]
 
 { #category : #converting }
@@ -466,54 +462,49 @@ ODBCField >> setFloat: aNumber [
 ODBCField >> setGuid: aUUID [
 	"Private - Set the receiver's buffer with an <GUID> value."
 
-	(self shouldTranslate: aUUID class: UUID)
-		ifTrue:
-			[buffer
-				replaceFrom: 1
-				to: 16
-				with: aUUID
-				startingAt: 1.
-			lengthBuf value: 16]
+	(self shouldTranslate: aUUID class: UUID) ifFalse: [ ^ self ].
+	buffer
+		replaceFrom: 1
+		to: 16
+		with: aUUID
+		startingAt: 1.
+	lengthBuf value: 16
 ]
 
 { #category : #converting }
 ODBCField >> setInt64: aNumber [
 	"Private - Set the receiver's buffer to the 64-bit signed integer value of the argument."
 
-	(self shouldTranslate: aNumber class: Number)
-		ifTrue:
-			[buffer signedLongLongAt: 1 put: aNumber asInteger.
-			lengthBuf value: 8]
+	(self shouldTranslate: aNumber class: Number) ifFalse: [ ^ self ].
+	buffer signedLongLongAt: 1 put: aNumber asInteger.
+	lengthBuf value: 8
 ]
 
 { #category : #converting }
 ODBCField >> setLong: aNumber [
 	"Private - Set the receiver's buffer to a 32-bit signed integer representation of the <Integer> argument."
-
-	(self shouldTranslate: aNumber class: Number)
-		ifTrue:
-			[buffer signedLongAt: 1 put: aNumber asInteger.
-			lengthBuf value: 4]
+	
+	(self shouldTranslate: aNumber class: Number) ifFalse: [ ^ self ].
+	buffer signedLongAt: 1 put: aNumber asInteger.
+	lengthBuf value: 4
 ]
 
 { #category : #converting }
 ODBCField >> setShort: aNumber [
 	"Private - Set the receiver's buffer to the 16-bit signed integer value of the argument."
-
-	(self shouldTranslate: aNumber class: Number)
-		ifTrue:
-			[buffer signedShortAt: 1 put: aNumber asInteger.
-			lengthBuf value: 2]
+	
+	(self shouldTranslate: aNumber class: Number) ifFalse: [ ^ self ].
+	buffer signedShortAt: 1 put: aNumber asInteger.
+	lengthBuf value: 2
 ]
 
 { #category : #converting }
 ODBCField >> setTime: aTime [
 	"Private - Set the receiver's buffer with an ODBCTIME object instantiated from aTime."
 
-	(self shouldTranslate: aTime class: Time)
-		ifTrue:
-			[(ODBCTIME fromHandle: buffer) time: aTime.
-			lengthBuf value: ODBCTIME byteSize]
+	(self shouldTranslate: aTime class: Time) ifFalse: [ ^ self ].
+	(ODBCTIME fromHandle: buffer) time: aTime.
+	lengthBuf value: ODBCTIME byteSize
 ]
 
 { #category : #converting }
@@ -541,8 +532,8 @@ ODBCField >> shouldTranslate: anObject class: aClass [
 	(anObject isKindOf: aClass)
 		ifFalse: [
 			self error: anObject class displayString, '(', anObject displayString,') invalid: ', aClass displayString,' expected'.
-			^false].
-	^true
+			^ false].
+	^ true
 ]
 
 { #category : #accessing }
@@ -555,7 +546,7 @@ ODBCField >> size [
 { #category : #accessing }
 ODBCField >> stringEncoder [
 
-	^ODBCConnection stringEncoder
+	^ ODBCConnection stringEncoder
 ]
 
 { #category : #accessing }

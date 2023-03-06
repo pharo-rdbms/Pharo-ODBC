@@ -4,9 +4,10 @@ Class {
 	#category : #'ODBC-Tests-Base'
 }
 
-{ #category : #public }
+{ #category : #accessing }
 AccessODBCTest class >> resources [
-	^{AccessNorthwindDB}
+
+	^ { AccessNorthwindDB }
 ]
 
 { #category : #private }
@@ -68,13 +69,14 @@ AccessODBCTest >> queryColumns [
 
 { #category : #'unit tests' }
 AccessODBCTest >> testAccessConnectionAttributes [
-	self should: [connection transactionIsolation: #readUncommitted] raise: ODBCError.
-	self should: [connection loginTimeout: 30] raise: ODBCError.
-	self should: [self assert: connection loginTimeout equals: 30] raise: ODBCError.
-	self should: [connection translate] raise: ODBCError.
-	self should: [connection translate: 0] raise: ODBCError.
-	self should: [connection translationDLL] raise: ODBCError.
-	self should: [connection translationDLL: 'blah.dll'] raise: ODBCError.
+
+	self should: [ connection transactionIsolation: #readUncommitted ] raise: ODBCError.
+	self should: [ connection loginTimeout: 30 ] raise: ODBCError.
+	self should: [ self assert: connection loginTimeout equals: 30 ] raise: ODBCError.
+	self should: [ connection translate ] raise: ODBCError.
+	self should: [ connection translate: 0 ] raise: ODBCError.
+	self should: [ connection translationDLL ] raise: ODBCError.
+	self should: [ connection translationDLL: 'blah.dll' ] raise: ODBCError.
 	self assert: connection uid isNil.
 	self assert: connection pwd isNil
 ]
@@ -83,18 +85,19 @@ AccessODBCTest >> testAccessConnectionAttributes [
 AccessODBCTest >> testForeignKeysQuery [
 	"The order DB is an Access DB and it doesn't support the foreign key querying stuff"
 
-	self shouldRaiseNotSupported: [connection queryForeignKeysOf: 'Orders']
+	self shouldRaiseNotSupported: [ connection queryForeignKeysOf: 'Orders' ]
 ]
 
 { #category : #'unit tests' }
 AccessODBCTest >> testPrimaryKeysQuery [
 	"The order DB is an Access DB and it doesn't support the key querying stuff"
 
-	self shouldRaiseNotSupported: [connection primaryKeysOf: 'Orders']
+	self shouldRaiseNotSupported: [ connection primaryKeysOf: 'Orders' ]
 ]
 
 { #category : #'unit tests' }
 AccessODBCTest >> testProceduresQuery [
+
 	| procs |
 	procs := connection procedures.
 	self assert: (procs includes: 'Employee Sales by Country')
@@ -102,16 +105,18 @@ AccessODBCTest >> testProceduresQuery [
 
 { #category : #'unit tests' }
 AccessODBCTest >> testTablesQuery [
+
 	| tables |
 	tables := connection tables.
 	self assertCollection: tables
-				hasSameElements: #('Categories' 'Customers' 'Employees' 'Order Details' 'Orders' 'Products' 'Shippers' 'Suppliers')
+		  hasSameElements: #('Categories' 'Customers' 'Employees' 'Order Details' 'Orders' 'Products' 'Shippers' 'Suppliers')
 ]
 
 { #category : #'unit tests' }
 AccessODBCTest >> testViewsQuery [
+
 	| views |
 	views := connection views.
 	self assertCollection: views
-				hasSameElements: #('Alphabetical List of Products' 'Category Sales for 1997' 'Current Product List' 'Customers and Suppliers by City' 'Employee Sales by Country' 'Invoices' 'Invoices Filter' 'Order Details Extended' 'Order Subtotals' 'Orders Qry' 'Product Sales for 1997' 'Products Above Average Price' 'Products by Category' 'Quarterly Orders' 'Quarterly Orders by Product' 'Sales by Category' 'Sales by Year' 'Ten Most Expensive Products')
+		  hasSameElements: #('Alphabetical List of Products' 'Category Sales for 1997' 'Current Product List' 'Customers and Suppliers by City' 'Employee Sales by Country' 'Invoices' 'Invoices Filter' 'Order Details Extended' 'Order Subtotals' 'Orders Qry' 'Product Sales for 1997' 'Products Above Average Price' 'Products by Category' 'Quarterly Orders' 'Quarterly Orders by Product' 'Sales by Category' 'Sales by Year' 'Ten Most Expensive Products')
 ]

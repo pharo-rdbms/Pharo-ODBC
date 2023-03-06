@@ -1,3 +1,6 @@
+"
+An SQL handle 
+"
 Class {
 	#name : #SQLHANDLE,
 	#superclass : #FFIConstantHandle,
@@ -6,21 +9,18 @@ Class {
 
 { #category : #converting }
 SQLHANDLE class >> asExternalTypeOn: generator [
+
 	^ SQLHANDLEType objectClass: self
 ]
 
 { #category : #'system startup' }
 SQLHANDLE class >> byteSize [
 
-	^4
+	^ 4
 ]
 
 { #category : #'class initialization' }
 SQLHANDLE class >> initialize [
-
-	"
-	self initialize
-	"
 
 	Smalltalk addToStartUpList: self
 ]
@@ -28,7 +28,7 @@ SQLHANDLE class >> initialize [
 { #category : #'instance creation' }
 SQLHANDLE class >> null [
 
-	^self fromInteger: 0
+	^ self fromInteger: 0
 ]
 
 { #category : #'system startup' }
@@ -47,11 +47,11 @@ SQLHANDLE >> invalidateHandle [
 { #category : #testing }
 SQLHANDLE >> isNull [
 
-	^handle = 0
+	^ handle = 0
 ]
 
 { #category : #accessing }
 SQLHANDLE >> tfPointerAddress [
 
-	^ self handle asSQLPOINTER
+	^ self getHandle asSQLPOINTER
 ]

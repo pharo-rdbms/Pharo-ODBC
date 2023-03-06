@@ -97,7 +97,7 @@ ODBCColAttr class >> initializeExtraBytes [
 { #category : #accessing }
 ODBCColAttr >> byteSizeForCharacters: anInteger [
 
-	^ODBCConnection stringEncoder byteSizeForCharacters: anInteger
+	^ ODBCConnection stringEncoder byteSizeForCharacters: anInteger
 ]
 
 { #category : #accessing }
@@ -105,14 +105,14 @@ ODBCColAttr >> cType [
 	"Private - Answer the 'C' type to which the described column's values should be converted when loaded
 	into Dolphin buffers (ODBCFields)."
 
-	^SQLToCTypes at: sqlType+TypeOffset
+	^ SQLToCTypes at: sqlType+TypeOffset
 ]
 
 { #category : #accessing }
 ODBCColAttr >> columnNumber [
 	"Answer the instance variable columnNumber"
 
-	^columnNumber
+	^ columnNumber
 ]
 
 { #category : #accessing }
@@ -128,7 +128,7 @@ ODBCColAttr >> deleteRuleMask [
 
 	| answer |
 	answer := (special bitAnd: DeleteRules) bitShift: -4.
-	^answer == 0 ifFalse: [ answer bitShift: -1 ]
+	^ answer == 0 ifFalse: [ answer bitShift: -1 ]
 ]
 
 { #category : #accessing }
@@ -136,19 +136,17 @@ ODBCColAttr >> deleteRuleMask: anInteger [
 	"Private - Set the delete rule mask for the receiver to anInteger"
 
 	special := special bitAnd: DeleteRules bitInvert.
-	anInteger isNil ifFalse: [
-		self specialFlagAt:
-			(1 bitShift: (anInteger+4))
-			put: true ]
+	anInteger ifNotNil: [
+		self specialFlagAt: (1 bitShift: anInteger + 4) put: true ]
 ]
 
 { #category : #testing }
 ODBCColAttr >> hasVariableTransferOctetLength [
 
-	^(self isCharType or: [self isBinaryType]) and: [self isFixedPointType not]
+	^ (self isCharType or: [self isBinaryType]) and: [self isFixedPointType not]
 ]
 
-{ #category : #initializing }
+{ #category : #initialization }
 ODBCColAttr >> initialize [
 	"Private - Initialize the receiver"
 
@@ -159,7 +157,7 @@ ODBCColAttr >> initialize [
 ODBCColAttr >> isBinaryType [
 	"Private - Answers true if the receiver represents a character based column"
 
-	^self cType == SQL_C_BINARY
+	^ self cType == SQL_C_BINARY
 ]
 
 { #category : #testing }
@@ -168,20 +166,20 @@ ODBCColAttr >> isCharType [
 
 	| cType |
 
-	^(cType := self cType) == SQL_C_CHAR or: [cType == SQL_C_WCHAR]
+	^ (cType := self cType) == SQL_C_CHAR or: [cType == SQL_C_WCHAR]
 ]
 
 { #category : #testing }
 ODBCColAttr >> isFixedPointType [
 
-	^sqlType == SQL_DECIMAL or: [sqlType == SQL_NUMERIC]
+	^ sqlType == SQL_DECIMAL or: [sqlType == SQL_NUMERIC]
 ]
 
 { #category : #testing }
 ODBCColAttr >> isForeignKey [
 	"Answer true if the receiver represents a foreign key"
 
-	^self specialFlagAt: ForeignKey
+	^ self specialFlagAt: ForeignKey
 ]
 
 { #category : #accessing }
@@ -195,14 +193,14 @@ ODBCColAttr >> isForeignKey: aBoolean [
 ODBCColAttr >> isKey [
 	"Answer true if the receiver is a key"
 
-	^special anyMask: (PrimaryKey bitOr: ForeignKey)
+	^ special anyMask: (PrimaryKey bitOr: ForeignKey)
 ]
 
 { #category : #testing }
 ODBCColAttr >> isPrimaryKey [
 	"Answer true if the receiver is a primary key"
 
-	^self specialFlagAt: PrimaryKey
+	^ self specialFlagAt: PrimaryKey
 ]
 
 { #category : #accessing }
@@ -216,7 +214,7 @@ ODBCColAttr >> isPrimaryKey: aBoolean [
 ODBCColAttr >> length [
 	"Answer the length instance variable."
 
-	^length
+	^ length
 ]
 
 { #category : #accessing }
@@ -230,14 +228,14 @@ ODBCColAttr >> length: anInteger [
 ODBCColAttr >> lengthC [
 	"Private - Answer the length of ByteArray sufficient to hold an entry for this column when converted to 'C' data. This needs to include any extra space for null-terminators if the 'C' target type is some kind of string."
 
-	^length + (CTypesExtraBytes at: sqlType+TypeOffset)
+	^ length + (CTypesExtraBytes at: sqlType+TypeOffset)
 ]
 
 { #category : #accessing }
 ODBCColAttr >> name [
 	"Answer the name instance variable."
 
-	^name
+	^ name
 ]
 
 { #category : #accessing }
@@ -254,7 +252,7 @@ ODBCColAttr >> parameterType [
 	is SQL_PARAM_INPUT, which is appropriate for most cases except some
 	stored procedures."
 
-	^(special bitAnd: ParameterTypeMask) >> ParameterTypeShift
+	^ (special bitAnd: ParameterTypeMask) >> ParameterTypeShift
 ]
 
 { #category : #accessing }
@@ -272,14 +270,14 @@ ODBCColAttr >> parameterType: anInteger [
 	unless describing an output or input/output parameter to a stored procedure."
 
 	special := (special bitClear: ParameterTypeMask)
-				bitOr: (anInteger bitShift: ParameterTypeShift)
+						bitOr: (anInteger bitShift: ParameterTypeShift)
 ]
 
 { #category : #accessing }
 ODBCColAttr >> precision [
 	"Answer the precision instance variable."
 
-	^precision
+	^ precision
 ]
 
 { #category : #accessing }
@@ -312,7 +310,7 @@ ODBCColAttr >> printOn: aStream [
 ODBCColAttr >> scale [
 	"Answer the scale instance variable."
 
-	^scale
+	^ scale
 ]
 
 { #category : #accessing }
@@ -326,7 +324,7 @@ ODBCColAttr >> scale: anInteger [
 ODBCColAttr >> specialFlagAt: flagMask [
 	"Private - Answer the special flag identified by flagMask"
 
-	^special allMask: flagMask
+	^ special allMask: flagMask
 ]
 
 { #category : #accessing }
@@ -340,7 +338,6 @@ ODBCColAttr >> specialFlagAt: flagMask put: aBoolean [
 
 { #category : #accessing }
 ODBCColAttr >> transferOctetLength [
-
 	"Private - Return the transfer octet length (size in bytes of the buffer necessary to receive data for this column) based on the column type.
 	https://docs.microsoft.com/en-us/sql/odbc/reference/appendixes/transfer-octet-length"
 
@@ -368,7 +365,7 @@ ODBCColAttr >> transferOctetLength [
 ODBCColAttr >> type [
 	"Answer the sqlType instance variable."
 
-	^sqlType
+	^ sqlType
 ]
 
 { #category : #accessing }
@@ -392,8 +389,6 @@ ODBCColAttr >> updateRuleMask: anInteger [
 	"Private - Set the update rule mask for the receiver to anInteger"
 
 	special := special bitAnd: UpdateRules bitInvert.
-	anInteger isNil ifFalse: [
-		self specialFlagAt:
-			(1 bitShift: (anInteger+8))
-			put: true ]
+	anInteger ifNotNil: [
+		self specialFlagAt: (1 bitShift: anInteger + 8) put: true ]
 ]

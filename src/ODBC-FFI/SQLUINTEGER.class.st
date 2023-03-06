@@ -1,3 +1,6 @@
+"
+I represent the SQL UINTEGER type
+"
 Class {
 	#name : #SQLUINTEGER,
 	#superclass : #SQLIntegerType,
@@ -7,14 +10,13 @@ Class {
 { #category : #converting }
 SQLUINTEGER class >> asExternalTypeOn: generator [
 
-	^FFIUInt32 asExternalTypeOn: generator
+	^ FFIUInt32 asExternalTypeOn: generator
 ]
 
-{ #category : #converting }
+{ #category : #'field definition' }
 SQLUINTEGER class >> fields [
-	"
-	SQLUINTEGER defineFields
-	"
+	<script: 'SQLUINTEGER defineFields'>
+
 	^ #(#(#value 'ulong') )
 ]
 

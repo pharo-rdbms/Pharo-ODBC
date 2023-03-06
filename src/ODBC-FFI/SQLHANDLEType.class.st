@@ -1,3 +1,6 @@
+"
+SQL handle type
+"
 Class {
 	#name : #SQLHANDLEType,
 	#superclass : #FFIConstantHandleType,

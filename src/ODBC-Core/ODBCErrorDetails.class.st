@@ -28,7 +28,7 @@ ODBCErrorDetails class >> fromSQLError: errorString [
 
 	| lastBrkt |
 	lastBrkt := errorString lastIndexOf: $].
-	^self new
+	^ self new
 		msg: errorString;
 		origin: (errorString copyFrom: 1 to: lastBrkt);
 		yourself
@@ -48,7 +48,7 @@ ODBCErrorDetails >> messageText [
 ODBCErrorDetails >> msg [
 	"Answer the msg instance variable."
 
-	^msg
+	^ msg
 ]
 
 { #category : #accessing }
@@ -76,7 +76,7 @@ ODBCErrorDetails >> origin: aString [
 ODBCErrorDetails >> sqlState [
 	"Answer the sqlState instance variable."
 
-	^sqlState
+	^ sqlState
 ]
 
 { #category : #accessing }

@@ -18,7 +18,7 @@ Class {
 	#category : #'ODBC-FFI-Base'
 }
 
-{ #category : #'template definition' }
+{ #category : #'field definition' }
 ODBCTIMESTAMP class >> fieldsDesc [
 	"Define the fields of the ODBC TIMESTAMP structure
 

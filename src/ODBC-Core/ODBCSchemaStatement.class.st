@@ -22,11 +22,13 @@ ODBCSchemaStatement class >> isAbstract [
 
 { #category : #accessing }
 ODBCSchemaStatement >> catalogName [
-	^catalogName
+
+	^ catalogName
 ]
 
 { #category : #accessing }
 ODBCSchemaStatement >> catalogName: aString [
+
 	catalogName := aString
 ]
 
@@ -35,7 +37,7 @@ ODBCSchemaStatement >> defaultCursorType [
 	"Answer the <Symbol>ic name of the default cursor type to be used for statements
 	(one of #dynamic, #forwardOnly, #keysetDriven, #static)."
 
-	^#forwardOnly
+	^ #forwardOnly
 ]
 
 { #category : #operations }
@@ -43,25 +45,29 @@ ODBCSchemaStatement >> executeStatement [
 	"Private - Execute the database command that the receiver represents.
 	Answer the <integer> return code."
 
-	^self subclassResponsibility
+	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
 ODBCSchemaStatement >> schemaName [
-	^schemaName
+
+	^ schemaName
 ]
 
 { #category : #accessing }
 ODBCSchemaStatement >> schemaName: aStringPattern [
+
 	schemaName := aStringPattern
 ]
 
 { #category : #accessing }
 ODBCSchemaStatement >> tableName [
-	^tableName
+
+	^ tableName
 ]
 
 { #category : #accessing }
 ODBCSchemaStatement >> tableName: aStringPattern [
+
 	tableName := aStringPattern
 ]

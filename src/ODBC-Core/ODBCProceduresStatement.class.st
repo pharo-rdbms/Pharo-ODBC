@@ -17,7 +17,7 @@ ODBCProceduresStatement >> executeStatement [
 	"Private - Execute the database command that the receiver represents.
 	Answer the <integer> return code."
 
-	^ODBCLibrary default
+	^ ODBCLibrary default
 		sqlProcedures: self allocatedHandle
 		catalogName: (self stringEncoder encodeStringWithNullTerminator: self catalogName)
 		nameLength1: SQL_NTS
@@ -29,10 +29,12 @@ ODBCProceduresStatement >> executeStatement [
 
 { #category : #accessing }
 ODBCProceduresStatement >> procedureName [
-	^procedureName
+
+	^ procedureName
 ]
 
 { #category : #accessing }
 ODBCProceduresStatement >> procedureName: aString [
+
 	procedureName := aString
 ]

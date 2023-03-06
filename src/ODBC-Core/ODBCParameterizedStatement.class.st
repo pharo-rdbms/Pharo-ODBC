@@ -59,10 +59,8 @@ ODBCParameterizedStatement >> exec [
 
 	| ret |
 	self close.
-	isPrepared
-		ifFalse: [self prepare].
-	paramCols notNil
-		ifTrue: [self setValues].
+	isPrepared ifFalse: [ self prepare ].
+	paramCols ifNotNil: [ self setValues ].
 	ret := ODBCLibrary default sqlExecute: self allocatedHandle.
 	self dbCheckException: ret.
 	executed := true
@@ -83,7 +81,7 @@ ODBCParameterizedStatement >> free [
 ODBCParameterizedStatement >> paramCols [
 	"Answer the receiver's parameter columns"
 
-	^paramCols
+	^ paramCols
 ]
 
 { #category : #accessing }
@@ -99,11 +97,11 @@ ODBCParameterizedStatement >> parameters [
 	#exec) completes lazy evaluation by causing allocation of a statement handle, preparing
 	the statement, creating the array of parameter fields and binding them."
 
-	^parameters
+	^ parameters
 		ifNil:
-			[parameters := paramCols collect: [:col | ODBCField newForCol: col].
-			self bindParams.
-			parameters]
+			[ parameters := paramCols collect: [:col | ODBCField newForCol: col ].
+			  self bindParams.
+			  parameters ]
 ]
 
 { #category : #operations }
@@ -130,7 +128,7 @@ ODBCParameterizedStatement >> prepare: aString [
 	self sqlString: aString; prepare
 ]
 
-{ #category : #initializing }
+{ #category : #initialization }
 ODBCParameterizedStatement >> reset [
 	"Private - Initialize the receiver."
 
@@ -152,7 +150,7 @@ ODBCParameterizedStatement >> setValues [
 ODBCParameterizedStatement >> values [
 	"Answer the array of parameter values."
 
-	^values
+	^ values
 ]
 
 { #category : #accessing }

@@ -16,10 +16,10 @@ Class {
 { #category : #testing }
 ODBCConnectionTest class >> isAbstract [
 
-	^self == ODBCConnectionTest
+	^ self == ODBCConnectionTest
 ]
 
-{ #category : #public }
+{ #category : #helpers }
 ODBCConnectionTest >> databaseResource [
 	self subclassResponsibility
 ]

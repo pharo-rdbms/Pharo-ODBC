@@ -95,7 +95,7 @@ ODBCExceptionDetails >> buildErrorInfoFrom: anExternalHandle type: anIntegerHand
 ODBCExceptionDetails >> code [
 	"Answer the code instance variable."
 
-	^code
+	^ code
 ]
 
 { #category : #accessing }
@@ -109,7 +109,7 @@ ODBCExceptionDetails >> code: anInteger [
 ODBCExceptionDetails >> errors [
 	"Answer the errors instance variable."
 
-	^errors
+	^ errors
 ]
 
 { #category : #accessing }
@@ -123,7 +123,7 @@ ODBCExceptionDetails >> errors: anOrderedCollection [
 ODBCExceptionDetails >> hDBC [
 	"Answer the hDBC instance variable."
 
-	^hDBC
+	^ hDBC
 ]
 
 { #category : #accessing }
@@ -137,7 +137,7 @@ ODBCExceptionDetails >> hDBC: anExternalHandle [
 ODBCExceptionDetails >> hEnv [
 	"Answer the hEnv instance variable."
 
-	^hEnv
+	^ hEnv
 ]
 
 { #category : #accessing }

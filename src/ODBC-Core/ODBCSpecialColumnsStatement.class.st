@@ -14,11 +14,13 @@ Class {
 
 { #category : #accessing }
 ODBCSpecialColumnsStatement >> columnType [
-	^columnType
+
+	^ columnType
 ]
 
 { #category : #accessing }
 ODBCSpecialColumnsStatement >> columnType: anInteger [
+
 	columnType := anInteger
 ]
 
@@ -27,7 +29,7 @@ ODBCSpecialColumnsStatement >> executeStatement [
 	"Private - Execute the database command that the receiver represents.
 	Answer the <integer> return code."
 
-	^ODBCLibrary default
+	^ ODBCLibrary default
 		sqlSpecialColumns: self allocatedHandle
 		identifierType: self columnType
 		catalogName: (self stringEncoder encodeStringWithNullTerminator: self catalogName)
@@ -42,20 +44,24 @@ ODBCSpecialColumnsStatement >> executeStatement [
 
 { #category : #accessing }
 ODBCSpecialColumnsStatement >> nullable [
-	^nullable
+
+	^ nullable
 ]
 
 { #category : #accessing }
 ODBCSpecialColumnsStatement >> nullable: aBoolean [
+
 	nullable := aBoolean
 ]
 
 { #category : #accessing }
 ODBCSpecialColumnsStatement >> scope [
-	^scope
+
+	^ scope
 ]
 
 { #category : #accessing }
 ODBCSpecialColumnsStatement >> scope: anInteger [
+
 	scope := anInteger
 ]

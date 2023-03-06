@@ -10,13 +10,13 @@ Class {
 { #category : #constants }
 ODBCUTF16Encoder >> bytesPerCharacter [
 
-	^2
+	^ 2
 ]
 
 { #category : #constants }
 ODBCUTF16Encoder >> characterEncoderClass [
 
-	^ZnUTF16Encoder
+	^ ZnUTF16Encoder
 ]
 
 { #category : #decoding }
@@ -45,7 +45,7 @@ ODBCUTF16Encoder >> decodeNullTerminatedStringFrom: aByteArray [
 
 	codePoint = 0 or: [ stream nextPut: (Character value: codePoint). false] ] whileFalse.
 
-	^stream contents
+	^ stream contents
 ]
 
 { #category : #decoding }
@@ -75,11 +75,11 @@ ODBCUTF16Encoder >> decodeStringFrom: aByteArray byteCount: anInteger [
 
 		stream nextPut: (Character value: codePoint) ].
 
-	^stream contents
+	^ stream contents
 ]
 
 { #category : #constants }
 ODBCUTF16Encoder >> nullTerminatorBytes [
 
-	^#[ 0 0 ]
+	^ #[ 0 0 ]
 ]

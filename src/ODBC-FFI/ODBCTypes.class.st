@@ -1,3 +1,6 @@
+"
+Defines ODBC SQL Types
+"
 Class {
 	#name : #ODBCTypes,
 	#superclass : #SharedPool,

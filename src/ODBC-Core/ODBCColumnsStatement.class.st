@@ -14,11 +14,13 @@ Class {
 
 { #category : #accessing }
 ODBCColumnsStatement >> columnName [
-	^columnName
+
+	^ columnName
 ]
 
 { #category : #accessing }
 ODBCColumnsStatement >> columnName: aString [
+
 	columnName := aString
 ]
 
@@ -27,7 +29,7 @@ ODBCColumnsStatement >> executeStatement [
 	"Private - Execute the database command that the receiver represents.
 	Answer the <integer> return code."
 
-	^ODBCLibrary default
+	^ ODBCLibrary default
 		sqlColumns: self allocatedHandle
 		catalogName: (self stringEncoder encodeStringWithNullTerminator: self catalogName)
 		nameLength1: SQL_NTS

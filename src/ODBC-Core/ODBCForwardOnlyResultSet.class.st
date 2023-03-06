@@ -48,10 +48,10 @@ ODBCForwardOnlyResultSet >> free [
 ODBCForwardOnlyResultSet >> moveFirst [
 	"Private - If not at the start of the result set, then re-exec the statement."
 
-	^position == 1
-		ifTrue: [0]
+	^ position == 1
+		ifTrue: [ 0 ]
 		ifFalse: [
-			position > 0 ifTrue: [self requery].
+			position > 0 ifTrue: [ self requery ].
 			self moveNext]
 ]
 
@@ -61,8 +61,8 @@ ODBCForwardOnlyResultSet >> moveLast [
 	Answer the <integer> row status value."
 
 	| status lastStatus |
-	[(status := self moveNext) notNil] whileTrue: [lastStatus := status].
-	^lastStatus
+	[(status := self moveNext) notNil] whileTrue: [ lastStatus := status ].
+	^ lastStatus
 ]
 
 { #category : #positioning }
@@ -71,8 +71,8 @@ ODBCForwardOnlyResultSet >> moveNext [
 
 	| status |
 	status := self fetchScroll: SQL_FETCH_NEXT offset: 0.
-	status notNil ifTrue: [position := position + 1].
-	^status
+	status ifNotNil: [ position := position + 1 ].
+	^ status
 ]
 
 { #category : #positioning }
@@ -120,5 +120,5 @@ ODBCForwardOnlyResultSet >> reverseDo: operation [
 	memory (since it needs to reify the entire result set) for speed (since
 	it only moves forward through the result set)."
 
-	^self asOrderedCollection reverseDo: operation
+	^ self asOrderedCollection reverseDo: operation
 ]

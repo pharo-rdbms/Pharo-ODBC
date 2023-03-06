@@ -21,7 +21,7 @@ Class {
 	#category : #'ODBC-Core-Base'
 }
 
-{ #category : #'private - pool initialization' }
+{ #category : #'class initialization' }
 ODBCColFlags class >> initialize [
 
 	self

@@ -4,9 +4,10 @@ Class {
 	#category : #'ODBC-Tests-Base'
 }
 
-{ #category : #public }
+{ #category : #accessing }
 SQLServerODBCTest class >> resources [
-	^{SQLServerNorthwindDB}
+
+	^ { SQLServerNorthwindDB }
 ]
 
 { #category : #private }
@@ -64,6 +65,7 @@ SQLServerODBCTest >> queryColumns [
 
 { #category : #'unit tests' }
 SQLServerODBCTest >> testForeignKeysQuery [
+
 	| keys map |
 	keys := connection queryForeignKeysOf: 'Orders'.
 	self assert: keys size equals: 3.
@@ -79,6 +81,7 @@ SQLServerODBCTest >> testForeignKeysQuery [
 
 { #category : #'unit tests' }
 SQLServerODBCTest >> testPrimaryKeysQuery [
+
 	| pkeys |
 	pkeys := connection primaryKeysOf: 'Orders'.
 	self assert: pkeys size equals: 1.
@@ -87,6 +90,7 @@ SQLServerODBCTest >> testPrimaryKeysQuery [
 
 { #category : #'unit tests' }
 SQLServerODBCTest >> testProceduresQuery [
+
 	| procs |
 	procs := connection procedures.
 	self assert: (procs includes: 'Employee Sales by Country;1')
@@ -94,6 +98,7 @@ SQLServerODBCTest >> testProceduresQuery [
 
 { #category : #'unit tests' }
 SQLServerODBCTest >> testSQLServerConnectionAttributes [
+
 	connection transactionIsolation: #readUncommitted.
 	self assert: connection transactionIsolation equals: #readUncommitted.
 	connection loginTimeout: 30.
@@ -110,6 +115,7 @@ SQLServerODBCTest >> testSQLServerConnectionAttributes [
 
 { #category : #public }
 SQLServerODBCTest >> testTablesQuery [
+
 	| tables |
 	tables := connection
 				tables: nil
@@ -122,6 +128,7 @@ SQLServerODBCTest >> testTablesQuery [
 
 { #category : #public }
 SQLServerODBCTest >> testViewsQuery [
+
 	| views |
 	views := connection
 				tables: nil

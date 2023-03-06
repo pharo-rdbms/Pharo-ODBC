@@ -10,10 +10,10 @@ Class {
 { #category : #converting }
 SQLLEN64 class >> asExternalTypeOn: generator [
 
-	^FFIInt64 asExternalTypeOn: generator
+	^ FFIInt64 asExternalTypeOn: generator
 ]
 
-{ #category : #converting }
+{ #category : #'field definition' }
 SQLLEN64 class >> fields [
 	"
 	SQLLEN64 defineFields

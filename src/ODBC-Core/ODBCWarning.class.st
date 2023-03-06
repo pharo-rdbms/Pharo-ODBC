@@ -16,7 +16,7 @@ ODBCWarning class >> signalWith: anODBCExceptionDetails [
 	self signal: anODBCExceptionDetails displayString withTag: anODBCExceptionDetails
 ]
 
-{ #category : #signalling }
+{ #category : #signaling }
 ODBCWarning >> signal [
 	"Signal this exception."
 

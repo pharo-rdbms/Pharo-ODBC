@@ -1,3 +1,6 @@
+"
+Defined C types for ODBC
+"
 Class {
 	#name : #ODBCCTypes,
 	#superclass : #SharedPool,
@@ -49,6 +52,7 @@ Class {
 
 { #category : #'class initialization' }
 ODBCCTypes class >> initialize [
+
 	self
 		initialize_SQL_C_BINARY;
 		initialize_SQL_C_BIT;
@@ -90,8 +94,7 @@ ODBCCTypes class >> initialize [
 		initialize_SQL_C_USHORT;
 		initialize_SQL_C_UTINYINT;
 		initialize_SQL_C_VARBOOKMARK;
-		initialize_SQL_C_WCHAR;
-		yourself
+		initialize_SQL_C_WCHAR
 ]
 
 { #category : #'private - pool initialization' }

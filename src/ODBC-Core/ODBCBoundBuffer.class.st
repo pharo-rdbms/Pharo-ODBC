@@ -36,7 +36,7 @@ ODBCBoundBuffer >> bind: aDBStatement [
 						targetValuePtr: dataBuffer
 						bufferLength: eachField bufferSize
 						strLenOrInd: eachField lengthBuf)].
-	^hStmt
+	^ hStmt
 ]
 
 { #category : #'data retrieval' }

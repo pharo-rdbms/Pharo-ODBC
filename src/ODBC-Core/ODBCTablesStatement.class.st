@@ -17,7 +17,7 @@ ODBCTablesStatement >> executeStatement [
 	"Private - Execute the database command that the receiver represents.
 	Answer the <integer> return code."
 
-	^ODBCLibrary default
+	^ ODBCLibrary default
 		sqlTables: self allocatedHandle
 		szTableQualifier: (self stringEncoder encodeStringWithNullTerminator: catalogName)
 		cbTableQualifier: SQL_NTS
@@ -29,7 +29,7 @@ ODBCTablesStatement >> executeStatement [
 		cbTableType: SQL_NTS
 ]
 
-{ #category : #initializing }
+{ #category : #initialization }
 ODBCTablesStatement >> initialize: anODBCConnection [
 	"Private - Initialize the receiver as a new statement of the
 	<ODBCConnection>, anODBCConnection."
@@ -40,10 +40,12 @@ ODBCTablesStatement >> initialize: anODBCConnection [
 
 { #category : #accessing }
 ODBCTablesStatement >> tableType [
-	^tableType
+
+	^ tableType
 ]
 
 { #category : #accessing }
 ODBCTablesStatement >> tableType: aString [
+
 	tableType := aString
 ]

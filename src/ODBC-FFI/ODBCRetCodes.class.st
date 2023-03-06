@@ -1,3 +1,6 @@
+"
+Define ODBC return codes
+"
 Class {
 	#name : #ODBCRetCodes,
 	#superclass : #SharedPool,

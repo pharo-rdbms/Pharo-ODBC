@@ -1,3 +1,6 @@
+"
+Defines ODBC constants
+"
 Class {
 	#name : #ODBCConstants,
 	#superclass : #SharedPool,

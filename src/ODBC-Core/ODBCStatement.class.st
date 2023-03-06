@@ -24,7 +24,7 @@ ODBCStatement >> defaultCursorType [
 	Implementation Note: For backwards compatibility use a #keysetDriven cursor
 	by default."
 
-	^#keysetDriven
+	^ #keysetDriven
 ]
 
 { #category : #operations }
@@ -36,10 +36,11 @@ ODBCStatement >> exec: aString [
 
 { #category : #operations }
 ODBCStatement >> executeStatement [
-	^ODBCLibrary default
-		sqlExecDirect: self allocatedHandle
-		statementText: (self stringEncoder encodeStringWithNullTerminator: self sqlString)
-		textLength: SQL_NTS
+
+	^ ODBCLibrary default
+			sqlExecDirect: self allocatedHandle
+			statementText: (self stringEncoder encodeStringWithNullTerminator: self sqlString)
+			textLength: SQL_NTS
 ]
 
 { #category : #printing }
@@ -58,7 +59,7 @@ ODBCStatement >> printOn: aStream [
 ODBCStatement >> sqlString [
 	"Answer the sqlString instance variable."
 
-	^sqlString
+	^ sqlString
 ]
 
 { #category : #accessing }
