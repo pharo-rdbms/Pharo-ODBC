@@ -2,24 +2,26 @@
 Provides encoding/decoding of UTF16 strings.
 "
 Class {
-	#name : #ODBCUTF16Encoder,
-	#superclass : #ODBCStringEncoder,
-	#category : #'ODBC-Core-Base'
+	#name : 'ODBCUTF16Encoder',
+	#superclass : 'ODBCStringEncoder',
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #constants }
+{ #category : 'constants' }
 ODBCUTF16Encoder >> bytesPerCharacter [
 
 	^ 2
 ]
 
-{ #category : #constants }
+{ #category : 'constants' }
 ODBCUTF16Encoder >> characterEncoderClass [
 
 	^ ZnUTF16Encoder
 ]
 
-{ #category : #decoding }
+{ #category : 'decoding' }
 ODBCUTF16Encoder >> decodeNullTerminatedStringFrom: aByteArray [
 	"Optimised (~25% faster) equivalent of superclass implementation"
 
@@ -48,7 +50,7 @@ ODBCUTF16Encoder >> decodeNullTerminatedStringFrom: aByteArray [
 	^ stream contents
 ]
 
-{ #category : #decoding }
+{ #category : 'decoding' }
 ODBCUTF16Encoder >> decodeStringFrom: aByteArray byteCount: anInteger [
 	"Optimised (~25% faster) equivalent of superclass implementation"
 
@@ -78,7 +80,7 @@ ODBCUTF16Encoder >> decodeStringFrom: aByteArray byteCount: anInteger [
 	^ stream contents
 ]
 
-{ #category : #constants }
+{ #category : 'constants' }
 ODBCUTF16Encoder >> nullTerminatorBytes [
 
 	^ #[ 0 0 ]

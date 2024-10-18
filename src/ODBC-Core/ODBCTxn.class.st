@@ -11,8 +11,8 @@ Instance Variables:
 Based on DBTxn from Dolphin Smalltalk Database Connection package.
 "
 Class {
-	#name : #ODBCTxn,
-	#superclass : #Object,
+	#name : 'ODBCTxn',
+	#superclass : 'Object',
 	#instVars : [
 		'connection',
 		'readOnly',
@@ -21,10 +21,12 @@ Class {
 	#pools : [
 		'ODBCConstants'
 	],
-	#category : #'ODBC-Core-Base'
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 ODBCTxn class >> newOn: anODBCConnection [
 	"Answer an instance of the receiver with commits disabled."
 
@@ -34,7 +36,7 @@ ODBCTxn class >> newOn: anODBCConnection [
 			yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 ODBCTxn class >> newRWOn: anODBCConnection [
 	"Answer an instance of the receiver with commits enabled."
 
@@ -44,21 +46,21 @@ ODBCTxn class >> newRWOn: anODBCConnection [
 			yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCTxn >> beReadOnly [
 	"Set the receiver's readOnly inst var to true."
 
 	readOnly := true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCTxn >> beReadWrite [
 	"Set the receiver's readOnly inst var to false."
 
 	readOnly := false
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCTxn >> commit [
 	"Commit the transaction."
 
@@ -67,21 +69,21 @@ ODBCTxn >> commit [
 	ODBCConnection transact: connection action: SQL_COMMIT
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCTxn >> connection [
 	"Answer the connection instance variable."
 
 	^ connection
 ]
 
-{ #category : #initializing }
+{ #category : 'initializing' }
 ODBCTxn >> connection: anODBCConnection [
 	"Private - Set the connection instance variable to anODBCConnection."
 
 	connection := anODBCConnection
 ]
 
-{ #category : #development }
+{ #category : 'development' }
 ODBCTxn >> creator: anObject [
 	"Private - Set the creator instance variable to anObject."
 
@@ -89,7 +91,7 @@ ODBCTxn >> creator: anObject [
 	self transcriptMessage: 'New transaction...'
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 ODBCTxn >> printOn: aStream [
 	"Print a text representation of the receiver on aStream."
 
@@ -106,7 +108,7 @@ ODBCTxn >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCTxn >> rollback [
 	"Free up all resources held by the tuples opened during this
 	transaction"
@@ -115,7 +117,7 @@ ODBCTxn >> rollback [
 	ODBCConnection transact: connection action: SQL_ROLLBACK
 ]
 
-{ #category : #'operations-logging' }
+{ #category : 'operations-logging' }
 ODBCTxn >> transcriptMessage: aString [
 	"Private - Output an appropriately annotated message to the current
 	session's trace device. In a development session this is the Transcript"

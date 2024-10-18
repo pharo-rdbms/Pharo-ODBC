@@ -4,35 +4,37 @@ ODBCSchemaStatement is the class of Database Connection statements for querying 
 Based on DBSchemaStatement from Dolphin Smalltalk Database Connection package.
 "
 Class {
-	#name : #ODBCSchemaStatement,
-	#superclass : #ODBCAbstractStatement,
+	#name : 'ODBCSchemaStatement',
+	#superclass : 'ODBCAbstractStatement',
 	#instVars : [
 		'catalogName',
 		'schemaName',
 		'tableName'
 	],
-	#category : #'ODBC-Core-Base'
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 ODBCSchemaStatement class >> isAbstract [
 
 	^ self == ODBCSchemaStatement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCSchemaStatement >> catalogName [
 
 	^ catalogName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCSchemaStatement >> catalogName: aString [
 
 	catalogName := aString
 ]
 
-{ #category : #constants }
+{ #category : 'constants' }
 ODBCSchemaStatement >> defaultCursorType [
 	"Answer the <Symbol>ic name of the default cursor type to be used for statements
 	(one of #dynamic, #forwardOnly, #keysetDriven, #static)."
@@ -40,7 +42,7 @@ ODBCSchemaStatement >> defaultCursorType [
 	^ #forwardOnly
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCSchemaStatement >> executeStatement [
 	"Private - Execute the database command that the receiver represents.
 	Answer the <integer> return code."
@@ -48,25 +50,25 @@ ODBCSchemaStatement >> executeStatement [
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCSchemaStatement >> schemaName [
 
 	^ schemaName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCSchemaStatement >> schemaName: aStringPattern [
 
 	schemaName := aStringPattern
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCSchemaStatement >> tableName [
 
 	^ tableName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCSchemaStatement >> tableName: aStringPattern [
 
 	tableName := aStringPattern

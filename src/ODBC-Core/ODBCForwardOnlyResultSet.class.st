@@ -9,15 +9,17 @@ Instance Variables:
 Based on DBForwardOnlyResultSet from Dolphin Smalltalk Database Connection package.
 "
 Class {
-	#name : #ODBCForwardOnlyResultSet,
-	#superclass : #ODBCResultSet,
+	#name : 'ODBCForwardOnlyResultSet',
+	#superclass : 'ODBCResultSet',
 	#instVars : [
 		'position'
 	],
-	#category : #'ODBC-Core-Base'
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #binding }
+{ #category : 'binding' }
 ODBCForwardOnlyResultSet >> bind: anArrayOfColNums [
 	"Private - Create and bind a buffer to hold the
 	specified columns (or #() for all columns)
@@ -27,7 +29,7 @@ ODBCForwardOnlyResultSet >> bind: anArrayOfColNums [
 	position := 0
 ]
 
-{ #category : #'realizing/unrealizing' }
+{ #category : 'realizing/unrealizing' }
 ODBCForwardOnlyResultSet >> close [
 	"Close the statement which generated the receiver."
 
@@ -35,7 +37,7 @@ ODBCForwardOnlyResultSet >> close [
 	position := 0
 ]
 
-{ #category : #'realizing/unrealizing' }
+{ #category : 'realizing/unrealizing' }
 ODBCForwardOnlyResultSet >> free [
 	"Free the statement which generated the receiver and any other
 	resources associated with the receiver itself."
@@ -44,7 +46,7 @@ ODBCForwardOnlyResultSet >> free [
 	position := 0
 ]
 
-{ #category : #positioning }
+{ #category : 'positioning' }
 ODBCForwardOnlyResultSet >> moveFirst [
 	"Private - If not at the start of the result set, then re-exec the statement."
 
@@ -55,7 +57,7 @@ ODBCForwardOnlyResultSet >> moveFirst [
 			self moveNext]
 ]
 
-{ #category : #positioning }
+{ #category : 'positioning' }
 ODBCForwardOnlyResultSet >> moveLast [
 	"Private - Scroll to the last row of the receiver's result set.
 	Answer the <integer> row status value."
@@ -65,7 +67,7 @@ ODBCForwardOnlyResultSet >> moveLast [
 	^ lastStatus
 ]
 
-{ #category : #positioning }
+{ #category : 'positioning' }
 ODBCForwardOnlyResultSet >> moveNext [
 	"Private - Advance to the next row in the result set."
 
@@ -75,7 +77,7 @@ ODBCForwardOnlyResultSet >> moveNext [
 	^ status
 ]
 
-{ #category : #positioning }
+{ #category : 'positioning' }
 ODBCForwardOnlyResultSet >> movePrevious [
 	"Private - Scroll to the previous row of the receiver's result set.
 	Answer the <integer> row status value."
@@ -83,7 +85,7 @@ ODBCForwardOnlyResultSet >> movePrevious [
 	self moveTo: position - 1
 ]
 
-{ #category : #positioning }
+{ #category : 'positioning' }
 ODBCForwardOnlyResultSet >> moveTo: anInteger [
 	| status |
 	position = anInteger
@@ -95,7 +97,7 @@ ODBCForwardOnlyResultSet >> moveTo: anInteger [
 	^status
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 ODBCForwardOnlyResultSet >> onStartup [
 	"Private - The system is starting. Clear down any invalid external
 	resources so that they are lazily reallocated on demand,etc."
@@ -104,14 +106,14 @@ ODBCForwardOnlyResultSet >> onStartup [
 	position := 0
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCForwardOnlyResultSet >> requery [
 	"Private - Cause a requery to occur lazily on the next access by closing the result set."
 
 	self close
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 ODBCForwardOnlyResultSet >> reverseDo: operation [
 	"Evaluate the <monadicValuable> argument, operation, against each
 	element of the receiver in reverse order, from end to start.

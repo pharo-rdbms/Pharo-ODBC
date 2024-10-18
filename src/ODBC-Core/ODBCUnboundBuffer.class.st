@@ -4,12 +4,14 @@ An ODBCUnboundRow represents a row buffer that is not statically bound to alloca
 Based on ODBCUnboundBuffer from Dolphin Smalltalk Database Connection package.
 "
 Class {
-	#name : #ODBCUnboundBuffer,
-	#superclass : #ODBCRowBuffer,
-	#category : #'ODBC-Core-Base'
+	#name : 'ODBCUnboundBuffer',
+	#superclass : 'ODBCRowBuffer',
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #'data retrieval' }
+{ #category : 'data retrieval' }
 ODBCUnboundBuffer >> getData: anODBCStatement [
 	"Private - Copy data from the result table into fields of the receiver."
 

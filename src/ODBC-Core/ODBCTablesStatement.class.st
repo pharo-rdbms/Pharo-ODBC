@@ -4,15 +4,17 @@ ODBCTablesStatement is a specialized <ODBCSchemaStatement> for querying about ta
 Based on DBTablesStatement from Dolphin Smalltalk Database Connection package.
 "
 Class {
-	#name : #ODBCTablesStatement,
-	#superclass : #ODBCSchemaStatement,
+	#name : 'ODBCTablesStatement',
+	#superclass : 'ODBCSchemaStatement',
 	#instVars : [
 		'tableType'
 	],
-	#category : #'ODBC-Core-Base'
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCTablesStatement >> executeStatement [
 	"Private - Execute the database command that the receiver represents.
 	Answer the <integer> return code."
@@ -29,7 +31,7 @@ ODBCTablesStatement >> executeStatement [
 		cbTableType: SQL_NTS
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ODBCTablesStatement >> initialize: anODBCConnection [
 	"Private - Initialize the receiver as a new statement of the
 	<ODBCConnection>, anODBCConnection."
@@ -38,13 +40,13 @@ ODBCTablesStatement >> initialize: anODBCConnection [
 	tableType := '''TABLE'''
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCTablesStatement >> tableType [
 
 	^ tableType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCTablesStatement >> tableType: aString [
 
 	tableType := aString

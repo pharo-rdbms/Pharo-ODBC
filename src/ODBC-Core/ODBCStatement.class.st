@@ -9,15 +9,17 @@ Instance Variables:
 Based on DBStatement from Dolphin Smalltalk Database Connection package.
 "
 Class {
-	#name : #ODBCStatement,
-	#superclass : #ODBCAbstractStatement,
+	#name : 'ODBCStatement',
+	#superclass : 'ODBCAbstractStatement',
 	#instVars : [
 		'sqlString'
 	],
-	#category : #'ODBC-Core-Base'
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #constants }
+{ #category : 'constants' }
 ODBCStatement >> defaultCursorType [
 	"Answer the <Symbol>ic name of the default cursor type to be used for statements
 	(one of #dynamic, #forwardOnly, #keysetDriven, #static).
@@ -27,14 +29,14 @@ ODBCStatement >> defaultCursorType [
 	^ #keysetDriven
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCStatement >> exec: aString [
 	"Execute the SQL statement aString using the receiver"
 
 	self sqlString: aString; exec
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCStatement >> executeStatement [
 
 	^ ODBCLibrary default
@@ -43,7 +45,7 @@ ODBCStatement >> executeStatement [
 			textLength: SQL_NTS
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 ODBCStatement >> printOn: aStream [
 	"Print a string representation of self onto aStream"
 
@@ -55,14 +57,14 @@ ODBCStatement >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCStatement >> sqlString [
 	"Answer the sqlString instance variable."
 
 	^ sqlString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCStatement >> sqlString: aString [
 	"Private - Set the sqlString instance variable to aString.
 	N.B. Changing the SQL string after executing the statement (either directly

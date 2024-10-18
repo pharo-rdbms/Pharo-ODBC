@@ -2,29 +2,31 @@
 Based on DBSpecialColumnsStatement from Dolphin Smalltalk Database Connection package.
 "
 Class {
-	#name : #ODBCSpecialColumnsStatement,
-	#superclass : #ODBCSchemaStatement,
+	#name : 'ODBCSpecialColumnsStatement',
+	#superclass : 'ODBCSchemaStatement',
 	#instVars : [
 		'columnType',
 		'scope',
 		'nullable'
 	],
-	#category : #'ODBC-Core-Base'
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCSpecialColumnsStatement >> columnType [
 
 	^ columnType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCSpecialColumnsStatement >> columnType: anInteger [
 
 	columnType := anInteger
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCSpecialColumnsStatement >> executeStatement [
 	"Private - Execute the database command that the receiver represents.
 	Answer the <integer> return code."
@@ -42,25 +44,25 @@ ODBCSpecialColumnsStatement >> executeStatement [
 		nullable: (self nullable ifTrue: [SQL_NULLABLE] ifFalse: [SQL_NO_NULLS])
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCSpecialColumnsStatement >> nullable [
 
 	^ nullable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCSpecialColumnsStatement >> nullable: aBoolean [
 
 	nullable := aBoolean
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCSpecialColumnsStatement >> scope [
 
 	^ scope
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCSpecialColumnsStatement >> scope: anInteger [
 
 	scope := anInteger

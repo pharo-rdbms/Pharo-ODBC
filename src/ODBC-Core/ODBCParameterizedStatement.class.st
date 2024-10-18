@@ -12,8 +12,8 @@ Instance Variables:
 Based on DBParameterizedStatement from Dolphin Smalltalk Database Connection package.
 "
 Class {
-	#name : #ODBCParameterizedStatement,
-	#superclass : #ODBCStatement,
+	#name : 'ODBCParameterizedStatement',
+	#superclass : 'ODBCStatement',
 	#instVars : [
 		'values',
 		'parameters',
@@ -23,10 +23,12 @@ Class {
 	#pools : [
 		'ODBCCTypes'
 	],
-	#category : #'ODBC-Core-Base'
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCParameterizedStatement >> bindParams [
 	"Private - Bind parameter columns for a prepared SQL statement so that when we
 	subsequently fill the buffer fields the statement is ready to exec. Normally only done
@@ -53,7 +55,7 @@ ODBCParameterizedStatement >> bindParams [
 						strLenOrIndPtr: eachField lengthBuf)]
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCParameterizedStatement >> exec [
 	"(Re)Execute a prepared statement."
 
@@ -66,7 +68,7 @@ ODBCParameterizedStatement >> exec [
 	executed := true
 ]
 
-{ #category : #'realizing/unrealizing' }
+{ #category : 'realizing/unrealizing' }
 ODBCParameterizedStatement >> free [
 	"Release external resources held by the receiver,
 	remaining in a consistent state in order that
@@ -77,21 +79,21 @@ ODBCParameterizedStatement >> free [
 	parameters := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCParameterizedStatement >> paramCols [
 	"Answer the receiver's parameter columns"
 
 	^ paramCols
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCParameterizedStatement >> paramCols: anArrayOfColAttrs [
 	"Set the receiver's parameter columns to anArrayOfColAttrs"
 
 	paramCols := anArrayOfColAttrs asArray
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCParameterizedStatement >> parameters [
 	"Private - Answer the receivers bound parameter fields. On first receipt (usually from
 	#exec) completes lazy evaluation by causing allocation of a statement handle, preparing
@@ -104,7 +106,7 @@ ODBCParameterizedStatement >> parameters [
 			  parameters ]
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCParameterizedStatement >> prepare [
 	"Private - Prepare the receiver for later execution when the parameter values have
 	been set. N.B. This should only be sent once unless closed in the interm."
@@ -120,7 +122,7 @@ ODBCParameterizedStatement >> prepare [
 	isPrepared := true
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCParameterizedStatement >> prepare: aString [
 	"Private - Prepare the receiver for later execution when the parameter values have
 	been set."
@@ -128,7 +130,7 @@ ODBCParameterizedStatement >> prepare: aString [
 	self sqlString: aString; prepare
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ODBCParameterizedStatement >> reset [
 	"Private - Initialize the receiver."
 
@@ -137,7 +139,7 @@ ODBCParameterizedStatement >> reset [
 	parameters := nil
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCParameterizedStatement >> setValues [
 	"Private - Copy object values to the bound fields for the parameters of the prepared SQL
 	statement. On first receipt this will cause the parameter fields to be created and bound 	(via #parameters)."
@@ -146,14 +148,14 @@ ODBCParameterizedStatement >> setValues [
 		(parameters at: i) value: (values at: i)]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCParameterizedStatement >> values [
 	"Answer the array of parameter values."
 
 	^ values
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCParameterizedStatement >> values: anArrayOfValues [
 	"Set the receiver's parameter values prior to a future #exec."
 

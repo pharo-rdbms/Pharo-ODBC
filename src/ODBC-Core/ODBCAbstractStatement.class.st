@@ -10,8 +10,8 @@ Instance Variables:
 Based on DBAbstractStatement from Dolphin Smalltalk Database Connection package.
 "
 Class {
-	#name : #ODBCAbstractStatement,
-	#superclass : #Object,
+	#name : 'ODBCAbstractStatement',
+	#superclass : 'Object',
 	#instVars : [
 		'handle',
 		'parent',
@@ -25,10 +25,12 @@ Class {
 		'ODBCConstants',
 		'ODBCRetCodes'
 	],
-	#category : #'ODBC-Core-Base'
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 ODBCAbstractStatement class >> initialize [
 	"
 		self initialize
@@ -42,20 +44,20 @@ ODBCAbstractStatement class >> initialize [
 		at: #dynamic put: SQL_CURSOR_DYNAMIC
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 ODBCAbstractStatement class >> isAbstract [
 
 	^self == ODBCAbstractStatement
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 ODBCAbstractStatement class >> new [
 	"Private - Should not implement. Use #parent:"
 
 	^self shouldNotImplement
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 ODBCAbstractStatement class >> parent: anODBCConnection [
 	"Answer an initialized instance of the receiver."
 
@@ -64,7 +66,7 @@ ODBCAbstractStatement class >> parent: anODBCConnection [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 ODBCAbstractStatement class >> parent: anODBCConnection cursorType: aSymbol [
 	"Answer an initialized instance of the receiver."
 
@@ -73,7 +75,7 @@ ODBCAbstractStatement class >> parent: anODBCConnection cursorType: aSymbol [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractStatement >> allocatedHandle [
 	"Private - Answer the receiver's ODBC statement handle, which is lazily
 	allocated if necessary."
@@ -86,7 +88,7 @@ ODBCAbstractStatement >> allocatedHandle [
 	^ handle
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractStatement >> asParameter [
 	"Answer the receiver in a form suitable for passing to an external function
 	primitive method (see ExternalLibrary and subclasses)."
@@ -94,20 +96,20 @@ ODBCAbstractStatement >> asParameter [
 	^ self executedHandle
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractStatement >> assignHandle: aSQLHANDLE [
 
 	handle := aSQLHANDLE
 ]
 
-{ #category : #'realizing/unrealizing' }
+{ #category : 'realizing/unrealizing' }
 ODBCAbstractStatement >> basicFree [
 	"Private - Free up all ODBC resources."
 
 	parent freeStmtHandle: self
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCAbstractStatement >> cancel [
 	"Cancel any outstanding asynchronous request."
 
@@ -118,7 +120,7 @@ ODBCAbstractStatement >> cancel [
 				ifFalse: [self dbCheckException: (ODBCLibrary default sqlCancel: handle) ]]
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCAbstractStatement >> close [
 	"Private - Close the cursor, but keep the handle.
 	Implementation Note: Use SQLFreeStmt(,SQL_CLOSE), rather than SQLCloseCursor, since the latter
@@ -131,7 +133,7 @@ ODBCAbstractStatement >> close [
 			(ODBCLibrary default sqlFreeStmt: handle option: SQL_CLOSE) ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractStatement >> columnLength: anInteger [
 	"Answer the length (bytes) of column number anInteger in the Result Set."
 
@@ -150,14 +152,14 @@ ODBCAbstractStatement >> columnLength: anInteger [
 	^ len value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractStatement >> cursorType [
 	"Answer the symbolic cursor type name (one of #dynamic, #forwardOnly, #keysetDriven or #static)."
 
 	^ cursorType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractStatement >> cursorType: aSymbol [
 
 	(CursorTypes includesKey: aSymbol)
@@ -167,7 +169,7 @@ ODBCAbstractStatement >> cursorType: aSymbol [
 	handle isNull ifFalse: [self setCursorType]
 ]
 
-{ #category : #exceptions }
+{ #category : 'exceptions' }
 ODBCAbstractStatement >> dbCheckException: anIntegerRetCode [
 	"Private - Checks anIntegerRetCode to see if an ODBCError or ODBCWarning should be 	signalled"
 
@@ -180,7 +182,7 @@ ODBCAbstractStatement >> dbCheckException: anIntegerRetCode [
 				ifFalse: [ODBCError]) signalWith: (self exceptionDetails: anIntegerRetCode)]
 ]
 
-{ #category : #constants }
+{ #category : 'constants' }
 ODBCAbstractStatement >> defaultCursorType [
 	"Answer the <Symbol>ic name of the default cursor type to be used for statements
 	(one of #dynamic, #forwardOnly, #keysetDriven, #static)."
@@ -188,7 +190,7 @@ ODBCAbstractStatement >> defaultCursorType [
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractStatement >> describeCol: anInteger [
 	"Answer an ODBCColAttr object which describes the column with the specified
 	<integer> index in the receiver's result set."
@@ -196,7 +198,7 @@ ODBCAbstractStatement >> describeCol: anInteger [
 	^ (self describeCols: (Array with: anInteger)) first
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractStatement >> describeCols: columnNumbers [
 	"Answer an array of <ODBCColAttr>s describing each of the columns of the receiver's results with indices in the <sequencedReadableCollection> argument."
 
@@ -263,7 +265,7 @@ ODBCAbstractStatement >> describeCols: columnNumbers [
 	^ answer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractStatement >> driverHStmt [
 	"Private - Answer the handle to the driver statement"
 
@@ -278,7 +280,7 @@ ODBCAbstractStatement >> driverHStmt [
 	^ value
 ]
 
-{ #category : #exceptions }
+{ #category : 'exceptions' }
 ODBCAbstractStatement >> exceptionDetails: anIntegerRetCode [
 	"Private - Answer an ODBCExceptionDetails instance that describes the state of the
 	receiver following an exception. This will be available as the tag of a subsequent
@@ -289,7 +291,7 @@ ODBCAbstractStatement >> exceptionDetails: anIntegerRetCode [
 			yourself
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCAbstractStatement >> exec [
 	"Private - Execute the tables query the receiver represents."
 
@@ -297,7 +299,7 @@ ODBCAbstractStatement >> exec [
 	executed := true
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCAbstractStatement >> executeStatement [
 	"Private - Execute the database command that the receiver represents.
 	Answer the <integer> return code."
@@ -305,7 +307,7 @@ ODBCAbstractStatement >> executeStatement [
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractStatement >> executedHandle [
 	"Private - Answer the receiver's ODBC statement handle having lazily
 	executed the SQL statement associated with the receiver."
@@ -316,14 +318,14 @@ ODBCAbstractStatement >> executedHandle [
 	^ answer
 ]
 
-{ #category : #finalization }
+{ #category : 'finalization' }
 ODBCAbstractStatement >> finalizationRegistry [
 	"Use the parent's statements WeakRegistry"
 
 	^ parent statements
 ]
 
-{ #category : #finalization }
+{ #category : 'finalization' }
 ODBCAbstractStatement >> finalize [
 	"Private - Free any external resources held by the receiver.
 	Should any error occur we print it to trace but otherwise ignore it."
@@ -331,14 +333,14 @@ ODBCAbstractStatement >> finalize [
 	[ self free ] on: ODBCError do: [:e | e trace ]
 ]
 
-{ #category : #'realizing/unrealizing' }
+{ #category : 'realizing/unrealizing' }
 ODBCAbstractStatement >> free [
 	"Free up all resources leaving the receiver in a re-usable state."
 
 	handle isNull ifFalse: [[ self basicFree ] ensure: [ self reset ]]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractStatement >> getStringAttribute: anInteger [
 	"Private - Answer a <String> containing the value of the statement attribute identified by the <integer> argument."
 
@@ -355,13 +357,13 @@ ODBCAbstractStatement >> getStringAttribute: anInteger [
 	self stringEncoder decodeNullTerminatedStringFrom: buffer] ensure: [ buffer free ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractStatement >> handle [
 
 	^ handle
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ODBCAbstractStatement >> initialize [
 	"Private - Initialize a new instance of the receiver."
 
@@ -369,7 +371,7 @@ ODBCAbstractStatement >> initialize [
 	cursorType := self defaultCursorType
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ODBCAbstractStatement >> initialize: anODBCConnection [
 	"Private - Initialize the receiver as a new statement of the
 	<ODBCConnection>, anODBCConnection."
@@ -378,7 +380,7 @@ ODBCAbstractStatement >> initialize: anODBCConnection [
 	self initialize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractStatement >> moveTo: anIntegerRow [
 	"Private - Position the cursor at the specified
 	row so that it is read on a subsequent Fetch (requires
@@ -391,7 +393,7 @@ ODBCAbstractStatement >> moveTo: anIntegerRow [
 				lockType: SQL_LOCK_NO_CHANGE)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractStatement >> numColumns [
 	"Answer the number of columns in the receiver's result set."
 
@@ -404,7 +406,7 @@ ODBCAbstractStatement >> numColumns [
 	^ ccol value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractStatement >> numRows [
 	"Answer the number of rows affected by an UPDATE, DELETE or INSERT command exec'd on
 	the receiver. May also work for some SELECTs, although often the answer will be -1
@@ -418,21 +420,21 @@ ODBCAbstractStatement >> numRows [
 	^ rowCount value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractStatement >> parent [
 	"Answer the statement's parent <ODBCConnection> object."
 
 	^ parent
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ODBCAbstractStatement >> reset [
 
 	handle := SQLHANDLE null.
 	executed := false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractStatement >> results [
 	"Answer an <ODBCResultSet> that manages the results for the receiver.
 	The result set will cause the receiver to be lazily executed when
@@ -443,7 +445,7 @@ ODBCAbstractStatement >> results [
 			ifFalse: [ODBCResultSet]) statement: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractStatement >> setAttribute: attributeInteger value: anIntegerOrStringOrBytes size: sizeInteger [
 	| ret |
 	ret := ODBCLibrary default
@@ -454,7 +456,7 @@ ODBCAbstractStatement >> setAttribute: attributeInteger value: anIntegerOrString
 	self dbCheckException: ret
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 ODBCAbstractStatement >> setCursorType [
 	"Private - Set the cursor type of the statement to one of: #static, #dynamic, #keysetDriven or #forwardOnly.
 	See the ODBC documentation for details of the different cursor types."
@@ -465,14 +467,14 @@ ODBCAbstractStatement >> setCursorType [
 			size: SQL_IS_UINTEGER
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ODBCAbstractStatement >> setDefaultAttributes [
 	"Private - Set the default attributes of the statement that need to be set before the statement is prepared."
 
 	self suppressErrorsDo: [ self setCursorType ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractStatement >> statusArray: anArrayOfWORDs [
 	"Private - Set the argument to be the receiver's status array attribute."
 
@@ -482,13 +484,13 @@ ODBCAbstractStatement >> statusArray: anArrayOfWORDs [
 		size: SQL_IS_POINTER
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractStatement >> stringEncoder [
 
 	^ODBCConnection stringEncoder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractStatement >> suppressErrorsDo: aNiladicBlock [
 
 	aNiladicBlock on: ODBCError do: [:e | e trace]

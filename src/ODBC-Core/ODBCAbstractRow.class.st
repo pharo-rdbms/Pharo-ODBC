@@ -12,8 +12,8 @@ Instance Variables:
 Based on DBAbstractRow from Dolphin Smalltalk Database Connection package.
 "
 Class {
-	#name : #ODBCAbstractRow,
-	#superclass : #Object,
+	#name : 'ODBCAbstractRow',
+	#superclass : 'Object',
 	#instVars : [
 		'columns',
 		'contents',
@@ -23,16 +23,18 @@ Class {
 	#pools : [
 		'ODBCConstants'
 	],
-	#category : #'ODBC-Core-Base'
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 ODBCAbstractRow class >> isAbstract [
 
 	^ self == ODBCAbstractRow
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 ODBCAbstractRow >> = comparand [
 	"Answer whether the receiver and the <Object>, comparand,
 	are considered equivalent."
@@ -41,21 +43,21 @@ ODBCAbstractRow >> = comparand [
 		  self contents = comparand contents ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCAbstractRow >> asObject [
 	"Private - Answer the receiver as an instance of DBRow containing the receiver's values."
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractRow >> at: aString [
 	"Answer the field named aSymbol from the receiver."
 
 	^ self atIndex: (self selectors at: aString)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractRow >> at: aString ifAbsent: exceptionHandler [
 	"Answer the field named aString from the receiver.  If the field is not present,
 	answer the result of evaluating the niladic valuable, exceptionHandler."
@@ -64,7 +66,7 @@ ODBCAbstractRow >> at: aString ifAbsent: exceptionHandler [
 		  (self selectors at: aString ifAbsent: [ ^ exceptionHandler value ])
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractRow >> at: key ifPresent: operation [
 	"Answer the result of evaluating the monadic valuable, operation, if
 	the argument, key, is the key of an element in the receiver, with that
@@ -73,7 +75,7 @@ ODBCAbstractRow >> at: key ifPresent: operation [
 	^ operation value: (self at: key ifAbsent: [ ^ nil ])
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractRow >> at: aString put: anObject [
 	"Set the field named aSymbol to anObject.
 	Answer the argument."
@@ -81,14 +83,14 @@ ODBCAbstractRow >> at: aString put: anObject [
 	^ self atIndex: (self selectors at: aString) put: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractRow >> atIndex: anInteger [
 	"Answer the field whose column index is anInteger."
 
 	^ self contents at: anInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractRow >> atIndex: anInteger put: anObject [
 	"Set the field whose column index is anInteger to anObject.
 	Answer the argument."
@@ -96,7 +98,7 @@ ODBCAbstractRow >> atIndex: anInteger put: anObject [
 	^ self contents at: anInteger put: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractRow >> buildSelectors [
 
 	| cols |
@@ -110,26 +112,26 @@ ODBCAbstractRow >> buildSelectors [
 			"selectors at: (instName, ':') put: i"]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractRow >> columns [
 	"Answer an <Array> of <ODBCColAttr>s describing the columns in this row."
 
 	^ columns
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractRow >> columns: anArrayOfODBCColAttr [
 
 	columns := anArrayOfODBCColAttr
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractRow >> contents [
 
 	^ contents
 ]
 
-{ #category : #exceptions }
+{ #category : 'exceptions' }
 ODBCAbstractRow >> doesNotUnderstand: aMessage [
 	"Private - See if the message selector is one of the field names of the receiver.
 	If so, access that field."
@@ -144,14 +146,14 @@ ODBCAbstractRow >> doesNotUnderstand: aMessage [
 		ifFalse: [self at: selector ifAbsent: [super doesNotUnderstand: aMessage]]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 ODBCAbstractRow >> hash [
 	"Answer the <integer> hash value for the receiver."
 
 	^ self contents hash
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 ODBCAbstractRow >> isDeletedRow [
 	"Answer whether the receiver represents a row in a result set which has been
 	deleted in the time since the result set was originally queried."
@@ -159,7 +161,7 @@ ODBCAbstractRow >> isDeletedRow [
 	^ self status = SQL_ROW_DELETED
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 ODBCAbstractRow >> printOn: aStream [
 	"Append the ASCII representation of the receiver to aStream."
 
@@ -171,7 +173,7 @@ ODBCAbstractRow >> printOn: aStream [
 	aStream nextPut: $)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractRow >> selectors [
 	"Private - Answer a <LookupTable> mapping the names of fields in the receiver to
 	column indices."
@@ -180,7 +182,7 @@ ODBCAbstractRow >> selectors [
 	^ selectors
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCAbstractRow >> status [
 
 	^ status

@@ -2,24 +2,26 @@
 Provided encoding/decoding of UTF32 strings.
 "
 Class {
-	#name : #ODBCUTF32Encoder,
-	#superclass : #ODBCStringEncoder,
-	#category : #'ODBC-Core-Base'
+	#name : 'ODBCUTF32Encoder',
+	#superclass : 'ODBCStringEncoder',
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #constants }
+{ #category : 'constants' }
 ODBCUTF32Encoder >> bytesPerCharacter [
 
 	^ 4
 ]
 
-{ #category : #constants }
+{ #category : 'constants' }
 ODBCUTF32Encoder >> characterEncoderClass [
 
 	^ ZnUTF32Encoder
 ]
 
-{ #category : #constants }
+{ #category : 'constants' }
 ODBCUTF32Encoder >> nullTerminatorBytes [
 
 	^ #[ 0 0 0 0 ]

@@ -4,28 +4,30 @@ ODBCStatisticsStatement is a specialized <ODBCSchemaStatement> for querying abou
 Based on DBStatisticsStatement from Dolphin Smalltalk Database Connection package.
 "
 Class {
-	#name : #ODBCStatisticsStatement,
-	#superclass : #ODBCSchemaStatement,
+	#name : 'ODBCStatisticsStatement',
+	#superclass : 'ODBCSchemaStatement',
 	#instVars : [
 		'type',
 		'accurate'
 	],
-	#category : #'ODBC-Core-Base'
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCStatisticsStatement >> accurate [
 
 	^ accurate
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCStatisticsStatement >> accurate: aBoolean [
 
 	accurate := aBoolean
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCStatisticsStatement >> executeStatement [
 	"Private - Execute the database command that the receiver represents.
 	Answer the <integer> return code."
@@ -42,7 +44,7 @@ ODBCStatisticsStatement >> executeStatement [
 		reserved: (accurate ifTrue: [SQL_ENSURE] ifFalse: [SQL_QUICK])
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ODBCStatisticsStatement >> initialize: anODBCConnection [
 	"Private - Initialize the receiver as a new statement of the
 	<ODBCConnection>, anODBCConnection."
@@ -52,19 +54,19 @@ ODBCStatisticsStatement >> initialize: anODBCConnection [
 	accurate := false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCStatisticsStatement >> type [
 
 	^ type
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCStatisticsStatement >> type: statisticsTypeInteger [
 
 	type := statisticsTypeInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCStatisticsStatement >> unique: aBoolean [
 
 	self type: (aBoolean ifTrue: [SQL_INDEX_UNIQUE] ifFalse: [SQL_INDEX_ALL])

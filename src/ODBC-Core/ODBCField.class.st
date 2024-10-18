@@ -15,8 +15,8 @@ Class Variables:
 Based on DBField from Dolphin Smalltalk Database Connection package.
 "
 Class {
-	#name : #ODBCField,
-	#superclass : #Object,
+	#name : 'ODBCField',
+	#superclass : 'Object',
 	#instVars : [
 		'column',
 		'buffer',
@@ -33,10 +33,12 @@ Class {
 		'ODBCRetCodes',
 		'ODBCTypes'
 	],
-	#category : #'ODBC-Core-Base'
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 ODBCField class >> initialize [
 	"Initialize the dictionaries of to/from
 	C Type/Smalltalk object converters.
@@ -104,14 +106,14 @@ ODBCField class >> initialize [
 				yourself)
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 ODBCField class >> new [
 	"Use #newForCol:"
 
 	^ self shouldNotImplement
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 ODBCField class >> newForCol: aDBColAttr [
 	"Answer a new instance of the receiver for the column described by aColAttr."
 
@@ -119,7 +121,7 @@ ODBCField class >> newForCol: aDBColAttr [
 		initializeForColumn: aDBColAttr
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 ODBCField >> = comparand [
 	"Answer whether the receiver and the <Object>, comparand,
 	are considered equivalent."
@@ -128,34 +130,34 @@ ODBCField >> = comparand [
 		column = comparand column and: [self value = comparand value]]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCField >> beNull [
 	"Set the receiver to be a null valued field."
 
 	lengthBuf value: SQL_NULL_DATA
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCField >> bufferSize [
 	"Private - Answer the size of the receiver's buffer."
 
 	^ bufferSize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCField >> column [
 
 	^ column
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCField >> fieldBuf [
 	"Private - Answer the address of the buffer for passing to the ODBC DLL."
 
 	^ buffer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCField >> fieldSize [
 	"Private - Answer the 'C' length of the receiver's associated column (the C length includes space for the null
 	terminator if the column is a string)"
@@ -163,7 +165,7 @@ ODBCField >> fieldSize [
 	^ column lengthC
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> getAnsiString [
 	"Private - Answer a <ByteString> read from the receiver's buffer, i.e. to read from a SQL_C_CHAR, SQL_C_VARCHAR, or SQL_C_LONGVARCHAR buffer."
 
@@ -175,28 +177,28 @@ ODBCField >> getAnsiString [
 	^ result
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> getBoolean [
 	"Private - Answer a <Boolean> read from the receiver's buffer."
 
 	^ self getByte allMask: 1
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> getByte [
 	"Private - Answer the receiver's buffer as an unsigned byte."
 
 	^ buffer unsignedByteAt: 1
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> getByteArray [
 	"Private - Answer a <ByteArray> copied from the receiver's buffer."
 
 	^ buffer copyFrom: 1 to: lengthBuf value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCField >> getData: aDBStatement [
 	"Private - Retrieve the receiver's associated column data from the ODBC result set
 	following a fetch (into the receiver's buffer)."
@@ -212,7 +214,7 @@ ODBCField >> getData: aDBStatement [
 	aDBStatement dbCheckException: ret
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> getDate [
 	"Private - Answer an instance of <Date> representing the contents of the receiver.
 	Use the services of the ODBCDATE structure to split the buffer."
@@ -220,28 +222,28 @@ ODBCField >> getDate [
 	^ (ODBCDATE fromHandle: buffer) asDate
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> getDateAndTime [
 	"Private - Answer an instance of <DateAndTime> representing the same DateAndTime as that stored in the buffer as an ODBCDATE and ODBCTIME."
 
 	^ (ODBCTIMESTAMP fromHandle: buffer) asDateAndTime
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> getDouble [
 	"Private - Answer a <Float> read from the IEEE 64-bit double precision floating point number in the receiver's buffer."
 
 	^ buffer doubleAt: 1
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> getFloat [
 	"Private - Answer a <Float> representing the 32-bit IEEE single precision floating point number in the receiver's buffer."
 
 	^ buffer floatAt: 1
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> getGuid [
 	"Private - Answer a <UUID> read from the receiver's buffer."
 
@@ -251,28 +253,28 @@ ODBCField >> getGuid [
 	^ result
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> getInt64 [
 	"Private - Answer an <integer> read from the 64-bit signed integer in the receiver's buffer."
 
 	^ buffer signedLongLongAt: 1
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> getLong [
 	"Private - Answer an <integer> read from the 32-bit signed integer in the receiver's buffer."
 
 	^ buffer signedLongAt: 1
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> getShort [
 	"Private - Answer an <integer> read from the signed 16-bit value in the receiver's buffer."
 
 	^ buffer signedShortAt: 1
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> getTime [
 	"Private - Answer an instance of <Time> representing the buffer of the receiver.
 	Use the services of the <ODBCTIME> structure to split the buffer."
@@ -280,21 +282,21 @@ ODBCField >> getTime [
 	^ (ODBCTIME fromHandle: buffer) asTime
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> getUtf16String [
 	"Private - Answer the receiver's buffer as an appropriate String (ByteString, WideString), i.e. to read from a SQL_C_WCHAR, SQL_C_WVARCHAR, or SQL_C_WLONGVARCHAR buffer."
 
 	^ self stringEncoder decodeStringFrom: buffer byteCount: lengthBuf value
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 ODBCField >> hash [
 	"Answer the <integer> hash value for the receiver. Must be the same for any two DBField's that compare equal."
 
 	^ column hash bitXor: self value hash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCField >> initializeForColumn: aDBColAttr [
 	"Private - Initialize the receiver to represent a value from
 	the database column described by the <DBColAttr> argument.
@@ -307,21 +309,21 @@ ODBCField >> initializeForColumn: aDBColAttr [
 	^self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 ODBCField >> isNull [
 	"Answer whether the receiver represents a null field."
 
 	^ lengthBuf value == SQL_NULL_DATA
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCField >> lengthBuf [
 	"Private - Answer the address of the length buffer for passing to ODBC"
 
 	^ lengthBuf
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> numberFromNumeric [
 	"Private - Answer the receiver's contents converted from a
 	string NUMERIC to a <ScaledDecimal> (ODBC converts NUMERIC
@@ -345,7 +347,7 @@ ODBCField >> numberFromNumeric [
 	^ ScaledDecimal newFromNumber: number scale: scale
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> numberToNumeric: aNumber [
 	"Private - Convert the argument to a 'C' string stored in the receiver for passing to ODBC (probably as a
 	bound parameter) where a NUMERIC is expected."
@@ -355,7 +357,7 @@ ODBCField >> numberToNumeric: aNumber [
 		self setAnsiString: ((aNumber asScaledDecimal: column scale) displayString allButLast: 2)]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 ODBCField >> printOn: aStream [
 	"Append the ASCII representation of the receiver to aStream."
 
@@ -368,7 +370,7 @@ ODBCField >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> setAnsiString: aString [
 	"Private - Set the receiver's buffer from aString."
 
@@ -384,7 +386,7 @@ ODBCField >> setAnsiString: aString [
 	lengthBuf value: byteCount
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> setBoolean: aBoolean [
 	"Private - Load the receiver's contents buffer with the <Boolean> argument."
 	
@@ -393,7 +395,7 @@ ODBCField >> setBoolean: aBoolean [
 	lengthBuf value: 1
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> setByte: aNumber [
 	"Private - Set the receiver's buffer to an unsigned byte representation of the
 	<Number> argument."
@@ -403,7 +405,7 @@ ODBCField >> setByte: aNumber [
 	lengthBuf value: 1
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> setByteArray: aByteArray [
 	"Private - Set the receiver's buffer from the <ByteArray> argument."
 
@@ -418,7 +420,7 @@ ODBCField >> setByteArray: aByteArray [
 	lengthBuf value: byteCount
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> setDate: aDate [
 	"Private - Set the receiver's buffer with an <ODBCDATE> object instantiated from
 	the <Date> argument."
@@ -428,7 +430,7 @@ ODBCField >> setDate: aDate [
 	lengthBuf value: ODBCDATE byteSize
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> setDateAndTime: aDateAndTime [
 	"Private - Set the receiver's buffer with an ODBCTIMESTAMP object instantiated from aDateAndTime."
 
@@ -438,7 +440,7 @@ ODBCField >> setDateAndTime: aDateAndTime [
 	lengthBuf value: ODBCTIMESTAMP byteSize
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> setDouble: aNumber [
 	"Private - Set the receiver's double buffer with <Float> value of the
 	<Number> argument."
@@ -448,7 +450,7 @@ ODBCField >> setDouble: aNumber [
 	lengthBuf value: 8
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> setFloat: aNumber [
 	"Private - Set the receiver's float buffer with the <Float> value of the
 	<Number> argument, aNumber."
@@ -458,7 +460,7 @@ ODBCField >> setFloat: aNumber [
 	lengthBuf value: 4
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> setGuid: aUUID [
 	"Private - Set the receiver's buffer with an <GUID> value."
 
@@ -471,7 +473,7 @@ ODBCField >> setGuid: aUUID [
 	lengthBuf value: 16
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> setInt64: aNumber [
 	"Private - Set the receiver's buffer to the 64-bit signed integer value of the argument."
 
@@ -480,7 +482,7 @@ ODBCField >> setInt64: aNumber [
 	lengthBuf value: 8
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> setLong: aNumber [
 	"Private - Set the receiver's buffer to a 32-bit signed integer representation of the <Integer> argument."
 	
@@ -489,7 +491,7 @@ ODBCField >> setLong: aNumber [
 	lengthBuf value: 4
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> setShort: aNumber [
 	"Private - Set the receiver's buffer to the 16-bit signed integer value of the argument."
 	
@@ -498,7 +500,7 @@ ODBCField >> setShort: aNumber [
 	lengthBuf value: 2
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> setTime: aTime [
 	"Private - Set the receiver's buffer with an ODBCTIME object instantiated from aTime."
 
@@ -507,7 +509,7 @@ ODBCField >> setTime: aTime [
 	lengthBuf value: ODBCTIME byteSize
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCField >> setUtf16String: aString [
 	"Private - Set the receiver's buffer from aString."
 
@@ -523,7 +525,7 @@ ODBCField >> setUtf16String: aString [
 	lengthBuf value: byteCount
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCField >> shouldTranslate: anObject class: aClass [
 	"Private - Answer whether the receiver should attempt to translate anObject into its buffer.
 	If anObject isNil then we can set the receiver to be null and answer false.
@@ -536,20 +538,20 @@ ODBCField >> shouldTranslate: anObject class: aClass [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCField >> size [
 	"Private - Answer the size of the receiver's buffer."
 
 	self error: 'do not use this'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCField >> stringEncoder [
 
 	^ ODBCConnection stringEncoder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCField >> value [
 	"Answer the contents of the receiver as a suitable
 	Smalltalk object."
@@ -558,7 +560,7 @@ ODBCField >> value [
 		  self perform: (GetSelectors at: column type + TypeOffset) ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCField >> value: anObject [
 	"Set the contents of the receiver's buffer from anObject."
 

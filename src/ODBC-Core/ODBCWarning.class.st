@@ -4,19 +4,21 @@ Instances of ODBCWarning hold exception information for Database Connection non-
 Based on DBWarning from Dolphin Smalltalk Database Connection package.
 "
 Class {
-	#name : #ODBCWarning,
-	#superclass : #Notification,
-	#category : #'ODBC-Core-Base'
+	#name : 'ODBCWarning',
+	#superclass : 'Notification',
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #signalling }
+{ #category : 'signalling' }
 ODBCWarning class >> signalWith: anODBCExceptionDetails [
 
 	anODBCExceptionDetails buildErrorInfo.
 	self signal: anODBCExceptionDetails displayString withTag: anODBCExceptionDetails
 ]
 
-{ #category : #signaling }
+{ #category : 'signaling' }
 ODBCWarning >> signal [
 	"Signal this exception."
 

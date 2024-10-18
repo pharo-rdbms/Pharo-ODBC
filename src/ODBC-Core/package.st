@@ -1,1 +1,1 @@
-Package { #name : #'ODBC-Core' }
+Package { #name : 'ODBC-Core' }

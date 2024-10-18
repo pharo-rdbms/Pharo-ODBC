@@ -20,8 +20,8 @@ Class Variables:
 Based on DBConnection from Dolphin Smalltalk Database Connection package.
 "
 Class {
-	#name : #ODBCConnection,
-	#superclass : #Object,
+	#name : 'ODBCConnection',
+	#superclass : 'Object',
 	#instVars : [
 		'handle',
 		'dsn',
@@ -45,10 +45,12 @@ Class {
 		'ODBCConstants',
 		'ODBCRetCodes'
 	],
-	#category : #'ODBC-Core-Base'
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 ODBCConnection class >> allocHandle [
 	"Private - Answer a new connection handle."
 
@@ -62,7 +64,7 @@ ODBCConnection class >> allocHandle [
 	^hDBC
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCConnection class >> connectString: aString do: aTwoArgBlock [
 	"Private - Interpret the connection string and pass the parameter name and value from each
 	$; separated substring to aTwoArgBlock."
@@ -85,14 +87,14 @@ ODBCConnection class >> connectString: aString do: aTwoArgBlock [
 				aTwoArgBlock value: paramName value: paramValue]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection class >> connections [
 	"Answer the <collection> of active connections."
 
 	^ Connections
 ]
 
-{ #category : #exceptions }
+{ #category : 'exceptions' }
 ODBCConnection class >> dbCheckException: anIntegerRetCode [
 	"Private - Checks anIntegerRetCode to see if a ODBCError or ODBCWarning should be signalled"
 
@@ -105,7 +107,7 @@ ODBCConnection class >> dbCheckException: anIntegerRetCode [
 				ifFalse: [ ODBCError ]) signalWith: (self exceptionDetails: anIntegerRetCode)]
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 ODBCConnection class >> determineStringEncoder [
 	"The String encoding can vary depending on the ODBC driver manager:
 	Windows - always UTF16
@@ -123,7 +125,7 @@ ODBCConnection class >> determineStringEncoder [
 	(drivers first key at: 2) = Character null ifTrue: [ StringEncoder := ODBCUTF32Encoder new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection class >> enumerateDataSources [
 	"Answers an array of associations of all the data sources and
 	 their descriptions"
@@ -169,7 +171,7 @@ ODBCConnection class >> enumerateDataSources [
 	^ sources contents
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection class >> enumerateDrivers [
 	"Answers an array of associations of all the drivers and their attributes"
 
@@ -214,7 +216,7 @@ ODBCConnection class >> enumerateDrivers [
 	^ drivers contents
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection class >> environmentHandle [
 	"Private - Answer the environment handle.
 	Create it if we haven't done so already."
@@ -235,7 +237,7 @@ ODBCConnection class >> environmentHandle [
 	^ HEnv
 ]
 
-{ #category : #exceptions }
+{ #category : 'exceptions' }
 ODBCConnection class >> exceptionDetails: retCode [
 	"Private - Answer a <ODBCExceptionDetails> instance that describes the state of the
 	receiver following an exception with the specified <integer> return code. This will
@@ -248,7 +250,7 @@ ODBCConnection class >> exceptionDetails: retCode [
 			yourself
 ]
 
-{ #category : #'realizing/unrealizing' }
+{ #category : 'realizing/unrealizing' }
 ODBCConnection class >> freeAll [
 	"Private - Free all of my instances which are recorded
 	in the handle table.
@@ -261,7 +263,7 @@ ODBCConnection class >> freeAll [
 		freeEnvironment
 ]
 
-{ #category : #'realizing/unrealizing' }
+{ #category : 'realizing/unrealizing' }
 ODBCConnection class >> freeEnvironment [
 
 	| ret |
@@ -271,7 +273,7 @@ ODBCConnection class >> freeEnvironment [
 	HEnv := nil
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 ODBCConnection class >> initialize [
 	"Private - Initialize the receiver's class variables"
 
@@ -292,7 +294,7 @@ ODBCConnection class >> initialize [
 	self newConnections
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 ODBCConnection class >> initializeStringEncoder [
 
 	self determineStringEncoder.
@@ -301,7 +303,7 @@ ODBCConnection class >> initializeStringEncoder [
 	ODBCColAttr initializeExtraBytes
 ]
 
-{ #category : #'realizing/unrealizing' }
+{ #category : 'realizing/unrealizing' }
 ODBCConnection class >> invalidateHandle: anExternalHandle [
 	"Private - Disconnect and free the specified connection handle.
 	This is used by ODBCConnection class to free a connection handle
@@ -315,14 +317,14 @@ ODBCConnection class >> invalidateHandle: anExternalHandle [
 	ret ~= SQL_SUCCESS ifTrue: [ODBCError signalWith: (self exceptionDetails: ret)]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection class >> newConnections [
 	"Use a WeakRegistry so this can take care of finalization for us"
 
-	Connections := WeakRegistry new
+	Connections := FinalizationRegistry new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection class >> odbcVersion [
 	<script: 'self odbcVersion inspect'>
 	
@@ -337,14 +339,14 @@ ODBCConnection class >> odbcVersion [
 	^ version value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection class >> reset [
 
 	HEnv := nil.
 	StringEncoder := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection class >> setDefaultEnvAttrs [
 	| ret |
 	ret := ODBCLibrary default
@@ -356,13 +358,13 @@ ODBCConnection class >> setDefaultEnvAttrs [
 	^ret
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection class >> stringEncoder [
 
 	^ StringEncoder ifNil: [ self initializeStringEncoder. StringEncoder ]
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCConnection class >> transact: aDBConnection action: anInteger [
 	"Private - Performs the requested transaction action on the specified
 	 connection (which if Null implies that ODBC should commit/rollback
@@ -376,7 +378,7 @@ ODBCConnection class >> transact: aDBConnection action: anInteger [
 	ret ~= SQL_SUCCESS ifTrue: [ODBCError signalWith: (aDBConnection exceptionDetails: ret)]
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 ODBCConnection >> allocStmtHandle: aODBCStatement [
 	"Private - Allocate a new statement handle for the specified object.
 	This may cause a connection to be lazily established (via the handle method)."
@@ -395,7 +397,7 @@ ODBCConnection >> allocStmtHandle: aODBCStatement [
 	self statements add: aODBCStatement
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCConnection >> asParameter [
 	"Answer the receiver in a form suitable for passing to an external function
 	primitive method (see ExternalLibrary and subclasses)."
@@ -404,7 +406,7 @@ ODBCConnection >> asParameter [
 	^ handle
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCConnection >> basicConnect [
 	"Private - Connect with the parameters specified earlier.
 	Assumes not already connected."
@@ -422,21 +424,21 @@ ODBCConnection >> basicConnect [
 			ifCurtailed: [ self free ]
 ]
 
-{ #category : #transactions }
+{ #category : 'transactions' }
 ODBCConnection >> beginRWTxn [
 	"Start a read/write transaction on this connection."
 
 	self transaction: (ODBCTxn newRWOn: self)
 ]
 
-{ #category : #transactions }
+{ #category : 'transactions' }
 ODBCConnection >> beginTxn [
 	"Start a read only transaction on this connection"
 
 	self transaction: (ODBCTxn newOn: self)
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 ODBCConnection >> buildConnectString [
 
 	| stream |
@@ -459,14 +461,14 @@ ODBCConnection >> buildConnectString [
 	^stream contents readStream upTo: Character null
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> catalogNameSeparator [
 	"Answer the qualifier name separator"
 
 	^ self getStringInfo: SQL_CATALOG_NAME_SEPARATOR
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> catalogTerm [
 	"Answer the <readableString> name for a 'catalog' in the parlance of the DBMS to which the
 	receiver is connected, e.g. in the case of Access this is 'DATABASE'."
@@ -474,7 +476,7 @@ ODBCConnection >> catalogTerm [
 	^ self getStringInfo: SQL_CATALOG_TERM
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 ODBCConnection >> checkEmptyEnvironment [
 	"Private - If there are no more open connections, free the environment"
 
@@ -484,7 +486,7 @@ ODBCConnection >> checkEmptyEnvironment [
 	HEnv := nil
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCConnection >> close [
 	"Close a database connection - rollback the current transaction, disconnect,
 	and free connection handle"
@@ -498,7 +500,7 @@ ODBCConnection >> close [
 		checkEmptyEnvironment
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCConnection >> closeNoFail [
 	"Quietly close connection (frees handle), and if no
 	more open connections, free the environment"
@@ -511,26 +513,26 @@ ODBCConnection >> closeNoFail [
 			self checkEmptyEnvironment ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> columnFieldIdentifier [
 
 	^columnFieldIdentifier
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> columnFieldIdentifier: anInteger [
 
 	columnFieldIdentifier := anInteger
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> columns: aStringTableName [
 	"Answer a list of columns in the table aStringTableName"
 
 	^self columns: nil qualifier: nil owner: nil table: aStringTableName
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> columns: aStringColumn qualifier: aStringQualifier owner: aStringOwner table: aStringTable [
 	"Answer the list of columns in the table matching the specified search criteria"
 
@@ -558,7 +560,7 @@ ODBCConnection >> columns: aStringColumn qualifier: aStringQualifier owner: aStr
 	^colAttrs
 ]
 
-{ #category : #transactions }
+{ #category : 'transactions' }
 ODBCConnection >> commitTxn [
 	"Commit the receiver's current transaction. Raise an error if there is no outstanding transaction."
 
@@ -566,7 +568,7 @@ ODBCConnection >> commitTxn [
 	transaction := nil
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCConnection >> connect [
 	"Connect with the parameters specified earlier. Do nothing if already connected.
 	Implementation Note: Connections are normally established lazily when the handle
@@ -575,7 +577,7 @@ ODBCConnection >> connect [
 	handle isNull ifTrue: [self basicConnect]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> connectString [
 	"Answer the connect string to use for this connection."
 
@@ -583,7 +585,7 @@ ODBCConnection >> connectString [
 	^connectString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> connectString: aString [
 	"Interpret the connection string and grab any parameters from it which we're interested in
 	i.e. those for which we have a 'set' method."
@@ -598,7 +600,7 @@ ODBCConnection >> connectString: aString [
 	connectString := aString
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> convertFunctions [
 	"Answers an array of the conversion functions available"
 
@@ -608,7 +610,7 @@ ODBCConnection >> convertFunctions [
 		select: [:maskName | (mask bitAnd: (ODBCConstants classPool at: maskName)) ~= 0]
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> cursorCommitBehaviour [
 	"Answer an <integer> from the SQL_CB_XXX enumeration identifying the
 	cursor commit behaviour of this connection."
@@ -616,7 +618,7 @@ ODBCConnection >> cursorCommitBehaviour [
 	^self getSQLUSmallIntInfo: SQL_CURSOR_COMMIT_BEHAVIOR
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> cursorRollbackBehaviour [
 	"Answer an <integer> from the SQL_CB_XXX enumeration identifying the
 	cursor rollback behaviour of this connection."
@@ -624,14 +626,14 @@ ODBCConnection >> cursorRollbackBehaviour [
 	^self getSQLUSmallIntInfo: SQL_CURSOR_ROLLBACK_BEHAVIOR
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> dataSourceName [
 	"Answer the data source name as a <readableString>."
 
 	^self getStringInfo: SQL_DATA_SOURCE_NAME
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> databaseName [
 	"Answer the <readableString> database name, e.g. in the case of an Access database this will
 	be the file name, or in the case of an SQL Server database the name of one of the databases hosted
@@ -640,7 +642,7 @@ ODBCConnection >> databaseName [
 	^self getStringInfo: SQL_DATABASE_NAME
 ]
 
-{ #category : #exceptions }
+{ #category : 'exceptions' }
 ODBCConnection >> dbCheckException: arg1 [
 
 	^ arg1 = SQL_SUCCESS ifFalse: [
@@ -650,21 +652,21 @@ ODBCConnection >> dbCheckException: arg1 [
 			  (self exceptionDetails: arg1) ]
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> dbmsName [
 	"Answers the underlying DBMS name as a <readableString>."
 
 	^self getStringInfo: SQL_DBMS_NAME
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> dbmsVersion [
 	"Answers the underlying DBMS version as a <readableString>"
 
 	^self getStringInfo: SQL_DBMS_VER
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 ODBCConnection >> decodeBitMask: anInteger map: aDictionary [
 	| answer |
 	answer := OrderedCollection new.
@@ -674,7 +676,7 @@ ODBCConnection >> decodeBitMask: anInteger map: aDictionary [
 	^answer
 ]
 
-{ #category : #constants }
+{ #category : 'constants' }
 ODBCConnection >> defaultCursorType [
 	"Answer the <Symbol>ic name of the default cursor type to be used for statements
 	(one of #dynamic, #forwardOnly, #keysetDriven, #static).
@@ -684,19 +686,19 @@ ODBCConnection >> defaultCursorType [
 	^#keysetDriven
 ]
 
-{ #category : #constants }
+{ #category : 'constants' }
 ODBCConnection >> defaultFlags [
 	^DriverCompleteMask
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> defaultTransactionIsolation [
 	"Answer the default transaction isolation."
 
 	^TxnIsolationLevels at: (self getSQLUIntegerInfo: SQL_DEFAULT_TXN_ISOLATION)
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCConnection >> disconnect [
 	"Private - disconnect without freeing handle. All oustanding
 	statements are free'd (this is necessary because they are
@@ -709,42 +711,42 @@ ODBCConnection >> disconnect [
 		self dbCheckException: ret]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> driverHDBC [
 	"Private - Answer the handle to the driver connection"
 
 	^self getHandle: SQL_DRIVER_HDBC
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> driverHEnv [
 	"Private - Answer the handle to the driver environment"
 
 	^self getHandle: SQL_DRIVER_HENV
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> driverName [
 	"Answer the driver name"
 
 	^self getStringInfo: SQL_DRIVER_NAME
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> driverVersion [
 	"Answer the driver version"
 
 	^self getStringInfo: SQL_DRIVER_VER
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> dsn [
 	"Answer the data set name for the receiver"
 
 	^dsn
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> dsn: aString [
 	"Set the data set name to aString."
 
@@ -752,7 +754,7 @@ ODBCConnection >> dsn: aString [
 	dsn := aString
 ]
 
-{ #category : #exceptions }
+{ #category : 'exceptions' }
 ODBCConnection >> exceptionDetails: code [
 	"Private - Answer an <ODBCExceptionDetails> instance that describes the state of the
 	receiver following an exception with the specified <integer> return code. This will
@@ -763,7 +765,7 @@ ODBCConnection >> exceptionDetails: code [
 		yourself
 ]
 
-{ #category : #executing }
+{ #category : 'executing' }
 ODBCConnection >> exec: aString [
 	"Execute the SQL in aString.
 	Answer the <ODBCStatement> used to execute the statement"
@@ -771,7 +773,7 @@ ODBCConnection >> exec: aString [
 	^self exec: aString cursorType: #keysetDriven
 ]
 
-{ #category : #executing }
+{ #category : 'executing' }
 ODBCConnection >> exec: aString cursorType: aSymbol [
 	"Execute the SQL in aString, answering the type of cursor specified by the
 	<Symbol> argument (one of #dynamic, #forwardOnly, #keysetDriven, or
@@ -783,7 +785,7 @@ ODBCConnection >> exec: aString cursorType: aSymbol [
 	^statement
 ]
 
-{ #category : #finalizing }
+{ #category : 'finalizing' }
 ODBCConnection >> finalize [
 	"Private - finalize the affairs of the receiver."
 
@@ -793,7 +795,7 @@ ODBCConnection >> finalize [
 	] on: ODBCError do: [:x | x trace]
 ]
 
-{ #category : #'realizing/unrealizing' }
+{ #category : 'realizing/unrealizing' }
 ODBCConnection >> free [
 	"Private - Free the connection handle."
 
@@ -802,14 +804,14 @@ ODBCConnection >> free [
 		handle invalidateHandle]
 ]
 
-{ #category : #'realizing/unrealizing' }
+{ #category : 'realizing/unrealizing' }
 ODBCConnection >> freeNoFail [
 	"Private - Free the connection handle ignoring any errors."
 
 	^ODBCLibrary default sqlFreeHandle: SQL_HANDLE_DBC handle: handle
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 ODBCConnection >> freeStmtHandle: aDBAbstractStatement [
 	| ret hstmt |
 
@@ -823,7 +825,7 @@ ODBCConnection >> freeStmtHandle: aDBAbstractStatement [
 	hstmt invalidateHandle
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> getBoolInfo: anInteger [
 	"Private - Answer a <Boolean> indicating the receiver's info attribute described by anInteger."
 
@@ -839,7 +841,7 @@ ODBCConnection >> getBoolInfo: anInteger [
 	^(value byteAt: 1) = $Y asciiValue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> getHandle [
 	"Private - Answer the handle instance variable.
 	Allocate it if we haven't done so already."
@@ -852,7 +854,7 @@ ODBCConnection >> getHandle [
 	^handle
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 ODBCConnection >> getHandle: anInteger [
 	| value |
 	value := SQLHANDLE new.
@@ -865,7 +867,7 @@ ODBCConnection >> getHandle: anInteger [
 	^value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> getSQLUIntegerAttribute: anInteger [
 	"Private - Answer an <Integer> containing the 32-bit unsigned integer value of the
 	connection attribute identified by the <integer> argument."
@@ -882,7 +884,7 @@ ODBCConnection >> getSQLUIntegerAttribute: anInteger [
 	^buffer value
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> getSQLUIntegerInfo: anInteger [
 	"Private - Answer an Integer containing the value of the receiver's SQLUINTEGER info attribute described by anInteger."
 
@@ -897,7 +899,7 @@ ODBCConnection >> getSQLUIntegerInfo: anInteger [
 	^value value
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> getSQLUSmallIntInfo: anInteger [
 	"Private - Answer an Integer containing the value of the receiver's SQLUSMALLINT info attribute described by infoCode."
 
@@ -912,7 +914,7 @@ ODBCConnection >> getSQLUSmallIntInfo: anInteger [
 	^value value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> getStringAttribute: anInteger [
 	"Private - Answer a <String> containing the value of the connection attribute identified by the <integer> argument."
 
@@ -929,7 +931,7 @@ ODBCConnection >> getStringAttribute: anInteger [
 	self stringEncoder decodeNullTerminatedStringFrom: buffer] ensure: [ buffer free ]
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> getStringInfo: anInteger [
 	"Private - Answer a String containing the value of the receiver's info attribute described by infoCode."
 
@@ -946,21 +948,21 @@ ODBCConnection >> getStringInfo: anInteger [
 	self stringEncoder decodeStringFrom: value byteCount: len value] ensure: [ value free ]
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> hasAccessibleTables [
 	"Answers whetherthe receiver is connected to a DB which has tables that can be accessed."
 
 	^self getBoolInfo: SQL_ACCESSIBLE_TABLES
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> hasIntegrityEnhancementFacility [
 	"Answer whether the DBMS to which the receiver is connected has integrity enhancement facility support."
 
 	^self getBoolInfo: SQL_INTEGRITY
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> identifierCase [
 	"Answer an <integer> constant from the SQL_IC_XXXX enumeration that indicates the
 	case sensitivity of the DBMS to which the receiver is connected."
@@ -968,14 +970,14 @@ ODBCConnection >> identifierCase [
 	^self getSQLUSmallIntInfo: SQL_IDENTIFIER_CASE
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> identifierQuoteCharacter [
 	"Answers the <Character> used to quote identifiers in the DBMS' SQL dialect."
 
 	^(self getStringInfo: SQL_IDENTIFIER_QUOTE_CHAR) first
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> indicesOf: aString [
 	"Answer the a <collection> of <DBRows> being details of all the indices for the
 	table with the specified <readableString> name."
@@ -986,7 +988,7 @@ ODBCConnection >> indicesOf: aString [
 		accurate: true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ODBCConnection >> initialize [
 	"Private - Initialize the receiver."
 
@@ -996,13 +998,13 @@ ODBCConnection >> initialize [
 	self initializeStatements
 ]
 
-{ #category : #'private - initialization' }
+{ #category : 'private - initialization' }
 ODBCConnection >> initializeStatements [
 	"Use WeakRegistry so this can take care of finalization for us"
-	statements := WeakRegistry new
+	statements := FinalizationRegistry new
 ]
 
-{ #category : #'realizing/unrealizing' }
+{ #category : 'realizing/unrealizing' }
 ODBCConnection >> invalidateAllStmts [
 	"Private - Free all statements under this connection"
 
@@ -1010,14 +1012,14 @@ ODBCConnection >> invalidateAllStmts [
 	self statements finalizeValues
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> isReadOnly [
 	"Answer whether the receiver's access mode option is set to read-only."
 
 	^(self getSQLUIntegerAttribute: SQL_ATTR_ACCESS_MODE) = SQL_MODE_READ_ONLY
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> isReadOnly: aBoolean [
 	"Set whether the receiver's access mode option is read-only."
 
@@ -1027,28 +1029,28 @@ ODBCConnection >> isReadOnly: aBoolean [
 		size: SQL_IS_UINTEGER
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> isSAGCompliant [
 	"Answer whether the DBMS to which the receiver is connected is SAG compliant."
 
 	^(self getSQLUSmallIntInfo: SQL_ODBC_SAG_CLI_CONFORMANCE) = SQL_OSCC_COMPLIANT
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> isSourceReadOnly [
 	"Answer whether the data source is read only."
 
 	^self getBoolInfo: SQL_DATA_SOURCE_READ_ONLY
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 ODBCConnection >> isTracing [
 	"Answer whether the receiver's trace option is set."
 
 	^(self getSQLUIntegerAttribute: SQL_ATTR_TRACE) = SQL_OPT_TRACE_ON
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> isTracing: aBoolean [
 	"Set whether the receiver's trace facility is on or off."
 
@@ -1058,21 +1060,21 @@ ODBCConnection >> isTracing: aBoolean [
 		size: SQL_IS_UINTEGER
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> isTransactionCapable [
 	"Answer whether the DBMS to which the receiver is connected supports transactions."
 
 	^self getSQLUSmallIntInfo: SQL_TXN_CAPABLE
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> loginTimeout [
 	"Answer the Integer value of the receiver's login timeout option."
 
 	^self getSQLUIntegerAttribute: SQL_ATTR_LOGIN_TIMEOUT
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> loginTimeout: anInteger [
 	"Set the receiver's login timeout to anInteger."
 
@@ -1082,70 +1084,70 @@ ODBCConnection >> loginTimeout: anInteger [
 		size: SQL_IS_UINTEGER
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> maxCatalogNameLength [
 	"Answer the <integer> maximum length of a catalog in the DBMS to which the receiver is connected."
 
 	^self getSQLUSmallIntInfo: SQL_MAX_CATALOG_NAME_LEN
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> maxColumnNameLength [
 	"Answer the <integer> maximum length of a column in the DBMS to which the receiver is connected."
 
 	^self getSQLUSmallIntInfo: SQL_MAX_COLUMN_NAME_LEN
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> maxConnections [
 	"Answer the <integer> maximum number of concurrent connections supported by the DBMS."
 
 	^self getSQLUSmallIntInfo: SQL_MAX_DRIVER_CONNECTIONS
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> maxCursorNameLength [
 	"Answer the <integer> maximum length of a cursor in the DBMS to which the receiver is connected."
 
 	^self getSQLUSmallIntInfo: SQL_MAX_CURSOR_NAME_LEN
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> maxProcedureNameLength [
 	"Answer the <integer> maximum length of a procedure in the DBMS to which the receiver is connected."
 
 	^self getSQLUSmallIntInfo: SQL_MAX_PROCEDURE_NAME_LEN
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> maxSchemaNameLength [
 	"Answer the <integer> maximum length of a schema name in the DBMS to which the receiver is connected."
 
 	^self getSQLUSmallIntInfo: SQL_MAX_SCHEMA_NAME_LEN
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> maxStatements [
 	"Answer the the maximum number of concurrent statements supported."
 
 	^self getSQLUSmallIntInfo: SQL_MAX_CONCURRENT_ACTIVITIES
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> maxTableNameLength [
 	"Answer the maximum length of a table name"
 
 	^self getSQLUSmallIntInfo: SQL_MAX_TABLE_NAME_LEN
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCConnection >> newParameterizedStatement: aSymbol [
 	"Private - Answer an ODBCParameterizedStatement connected to the receiver"
 
 	^ODBCParameterizedStatement parent: self cursorType: aSymbol
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCConnection >> newStatement: aSymbol [
 	"Private - Answer an ODBCStatement connected to the receiver and with the specified
 	cursor type."
@@ -1153,7 +1155,7 @@ ODBCConnection >> newStatement: aSymbol [
 	^ ODBCStatement parent: self cursorType: aSymbol
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> numericFunctions [
 	"Answers an array of the numeric functions available"
 
@@ -1163,7 +1165,7 @@ ODBCConnection >> numericFunctions [
 		select: [:maskName | (mask bitAnd: (ODBCConstants bindingOf: maskName) value) ~= 0]
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> odbcConformance [
 	"Answer the level of ODBC conformance:
 		0	- none
@@ -1174,7 +1176,7 @@ ODBCConnection >> odbcConformance [
 	^self getSQLUSmallIntInfo: SQL_ODBC_API_CONFORMANCE
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> odbcSQLConformance [
 	"Answer the level of ODBC SQL conformance:
 		0 - core
@@ -1185,14 +1187,14 @@ ODBCConnection >> odbcSQLConformance [
 	^self getSQLUSmallIntInfo: SQL_ODBC_SQL_CONFORMANCE
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> odbcVersion [
 	"Answer the ODBC version"
 
 	^self getStringInfo: SQL_ODBC_VER
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCConnection >> open [
 
 	| tmp2 tmp3 tmp4 |
@@ -1222,7 +1224,7 @@ ODBCConnection >> open [
 			 characterCount: (tmp4 value min: tmp2))
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 ODBCConnection >> postCopy [
 	"Apply any final flourish to the copy that may be required in order to ensure that the copy
 	does not share any state with the original, apart from the elements. Answer the receiver. In
@@ -1236,7 +1238,7 @@ ODBCConnection >> postCopy [
 	^self
 ]
 
-{ #category : #executing }
+{ #category : 'executing' }
 ODBCConnection >> prepare: aString [
 	"Prepare the SQL in aString.
 	Answer a new ODBCParameterizedStatement which is used to execute the SQL."
@@ -1244,7 +1246,7 @@ ODBCConnection >> prepare: aString [
 	^self prepare: aString cursorType: self defaultCursorType
 ]
 
-{ #category : #executing }
+{ #category : 'executing' }
 ODBCConnection >> prepare: aString cursorType: aSymbol [
 	"Prepare the SQL in the <readableString> argument, aString, into a new <ODBCParameterizedStatement>
 	with the specified cursor type."
@@ -1255,7 +1257,7 @@ ODBCConnection >> prepare: aString cursorType: aSymbol [
 	^statement
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> primaryKeysOf: aString [
 	"Answer a list of the primary key column names in the
 	table named aString"
@@ -1269,7 +1271,7 @@ ODBCConnection >> primaryKeysOf: aString [
 	^answer
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 ODBCConnection >> printOn: aStream [
 	"Append the ASCII representation of the receiver
 	 to aStream."
@@ -1280,7 +1282,7 @@ ODBCConnection >> printOn: aStream [
 	aStream nextPut: $)
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> procedure: aStringQual owner: aStringOwner name: aStringName [
 	"Answer a list of procedures in the table(s) matching
 	the specified criteria"
@@ -1296,7 +1298,7 @@ ODBCConnection >> procedure: aStringQual owner: aStringOwner name: aStringName [
 	^answer
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> procedureTerm [
 	"Answer the <readableString> name for a 'stored-procedure' in the parlance of the DBMS to which the
 	receiver is connected, e.g. in the case of Access this is 'QUERY'."
@@ -1304,7 +1306,7 @@ ODBCConnection >> procedureTerm [
 	^self getStringInfo: SQL_PROCEDURE_TERM
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> procedures [
 	"Answer a <collection> of the <readableString> names of all the stored procedures in
 	the database."
@@ -1312,14 +1314,14 @@ ODBCConnection >> procedures [
 	^self procedure: nil owner: nil name: nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> pwd [
 	"Answer the password for the receiver"
 
 	^pwd
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> pwd: aString [
 	"Set the password for the receiver to aString"
 
@@ -1327,7 +1329,7 @@ ODBCConnection >> pwd: aString [
 	pwd := aString
 ]
 
-{ #category : #executing }
+{ #category : 'executing' }
 ODBCConnection >> query: aString [
 	"Execute the SQL in aString.
 	Answer an <ODBCResultSet> representing the resultant result set."
@@ -1335,12 +1337,12 @@ ODBCConnection >> query: aString [
 	^self query: aString cursorType: self defaultCursorType
 ]
 
-{ #category : #executing }
+{ #category : 'executing' }
 ODBCConnection >> query: aString cursorType: aSymbol [
 	^(self exec: aString cursorType: aSymbol) results
 ]
 
-{ #category : #executing }
+{ #category : 'executing' }
 ODBCConnection >> query: aString forwardOnly: aBoolean [
 	"Execute the SQL in aString.
 	Answer an <ODBCResultSet> representing the results.
@@ -1353,7 +1355,7 @@ ODBCConnection >> query: aString forwardOnly: aBoolean [
 		cursorType: (aBoolean ifTrue: [#forwardOnly] ifFalse: [#keysetDriven])
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> queryForeignKeysOf: aTableNameString [
 	"Private - Answer the DBResultSet for the standard query SQLForeignKeys()
 	where szFkTableName is set to aTableNameString."
@@ -1366,7 +1368,7 @@ ODBCConnection >> queryForeignKeysOf: aTableNameString [
 	^answer
 ]
 
-{ #category : #transactions }
+{ #category : 'transactions' }
 ODBCConnection >> rollbackTxn [
 	"Rollback the receiver's transaction. Raise an error if there is no outstanding transaction."
 
@@ -1374,7 +1376,7 @@ ODBCConnection >> rollbackTxn [
 	transaction := nil
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> rowIdColumns: aString [
 	"Answer the names of the columns constituting the 'best row ID' in the
 	table named by the <String> argument."
@@ -1388,7 +1390,7 @@ ODBCConnection >> rowIdColumns: aString [
 		nullable: true	"Transaction"
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> rowVersionColumns: aStringTableName [
 	"Answer the names of the columns (if any) in the named table which are updated automatically
 	by the datasource when a row is updated by any transaction (e.g. a timestamp)."
@@ -1402,7 +1404,7 @@ ODBCConnection >> rowVersionColumns: aStringTableName [
 		nullable: true	"Transaction"
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> schemaTerm [
 	"Answer the <readableString> name for a 'schema' in the parlance of the DBMS to which the
 	receiver is connected."
@@ -1410,21 +1412,21 @@ ODBCConnection >> schemaTerm [
 	^self getStringInfo: SQL_SCHEMA_TERM
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> searchPatternEscape [
 	"Answer the search pattern escape character"
 
 	^self getStringInfo: SQL_SEARCH_PATTERN_ESCAPE
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> serverName [
 	"Answer the server name"
 
 	^self getStringInfo: SQL_SERVER_NAME
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> setAttribute: idInteger value: anIntegerOrStringOrBytes size: sizeInteger [
 	"Private - Set the an attribute of the receiver's connection."
 
@@ -1437,7 +1439,7 @@ ODBCConnection >> setAttribute: idInteger value: anIntegerOrStringOrBytes size: 
 	self dbCheckException: ret
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 ODBCConnection >> setDefaultAttributes [
 	"Private - Set the default connection attributes."
 
@@ -1447,7 +1449,7 @@ ODBCConnection >> setDefaultAttributes [
 		size: SQL_IS_UINTEGER
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> specialColumns: anIntegerType qualifier: aStringQual owner: aStringOwner name: aStringName scope: anIntegerScope nullable: aBoolean [
 	"Answer a <collection> of the <readableString> names of special
 	columns matching the specified criteria."
@@ -1467,14 +1469,14 @@ ODBCConnection >> specialColumns: anIntegerType qualifier: aStringQual owner: aS
 	^answer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> statements [
 	"Answer a set of active statements"
 
 	^statements
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> statisticsFor: aString type: anInteger accurate: aBoolean [
 	"Answer a collection of statistics for the table with aString name and anInteger type"
 
@@ -1489,13 +1491,13 @@ ODBCConnection >> statisticsFor: aString type: anInteger accurate: aBoolean [
 	^answer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> stringEncoder [
 
 	^self class stringEncoder
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> stringFunctions [
 	"Answer an array of string functions supported"
 
@@ -1505,7 +1507,7 @@ ODBCConnection >> stringFunctions [
 		select: [:maskName | (mask bitAnd: (ODBCConstants bindingOf: maskName) value) ~= 0]
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> supportedCursorTypes [
 	"Answer a <collection> of <Symbol>s, being the cursor types supported by the database to
 	which the receiver is connected."
@@ -1515,7 +1517,7 @@ ODBCConnection >> supportedCursorTypes [
 	^self decodeBitMask: mask map: ScrollTypes
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> supportedTransactionIsolationLevels [
 	"Answer a <collection> of the <Symbol>ic names of the transaction isolation levels
 	supported by this connection."
@@ -1528,42 +1530,42 @@ ODBCConnection >> supportedTransactionIsolationLevels [
 	^answer
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> supportsExpressionsInOrderBy [
 	"Answers whether the receiver supports expressions in a ORDER BY list"
 
 	^self getBoolInfo: SQL_EXPRESSIONS_IN_ORDERBY
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> supportsMultipleActiveTransactions [
 	"Answer whether multiple active transactions are supported."
 
 	^self getBoolInfo: SQL_MULTIPLE_ACTIVE_TXN
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> supportsMultipleResultSets [
 	"Answer whether multiple result sets are supported."
 
 	^self getBoolInfo: SQL_MULT_RESULT_SETS
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> supportsOuterJoins [
 	"Answer whether the receiver supports outer joins."
 
 	^self getBoolInfo: SQL_OUTER_JOINS
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> supportsRowUpdates [
 	"Answer whether the DBMS to which the receiver is connected supports row updates."
 
 	^self getBoolInfo: SQL_ROW_UPDATES
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> systemFunctions [
 	"Answer an array of system functions supported"
 
@@ -1573,21 +1575,21 @@ ODBCConnection >> systemFunctions [
 		select: [:maskName | (mask bitAnd: (ODBCConstants bindingOf: maskName) value) ~= 0]
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> tableTerm [
 	"Answer the underlying vendor name for a table"
 
 	^self getStringInfo: SQL_TABLE_TERM
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> tables [
 	"Answer a collection of all user tables on the database"
 
 	^self tables: nil owners: nil tables: nil types: '''TABLE'''
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> tables: aStringQualifier owners: aStringOwners tables: aStringTables types: aStringTypes [
 	"Answer a <collection> of the <readableString> names of the tables in
 	the connected data source that match the specified criteria."
@@ -1604,7 +1606,7 @@ ODBCConnection >> tables: aStringQualifier owners: aStringOwners tables: aString
 	^answer
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> timeDateFunctions [
 	"Answer an array of available date and time functions"
 
@@ -1614,14 +1616,14 @@ ODBCConnection >> timeDateFunctions [
 		select: [:maskName | (mask bitAnd: (ODBCConstants bindingOf: maskName) value) ~= 0]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> traceFile [
 	"Answer a String containing the value of the receiver's trace file option."
 
 	^self getStringAttribute: SQL_ATTR_TRACEFILE
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> traceFile: aString [
 	"Set the receiver's trace facility on, outputting to the trace file specified by aString."
 
@@ -1633,7 +1635,7 @@ ODBCConnection >> traceFile: aString [
 	self isTracing: true
 ]
 
-{ #category : #transactions }
+{ #category : 'transactions' }
 ODBCConnection >> transaction [
 	"Answer the outstanding ODBCTnn. Throw an exception if there isn't one."
 
@@ -1642,7 +1644,7 @@ ODBCConnection >> transaction [
 	^transaction
 ]
 
-{ #category : #transactions }
+{ #category : 'transactions' }
 ODBCConnection >> transaction: anODBCTxn [
 	"Private - Set the receiver's transaction to anODBCTxn. Throw an exception if one exists already."
 
@@ -1652,14 +1654,14 @@ ODBCConnection >> transaction: anODBCTxn [
 	self willAutoCommit: transaction isNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> transactionIsolation [
 	"Answer the receiver's Transaction Isolation Level."
 
 	^TxnIsolationLevels at: (self getSQLUIntegerAttribute: SQL_ATTR_TXN_ISOLATION)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> transactionIsolation: aSymbol [
 	"Set the receiver's transaction isolation level to that named by the <Symbol> argument
 	(one of #readUncommitted, #readCommitted, #repeatableRead, or #serializable)."
@@ -1670,14 +1672,14 @@ ODBCConnection >> transactionIsolation: aSymbol [
 		size: SQL_IS_UINTEGER
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> translate [
 	"Answer an Integer containing the the value of receiver's Translate option."
 
 	^self getSQLUIntegerAttribute: SQL_ATTR_TRANSLATE_OPTION
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> translate: anInteger [
 	"Set the receiver's translate option to anInteger."
 
@@ -1687,14 +1689,14 @@ ODBCConnection >> translate: anInteger [
 		size: SQL_IS_UINTEGER
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> translationDLL [
 	"Answer a String containing the value of the receiver's translate DLL option."
 
 	^self getStringAttribute: SQL_ATTR_TRANSLATE_LIB
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> translationDLL: aString [
 	"Set the receiver's translate DLL option to aString."
 
@@ -1704,14 +1706,14 @@ ODBCConnection >> translationDLL: aString [
 		size: SQL_NTS
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> uid [
 	"Answer the user identifier for the receiver"
 
 	^uid
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> uid: aString [
 	"Set the user identifier for the receiver to aString."
 
@@ -1719,7 +1721,7 @@ ODBCConnection >> uid: aString [
 	uid := aString
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> uniqueIndicesOf: aString [
 	"Answer the a <collection> of <DBRows> being details of the unique indices for the
 	table with the specified <readableString> name."
@@ -1730,40 +1732,40 @@ ODBCConnection >> uniqueIndicesOf: aString [
 		accurate: true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> useDriverCompletion [
 	^flags allMask: DriverCompleteMask
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> useDriverCompletion: aBoolean [
 	"Enable/disable the user of the SQL_DRIVER_COMPLETE option when opening this connection."
 
 	flags := (aBoolean ifTrue: [flags bitOr: DriverCompleteMask] ifFalse: [flags bitClear: DriverCompleteMask])
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> userName [
 	"Answer the underlying user name for the receiver"
 
 	^self getStringInfo: SQL_USER_NAME
 ]
 
-{ #category : #enquiries }
+{ #category : 'enquiries' }
 ODBCConnection >> views [
 	"Answer a collection of all user tables on the database"
 
 	^self tables: nil owners: nil tables: nil types: '''VIEW'''
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 ODBCConnection >> willAutoCommit [
 	"Answer whether the receiver's auto commit option is set."
 
 	^(self getSQLUIntegerAttribute: SQL_ATTR_AUTOCOMMIT) = SQL_AUTOCOMMIT_ON
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCConnection >> willAutoCommit: aBoolean [
 	"Set whether the receiver's auto commit option is on or off."
 

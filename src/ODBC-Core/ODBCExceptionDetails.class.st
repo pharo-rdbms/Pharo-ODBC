@@ -13,8 +13,8 @@ Depending on the activity in progress at the time of the exception, one or more 
 Based on DBExceptionDetails from Dolphin Smalltalk Database Connection package.
 "
 Class {
-	#name : #ODBCExceptionDetails,
-	#superclass : #Object,
+	#name : 'ODBCExceptionDetails',
+	#superclass : 'Object',
 	#instVars : [
 		'errors',
 		'hEnv',
@@ -27,10 +27,12 @@ Class {
 		'ODBCConstants',
 		'ODBCRetCodes'
 	],
-	#category : #'ODBC-Core-Base'
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCExceptionDetails >> addErrorDetails: newErrorDetails [
 	"Private - Add a new error details object to my collection."
 
@@ -38,7 +40,7 @@ ODBCExceptionDetails >> addErrorDetails: newErrorDetails [
 	errors addLast: newErrorDetails
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCExceptionDetails >> buildErrorInfo [
 	"Private - Retrieve all error information available from the ODBC Driver
 	 for my handles, unless none is found in which case
@@ -52,7 +54,7 @@ ODBCExceptionDetails >> buildErrorInfo [
 	errors ifNil: [self retCodeError: code]
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCExceptionDetails >> buildErrorInfoFrom: anExternalHandle type: anIntegerHandleType [
 	"Private - Retrieve all error information available from the ODBC Driver for <anExternalHandle>, which is of type <anIntegerHandleType>"
 
@@ -91,83 +93,83 @@ ODBCExceptionDetails >> buildErrorInfoFrom: anExternalHandle type: anIntegerHand
 				recNumber := recNumber + 1]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCExceptionDetails >> code [
 	"Answer the code instance variable."
 
 	^ code
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCExceptionDetails >> code: anInteger [
 	"Private - Set the instance variable code to anInteger."
 
 	code := anInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCExceptionDetails >> errors [
 	"Answer the errors instance variable."
 
 	^ errors
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCExceptionDetails >> errors: anOrderedCollection [
 	"Private - Set the errors instance variable to anOrderedCollection."
 
 	errors := anOrderedCollection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCExceptionDetails >> hDBC [
 	"Answer the hDBC instance variable."
 
 	^ hDBC
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCExceptionDetails >> hDBC: anExternalHandle [
 	"Private - Set the instance variable hDBC to anExternalHandle."
 
 	hDBC := anExternalHandle
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCExceptionDetails >> hEnv [
 	"Answer the hEnv instance variable."
 
 	^ hEnv
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCExceptionDetails >> hEnv: anExternalHandle [
 	"Private - Set the instance variable hEnv to anExternalHandle."
 
 	hEnv := anExternalHandle
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCExceptionDetails >> hStmt [
 	"Answer the hStmt instance variable."
 
 	^hStmt
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCExceptionDetails >> hStmt: anExternalHandle [
 	"Private - Set the instance variable hStmt to anExternalHandle."
 
 	hStmt := anExternalHandle
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ODBCExceptionDetails >> initialize [
 
 	hEnv := hDBC := hStmt := SQLHANDLE null
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 ODBCExceptionDetails >> printOn: aStream [
 	"Print an textual representation of the receiver to aStream"
 
@@ -176,7 +178,7 @@ ODBCExceptionDetails >> printOn: aStream [
 		separatedBy: [ aStream space ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCExceptionDetails >> retCodeError: anInteger [
 	"Private - Add to our collection, a new error whose code is anIteger."
 
@@ -188,13 +190,13 @@ ODBCExceptionDetails >> retCodeError: anInteger [
 			yourself)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCExceptionDetails >> stringEncoder [
 
 	^ stringEncoder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCExceptionDetails >> stringEncoder: anObject [
 
 	stringEncoder := anObject

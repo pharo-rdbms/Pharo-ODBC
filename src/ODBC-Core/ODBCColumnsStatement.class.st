@@ -4,27 +4,29 @@ ODBCPrimaryKeysStatement is a specialized <ODBCSchemaStatement> for querying met
 Based on DBColumnsStatement from Dolphin Smalltalk Database Connection package.
 "
 Class {
-	#name : #ODBCColumnsStatement,
-	#superclass : #ODBCSchemaStatement,
+	#name : 'ODBCColumnsStatement',
+	#superclass : 'ODBCSchemaStatement',
 	#instVars : [
 		'columnName'
 	],
-	#category : #'ODBC-Core-Base'
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColumnsStatement >> columnName [
 
 	^ columnName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColumnsStatement >> columnName: aString [
 
 	columnName := aString
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCColumnsStatement >> executeStatement [
 	"Private - Execute the database command that the receiver represents.
 	Answer the <integer> return code."

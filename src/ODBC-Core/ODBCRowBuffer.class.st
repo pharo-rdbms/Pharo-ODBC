@@ -4,19 +4,21 @@ ODBCRowBuffers are used to describe and buffer the columns of the current row in
 Based on DBRowBuffer from Dolphin Smalltalk Database Connection package.
 "
 Class {
-	#name : #ODBCRowBuffer,
-	#superclass : #ODBCAbstractRow,
-	#category : #'ODBC-Core-Base'
+	#name : 'ODBCRowBuffer',
+	#superclass : 'ODBCAbstractRow',
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCRowBuffer >> asObject [
 	"Private - Answer the receiver as an instance of ODBCRow containing the receiver's values."
 
 	^ ODBCRow fromBuffer: self
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCRowBuffer >> bind: aDBStatement [
 	"Private - Bind the receiver's field buffers to columns in the result table."
 
@@ -28,7 +30,7 @@ ODBCRowBuffer >> bind: aDBStatement [
 	^ hStmt
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCRowBuffer >> contents [
 	"Answer the contents instance variable."
 
@@ -36,7 +38,7 @@ ODBCRowBuffer >> contents [
 	^ contents
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCRowBuffer >> objects [
 	"Private - Answer the receivers contents as an <Array> of <Object>s
 	representing the value of each column."
@@ -44,14 +46,14 @@ ODBCRowBuffer >> objects [
 	^ self contents collect: [:c | c value ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCRowBuffer >> sizeInBytes [
 	"Answer the size of the receiver structure in bytes."
 
 	 ^ self contents inject: 0 into: [:size :f | size + f size ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCRowBuffer >> status [
 
 	^ status value

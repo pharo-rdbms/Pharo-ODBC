@@ -2,17 +2,19 @@
 Based on DBForeignKeysStatement from Dolphin Smalltalk Database Connection package.
 "
 Class {
-	#name : #ODBCForeignKeysStatement,
-	#superclass : #ODBCSchemaStatement,
+	#name : 'ODBCForeignKeysStatement',
+	#superclass : 'ODBCSchemaStatement',
 	#instVars : [
 		'foreignCatalogName',
 		'foreignSchemaName',
 		'foreignTableName'
 	],
-	#category : #'ODBC-Core-Base'
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCForeignKeysStatement >> executeStatement [
 	"Private - Execute the database command that the receiver represents.
 	Answer the <integer> return code."
@@ -33,37 +35,37 @@ ODBCForeignKeysStatement >> executeStatement [
 		nameLength6: SQL_NTS
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCForeignKeysStatement >> foreignCatalogName [
 
 	^ foreignCatalogName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCForeignKeysStatement >> foreignCatalogName: patternString [
 
 	foreignCatalogName := patternString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCForeignKeysStatement >> foreignSchemaName [
 
 	^ foreignSchemaName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCForeignKeysStatement >> foreignSchemaName: patternString [
 
 	foreignSchemaName := patternString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCForeignKeysStatement >> foreignTableName [
 
 	^ foreignTableName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCForeignKeysStatement >> foreignTableName: aString [
 
 	foreignTableName := aString

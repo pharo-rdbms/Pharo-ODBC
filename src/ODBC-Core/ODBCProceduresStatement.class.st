@@ -4,15 +4,17 @@ ODBCProceduresStatement is a specialized <ODBCSchemaStatement> for querying abou
 Based on DBProceduresStatement from Dolphin Smalltalk Database Connection package.
 "
 Class {
-	#name : #ODBCProceduresStatement,
-	#superclass : #ODBCSchemaStatement,
+	#name : 'ODBCProceduresStatement',
+	#superclass : 'ODBCSchemaStatement',
 	#instVars : [
 		'procedureName'
 	],
-	#category : #'ODBC-Core-Base'
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCProceduresStatement >> executeStatement [
 	"Private - Execute the database command that the receiver represents.
 	Answer the <integer> return code."
@@ -27,13 +29,13 @@ ODBCProceduresStatement >> executeStatement [
 		nameLength3: SQL_NTS
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCProceduresStatement >> procedureName [
 
 	^ procedureName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCProceduresStatement >> procedureName: aString [
 
 	procedureName := aString

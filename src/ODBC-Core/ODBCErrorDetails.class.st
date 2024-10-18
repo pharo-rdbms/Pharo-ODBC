@@ -10,18 +10,20 @@ Instance Variables:
 Based on DBErrorDetails from Dolphin Smalltalk Database Connection package.
 "
 Class {
-	#name : #ODBCErrorDetails,
-	#superclass : #Object,
+	#name : 'ODBCErrorDetails',
+	#superclass : 'Object',
 	#instVars : [
 		'msg',
 		'nativeErr',
 		'sqlState',
 		'origin'
 	],
-	#category : #'ODBC-Core-Base'
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 ODBCErrorDetails class >> fromSQLError: errorString [
 	"Answer a new instance of the receiver built from the information in the
 	<readableString>, errorString."
@@ -34,7 +36,7 @@ ODBCErrorDetails class >> fromSQLError: errorString [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCErrorDetails >> messageText [
 	"Answer a text representation of the error of the form:
 		STATE: MSG"
@@ -44,42 +46,42 @@ ODBCErrorDetails >> messageText [
 			ifNotNil: [ sqlState , ': ' ]) , msg
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCErrorDetails >> msg [
 	"Answer the msg instance variable."
 
 	^ msg
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCErrorDetails >> msg: aString [
 	"Private - Set the msg instance variable to aString."
 
 	msg := aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCErrorDetails >> nativeErr: aString [
 	"Private - Set the nativeErr instance variable to aString."
 
 	nativeErr := aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCErrorDetails >> origin: aString [
 	"Private - Set the origin instance variable to aString."
 
 	origin := aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCErrorDetails >> sqlState [
 	"Answer the sqlState instance variable."
 
 	^ sqlState
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCErrorDetails >> sqlState: aString [
 	"Private - Set the sqlState instance variable to aString."
 

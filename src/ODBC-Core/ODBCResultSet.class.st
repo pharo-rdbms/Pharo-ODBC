@@ -11,8 +11,8 @@ Based on DBResultSet from Dolphin Smalltalk Database Connection package.
 
 "
 Class {
-	#name : #ODBCResultSet,
-	#superclass : #SequenceableCollection,
+	#name : 'ODBCResultSet',
+	#superclass : 'SequenceableCollection',
 	#instVars : [
 		'statement',
 		'buffer',
@@ -22,16 +22,18 @@ Class {
 		'ODBCConstants',
 		'ODBCRetCodes'
 	],
-	#category : #'ODBC-Core-Base'
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 ODBCResultSet class >> initialize [
 
 	Smalltalk addToStartUpList: self
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 ODBCResultSet class >> onStartup [
 	"Ensure all the receiver's subinstances are in their 'invalidated' state on startup
 	so that they rebuild their external resource when required rather than attempting
@@ -40,14 +42,14 @@ ODBCResultSet class >> onStartup [
 	self allSubInstancesDo: [:i | i onStartup]
 ]
 
-{ #category : #'system startup' }
+{ #category : 'system startup' }
 ODBCResultSet class >> startUp: isImageStarting [
 	"Private - Ensure that old external resources are cleared so that they will be re-created."
 
 	isImageStarting ifTrue: [self onStartup]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 ODBCResultSet class >> statement: aDBStatement [
 	"Answer a new instance of DBResultSet for aDBStatement."
 
@@ -56,7 +58,7 @@ ODBCResultSet class >> statement: aDBStatement [
 			yourself
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 ODBCResultSet >> , operand [
 	"Answer a new <sequencedReadableCollection> containing the elements
 	of the receiver in their original order with those of the <sequencedReadableCollection>,
@@ -66,14 +68,14 @@ ODBCResultSet >> , operand [
 	^self asOrderedCollection, operand
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 ODBCResultSet >> add: newElement [
 	"ODBCResultSets are not extensible."
 
 	^self shouldNotImplement
 ]
 
-{ #category : #allocating }
+{ #category : 'allocating' }
 ODBCResultSet >> allocBuffer: anArrayOfColNums [
 	"Private - Allocate a buffer in the receiver to hold
 	the specified column numbers in the receiver's
@@ -82,7 +84,7 @@ ODBCResultSet >> allocBuffer: anArrayOfColNums [
 	^buffer := self bufferClass new columns: (self describeCols: anArrayOfColNums)
 ]
 
-{ #category : #'double dispatch' }
+{ #category : 'double dispatch' }
 ODBCResultSet >> appendToStream: puttableStream [
 	"Private - Append the receiver's elements to the argument, puttableStream.
 	Answer the receiver.
@@ -92,7 +94,7 @@ ODBCResultSet >> appendToStream: puttableStream [
 	self do: [:element | puttableStream nextPut: element]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCResultSet >> approxSize [
 	"Private - Answer the approximate size of the receiver."
 
@@ -106,7 +108,7 @@ ODBCResultSet >> approxSize [
 	^rowCount < 0 ifTrue: [50] ifFalse: [rowCount]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 ODBCResultSet >> asArray [
 	"Answer an <Array> of <ODBCRow>s containing all the rows from the receiver.
 	Implementation Note: Avoid using potentially slow #size."
@@ -117,14 +119,14 @@ ODBCResultSet >> asArray [
 	^stream contents
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCResultSet >> at: anInteger [
 	"Answer the row at index anInteger in the receiver's result set"
 
 	^(self moveTo: anInteger) isNil ifFalse: [buffer asObject]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCResultSet >> at: anInteger ifAbsent: aBlock [
 	"Answer the row in the result set at index anInteger, or if there is no such row,
 	the result of evaluating aBlock"
@@ -135,21 +137,21 @@ ODBCResultSet >> at: anInteger ifAbsent: aBlock [
 		ifFalse: [answer]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCResultSet >> at: index put: newElement [
 	"ODBCResultSets are not updatable."
 
 	^self shouldNotImplement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCResultSet >> atIndex: anInteger [
   	"Answer the row at index anInteger."
 
 	^self at: anInteger ifAbsent: []
 ]
 
-{ #category : #binding }
+{ #category : 'binding' }
 ODBCResultSet >> bind [
 	"Private - Create and 'bind' (an unbound buffer will not
 	actually do any SQLBindCols, though a bound buffer will)
@@ -158,7 +160,7 @@ ODBCResultSet >> bind [
 	self bind: #()
 ]
 
-{ #category : #binding }
+{ #category : 'binding' }
 ODBCResultSet >> bind: anArrayOfColNums [
 	"Private - Create and bind a buffer to hold the
 	specified columns (or #() for all columns)
@@ -167,7 +169,7 @@ ODBCResultSet >> bind: anArrayOfColNums [
 	(self allocBuffer: anArrayOfColNums) bind: statement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCResultSet >> buffer: anODBCObjBuf [
 	"Private - Set the receiver's buffer. Mainly used to
 	pre-setup an object buffer, rather than have the
@@ -176,7 +178,7 @@ ODBCResultSet >> buffer: anODBCObjBuf [
 	buffer := anODBCObjBuf
 ]
 
-{ #category : #constants }
+{ #category : 'constants' }
 ODBCResultSet >> bufferClass [
 	"Private - Answer the buffer class to use for ODBCResultSets (e.g. ODBCBoundRow for bound buffers
 	where memory is allocated and bound using SQLBindCol, or ODBCUnboundRow for unbound buffers
@@ -185,14 +187,14 @@ ODBCResultSet >> bufferClass [
 	^ODBCBoundBuffer
 ]
 
-{ #category : #'realizing/unrealizing' }
+{ #category : 'realizing/unrealizing' }
 ODBCResultSet >> close [
 	"Close the statement which generated the receiver."
 
 	statement close
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 ODBCResultSet >> collect: transformer [
 	"Evaluate the <monadicValuable> argument, transformer, for each of the
 	receiver's elements in the order defined by the receiver's implementation of #do:.
@@ -209,7 +211,7 @@ ODBCResultSet >> collect: transformer [
 	^answer
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 ODBCResultSet >> copyEmpty: anInteger [
 	"Private - Answer an empty copy of the receiver, with sufficient capacity for anInteger
 	number of elements.
@@ -218,7 +220,7 @@ ODBCResultSet >> copyEmpty: anInteger [
 	^self species new: anInteger
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 ODBCResultSet >> copyFrom: start [
 	"Answer a copy of a subset of the receiver which starts with its element at Integer
 	index start.
@@ -230,7 +232,7 @@ ODBCResultSet >> copyFrom: start [
 	^answer
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 ODBCResultSet >> copySize [
 	"Private - Answer the size of empty copy to create when performing various
 	copying/collecting transformations against the receiver.
@@ -240,7 +242,7 @@ ODBCResultSet >> copySize [
 	^self approxSize
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 ODBCResultSet >> copyWith: newElement [
 	"Answer a <sequencedReadableCollection> which is a copy of
 	the receiver that has newElement concatenated to its end.
@@ -249,7 +251,7 @@ ODBCResultSet >> copyWith: newElement [
 	^self asOrderedCollection addLast: newElement; yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCResultSet >> countElements [
 	"Private - Count, and answer, the number of elements in the receiver."
 
@@ -259,7 +261,7 @@ ODBCResultSet >> countElements [
 	^tally
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCResultSet >> describeCol: anInteger [
 	"Answer an ODBCColAttr object which describes the column
 	numbered anInteger in the receiver's result set"
@@ -267,7 +269,7 @@ ODBCResultSet >> describeCol: anInteger [
 	^statement describeCol: anInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCResultSet >> describeCols [
 	"Answer the list of column attributes for all of
 	the columns in the receiver's result set"
@@ -275,7 +277,7 @@ ODBCResultSet >> describeCols [
 	^self describeCols: #()
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCResultSet >> describeCols: anArray [
 	"Answer a list of column attributes for the columns in
 	the receiver's result set specified by the column numbers
@@ -293,7 +295,7 @@ ODBCResultSet >> describeCols: anArray [
 	^columns
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 ODBCResultSet >> do: aOneArgBlock [
 
 	| status |
@@ -304,7 +306,7 @@ ODBCResultSet >> do: aOneArgBlock [
 			status := self moveNext]
 ]
 
-{ #category : #positioning }
+{ #category : 'positioning' }
 ODBCResultSet >> fetchScroll: orientationInteger offset: offsetInteger [
 	"Private - Fetch the specified row from the receiver's
 	result set. Answers true if a row was successfully
@@ -325,7 +327,7 @@ ODBCResultSet >> fetchScroll: orientationInteger offset: offsetInteger [
 	^buffer status
 ]
 
-{ #category : #searching }
+{ #category : 'searching' }
 ODBCResultSet >> findLast: discriminator [
 	"Answer the <integer> index of the last element of the receiver for which the
 	<monadicValuable> argument, discriminator, evaluates to true. If there are
@@ -340,14 +342,14 @@ ODBCResultSet >> findLast: discriminator [
 		ifFalse: [super findLast: discriminator]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCResultSet >> first [
 	"Answer the first row of the receiver"
 
 	^self moveFirst isNil ifFalse: [buffer asObject]
 ]
 
-{ #category : #'realizing/unrealizing' }
+{ #category : 'realizing/unrealizing' }
 ODBCResultSet >> free [
 	"Free the statement which generated the receiver and any other
 	resources associated with the receiver itself."
@@ -356,7 +358,7 @@ ODBCResultSet >> free [
 	buffer := nil
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 ODBCResultSet >> from: start keysAndValuesDo: operation [
 	"Evaluate the <dyadicValuable>, operation, for each element of the receiver
 	from the element with <integer> index, start, inclusive. A BoundsError will be
@@ -371,7 +373,7 @@ ODBCResultSet >> from: start keysAndValuesDo: operation [
 			i := i + 1]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 ODBCResultSet >> from: start to: stop keysAndValuesDo: operation [
 	"Evaluate the <dyadicValuable>, operation, for each element of the receiver
 	between the <integer> indices, start and stop, inclusive with the element and its
@@ -387,7 +389,7 @@ ODBCResultSet >> from: start to: stop keysAndValuesDo: operation [
 			i := i + 1]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 ODBCResultSet >> hash [
 	"Answer the <integer> hash value for the receiver.
 	Implementation Note: Override to avoid potentially slow #size."
@@ -395,7 +397,7 @@ ODBCResultSet >> hash [
 	^columns hash
 ]
 
-{ #category : #searching }
+{ #category : 'searching' }
 ODBCResultSet >> identityIndexOf: anElement [
 	"Answer the index of the first occurrence of the object which is the argument
 	anElement, within the receiver. If the receiver does not contain anElement,
@@ -404,7 +406,7 @@ ODBCResultSet >> identityIndexOf: anElement [
 	^self findFirst: [:e | anElement == e]
 ]
 
-{ #category : #searching }
+{ #category : 'searching' }
 ODBCResultSet >> indexOf: target [
 	"Answer the <integer> index of the first element of the receiver which is
 	equal to the <Object> argument, target, within the receiver. If the receiver
@@ -414,7 +416,7 @@ ODBCResultSet >> indexOf: target [
 	^self findFirst: [:e | target = e]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 ODBCResultSet >> isEmpty [
 	"Answer true if the receiver collection contains no elements, else answer false."
 
@@ -430,7 +432,7 @@ ODBCResultSet >> isEmpty [
 	^rowCount == 0 or: [rowCount < 0 and: [self first isNil	"Have to retrieve first row"]]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 ODBCResultSet >> keysAndValuesDo: operation [
 	"Evaluate the <dyadicValuable>, operation, for each element of the receiver
 	with the <integer> index of that element and the element itself as the arguments."
@@ -443,14 +445,14 @@ ODBCResultSet >> keysAndValuesDo: operation [
 	self from: 1 keysAndValuesDo: operation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCResultSet >> last [
 	"Answer the last row of the receiver's result set"
 
 	^self moveLast isNil ifFalse: [buffer asObject]
 ]
 
-{ #category : #searching }
+{ #category : 'searching' }
 ODBCResultSet >> lastIndexOf: target [
 	"Answer the <integer> index of the last element of the receiver which is
 	equal to the <Object> argument, target, within the receiver. If the receiver
@@ -459,13 +461,13 @@ ODBCResultSet >> lastIndexOf: target [
 	^self findLast: [:e | target = e]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCResultSet >> lookup: keyInteger [
 
 	^self at: keyInteger
 ]
 
-{ #category : #positioning }
+{ #category : 'positioning' }
 ODBCResultSet >> moveFirst [
 	"Private - Scroll to the first row of the receiver's result set.
 	Answer the <integer> row status value."
@@ -473,7 +475,7 @@ ODBCResultSet >> moveFirst [
 	^self fetchScroll: SQL_FETCH_FIRST offset: 0
 ]
 
-{ #category : #positioning }
+{ #category : 'positioning' }
 ODBCResultSet >> moveLast [
 	"Private - Scroll to the last row of the receiver's result set.
 	Answer the <integer> row status value."
@@ -481,7 +483,7 @@ ODBCResultSet >> moveLast [
 	^self fetchScroll: SQL_FETCH_LAST offset: 0
 ]
 
-{ #category : #positioning }
+{ #category : 'positioning' }
 ODBCResultSet >> moveNext [
 	"Private - Scroll to the next row of the receiver's result set.
 	Answer the <integer> row status value."
@@ -489,7 +491,7 @@ ODBCResultSet >> moveNext [
 	^self fetchScroll: SQL_FETCH_NEXT offset: 0
 ]
 
-{ #category : #positioning }
+{ #category : 'positioning' }
 ODBCResultSet >> movePrevious [
 	"Private - Scroll to the previous row of the receiver's result set.
 	Answer the <integer> row status value."
@@ -497,7 +499,7 @@ ODBCResultSet >> movePrevious [
 	^self fetchScroll: SQL_FETCH_PREV offset: 0
 ]
 
-{ #category : #positioning }
+{ #category : 'positioning' }
 ODBCResultSet >> moveTo: anInteger [
 	"Private - Position the cursor at the specified
 	row (requires extended fetch capability),
@@ -508,28 +510,28 @@ ODBCResultSet >> moveTo: anInteger [
 		  ifFalse: [ self scrollTo: anInteger ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCResultSet >> next [
 	"Answer the next row of the receiver's result set, skipping any deleted rows."
 
 	^self moveNext ifNotNil: [buffer asObject]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCResultSet >> numColumns [
 	"Answer the number of columns in the result set associated with the receiver's statement."
 
 	^ statement numColumns
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCResultSet >> numRows [
 	"Answer the number of rows in the result set associated with the receiver's statement."
 
 	^ statement numRows
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 ODBCResultSet >> onStartup [
 	"Private - The system is starting. Clear down any invalid external
 	resources so that they are lazily reallocated on demand."
@@ -537,14 +539,14 @@ ODBCResultSet >> onStartup [
 	buffer := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCResultSet >> previous [
 	"Answer the previous row of the receiver's result set"
 
 	^ self movePrevious ifNotNil: [buffer asObject]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 ODBCResultSet >> printOn: aStream [
 	"Print a string representation of self onto aStream"
 
@@ -556,7 +558,7 @@ ODBCResultSet >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 ODBCResultSet >> rawCollect: aZeroArgBlock [
 	"Private - Answer an OrderedCollection containing the
 	results of evaluating aBlock with the current row
@@ -570,7 +572,7 @@ ODBCResultSet >> rawCollect: aZeroArgBlock [
 	^ answer
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 ODBCResultSet >> rawDo: aZeroArgBlock [
 	"Private - Answer the receiver.  For each row in the
 	receiver's result set evaluates aZeroArgBlock with
@@ -585,21 +587,21 @@ ODBCResultSet >> rawDo: aZeroArgBlock [
 			status := self moveNext]
 ]
 
-{ #category : #binding }
+{ #category : 'binding' }
 ODBCResultSet >> realize [
 	"Private - Recreate the result set."
 
 	self bind
 ]
 
-{ #category : #mutating }
+{ #category : 'mutating' }
 ODBCResultSet >> resize: anInteger [
 	"ODBCResultSets are not extensible."
 
 	^ self shouldNotImplement
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 ODBCResultSet >> reverse [
 	"Answer a new <sequencedReadableCollection> which contains the same elements
 	as the receiver, but in reverse order."
@@ -610,7 +612,7 @@ ODBCResultSet >> reverse [
 	^ answer
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 ODBCResultSet >> reverseDo: operation [
 	"Evaluate the <monadicValuable> argument, operation, against each
 	element of the receiver in reverse order, from end to start."
@@ -622,13 +624,13 @@ ODBCResultSet >> reverseDo: operation [
 			  object := self previous ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCResultSet >> scrollTo: anInteger [
 
 	^ self fetchScroll: SQL_FETCH_ABSOLUTE offset: anInteger
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 ODBCResultSet >> select: discriminator [
 	"Evaluate the monadic valuable argument, discriminator, for each of the receiver's elements.
 	Answer a new Collection like the receiver containing only those elements for which
@@ -642,7 +644,7 @@ ODBCResultSet >> select: discriminator [
 	^ newCollection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCResultSet >> size [
 	"Answer the size of the receiver's result set."
 
@@ -658,7 +660,7 @@ ODBCResultSet >> size [
 	^ rowCount < 0 ifTrue: [self countElements] ifFalse: [rowCount]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 ODBCResultSet >> species [
 	"Answer the species of ODBCResultSets.
 	Although the receiver is not extensible, when copying it helps to create an
@@ -668,14 +670,14 @@ ODBCResultSet >> species [
 	^ OrderedCollection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCResultSet >> statement [
 	"Private - Answer the statement instance variable"
 
 	^ statement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCResultSet >> statement: anODBCStatement [
 	"Private - Set the statement instance variable to anODBCStatement."
 
@@ -684,7 +686,7 @@ ODBCResultSet >> statement: anODBCStatement [
 	self bind
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCResultSet >> statementHandle [
 	"Private - Answer the handle of the associated statement."
 
@@ -694,7 +696,7 @@ ODBCResultSet >> statementHandle [
 	^ hStmt
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 ODBCResultSet >> with: otherCollection do: operation [
 	"Evaluate the <dyadicValuable> argument, operation, with each of
 	the receiver's elements along with the corresponding element from the

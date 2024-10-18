@@ -4,12 +4,14 @@ ODBCPrimaryKeysStatement is a specialized <ODBCSchemaStatement> for querying abo
 Based on DBPrimaryKeysStatement from Dolphin Smalltalk Database Connection package.
 "
 Class {
-	#name : #ODBCPrimaryKeysStatement,
-	#superclass : #ODBCSchemaStatement,
-	#category : #'ODBC-Core-Base'
+	#name : 'ODBCPrimaryKeysStatement',
+	#superclass : 'ODBCSchemaStatement',
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCPrimaryKeysStatement >> executeStatement [
 	"Private - Execute the database command that the receiver represents.
 	Answer the <integer> return code."

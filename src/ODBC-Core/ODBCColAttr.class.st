@@ -14,8 +14,8 @@ Based on DBColAttr from Dolphin Smalltalk Database Connection package.
 
 "
 Class {
-	#name : #ODBCColAttr,
-	#superclass : #Object,
+	#name : 'ODBCColAttr',
+	#superclass : 'Object',
 	#instVars : [
 		'columnNumber',
 		'name',
@@ -35,10 +35,12 @@ Class {
 		'ODBCConstants',
 		'ODBCTypes'
 	],
-	#category : #'ODBC-Core-Base'
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 ODBCColAttr class >> initialize [
 	"Private - Initialize the receiver's class variables.
 		self initialize
@@ -81,7 +83,7 @@ ODBCColAttr class >> initialize [
 	self initializeExtraBytes
 ]
 
-{ #category : #'private - initialization' }
+{ #category : 'private - initialization' }
 ODBCColAttr class >> initializeExtraBytes [
 
 	| extraBytes |
@@ -94,13 +96,13 @@ ODBCColAttr class >> initializeExtraBytes [
 	CTypesExtraBytes := extraBytes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> byteSizeForCharacters: anInteger [
 
 	^ ODBCConnection stringEncoder byteSizeForCharacters: anInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> cType [
 	"Private - Answer the 'C' type to which the described column's values should be converted when loaded
 	into Dolphin buffers (ODBCFields)."
@@ -108,21 +110,21 @@ ODBCColAttr >> cType [
 	^ SQLToCTypes at: sqlType+TypeOffset
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> columnNumber [
 	"Answer the instance variable columnNumber"
 
 	^ columnNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> columnNumber: anInteger [
 	"Private - Set the instance variable columnNumber to anInteger."
 
 	columnNumber := anInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> deleteRuleMask [
 	"Answer the delete rule mask for the receiver"
 
@@ -131,7 +133,7 @@ ODBCColAttr >> deleteRuleMask [
 	^ answer == 0 ifFalse: [ answer bitShift: -1 ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> deleteRuleMask: anInteger [
 	"Private - Set the delete rule mask for the receiver to anInteger"
 
@@ -140,27 +142,27 @@ ODBCColAttr >> deleteRuleMask: anInteger [
 		self specialFlagAt: (1 bitShift: anInteger + 4) put: true ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 ODBCColAttr >> hasVariableTransferOctetLength [
 
 	^ (self isCharType or: [self isBinaryType]) and: [self isFixedPointType not]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ODBCColAttr >> initialize [
 	"Private - Initialize the receiver"
 
 	special := (SQL_PARAM_INPUT bitShift: ParameterTypeShift)
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 ODBCColAttr >> isBinaryType [
 	"Private - Answers true if the receiver represents a character based column"
 
 	^ self cType == SQL_C_BINARY
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 ODBCColAttr >> isCharType [
 	"Private - Answers true if the receiver represents a character based column"
 
@@ -169,83 +171,83 @@ ODBCColAttr >> isCharType [
 	^ (cType := self cType) == SQL_C_CHAR or: [cType == SQL_C_WCHAR]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 ODBCColAttr >> isFixedPointType [
 
 	^ sqlType == SQL_DECIMAL or: [sqlType == SQL_NUMERIC]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 ODBCColAttr >> isForeignKey [
 	"Answer true if the receiver represents a foreign key"
 
 	^ self specialFlagAt: ForeignKey
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> isForeignKey: aBoolean [
 	"Private - Mark the receiver as representing a foreign key according to aBoolean"
 
 	self specialFlagAt: ForeignKey put: aBoolean
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 ODBCColAttr >> isKey [
 	"Answer true if the receiver is a key"
 
 	^ special anyMask: (PrimaryKey bitOr: ForeignKey)
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 ODBCColAttr >> isPrimaryKey [
 	"Answer true if the receiver is a primary key"
 
 	^ self specialFlagAt: PrimaryKey
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> isPrimaryKey: aBoolean [
 	"Private - Sets the receiver to be a primary key according to aBoolean"
 
 	self specialFlagAt: PrimaryKey put: aBoolean
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> length [
 	"Answer the length instance variable."
 
 	^ length
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> length: anInteger [
 	"Private - Set the length instance variable to anInteger."
 
 	length := anInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> lengthC [
 	"Private - Answer the length of ByteArray sufficient to hold an entry for this column when converted to 'C' data. This needs to include any extra space for null-terminators if the 'C' target type is some kind of string."
 
 	^ length + (CTypesExtraBytes at: sqlType+TypeOffset)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> name [
 	"Answer the name instance variable."
 
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> name: aString [
 	"Private - Set the name instance variable to aString."
 
 	name := aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> parameterType [
 	"Answer the SQL_PARAM_XXXX value that defines the type of parameter
 	the receiver represents when used in a parameterized statement. The default
@@ -255,7 +257,7 @@ ODBCColAttr >> parameterType [
 	^ (special bitAnd: ParameterTypeMask) >> ParameterTypeShift
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> parameterType: anInteger [
 	"Set the type of parameter the receiver represents when used in a parameterized
 	statement to the SQL_PARAM_XXXX value specified as the integer argument.
@@ -273,21 +275,21 @@ ODBCColAttr >> parameterType: anInteger [
 						bitOr: (anInteger bitShift: ParameterTypeShift)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> precision [
 	"Answer the precision instance variable."
 
 	^ precision
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> precision: anInteger [
 	"Private - Set the precision instance variable to anInteger."
 
 	precision := anInteger
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 ODBCColAttr >> printOn: aStream [
 	"Append the ASCII representation of
 	 the receiver to aStream."
@@ -306,28 +308,28 @@ ODBCColAttr >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> scale [
 	"Answer the scale instance variable."
 
 	^ scale
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> scale: anInteger [
 	"Private - Set the scale instance variable to anInteger."
 
 	scale := anInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> specialFlagAt: flagMask [
 	"Private - Answer the special flag identified by flagMask"
 
 	^ special allMask: flagMask
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> specialFlagAt: flagMask put: aBoolean [
 	"Private - Set the special flag identified by flagMask to aBoolean"
 
@@ -336,7 +338,7 @@ ODBCColAttr >> specialFlagAt: flagMask put: aBoolean [
 		ifFalse: [ special bitClear: flagMask ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> transferOctetLength [
 	"Private - Return the transfer octet length (size in bytes of the buffer necessary to receive data for this column) based on the column type.
 	https://docs.microsoft.com/en-us/sql/odbc/reference/appendixes/transfer-octet-length"
@@ -361,21 +363,21 @@ ODBCColAttr >> transferOctetLength [
 		ifFalse: [self error: 'unknown type']
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> type [
 	"Answer the sqlType instance variable."
 
 	^ sqlType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> type: anInteger [
 	"Private - Set the sqlType instance variable to anInteger."
 
 	sqlType := anInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> updateRuleMask [
 	"Answer the update rule mask for the receiver"
 
@@ -384,7 +386,7 @@ ODBCColAttr >> updateRuleMask [
 	^answer == 0 ifFalse: [ answer bitShift: -1 ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCColAttr >> updateRuleMask: anInteger [
 	"Private - Set the update rule mask for the receiver to anInteger"
 

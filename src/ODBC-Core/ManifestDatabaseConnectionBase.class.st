@@ -8,19 +8,21 @@ For documentation evaluate:
 	SmalltalkSystem help: 'databaseconnectivity'
 "
 Class {
-	#name : #ManifestDatabaseConnectionBase,
-	#superclass : #PackageManifest,
-	#category : #'ODBC-Core-Manifest'
+	#name : 'ManifestDatabaseConnectionBase',
+	#superclass : 'PackageManifest',
+	#category : 'ODBC-Core-Manifest',
+	#package : 'ODBC-Core',
+	#tag : 'Manifest'
 }
 
-{ #category : #'code-critics' }
+{ #category : 'code-critics' }
 ManifestDatabaseConnectionBase class >> ruleBadMessageRule2V1FalsePositive [
 
 	<ignoreForCoverage>
 	^ #(#(#(#RGMethodDefinition #(#ODBCField #shouldTranslate:class: #false)) #'2023-03-07T00:15:07.698506+01:00') )
 ]
 
-{ #category : #'code-critics' }
+{ #category : 'code-critics' }
 ManifestDatabaseConnectionBase class >> ruleEquivalentSuperclassMethodsRuleV1FalsePositive [
 
 	<ignoreForCoverage>

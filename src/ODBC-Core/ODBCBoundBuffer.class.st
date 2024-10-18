@@ -8,16 +8,18 @@ Based on DBBoundRow from Dolphin Smalltalk Database Connection package.
 
 "
 Class {
-	#name : #ODBCBoundBuffer,
-	#superclass : #ODBCRowBuffer,
+	#name : 'ODBCBoundBuffer',
+	#superclass : 'ODBCRowBuffer',
 	#pools : [
 		'ODBCCTypes',
 		'ODBCConstants'
 	],
-	#category : #'ODBC-Core-Base'
+	#category : 'ODBC-Core-Base',
+	#package : 'ODBC-Core',
+	#tag : 'Base'
 }
 
-{ #category : #operations }
+{ #category : 'operations' }
 ODBCBoundBuffer >> bind: aDBStatement [
 	"Private - Bind the receiver's field buffers to columns in the result table."
 
@@ -39,7 +41,7 @@ ODBCBoundBuffer >> bind: aDBStatement [
 	^ hStmt
 ]
 
-{ #category : #'data retrieval' }
+{ #category : 'data retrieval' }
 ODBCBoundBuffer >> getData: aDBStatement [
 	"Private - Not currently relevant to a bound row, though it might be if
 	we wanted to use SQLGetData for long values."
