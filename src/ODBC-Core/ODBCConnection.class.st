@@ -92,6 +92,13 @@ ODBCConnection class >> connections [
 	^ Connections
 ]
 
+{ #category : #'private - finalization' }
+ODBCConnection class >> createNewFinalizationRegistry [
+	"Use a FinalizationRegistry so this can take care of finalization for us"
+
+	^ FinalizationRegistry new
+]
+
 { #category : #exceptions }
 ODBCConnection class >> dbCheckException: anIntegerRetCode [
 	"Private - Checks anIntegerRetCode to see if a ODBCError or ODBCWarning should be signalled"
@@ -317,9 +324,8 @@ ODBCConnection class >> invalidateHandle: anExternalHandle [
 
 { #category : #accessing }
 ODBCConnection class >> newConnections [
-	"Use a WeakRegistry so this can take care of finalization for us"
 
-	Connections := WeakRegistry new
+	Connections := self createNewFinalizationRegistry
 ]
 
 { #category : #accessing }
@@ -998,16 +1004,15 @@ ODBCConnection >> initialize [
 
 { #category : #'private - initialization' }
 ODBCConnection >> initializeStatements [
-	"Use WeakRegistry so this can take care of finalization for us"
-	statements := WeakRegistry new
+
+	statements := self class createNewFinalizationRegistry
 ]
 
 { #category : #'realizing/unrealizing' }
 ODBCConnection >> invalidateAllStmts [
 	"Private - Free all statements under this connection"
 
-	self statements do: [:s | s free].
-	self statements finalizeValues
+	self statements do: [:s | s free ]
 ]
 
 { #category : #accessing }
