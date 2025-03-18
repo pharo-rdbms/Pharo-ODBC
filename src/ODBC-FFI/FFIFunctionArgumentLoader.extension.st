@@ -1,6 +1,6 @@
-Extension { #name : #FFIFunctionArgumentLoader }
+Extension { #name : 'FFIFunctionArgumentLoader' }
 
-{ #category : #'*ODBC-FFI' }
+{ #category : '*ODBC-FFI' }
 FFIFunctionArgumentLoader >> emitPluggableHandleArityUnpack: aBuilder type: aType context: aContext objectClass: objectClass instVarName: aName [
 	"This a special kind of arity-unpacking, that works with FFIConstantHandleType
 	Compared to emithHandleArityUnpack:... this method queries aType for the unpack selector to use"

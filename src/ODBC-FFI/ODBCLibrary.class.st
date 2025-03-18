@@ -13,8 +13,8 @@ Type mapping:
 Note that SQLRETURN is an alias for SQLSMALLINT
 "
 Class {
-	#name : #ODBCLibrary,
-	#superclass : #FFILibrary,
+	#name : 'ODBCLibrary',
+	#superclass : 'FFILibrary',
 	#classVars : [
 		'SQLCHAR',
 		'SQLHDBC',
@@ -28,16 +28,18 @@ Class {
 	#pools : [
 		'ODBCConstants'
 	],
-	#category : #'ODBC-FFI-Library'
+	#category : 'ODBC-FFI-Library',
+	#package : 'ODBC-FFI',
+	#tag : 'Library'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 ODBCLibrary class >> default [
 
 	^ self uniqueInstance
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 ODBCLibrary class >> initialize [
 
 	SQLRETURN := #short.
@@ -52,7 +54,7 @@ ODBCLibrary class >> initialize [
 	SQLSETPOSIROW := (ExternalAddress wordSize = 4 ifTrue: [#ushort] ifFalse: [#uint64])
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ODBCLibrary class >> moduleName [
 	"Return the name of the module for this library"
 	| os |
@@ -62,13 +64,13 @@ ODBCLibrary class >> moduleName [
 	^ 'libodbc.so'
 ]
 
-{ #category : #'accessing platform' }
+{ #category : 'accessing platform' }
 ODBCLibrary >> macLibraryName [
 
 	^'libiodbc.dylib'
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlAllocHandle: handleType inputHandle: inputHandle outputHandlePtr: outputHandlePtr [
 
 	"SQLRETURN SQLAllocHandle(
@@ -79,7 +81,7 @@ ODBCLibrary >> sqlAllocHandle: handleType inputHandle: inputHandle outputHandleP
 	self ffiCall: #(SQLRETURN SQLAllocHandle (SQLSMALLINT handleType, SQLHANDLE inputHandle, SQLHANDLE * outputHandlePtr))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlBindCol: anExternalHandle columnNumber: anIntegerCol targetType: anIntegerType targetValuePtr: anExternalAddressBuf bufferLength: anIntegerMax strLenOrInd: anExternalAddressLen [
 	"SQLRETURN SQLBindCol(
 		SQLHSTMT     StatementHandle,
@@ -92,7 +94,7 @@ ODBCLibrary >> sqlBindCol: anExternalHandle columnNumber: anIntegerCol targetTyp
 	self ffiCall: #(SQLRETURN SQLBindCol (SQLHSTMT anExternalHandle, SQLUSMALLINT anIntegerCol, SQLSMALLINT anIntegerType, SQLPOINTER anExternalAddressBuf, SQLLEN anIntegerMax, SQLLEN * anExternalAddressLen))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlBindParameter: anExternalHandle parameterNumber: parmNumInteger inputOutputType: ioInteger valueType: valueInteger parameterType: parmTypeInteger columnSize: sizeInteger decimalDigits: digitsInteger parameterValuePtr: parmBytes bufferLength: bufLenInteger strLenOrIndPtr: strLenOrIndPtr [
 	"SQLRETURN SQLBindParameter(
 		SQLHSTMT        StatementHandle,
@@ -109,7 +111,7 @@ ODBCLibrary >> sqlBindParameter: anExternalHandle parameterNumber: parmNumIntege
 	self ffiCall: #(SQLRETURN SQLBindParameter (SQLHSTMT anExternalHandle, SQLUSMALLINT parmNumInteger, SQLSMALLINT ioInteger, SQLSMALLINT valueInteger, SQLSMALLINT parmTypeInteger, SQLULEN sizeInteger, SQLSMALLINT digitsInteger, SQLPOINTER parmBytes, SQLLEN bufLenInteger, SQLLEN * strLenOrIndPtr))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlCancel: anExternalHandle [
 	"SQLRETURN SQLCancel(
      SQLHSTMT     StatementHandle);"
@@ -117,7 +119,7 @@ ODBCLibrary >> sqlCancel: anExternalHandle [
 	self ffiCall: #(SQLTRETURN SQLCancel (SQLHSTMT connectionHandle))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlColAttribute: anExternalHandle columnNumber: columnInteger fieldIdentifier: idInteger characterAttributePtr: bytes bufferLength: sizeInteger stringLengthPtr: anSWORD numericAttributePtr: anExternalAddress [
 	"SQLRETURN SQLColAttributeW (
       SQLHSTMT        StatementHandle,
@@ -131,7 +133,7 @@ ODBCLibrary >> sqlColAttribute: anExternalHandle columnNumber: columnInteger fie
 	self ffiCall: #(SQLRETURN SQLColAttributeW (SQLHSTMT anExternalHandle, SQLUSMALLINT columnInteger, SQLUSMALLINT idInteger, void* bytes, SQLSMALLINT sizeInteger, SQLSMALLINT * anSWORD, SQLLEN * anExternalAddress))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlColumns: anExternalHandleSTMT catalogName: aStringParmQual nameLength1: anIntegerQualLen schemaName: aStringParmOwner nameLength2: anIntegerOwnerLen tableName: aStringParmName nameLength3: anIntegerNameLen columnName: aStringParmType nameLength4: anIntegerTypeLen [
 	"SQLRETURN SQLColumnsW(
 		SQLHSTMT     StatementHandle,
@@ -147,7 +149,7 @@ ODBCLibrary >> sqlColumns: anExternalHandleSTMT catalogName: aStringParmQual nam
 	self ffiCall: #(SQLRETURN SQLColumnsW (SQLHSTMT anExternalHandleSTMT, SQLWCHAR * aStringParmQual, SQLSMALLINT anIntegerQualLen, SQLWCHAR * aStringParmOwner, SQLSMALLINT anIntegerOwnerLen, SQLWCHAR * aStringParmName, SQLSMALLINT anIntegerNameLen, SQLWCHAR * aStringParmType, SQLSMALLINT anIntegerTypeLen))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlConnect: anExternalHandle serverName: dsnString nameLength1: dsnInteger userName: uidString nameLength2: uidInteger authentication: authString nameLength3: authInteger [
 	"Load driver and establish connection to a data source.
 
@@ -163,7 +165,7 @@ ODBCLibrary >> sqlConnect: anExternalHandle serverName: dsnString nameLength1: d
 	self ffiCall: #(SQLRETURN SQLConnectW (SQLHDBC anExternalHandle, SQLWCHAR * dsnString, SQLSMALLINT dsnInteger, SQLWCHAR * uidString, SQLSMALLINT uidInteger, SQLWCHAR * authString, SQLSMALLINT authInteger))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlDataSources: anExternalHandle direction: anIntegerConstant serverName: anExternalBuffer bufferLength1: anIntegerMax nameLength1Ptr: anIntegerParmLen description: anExternalBufferParm bufferLength2: anIntegerParmDMax nameLength2Ptr: anIntegerParmDLen [
 	"SQLRETURN SQLDataSources(
      SQLHENV          EnvironmentHandle,
@@ -178,7 +180,7 @@ ODBCLibrary >> sqlDataSources: anExternalHandle direction: anIntegerConstant ser
 	self ffiCall: #(SQLRETURN SQLDataSourcesW (SQLHENV anExternalHandle, SQLUSMALLINT anIntegerConstant, SQLWCHAR * anExternalBuffer, SQLSMALLINT anIntegerMax, SQLSMALLINT * anIntegerParmLen, SQLWCHAR * anExternalBufferParm, SQLSMALLINT anIntegerParmDMax, SQLSMALLINT * anIntegerParmDLen))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlDescribeCol: anExternalHandle columnNumber: columnInteger columnName: aString bufferLength: sizeInteger nameLengthPtr: maxSWORD dataTypePtr: typeSWORD columnSizePtr: precisionDWORD decimalDigitsPtr: scaleSWORD nullablePtr: nullableSWORD [
 	"SQLRETURN SQLDescribeColW(
 		SQLHSTMT       StatementHandle,
@@ -194,14 +196,14 @@ ODBCLibrary >> sqlDescribeCol: anExternalHandle columnNumber: columnInteger colu
 	self ffiCall: #(SQLRETURN SQLDescribeColW (SQLHSTMT anExternalHandle, SQLUSMALLINT columnInteger, SQLWCHAR * aString, SQLSMALLINT sizeInteger, SQLSMALLINT * maxSWORD, SQLSMALLINT * typeSWORD, SQLULEN * precisionDWORD, SQLSMALLINT * scaleSWORD, SQLSMALLINT * nullableSWORD))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlDisconnect: connectionHandle [
 	"SQLRETURN SQLDisconnect(SQLHDBC ConnectionHandle);"
 
 	self ffiCall: #(SQLRETURN SQLDisconnect (SQLHDBC connectionHandle))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlDriverConnect: anExternalHandle windowHandle: aWinHandle inConnectionString: aStringConn stringLength1: anIntegerConn outConnectionString: aStringConnOut bufferLength: anIntegerConnOut stringLength2Ptr: anExternalShort driverCompletion: anIntegerOption [
 
 	"SQLRETURN SQLDriverConnectW(
@@ -217,7 +219,7 @@ ODBCLibrary >> sqlDriverConnect: anExternalHandle windowHandle: aWinHandle inCon
 	self ffiCall: #(SQLRETURN SQLDriverConnectW (SQLHDBC anExternalHandle, SQLHANDLE aWinHandle, SQLWCHAR * aStringConn, SQLSMALLINT anIntegerConn, SQLWCHAR * aStringConnOut, SQLSMALLINT anIntegerConnOut, SQLSMALLINT * anExternalShort, SQLUSMALLINT anIntegerOption))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlDrivers: anExternalHandle direction: anIntegerConstant driverDescription: anExternalBuffer bufferLength1: anIntegerMax descriptionLengthPtr: anIntegerParmLen attributes: anExternalBufferParm bufferLength2: anIntegerParmDMax attributesLengthPtr: anIntegerParmDLen [
 
 	"SQLRETURN SQLDriversW(
@@ -233,7 +235,7 @@ ODBCLibrary >> sqlDrivers: anExternalHandle direction: anIntegerConstant driverD
 	self ffiCall: #(SQLRETURN SQLDriversW (SQLHENV anExternalHandle, SQLUSMALLINT anIntegerConstant, SQLWCHAR * anExternalBuffer, SQLSMALLINT anIntegerMax, SQLSMALLINT * anIntegerParmLen, SQLWCHAR * anExternalBufferParm, SQLSMALLINT anIntegerParmDMax, SQLSMALLINT * anIntegerParmDLen))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlEndTran: type handle: aHandle completionType: completionType [
 	"SQLRETURN
 	SQLEndTran(
@@ -244,7 +246,7 @@ ODBCLibrary >> sqlEndTran: type handle: aHandle completionType: completionType [
 	self ffiCall: #(SQLRETURN SQLEndTran (SQLSMALLINT type, SQLHANDLE aHandle, SQLSMALLINT completionType))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlExecDirect: anExternalHandle statementText: aString textLength: anInteger [
 	"SQLRETURN SQLExecDirectW(
 		SQLHSTMT StatementHandle,
@@ -254,7 +256,7 @@ ODBCLibrary >> sqlExecDirect: anExternalHandle statementText: aString textLength
 	self ffiCall: #(SQLRETURN SQLExecDirectW (SQLHSTMT anExternalHandle, SQLCHAR * aString, SQLINTEGER anInteger))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlExecute: hstmt [
 	"SQLRETURN SQL_API SQLExecute(
 		SQLHSTMT		hstmt);"
@@ -262,7 +264,7 @@ ODBCLibrary >> sqlExecute: hstmt [
 	self ffiCall: #(SQLRETURN SQLExecute (SQLHSTMT hstmt))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlFetchScroll: anExternalHandle fetchOrientation: orientationInteger fetchOffset: offsetInteger [
 	"SQLRETURN SQLFetchScroll(
       SQLHSTMT      StatementHandle,
@@ -272,7 +274,7 @@ ODBCLibrary >> sqlFetchScroll: anExternalHandle fetchOrientation: orientationInt
 	self ffiCall: #(SQLRETURN SQLFetchScroll (SQLHSTMT anExternalHandle, SQLSMALLINT orientationInteger, SQLLEN offsetInteger))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlForeignKeys: anExternalHandle pkCatalogName: aStringPkQual nameLength1: anIntegerPkQual pkSchemaName: aStringPkOwn nameLength2: anIntegerPkOwn pkTableName: aStringPkName nameLength3: anIntegerPkName fkCatalogName: aStringFkQual nameLength4: anIntegerFkQual fkSchemaName: aStringFkOwn nameLength5: anIntegerFkOwn fkTableName: aStringFkName nameLength6: anIntegerFkName [
 	"SQLRETURN SQLForeignKeysW(
 		SQLHSTMT     StatementHandle,
@@ -292,7 +294,7 @@ ODBCLibrary >> sqlForeignKeys: anExternalHandle pkCatalogName: aStringPkQual nam
 	self ffiCall: #(SQLRETURN SQLForeignKeysW (SQLHSTMT anExternalHandle, SQLWCHAR * aStringPkQual, SQLSMALLINT anIntegerPkQual, SQLWCHAR * aStringPkOwn, SQLSMALLINT anIntegerPkOwn, SQLWCHAR * aStringPkName, SQLSMALLINT anIntegerPkName, SQLWCHAR * aStringFkQual, SQLSMALLINT anIntegerFkQual, SQLWCHAR * aStringFkOwn, SQLSMALLINT anIntegerFkOwn, SQLWCHAR * aStringFkName, SQLSMALLINT anIntegerFkName))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlFreeHandle: anInteger handle: anExternalHandle [
 	"SQLRETURN SQLFreeHandle(
      SQLSMALLINT   HandleType,
@@ -301,7 +303,7 @@ ODBCLibrary >> sqlFreeHandle: anInteger handle: anExternalHandle [
 	self ffiCall: #(SQLRETURN SQLFreeHandle (SQLSMALLINT anInteger, SQLHANDLE anExternalHandle))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlFreeStmt: statementHandle option: optionInteger [
 	"SQLRETURN
 	SQLFreeStmt(
@@ -311,7 +313,7 @@ ODBCLibrary >> sqlFreeStmt: statementHandle option: optionInteger [
 	self ffiCall: #(SQLRETURN SQLFreeStmt (SQLHSTMT statementHandle, SQLUSMALLINT  optionInteger))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlGetConnectAttr: anExternalHandle attribute: idInteger valuePtr: anIntegerOrStringOrBytes bufferLength: lengthInteger stringLengthPtr: anSDWORD [
 	"SQLRETURN SQLGetConnectAttrW(
      SQLHDBC        ConnectionHandle,
@@ -323,7 +325,7 @@ ODBCLibrary >> sqlGetConnectAttr: anExternalHandle attribute: idInteger valuePtr
 	self ffiCall: #(SQLRETURN SQLGetConnectAttrW (SQLHDBC anExternalHandle, SQLINTEGER idInteger, SQLPOINTER anIntegerOrStringOrBytes, SQLINTEGER lengthInteger, SQLINTEGER * anSDWORD))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlGetData: anExternalHandleSTMT columnNumber: anIntegerPar targetType: anIntegerCType targetValuePtr: anExternalBuffer bufferLength: anIntegerMax strLenOrIndPtr: anSDWORD [
 	"SQLRETURN SQLGetData(
       SQLHSTMT       StatementHandle,
@@ -336,7 +338,7 @@ ODBCLibrary >> sqlGetData: anExternalHandleSTMT columnNumber: anIntegerPar targe
 	self ffiCall: #(SQLRETURN SQLGetData (SQLHSTMT anExternalHandleSTMT, SQLUSMALLINT anIntegerPar, SQLSMALLINT anIntegerCType, SQLPOINTER anExternalBuffer, SQLLEN anIntegerMax, SQLLEN * anSDWORD))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlGetDiagRec: anIntegerHandleType handle: anExternalHandle recNumber: anIntegerRecordNumber szSqlState: anSQLStateParm pfNativeError: anIntegerParmNErr szErrorMsg: anExternalBufferErrMsg cbErrorMsgMax: anInteger pcbErrorMsg: anIntegerParmLen [
 	"SQLRETURN SQLGetDiagRecW(
 		SQLSMALLINT     HandleType,
@@ -351,7 +353,7 @@ ODBCLibrary >> sqlGetDiagRec: anIntegerHandleType handle: anExternalHandle recNu
 	self ffiCall: #(SQLRETURN SQLGetDiagRecW (SQLSMALLINT anIntegerHandleType, SQLHANDLE anExternalHandle, SQLSMALLINT anIntegerRecordNumber, SQLWCHAR* anSQLStateParm, SQLSMALLINT* anIntegerParmNErr, SQLWCHAR* anExternalBufferErrMsg, SQLSMALLINT anInteger, SQLSMALLINT* anIntegerParmLen))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlGetEnvAttr: anExternalHandle infoType: anIntegerType infoValuePtr: bytes bufferLength: anIntegerMax stringLengthPtr: anSWORD [
 	"SQLRETURN SQLGetEnvAttr(
      SQLHENV        EnvironmentHandle,
@@ -363,7 +365,7 @@ ODBCLibrary >> sqlGetEnvAttr: anExternalHandle infoType: anIntegerType infoValue
 	self ffiCall: #(SQLRETURN SQLGetEnvAttr (SQLHDBC anExternalHandle, SQLINTEGER anIntegerType, SQLPOINTER bytes, SQLINTEGER anIntegerMax, SQLINTEGER * anSWORD))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlGetInfo: anExternalHandle infoType: anIntegerType infoValueHandle: aSQLHANDLE bufferLength: anIntegerMax stringLengthPtr: aSQLSMALLINT [
 
 	"	SQLRETURN SQLGetInfoW(
@@ -376,7 +378,7 @@ ODBCLibrary >> sqlGetInfo: anExternalHandle infoType: anIntegerType infoValueHan
 	self ffiCall: #(SQLRETURN SQLGetInfoW (SQLHDBC anExternalHandle, SQLUSMALLINT anIntegerType, SQLHANDLE * aSQLHANDLE, SQLSMALLINT anIntegerMax, SQLSMALLINT * aSQLSMALLINT))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlGetInfo: anExternalHandle infoType: anIntegerType infoValuePtr: bytes bufferLength: anIntegerMax stringLengthPtr: aSQLSMALLINT [
 
 	"	SQLRETURN SQLGetInfoW(
@@ -389,7 +391,7 @@ ODBCLibrary >> sqlGetInfo: anExternalHandle infoType: anIntegerType infoValuePtr
 	self ffiCall: #(SQLRETURN SQLGetInfoW (SQLHDBC anExternalHandle, SQLUSMALLINT anIntegerType, SQLPOINTER bytes, SQLSMALLINT anIntegerMax, SQLSMALLINT * aSQLSMALLINT))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlGetStmtAttr: anExternalHandle attribute: optionCode valuePtr: anIntegerOrStringOrBytes bufferLength: lengthInteger stringLengthPtr: anSDWORD [
 	"SQLRETURN SQLGetStmtAttr(
      SQLHSTMT        StatementHandle,
@@ -401,7 +403,7 @@ ODBCLibrary >> sqlGetStmtAttr: anExternalHandle attribute: optionCode valuePtr: 
 	self ffiCall: #(SQLRETURN SQLGetStmtAttrW (SQLHSTMT anExternalHandle, SQLINTEGER optionCode, SQLPOINTER anIntegerOrStringOrBytes, SQLINTEGER lengthInteger, SQLINTEGER * anSWORD))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlNumResultCols: anExternalHandle pccol: anSWORD [
 	"Return the number of columns in the result set for the statement.
 
@@ -412,7 +414,7 @@ ODBCLibrary >> sqlNumResultCols: anExternalHandle pccol: anSWORD [
 	self ffiCall: #(SQLRETURN SQLNumResultCols (SQLHSTMT anExternalHandle, SQLSMALLINT * anSWORD))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlPrepare: anExternalHandle statementText: aString textLength: anInteger [
 	"SQLRETURN SQLPrepareW(
 		SQLHSTMT StatementHandle,
@@ -422,7 +424,7 @@ ODBCLibrary >> sqlPrepare: anExternalHandle statementText: aString textLength: a
 	self ffiCall: #(SQLRETURN SQLPrepareW (SQLHSTMT anExternalHandle, SQLWCHAR* aString, SQLINTEGER anInteger))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlPrimaryKeys: anExternalHandle catalogName: aStringQual nameLength1: anIntegerQual schemaName: aStringOwn nameLength2: anIntegerOwn tableName: aStringName nameLength3: anIntegerName [
 	"SQLRETURN SQLPrimaryKeysW(
 		SQLHSTMT     StatementHandle,
@@ -436,7 +438,7 @@ ODBCLibrary >> sqlPrimaryKeys: anExternalHandle catalogName: aStringQual nameLen
 	self ffiCall: #(SQLRETURN SQLPrimaryKeysW (SQLHSTMT anExternalHandle, SQLWCHAR * aStringQual, SQLSMALLINT anIntegerQual, SQLWCHAR * aStringOwn, SQLSMALLINT anIntegerOwn, SQLWCHAR * aStringName, SQLSMALLINT anIntegerName))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlProcedures: anExternalHandle catalogName: aStringParmPQ nameLength1: anIntegerPQ schemaName: aStringParmPO nameLength1: anIntegerPO procName: aStringParmPN nameLength3: anIntegerPN [
 	"SQLRETURN SQLProceduresW(
 		SQLHSTMT     StatementHandle,
@@ -450,7 +452,7 @@ ODBCLibrary >> sqlProcedures: anExternalHandle catalogName: aStringParmPQ nameLe
 	self ffiCall: #(SQLRETURN SQLProceduresW (SQLHSTMT anExternalHandle, SQLWCHAR * aStringParmPQ, SQLSMALLINT anIntegerPQ, SQLWCHAR * aStringParmPO, SQLSMALLINT anIntegerPO, SQLWCHAR * aStringParmPN, SQLSMALLINT anIntegerPN))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlRowCount: anExternalHandle rowCountPtr: anSDWORD [
 	"Return the number of rows affected by an UPDATE, INSERT or
 	DELETE statement associated with the specified hstmt.
@@ -462,7 +464,7 @@ ODBCLibrary >> sqlRowCount: anExternalHandle rowCountPtr: anSDWORD [
 	self ffiCall: #(SQLRETURN SQLRowCount (SQLHSTMT anExternalHandle, SQLLEN * anSDWORD))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlSetConnectAttr: connectionHandle attribute: attribute valuePtr: value stringLength: length [
 	"SQLRETURN SQLSetConnectAttrW(
 		SQLHDBC ConnectionHandle,
@@ -473,7 +475,7 @@ ODBCLibrary >> sqlSetConnectAttr: connectionHandle attribute: attribute valuePtr
 	self ffiCall: #(SQLRETURN SQLSetConnectAttrW (SQLHDBC connectionHandle, SQLINTEGER attribute, SQLPOINTER value, SQLINTEGER length))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlSetEnvAttr: hEnv attribute: attr valuePtr: value stringLength: length [
 	"SQLRETURN SQLSetEnvAttr(
 		SQLHENV     EnvironmentHandle,
@@ -484,7 +486,7 @@ ODBCLibrary >> sqlSetEnvAttr: hEnv attribute: attr valuePtr: value stringLength:
 	self ffiCall: #(SQLRETURN SQLSetEnvAttr (SQLHENV hEnv, SQLINTEGER attr, SQLPOINTER value, SQLINTEGER length))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlSetPos: anExternalHandle rowNumber: anIntegerRow operation: anIntegerOption lockType: aBoolLock [
 	"SQLRETURN SQLSetPos(
       SQLHSTMT        StatementHandle,
@@ -495,7 +497,7 @@ ODBCLibrary >> sqlSetPos: anExternalHandle rowNumber: anIntegerRow operation: an
 	self ffiCall: #(SQLRETURN SQLSetPos (SQLHSTMT anExternalHandle, SQLSETPOSIROW anIntegerRow, SQLUSMALLINT anIntegerOption, SQLUSMALLINT aBoolLock))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlSetStmtAttr: anExternalHandle attribute: anInteger valuePtr: anExternalAddress stringLength: lengthInteger [
 	"SQLRETURN  SQL_API SQLSetStmtAttrW(
 		SQLHSTMT StatementHandle,
@@ -506,7 +508,7 @@ ODBCLibrary >> sqlSetStmtAttr: anExternalHandle attribute: anInteger valuePtr: a
 	self ffiCall: #(SQLRETURN SQLSetStmtAttrW (SQLHSTMT anExternalHandle, SQLINTEGER anInteger, SQLPOINTER anExternalAddress, SQLINTEGER lengthInteger))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlSpecialColumns: anExternalHandle identifierType: anInteger catalogName: aStringQual nameLength1: anIntegerQual schemaName: aStringOwn nameLength2: anIntegerOwn tableName: aStringName nameLength3: anIntegerName scope: anIntegerScope nullable: anIntegerNullable [
 	"SQLRETURN SQLSpecialColumnsW(
 		SQLHSTMT     StatementHandle,
@@ -523,7 +525,7 @@ ODBCLibrary >> sqlSpecialColumns: anExternalHandle identifierType: anInteger cat
 	self ffiCall: #(SQLRETURN SQLSpecialColumnsW (SQLHSTMT anExternalHandle, SQLSMALLINT anInteger, SQLWCHAR * aStringQual, SQLSMALLINT anIntegerQual, SQLWCHAR * aStringOwn, SQLSMALLINT anIntegerOwn, SQLWCHAR * aStringName, SQLSMALLINT anIntegerName, SQLSMALLINT anIntegerScope, SQLSMALLINT anIntegerNullable))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlStatistics: anExternalHandle catalogName: aStringQual nameLength1: anIntegerQual schemaName: aStringOwn nameLength2: anIntegerOwn tableName: aStringName nameLength3: anIntegerName unique: anIntegerScope reserved: anIntegerNullable [
 	"SQLRETURN SQLStatisticsW(
 		SQLHSTMT     StatementHandle,
@@ -539,7 +541,7 @@ ODBCLibrary >> sqlStatistics: anExternalHandle catalogName: aStringQual nameLeng
 	self ffiCall: #(SQLRETURN SQLStatisticsW (SQLHSTMT anExternalHandle, SQLWCHAR * aStringQual, SQLSMALLINT anIntegerQual, SQLWCHAR * aStringOwn, SQLSMALLINT anIntegerOwn, SQLWCHAR * aStringName, SQLSMALLINT anIntegerName, SQLUSMALLINT anIntegerScope, SQLUSMALLINT anIntegerNullable))
 ]
 
-{ #category : #'ffi methods' }
+{ #category : 'ffi methods' }
 ODBCLibrary >> sqlTables: anExternalHandleSTMT szTableQualifier: aStringParmQual cbTableQualifier: anIntegerQualLen szTableOwner: aStringParmOwner cbTableOwner: anIntegerOwnerLen szTableName: aStringParmName cbTableName: anIntegerNameLen szTableType: aStringParmType cbTableType: anIntegerTypeLen [
 	"SQLRETURN SQLTablesW(
      SQLHSTMT       StatementHandle,
@@ -555,13 +557,25 @@ ODBCLibrary >> sqlTables: anExternalHandleSTMT szTableQualifier: aStringParmQual
 	self ffiCall: #(SQLRETURN SQLTablesW (SQLHSTMT anExternalHandleSTMT, SQLWCHAR * aStringParmQual, SQLSMALLINT anIntegerQualLen, SQLWCHAR * aStringParmOwner, SQLSMALLINT anIntegerOwnerLen, SQLWCHAR * aStringParmName, SQLSMALLINT anIntegerNameLen, SQLWCHAR * aStringParmType, SQLSMALLINT anIntegerTypeLen))
 ]
 
-{ #category : #'accessing platform' }
+{ #category : 'accessing platform' }
+ODBCLibrary >> unixLibraryName [
+
+	^'libodbc.so'
+]
+
+{ #category : 'accessing platform' }
 ODBCLibrary >> unixModuleName [
 
 	^'libodbc.so'
 ]
 
-{ #category : #'accessing platform' }
+{ #category : 'accessing platform' }
+ODBCLibrary >> win32LibraryName [
+
+	^'ODBC32'
+]
+
+{ #category : 'accessing platform' }
 ODBCLibrary >> win32ModuleName [
 
 	^'ODBC32'

@@ -2,12 +2,14 @@
 SQL handle type
 "
 Class {
-	#name : #SQLHANDLEType,
-	#superclass : #FFIConstantHandleType,
-	#category : #'ODBC-FFI-SQL-Types'
+	#name : 'SQLHANDLEType',
+	#superclass : 'FFIConstantHandleType',
+	#category : 'ODBC-FFI-SQL-Types',
+	#package : 'ODBC-FFI',
+	#tag : 'SQL-Types'
 }
 
-{ #category : #'emitting code' }
+{ #category : 'emitting code' }
 SQLHANDLEType >> basicEmitArgument: aBuilder context: aContext inCallout: aCallout [
 
 	"Pharo 9: differing semantics needed for TFFIBackend"
@@ -17,7 +19,7 @@ SQLHANDLEType >> basicEmitArgument: aBuilder context: aContext inCallout: aCallo
 		ifFalse: [ super basicEmitArgument: aBuilder context: aContext inCallout: aCallout ]
 ]
 
-{ #category : #'emitting code' }
+{ #category : 'emitting code' }
 SQLHANDLEType >> emitReturnArgument: builder context: aContext [
 
 	self loader
@@ -28,7 +30,7 @@ SQLHANDLEType >> emitReturnArgument: builder context: aContext [
 		instVarName: self instanceVariableName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SQLHANDLEType >> externalType [
 
 	^self is32BitHandle
@@ -36,14 +38,14 @@ SQLHANDLEType >> externalType [
 	 	ifFalse: [ ExternalType unsignedLongLong ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SQLHANDLEType >> is32BitHandle [
 	"Always on Windows; by VM type on others"
 
 	^Smalltalk os isWindows or: [ Smalltalk vm is32bit ]
 ]
 
-{ #category : #constants }
+{ #category : 'constants' }
 SQLHANDLEType >> unpackHandleFromAritySelector [
 
 	^self is32BitHandle
