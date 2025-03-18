@@ -64,7 +64,7 @@ ODBCLibrary class >> moduleName [
 	^ 'libodbc.so'
 ]
 
-{ #category : 'accessing platform' }
+{ #category : 'accessing - platform' }
 ODBCLibrary >> macLibraryName [
 
 	^'libiodbc.dylib'
@@ -557,7 +557,7 @@ ODBCLibrary >> sqlTables: anExternalHandleSTMT szTableQualifier: aStringParmQual
 	self ffiCall: #(SQLRETURN SQLTablesW (SQLHSTMT anExternalHandleSTMT, SQLWCHAR * aStringParmQual, SQLSMALLINT anIntegerQualLen, SQLWCHAR * aStringParmOwner, SQLSMALLINT anIntegerOwnerLen, SQLWCHAR * aStringParmName, SQLSMALLINT anIntegerNameLen, SQLWCHAR * aStringParmType, SQLSMALLINT anIntegerTypeLen))
 ]
 
-{ #category : 'accessing platform' }
+{ #category : 'accessing - platform' }
 ODBCLibrary >> unixLibraryName [
 
 	^'libodbc.so'
@@ -569,7 +569,7 @@ ODBCLibrary >> unixModuleName [
 	^'libodbc.so'
 ]
 
-{ #category : 'accessing platform' }
+{ #category : 'accessing - platform' }
 ODBCLibrary >> win32LibraryName [
 
 	^'ODBC32'
