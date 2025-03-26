@@ -2,32 +2,34 @@
 I represent the SQL UINTEGER type
 "
 Class {
-	#name : #SQLUINTEGER,
-	#superclass : #SQLIntegerType,
-	#category : #'ODBC-FFI-SQL-Types'
+	#name : 'SQLUINTEGER',
+	#superclass : 'SQLIntegerType',
+	#category : 'ODBC-FFI-SQL-Types',
+	#package : 'ODBC-FFI',
+	#tag : 'SQL-Types'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 SQLUINTEGER class >> asExternalTypeOn: generator [
 
 	^ FFIUInt32 asExternalTypeOn: generator
 ]
 
-{ #category : #'field definition' }
+{ #category : 'field definition' }
 SQLUINTEGER class >> fields [
 	<script: 'SQLUINTEGER defineFields'>
 
 	^ #(#(#value 'ulong') )
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SQLUINTEGER >> value [
 	"This method was automatically generated. See SQLUINTEGER class>>fields."
 	<generated>
 	^handle unsignedLongAt: 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SQLUINTEGER >> value: anObject [
 	"This method was automatically generated. See SQLUINTEGER class>>fields."
 	<generated>

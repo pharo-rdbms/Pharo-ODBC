@@ -1,12 +1,12 @@
-Extension { #name : #ByteArray }
+Extension { #name : 'ByteArray' }
 
-{ #category : #'*ODBC-FFI' }
+{ #category : '*ODBC-FFI' }
 ByteArray >> asSQLPOINTER [
 
 	^self
 ]
 
-{ #category : #'*ODBC-FFI' }
+{ #category : '*ODBC-FFI' }
 ByteArray >> unpackULongLongHandleFromArity: arity [
 	"This will 'unpack' a long long (handle) from a certain arity. See #packToArity: for a better explanation."
 

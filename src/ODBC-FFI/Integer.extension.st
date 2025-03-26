@@ -1,6 +1,6 @@
-Extension { #name : #Integer }
+Extension { #name : 'Integer' }
 
-{ #category : #'*ODBC-FFI' }
+{ #category : '*ODBC-FFI' }
 Integer >> asSQLPOINTER [
 
 	^ExternalAddress new fromInteger: self

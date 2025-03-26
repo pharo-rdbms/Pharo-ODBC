@@ -1,6 +1,6 @@
-Extension { #name : #ExternalObject }
+Extension { #name : 'ExternalObject' }
 
-{ #category : #'*ODBC-FFI' }
+{ #category : '*ODBC-FFI' }
 ExternalObject >> asSQLPOINTER [
 
 	^self

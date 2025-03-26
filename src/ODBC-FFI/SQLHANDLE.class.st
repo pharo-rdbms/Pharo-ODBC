@@ -2,55 +2,57 @@
 An SQL handle 
 "
 Class {
-	#name : #SQLHANDLE,
-	#superclass : #FFIConstantHandle,
-	#category : #'ODBC-FFI-SQL-Types'
+	#name : 'SQLHANDLE',
+	#superclass : 'FFIConstantHandle',
+	#category : 'ODBC-FFI-SQL-Types',
+	#package : 'ODBC-FFI',
+	#tag : 'SQL-Types'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 SQLHANDLE class >> asExternalTypeOn: generator [
 
 	^ SQLHANDLEType objectClass: self
 ]
 
-{ #category : #'system startup' }
+{ #category : 'system startup' }
 SQLHANDLE class >> byteSize [
 
 	^ 4
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 SQLHANDLE class >> initialize [
 
 	Smalltalk addToStartUpList: self
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SQLHANDLE class >> null [
 
 	^ self fromInteger: 0
 ]
 
-{ #category : #'system startup' }
+{ #category : 'system startup' }
 SQLHANDLE class >> startUp: isImageStarting [
 	"Private - Ensure that old external resources are cleared so that they will be re-created."
 
 	isImageStarting ifTrue: [self allInstancesDo: [ :each | each invalidateHandle]]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SQLHANDLE >> invalidateHandle [
 
 	handle := 0
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SQLHANDLE >> isNull [
 
 	^ handle = 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SQLHANDLE >> tfPointerAddress [
 
 	^ self getHandle asSQLPOINTER

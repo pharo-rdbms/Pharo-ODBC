@@ -1,6 +1,6 @@
-Extension { #name : #ExternalAddress }
+Extension { #name : 'ExternalAddress' }
 
-{ #category : #'*ODBC-FFI' }
+{ #category : '*ODBC-FFI' }
 ExternalAddress >> unpackULongLongHandleFromArity: arity [
 	^ (self unpackFromArity: arity) unsignedLongLongAt: 1
 ]
