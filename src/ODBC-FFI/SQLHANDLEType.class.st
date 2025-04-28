@@ -42,7 +42,7 @@ SQLHANDLEType >> externalType [
 SQLHANDLEType >> is32BitHandle [
 	"Always on Windows; by VM type on others"
 
-	^Smalltalk os isWindows or: [ Smalltalk vm is32bit ]
+	^Smalltalk vm is32bit
 ]
 
 { #category : 'constants' }
