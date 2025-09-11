@@ -28,7 +28,7 @@ Class {
 { #category : #'class initialization' }
 ODBCResultSet class >> initialize [
 
-	Smalltalk addToStartUpList: self
+	SessionManager current registerSystemClassNamed: self name
 ]
 
 { #category : #'event handling' }

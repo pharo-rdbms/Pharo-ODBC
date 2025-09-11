@@ -24,7 +24,7 @@ SQLHANDLE class >> byteSize [
 { #category : 'class initialization' }
 SQLHANDLE class >> initialize [
 
-	Smalltalk addToStartUpList: self
+	SessionManager current registerSystemClassNamed: self name
 ]
 
 { #category : 'instance creation' }
