@@ -203,7 +203,7 @@ ODBCAbstractStatement >> describeCols: columnNumbers [
 	| answer i name columnSize colNameLen dataType decimalDigits nullable nameBufSize hStmt colLen lib |
 	"Allocate a buffer sufficient to hold any column name, that we will re-use for all the columns"
 	nameBufSize := self parent maxColumnNameLength + 1.
-	name := ExternalAddress gcallocate: (self stringEncoder byteSizeForCharacters: nameBufSize).
+	name := (self stringEncoder stringBufferFor: nameBufSize).
 	"Similarly, re-usable buffers for all the other output parameters"
 	colNameLen := SQLSMALLINT new.
 	dataType := SQLSMALLINT new.
@@ -342,17 +342,16 @@ ODBCAbstractStatement >> free [
 ODBCAbstractStatement >> getStringAttribute: anInteger [
 	"Private - Answer a <String> containing the value of the statement attribute identified by the <integer> argument."
 
-	| bufferLen buffer |
-	bufferLen := self stringEncoder byteSizeForCharacters: SQL_MAX_OPTION_STRING_LENGTH + 1.
-	buffer := ExternalAddress allocate: bufferLen.
-	^[self dbCheckException: (ODBCLibrary default
+	|  buffer |
+	buffer := self stringEncoder stringBufferFor: SQL_MAX_OPTION_STRING_LENGTH.
+	self dbCheckException: (ODBCLibrary default
 				sqlGetStmtAttr: self allocatedHandle
 				attribute: anInteger
 				valuePtr: buffer
-				bufferLength: bufferLen "Byte size including implicit null terminator"
+				bufferLength: buffer size "Byte size including implicit null terminator"
 				stringLengthPtr: nil).
 	"N.B. We assume that as with SqlGetConnectAttr that the SQL server driver will not populate the stringLengthPtr argument. There do not seem to be any string options to test this against currently."
-	self stringEncoder decodeNullTerminatedStringFrom: buffer] ensure: [ buffer free ]
+	^self stringEncoder decodeNullTerminatedStringFrom: buffer
 ]
 
 { #category : #accessing }

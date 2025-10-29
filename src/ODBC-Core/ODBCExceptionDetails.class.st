@@ -57,38 +57,40 @@ ODBCExceptionDetails >> buildErrorInfoFrom: anExternalHandle type: anIntegerHand
 	"Private - Retrieve all error information available from the ODBC Driver for <anExternalHandle>, which is of type <anIntegerHandleType>"
 
 	| szSqlState fNativeError szErrorMsgSize szErrorMsg cbErrorMsg recNumber odbc |
-	szSqlState := ExternalAddress gcallocate: (self stringEncoder byteSizeForCharacters: SQL_SQLSTATE_SIZE).
+	szSqlState := self stringEncoder stringBufferFor: SQL_SQLSTATE_SIZE.
 	szErrorMsgSize := 128.
-	szErrorMsg := ExternalAddress gcallocate: (self stringEncoder byteSizeForCharacters: szErrorMsgSize).
+	szErrorMsg := self stringEncoder stringBufferFor: szErrorMsgSize.
 	cbErrorMsg := SQLSMALLINT new.
 	fNativeError := SQLINTEGER new.
 	recNumber := 1.
 	odbc := ODBCLibrary default.
 
-	[| ret |
-
-	[ret := odbc
-				sqlGetDiagRec: anIntegerHandleType
-				handle: anExternalHandle
-				recNumber: recNumber
-				szSqlState: szSqlState
-				pfNativeError: fNativeError
-				szErrorMsg: szErrorMsg
-				cbErrorMsgMax: szErrorMsgSize + 1
-				pcbErrorMsg: cbErrorMsg.
-	ret == SQL_SUCCESS_WITH_INFO]
-			whileTrue:
-				["Try again with a larger buffer"
-				szErrorMsg := ExternalAddress gcallocate: (szErrorMsgSize := self stringEncoder byteSizeForCharacters: cbErrorMsg value)].
-	ret == SQL_SUCCESS]
-			whileTrue:
-				[| newErr |
-				newErr := ODBCErrorDetails fromSQLError: (self stringEncoder decodeStringFrom: szErrorMsg characterCount: cbErrorMsg asInteger).
-				newErr
-					nativeErr: fNativeError asInteger;
-					sqlState: (self stringEncoder decodeStringFrom: szSqlState characterCount: 5).
-				self addErrorDetails: newErr.
-				recNumber := recNumber + 1]
+	[
+	| ret |
+	[
+	ret := odbc
+		       sqlGetDiagRec: anIntegerHandleType
+		       handle: anExternalHandle
+		       recNumber: recNumber
+		       szSqlState: szSqlState
+		       pfNativeError: fNativeError
+		       szErrorMsg: szErrorMsg
+		       cbErrorMsgMax: szErrorMsgSize + 1
+		       pcbErrorMsg: cbErrorMsg.
+	ret == SQL_SUCCESS_WITH_INFO ] whileTrue: [ "Try again with a larger buffer"
+		szErrorMsg := self stringEncoder stringBufferFor:
+			              (szErrorMsgSize := cbErrorMsg value) ].
+	ret == SQL_SUCCESS ] whileTrue: [
+		| newErr |
+		newErr := ODBCErrorDetails fromSQLError: (self stringEncoder
+				           decodeStringFrom: szErrorMsg
+				           characterCount: cbErrorMsg asInteger).
+		newErr
+			nativeErr: fNativeError asInteger;
+			sqlState:
+				(self stringEncoder decodeStringFrom: szSqlState characterCount: 5).
+		self addErrorDetails: newErr.
+		recNumber := recNumber + 1 ]
 ]
 
 { #category : #accessing }

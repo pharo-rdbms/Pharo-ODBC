@@ -97,5 +97,5 @@ ODBCStringEncoder >> stringBufferFor: anInteger [
 	"Create, allocate and return a buffer (ExternalAddress) to hold anInteger characters in the receiver's encoding"
 
 	"For convenience always add 1 for a null terminator - allows this method to be used for all String API calls"
-	^ ExternalAddress gcallocate: (self byteSizeForCharacters: (anInteger + 1))
+	^ ByteArray newPinned: (self byteSizeForCharacters: (anInteger + 1))
 ]
