@@ -35,22 +35,21 @@ ODBCParameterizedStatement >> bindParams [
 	| odbc hstmt |
 	odbc := ODBCLibrary default.
 	hstmt := self allocatedHandle.
-	parameters keysAndValuesDo:
-			[:i :eachField |
-			| buf column |
-			buf := eachField fieldBuf.
-			column := eachField column.
-			self dbCheckException: (odbc
-						sqlBindParameter: hstmt
-						parameterNumber: i
-						inputOutputType: column parameterType
-						valueType: column cType
-						parameterType: column type
-						columnSize: column precision
-						decimalDigits: column scale
-						parameterValuePtr: buf
-						bufferLength: eachField bufferSize
-						strLenOrIndPtr: eachField lengthBuf)]
+	parameters keysAndValuesDo: [ :i :eachField |
+		| buf column |
+		buf := eachField fieldBuf.
+		column := eachField column.
+		self dbCheckException: (odbc
+				 sqlBindParameter: hstmt
+				 parameterNumber: i
+				 inputOutputType: column parameterType
+				 valueType: column cType
+				 parameterType: column type
+				 columnSize: column precision
+				 decimalDigits: column scale
+				 parameterValuePtr: buf
+				 bufferLength: buf size
+				 strLenOrIndPtr: eachField lengthBuf) ]
 ]
 
 { #category : #operations }

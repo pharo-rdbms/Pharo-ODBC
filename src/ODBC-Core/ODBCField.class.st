@@ -20,7 +20,6 @@ Class {
 	#instVars : [
 		'column',
 		'buffer',
-		'bufferSize',
 		'lengthBuf'
 	],
 	#classVars : [
@@ -136,13 +135,6 @@ ODBCField >> beNull [
 ]
 
 { #category : #accessing }
-ODBCField >> bufferSize [
-	"Private - Answer the size of the receiver's buffer."
-
-	^ bufferSize
-]
-
-{ #category : #accessing }
 ODBCField >> column [
 
 	^ column
@@ -207,7 +199,7 @@ ODBCField >> getData: aDBStatement [
 				columnNumber: column columnNumber
 				targetType: column cType
 				targetValuePtr: buffer
-				bufferLength: bufferSize
+				bufferLength: buffer size
 				strLenOrIndPtr: lengthBuf.
 	aDBStatement dbCheckException: ret
 ]
@@ -302,8 +294,7 @@ ODBCField >> initializeForColumn: aDBColAttr [
 
 	lengthBuf := SQLLEN fromInteger: SQL_NULL_DATA.
 	column := aDBColAttr.
-	bufferSize := ("2 raisedTo: 16" 65536) min: aDBColAttr lengthC.
-	buffer := ExternalAddress gcallocate: bufferSize.
+	buffer := ByteArray newPinned: (("2 raisedTo: 16" 65536) min: aDBColAttr lengthC).
 	^self
 ]
 
@@ -409,7 +400,7 @@ ODBCField >> setByteArray: aByteArray [
 
 	| byteCount |
 	(self shouldTranslate: aByteArray class: ByteArray) ifFalse: [ ^ self ].
-	byteCount := aByteArray size min: bufferSize.
+	byteCount := aByteArray size min: buffer size.
 	buffer
 		replaceFrom: 1
 		to: byteCount

@@ -135,44 +135,53 @@ ODBCConnection class >> enumerateDataSources [
 	"Answers an array of associations of all the data sources and
 	 their descriptions"
 
-	| bufferLength dsn descriptionBufferLength description dsnLength descriptionLength hEnv odbc ret sources |
-	bufferLength := self stringEncoder byteSizeForCharacters: SQL_MAX_DSN_LENGTH + 1.
-	dsn := ExternalAddress gcallocate: bufferLength.
-	descriptionBufferLength := bufferLength.
-	description := ExternalAddress gcallocate: descriptionBufferLength.
+	| dsn descriptionBufferLength description dsnLength descriptionLength hEnv odbc ret sources |
+	dsn := self stringEncoder stringBufferFor: SQL_MAX_DSN_LENGTH.
+	descriptionBufferLength := 4.
+	description := self stringEncoder stringBufferFor:
+		               descriptionBufferLength.
 	dsnLength := SQLSMALLINT new.
 	descriptionLength := SQLSMALLINT new.
 	hEnv := self environmentHandle.
 	odbc := ODBCLibrary default.
 
-	[ret := odbc
-				sqlDataSources: hEnv
-				direction: SQL_FETCH_FIRST
-				serverName: dsn
-				bufferLength1: bufferLength
-				nameLength1Ptr: dsnLength
-				description: description
-				bufferLength2: descriptionBufferLength
-				nameLength2Ptr: descriptionLength.
-	ret == SQL_SUCCESS_WITH_INFO]
-			whileTrue: [description := ExternalAddress gcallocate: (descriptionBufferLength := self stringEncoder byteSizeForCharacters: descriptionLength value + 1)].
+	[
+	ret := odbc
+		       sqlDataSources: hEnv
+		       direction: SQL_FETCH_FIRST
+		       serverName: dsn
+		       bufferLength1: SQL_MAX_DSN_LENGTH + 1
+		       nameLength1Ptr: dsnLength
+		       description: description
+		       bufferLength2: descriptionBufferLength + 1
+		       nameLength2Ptr: descriptionLength.
+	ret == SQL_SUCCESS_WITH_INFO ] whileTrue: [
+		description := self stringEncoder stringBufferFor:
+			               (descriptionBufferLength := descriptionLength value) ].
 	sources := WriteStream on: Array new.
-	[ret == SQL_SUCCESS] whileTrue:
-			[sources nextPut: (Association key: (self stringEncoder decodeStringFrom: dsn characterCount: dsnLength value)
-						value: (self stringEncoder decodeStringFrom: description characterCount: descriptionLength value)).
+	[ ret == SQL_SUCCESS ] whileTrue: [
+		sources nextPut: (Association
+				 key: (self stringEncoder
+						  decodeStringFrom: dsn
+						  characterCount: dsnLength value)
+				 value: (self stringEncoder
+						  decodeStringFrom: description
+						  characterCount: descriptionLength value)).
 
-			[ret := odbc
-						sqlDataSources: hEnv
-						direction: SQL_FETCH_NEXT
-						serverName: dsn
-						bufferLength1: bufferLength
-						nameLength1Ptr: dsnLength
-						description: description
-						bufferLength2: descriptionBufferLength
-						nameLength2Ptr: descriptionLength.
-			ret == SQL_SUCCESS_WITH_INFO]
-					whileTrue: [description := ExternalAddress gcallocate: (descriptionBufferLength := self stringEncoder byteSizeForCharacters: descriptionLength value + 1)]].
-	ret ~= SQL_NO_DATA ifTrue: [self dbCheckException: ret].
+		[
+		ret := odbc
+			       sqlDataSources: hEnv
+			       direction: SQL_FETCH_NEXT
+			       serverName: dsn
+			       bufferLength1: SQL_MAX_DSN_LENGTH + 1
+			       nameLength1Ptr: dsnLength
+			       description: description
+			       bufferLength2: descriptionBufferLength + 1
+			       nameLength2Ptr: descriptionLength.
+		ret == SQL_SUCCESS_WITH_INFO ] whileTrue: [
+			description := self stringEncoder stringBufferFor:
+				               (descriptionBufferLength := descriptionLength value) ] ].
+	ret ~= SQL_NO_DATA ifTrue: [ self dbCheckException: ret ].
 	^ sources contents
 ]
 
@@ -181,43 +190,53 @@ ODBCConnection class >> enumerateDrivers [
 	"Answers an array of associations of all the drivers and their attributes"
 
 	| bufferLength driver attributesBufferLength attributes driverLength attributesLength hEnv odbc ret drivers |
-	bufferLength := self stringEncoder byteSizeForCharacters: SQL_MAX_MESSAGE_LENGTH + 1.
-	driver := ExternalAddress gcallocate: bufferLength.
+	bufferLength := SQL_MAX_MESSAGE_LENGTH.
+	driver := self stringEncoder stringBufferFor: bufferLength.
 	attributesBufferLength := bufferLength.
-	attributes := ExternalAddress gcallocate: attributesBufferLength.
+	attributes := self stringEncoder stringBufferFor:
+		              attributesBufferLength.
 	driverLength := SQLSMALLINT new.
 	attributesLength := SQLSMALLINT new.
 	hEnv := self environmentHandle.
 	odbc := ODBCLibrary default.
 
-	[ret := odbc
-				sqlDrivers: hEnv
-				direction: SQL_FETCH_FIRST
-				driverDescription: driver
-				bufferLength1: bufferLength
-				descriptionLengthPtr: driverLength
-				attributes: attributes
-				bufferLength2: attributesBufferLength
-				attributesLengthPtr: attributesLength.
-	ret == SQL_SUCCESS_WITH_INFO]
-			whileTrue: [attributes := ExternalAddress gcallocate: (attributesBufferLength := self stringEncoder byteSizeForCharacters: attributesLength value + 1)].
+	[
+	ret := odbc
+		       sqlDrivers: hEnv
+		       direction: SQL_FETCH_FIRST
+		       driverDescription: driver
+		       bufferLength1: bufferLength + 1
+		       descriptionLengthPtr: driverLength
+		       attributes: attributes
+		       bufferLength2: attributesBufferLength + 1
+		       attributesLengthPtr: attributesLength.
+	ret == SQL_SUCCESS_WITH_INFO ] whileTrue: [
+		attributes := self stringEncoder stringBufferFor:
+			              (attributesBufferLength := attributesLength value) ].
 	drivers := WriteStream on: Array new.
-	[ret == SQL_SUCCESS] whileTrue:
-			[drivers nextPut: (Association key: (self stringEncoder decodeStringFrom: driver characterCount: driverLength value)
-						value: (self stringEncoder decodeStringFrom: attributes characterCount: attributesLength value)).
+	[ ret == SQL_SUCCESS ] whileTrue: [
+		drivers nextPut: (Association
+				 key: (self stringEncoder
+						  decodeStringFrom: driver
+						  characterCount: driverLength value)
+				 value: (self stringEncoder
+						  decodeStringFrom: attributes
+						  characterCount: attributesLength value)).
 
-			[ret := odbc
-				sqlDrivers: hEnv
-				direction: SQL_FETCH_NEXT
-				driverDescription: driver
-				bufferLength1: bufferLength
-				descriptionLengthPtr: driverLength
-				attributes: attributes
-				bufferLength2: attributesBufferLength
-				attributesLengthPtr: attributesLength.
-			ret == SQL_SUCCESS_WITH_INFO]
-					whileTrue: [attributes := ExternalAddress gcallocate: (attributesBufferLength := self stringEncoder byteSizeForCharacters: attributesLength value)]].
-	ret ~= SQL_NO_DATA ifTrue: [self dbCheckException: ret].
+		[
+		ret := odbc
+			       sqlDrivers: hEnv
+			       direction: SQL_FETCH_NEXT
+			       driverDescription: driver
+			       bufferLength1: bufferLength
+			       descriptionLengthPtr: driverLength
+			       attributes: attributes
+			       bufferLength2: attributesBufferLength
+			       attributesLengthPtr: attributesLength.
+		ret == SQL_SUCCESS_WITH_INFO ] whileTrue: [
+			attributes := self stringEncoder stringBufferFor:
+				              (attributesBufferLength := attributesLength value) ] ].
+	ret ~= SQL_NO_DATA ifTrue: [ self dbCheckException: ret ].
 	^ drivers contents
 ]
 
@@ -833,16 +852,15 @@ ODBCConnection >> freeStmtHandle: aDBAbstractStatement [
 ODBCConnection >> getBoolInfo: anInteger [
 	"Private - Answer a <Boolean> indicating the receiver's info attribute described by anInteger."
 
-	| length value |
-	length := self stringEncoder byteSizeForCharacters: 2. "Byte size including implict null char"
-	value := ExternalAddress gcallocate: length.
+	| value |
+	value := self stringEncoder stringBufferFor: 2.
 	self dbCheckException: (ODBCLibrary default
-				sqlGetInfo: self asParameter
-				infoType: anInteger
-				infoValuePtr: value
-				bufferLength: length
-				stringLengthPtr: nil).
-	^(value byteAt: 1) = $Y asciiValue
+			 sqlGetInfo: self asParameter
+			 infoType: anInteger
+			 infoValuePtr: value
+			 bufferLength: value size
+			 stringLengthPtr: nil).
+	^ (value byteAt: 1) = $Y asciiValue
 ]
 
 { #category : #accessing }
@@ -922,34 +940,34 @@ ODBCConnection >> getSQLUSmallIntInfo: anInteger [
 ODBCConnection >> getStringAttribute: anInteger [
 	"Private - Answer a <String> containing the value of the connection attribute identified by the <integer> argument."
 
-	| bufferLen buffer |
-	bufferLen := self stringEncoder byteSizeForCharacters: SQL_MAX_OPTION_STRING_LENGTH + 1.
-	buffer := ExternalAddress allocate: bufferLen.
-	^[self dbCheckException: (ODBCLibrary default
-				sqlGetConnectAttr: self asParameter
-				attribute: anInteger
-				valuePtr: buffer
-				bufferLength: bufferLen
-				stringLengthPtr: nil).
+	| buffer |
+	buffer := self stringEncoder stringBufferFor:
+		          SQL_MAX_OPTION_STRING_LENGTH.
+	self dbCheckException: (ODBCLibrary default
+			 sqlGetConnectAttr: self asParameter
+			 attribute: anInteger
+			 valuePtr: buffer
+			 bufferLength: buffer size
+			 stringLengthPtr: nil).
 	"N.B. The SQL server driver never seems to populate the stringLengthPtr argument, so we are forced to trim up to the nulls."
-	self stringEncoder decodeNullTerminatedStringFrom: buffer] ensure: [ buffer free ]
+	^ self stringEncoder decodeNullTerminatedStringFrom: buffer
 ]
 
 { #category : #enquiries }
 ODBCConnection >> getStringInfo: anInteger [
 	"Private - Answer a String containing the value of the receiver's info attribute described by infoCode."
 
-	| value len bufferLen |
+	| value len |
 	len := SQLSMALLINT new.
-	bufferLen := self stringEncoder byteSizeForCharacters: SQL_MAX_MESSAGE_LENGTH + 1.
-	value := ExternalAddress allocate: bufferLen.
-	^[self dbCheckException: (ODBCLibrary default
-				sqlGetInfo: self asParameter
-				infoType: anInteger
-				infoValuePtr: value
-				bufferLength: bufferLen
-				stringLengthPtr: len).
-	self stringEncoder decodeStringFrom: value byteCount: len value] ensure: [ value free ]
+	value := self stringEncoder stringBufferFor:
+		         SQL_MAX_MESSAGE_LENGTH + 1.
+	self dbCheckException: (ODBCLibrary default
+			 sqlGetInfo: self asParameter
+			 infoType: anInteger
+			 infoValuePtr: value
+			 bufferLength: value size
+			 stringLengthPtr: len).
+	^ self stringEncoder decodeStringFrom: value byteCount: len value
 ]
 
 { #category : #enquiries }
@@ -1200,31 +1218,31 @@ ODBCConnection >> odbcVersion [
 { #category : #operations }
 ODBCConnection >> open [
 
-	| tmp2 tmp3 tmp4 |
+	| connSzBufSize connSz lenConnSz |
 	handle isNull ifFalse: [ ^ self ].
 	[
-	| tmp5 |
-	tmp2 := self stringEncoder byteSizeForCharacters: 1024 + 1.
-	tmp3 := ExternalAddress gcallocate: tmp2.
-	tmp4 := SQLSMALLINT new.
-	tmp5 := ODBCLibrary default
+	| ret |
+	connSzBufSize := 1024.
+	connSz :=  (self stringEncoder stringBufferFor: connSzBufSize).
+	lenConnSz := SQLSMALLINT new.
+	ret := ODBCLibrary default
 		        sqlDriverConnect: self getHandle
 		        windowHandle: SQLHANDLE new
 		        inConnectionString:
 		        (self stringEncoder encodeStringWithNullTerminator:
 			         self connectString)
 		        stringLength1: SQL_NTS
-		        outConnectionString: tmp3
-		        bufferLength: tmp2
-		        stringLength2Ptr: tmp4
+		        outConnectionString: connSz
+		        bufferLength: connSzBufSize + 1
+		        stringLength2Ptr: lenConnSz
 		        driverCompletion: (self useDriverCompletion
 				         ifTrue: [ SQL_DRIVER_COMPLETE ]
 				         ifFalse: [ SQL_DRIVER_NOPROMPT ]).
-	tmp5 == SQL_NO_DATA ifTrue: [ ^ nil ].
-	self dbCheckException: tmp5 ] ifCurtailed: [ self free ].
+	ret == SQL_NO_DATA ifTrue: [ ^ nil ].
+	self dbCheckException: ret ] ifCurtailed: [ self free ].
 	self connectString: (self stringEncoder
-			 decodeStringFrom: tmp3
-			 characterCount: (tmp4 value min: tmp2))
+			 decodeStringFrom: connSz
+			 characterCount: (lenConnSz value min: connSzBufSize))
 ]
 
 { #category : #copying }

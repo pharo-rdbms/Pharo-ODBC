@@ -34,7 +34,7 @@ ODBCBoundBuffer >> bind: aDBStatement [
 						columnNumber: column columnNumber
 						targetType: column cType
 						targetValuePtr: dataBuffer
-						bufferLength: eachField bufferSize
+						bufferLength: dataBuffer size
 						strLenOrInd: eachField lengthBuf)].
 	^ hStmt
 ]
